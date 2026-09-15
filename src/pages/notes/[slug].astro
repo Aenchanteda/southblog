@@ -1,0 +1,36 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { formatDate, getEntrySlug, isPublished } from '../../lib/content';
+
+type NoteEntry = CollectionEntry<'notes'>;
+
+export async function getStaticPaths() {
+  const notes = (await getCollection('notes')).filter(isPublished);
+  return notes.map((note) => ({
+    params: { slug: getEntrySlug(note) },
+    props: { note },
+  }));
+}
+
+const { note } = Astro.props as { note: NoteEntry };
+const { Content } = await render(note);
+---
+
+<BaseLayout title={note.data.title} description={note.data.description}>
+  <article class="post">
+    <header class="post-header">
+      <p class="article-meta">学习心得 · {formatDate(note.data.pubDate)}</p>
+      <h1>{note.data.title}</h1>
+      <p class="lead">{note.data.description}</p>
+      {note.data.tags.length > 0 && (
+        <ul class="tag-list" aria-label="标签">
+          {note.data.tags.map((tag) => <li>{tag}</li>)}
+        </ul>
+      )}
+    </header>
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>

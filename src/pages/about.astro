@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { siteConfig } from '../site.config';
+---
+
+<BaseLayout title="关于" description="关于南边小站。">
+  <section class="content-panel">
+    <div class="list-header">
+      <p class="eyebrow">About</p>
+      <h1>关于 {siteConfig.name}</h1>
+      <p class="lead">
+        这是一个个人静态站点模板，适合记录博客文章、学习心得和项目复盘。你可以在
+        <code>src/site.config.ts</code> 中修改站点名称、作者和描述。
+      </p>
+    </div>
+    <div class="prose">
+      <p>
+        当前作者占位符是 <strong>{siteConfig.author}</strong>。部署前可以把它替换成你的名字、昵称或组织名称。
+      </p>
+      <p>
+        内容使用 Markdown/MDX 与 Astro Content Collections 管理，既适合普通文章，也方便在需要时加入组件化内容。
+      </p>
+    </div>
+  </section>
+</BaseLayout>
