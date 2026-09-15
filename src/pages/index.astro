@@ -7,31 +7,55 @@ import { byNewest, isPublished } from '../lib/content';
 
 const blogPosts = (await getCollection('blog')).filter(isPublished).sort(byNewest);
 const notes = (await getCollection('notes')).filter(isPublished).sort(byNewest);
-const latest = [
-  ...blogPosts.slice(0, 2).map((entry) => ({ entry, section: 'blog' as const })),
-  ...notes.slice(0, 2).map((entry) => ({ entry, section: 'notes' as const })),
-].sort((a, b) => byNewest(a.entry, b.entry));
 ---
 
 <BaseLayout>
   <section class="hero">
-    <p class="eyebrow">Personal Blog · Learning Notes</p>
-    <h1>{siteConfig.name}</h1>
-    <p>
-      这里是一个面向中文阅读体验的个人静态博客，用来保存长期文章、学习心得和偶尔冒出来的英文技术关键词。
-    </p>
+    <div class="hero-content">
+      <p class="eyebrow">Personal Journal · Learning Notes</p>
+      <h1>{siteConfig.name}</h1>
+      <p>
+        一处安静的个人写作空间：记录长期文章、学习心得，以及那些在中文语境里慢慢生长的技术与生活观察。
+      </p>
+      <div class="hero-meta" aria-label="站点内容类型">
+        <span>博客文章</span>
+        <span>学习心得</span>
+        <span>Markdown / MDX</span>
+      </div>
+    </div>
+    <aside class="hero-card" aria-label="站点简介">
+      <div class="stamp">记</div>
+      <p class="eyebrow">Today</p>
+      <h2>把零散想法，整理成可以回看的文字。</h2>
+      <p>
+        首页会同步展示最新博客和学习笔记；更完整的文章放在博客，更轻量的理解路径留给学习心得。
+      </p>
+    </aside>
   </section>
 
-  <section aria-labelledby="latest-heading">
+  <section class="home-section" aria-labelledby="latest-blog-heading">
     <div class="section-heading">
       <div>
-        <p class="eyebrow">Latest</p>
-        <h2 id="latest-heading">最新更新</h2>
+        <p class="eyebrow">Latest Blog</p>
+        <h2 id="latest-blog-heading">最新博客</h2>
       </div>
       <a href="/blog">查看全部博客</a>
     </div>
-    <div class="grid">
-      {latest.map(({ entry, section }) => <ArticleCard entry={entry} section={section} />)}
+    <div class="article-grid">
+      {blogPosts.slice(0, 2).map((entry) => <ArticleCard entry={entry} section="blog" />)}
+    </div>
+  </section>
+
+  <section class="home-section" aria-labelledby="latest-notes-heading">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Learning Notes</p>
+        <h2 id="latest-notes-heading">学习心得</h2>
+      </div>
+      <a href="/notes">查看全部心得</a>
+    </div>
+    <div class="article-grid">
+      {notes.slice(0, 2).map((entry) => <ArticleCard entry={entry} section="notes" />)}
     </div>
   </section>
 </BaseLayout>

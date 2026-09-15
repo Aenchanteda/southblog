@@ -10,11 +10,11 @@ const posts = (await getCollection('blog')).filter(isPublished).sort(byNewest);
 <BaseLayout title="博客" description="南边小站的博客文章列表。">
   <section class="content-panel">
     <div class="list-header">
-      <p class="eyebrow">Blog</p>
+      <p class="eyebrow">Blog Archive</p>
       <h1>博客</h1>
-      <p class="lead">较完整的想法、项目记录与生活观察，适合慢慢读。</p>
+      <p class="lead">较完整的想法、项目记录与生活观察，适合慢慢读，也适合过一段时间再回来重看。</p>
     </div>
-    <div class="grid">
+    <div class="article-grid">
       {posts.map((entry) => <ArticleCard entry={entry} section="blog" />)}
     </div>
   </section>
