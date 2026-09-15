@@ -9,17 +9,26 @@ interface Props {
 
 const { entry, section } = Astro.props;
 const href = `/${section}/${getEntrySlug(entry)}`;
+const sectionLabel = section === 'blog' ? '博客' : '学习心得';
 ---
 
 <article class="article-card">
-  <a href={href}>
-    <p class="article-meta">{formatDate(entry.data.pubDate)}</p>
-    <h3>{entry.data.title}</h3>
-    <p>{entry.data.description}</p>
-    {entry.data.tags.length > 0 && (
-      <ul class="tag-list" aria-label="标签">
-        {entry.data.tags.map((tag) => <li>{tag}</li>)}
-      </ul>
-    )}
+  <a class="article-link" href={href}>
+    <div class="card-topline">
+      <span class="section-pill">{sectionLabel}</span>
+      <time datetime={entry.data.pubDate.toISOString()}>{formatDate(entry.data.pubDate)}</time>
+    </div>
+    <div class="card-body">
+      <h3>{entry.data.title}</h3>
+      <p>{entry.data.description}</p>
+    </div>
+    <div class="card-footer">
+      {entry.data.tags.length > 0 && (
+        <ul class="tag-list" aria-label="标签">
+          {entry.data.tags.map((tag) => <li>{tag}</li>)}
+        </ul>
+      )}
+      <span class="read-more">继续阅读 <span aria-hidden="true">&rarr;</span></span>
+    </div>
   </a>
 </article>

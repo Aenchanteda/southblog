@@ -18,19 +18,27 @@ const { Content } = await render(post);
 ---
 
 <BaseLayout title={post.data.title} description={post.data.description}>
-  <article class="post">
-    <header class="post-header">
-      <p class="article-meta">博客 · {formatDate(post.data.pubDate)}</p>
-      <h1>{post.data.title}</h1>
-      <p class="lead">{post.data.description}</p>
-      {post.data.tags.length > 0 && (
-        <ul class="tag-list" aria-label="标签">
-          {post.data.tags.map((tag) => <li>{tag}</li>)}
-        </ul>
-      )}
-    </header>
-    <div class="prose">
-      <Content />
-    </div>
-  </article>
+  <div class="post-shell">
+    <a class="back-link" href="/blog"><span aria-hidden="true">&larr;</span> 返回博客</a>
+    <article class="post">
+      <header class="post-header">
+        <p class="post-kicker">Blog</p>
+        <h1>{post.data.title}</h1>
+        <p class="lead">{post.data.description}</p>
+        <div class="post-meta-row">
+          <span>博客</span>
+          <span class="dot" aria-hidden="true"></span>
+          <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
+        </div>
+        {post.data.tags.length > 0 && (
+          <ul class="tag-list" aria-label="标签">
+            {post.data.tags.map((tag) => <li>{tag}</li>)}
+          </ul>
+        )}
+      </header>
+      <div class="prose">
+        <Content />
+      </div>
+    </article>
+  </div>
 </BaseLayout>

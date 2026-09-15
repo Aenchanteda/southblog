@@ -18,19 +18,27 @@ const { Content } = await render(note);
 ---
 
 <BaseLayout title={note.data.title} description={note.data.description}>
-  <article class="post">
-    <header class="post-header">
-      <p class="article-meta">学习心得 · {formatDate(note.data.pubDate)}</p>
-      <h1>{note.data.title}</h1>
-      <p class="lead">{note.data.description}</p>
-      {note.data.tags.length > 0 && (
-        <ul class="tag-list" aria-label="标签">
-          {note.data.tags.map((tag) => <li>{tag}</li>)}
-        </ul>
-      )}
-    </header>
-    <div class="prose">
-      <Content />
-    </div>
-  </article>
+  <div class="post-shell">
+    <a class="back-link" href="/notes"><span aria-hidden="true">&larr;</span> 返回学习心得</a>
+    <article class="post">
+      <header class="post-header">
+        <p class="post-kicker">Learning Notes</p>
+        <h1>{note.data.title}</h1>
+        <p class="lead">{note.data.description}</p>
+        <div class="post-meta-row">
+          <span>学习心得</span>
+          <span class="dot" aria-hidden="true"></span>
+          <time datetime={note.data.pubDate.toISOString()}>{formatDate(note.data.pubDate)}</time>
+        </div>
+        {note.data.tags.length > 0 && (
+          <ul class="tag-list" aria-label="标签">
+            {note.data.tags.map((tag) => <li>{tag}</li>)}
+          </ul>
+        )}
+      </header>
+      <div class="prose">
+        <Content />
+      </div>
+    </article>
+  </div>
 </BaseLayout>

@@ -5,15 +5,20 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
 ---
 
 <header class="site-header">
-  <a class="brand" href="/" aria-label={`${siteConfig.name} 首页`}>
-    <span class="brand-mark">南</span>
-    <span>{siteConfig.name}</span>
-  </a>
-  <nav class="site-nav" aria-label="主导航">
-    {siteConfig.nav.map((item) => {
-      const itemPath = item.href.replace(/\/$/, '') || '/';
-      const isActive = currentPath === itemPath || (itemPath !== '/' && currentPath.startsWith(`${itemPath}/`));
-      return <a href={item.href} aria-current={isActive ? 'page' : undefined}>{item.label}</a>;
-    })}
-  </nav>
+  <div class="nav-frame">
+    <a class="brand" href="/" aria-label={`${siteConfig.name} 首页`}>
+      <span class="brand-mark" aria-hidden="true">南</span>
+      <span class="brand-copy">
+        <strong>{siteConfig.name}</strong>
+        <small>{siteConfig.alternateName}</small>
+      </span>
+    </a>
+    <nav class="site-nav" aria-label="主导航">
+      {siteConfig.nav.map((item) => {
+        const itemPath = item.href.replace(/\/$/, '') || '/';
+        const isActive = currentPath === itemPath || (itemPath !== '/' && currentPath.startsWith(`${itemPath}/`));
+        return <a href={item.href} aria-current={isActive ? 'page' : undefined}>{item.label}</a>;
+      })}
+    </nav>
+  </div>
 </header>
