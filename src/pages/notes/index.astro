@@ -1,0 +1,21 @@
+---
+import { getCollection } from 'astro:content';
+import ArticleCard from '../../components/ArticleCard.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { byNewest, isPublished } from '../../lib/content';
+
+const notes = (await getCollection('notes')).filter(isPublished).sort(byNewest);
+---
+
+<BaseLayout title="学习心得" description="南边小站的学习心得与笔记列表。">
+  <section class="content-panel">
+    <div class="list-header">
+      <p class="eyebrow">Notes</p>
+      <h1>学习心得</h1>
+      <p class="lead">更轻量的学习记录，保留问题、理解路径和可复用的小结。</p>
+    </div>
+    <div class="grid">
+      {notes.map((entry) => <ArticleCard entry={entry} section="notes" />)}
+    </div>
+  </section>
+</BaseLayout>

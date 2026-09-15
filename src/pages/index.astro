@@ -1,0 +1,37 @@
+---
+import { getCollection } from 'astro:content';
+import ArticleCard from '../components/ArticleCard.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { siteConfig } from '../site.config';
+import { byNewest, isPublished } from '../lib/content';
+
+const blogPosts = (await getCollection('blog')).filter(isPublished).sort(byNewest);
+const notes = (await getCollection('notes')).filter(isPublished).sort(byNewest);
+const latest = [
+  ...blogPosts.slice(0, 2).map((entry) => ({ entry, section: 'blog' as const })),
+  ...notes.slice(0, 2).map((entry) => ({ entry, section: 'notes' as const })),
+].sort((a, b) => byNewest(a.entry, b.entry));
+---
+
+<BaseLayout>
+  <section class="hero">
+    <p class="eyebrow">Personal Blog · Learning Notes</p>
+    <h1>{siteConfig.name}</h1>
+    <p>
+      这里是一个面向中文阅读体验的个人静态博客，用来保存长期文章、学习心得和偶尔冒出来的英文技术关键词。
+    </p>
+  </section>
+
+  <section aria-labelledby="latest-heading">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Latest</p>
+        <h2 id="latest-heading">最新更新</h2>
+      </div>
+      <a href="/blog">查看全部博客</a>
+    </div>
+    <div class="grid">
+      {latest.map(({ entry, section }) => <ArticleCard entry={entry} section={section} />)}
+    </div>
+  </section>
+</BaseLayout>

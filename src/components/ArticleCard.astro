@@ -1,0 +1,25 @@
+---
+import type { ArticleEntry } from '../lib/content';
+import { formatDate, getEntrySlug } from '../lib/content';
+
+interface Props {
+  entry: ArticleEntry;
+  section: 'blog' | 'notes';
+}
+
+const { entry, section } = Astro.props;
+const href = `/${section}/${getEntrySlug(entry)}`;
+---
+
+<article class="article-card">
+  <a href={href}>
+    <p class="article-meta">{formatDate(entry.data.pubDate)}</p>
+    <h3>{entry.data.title}</h3>
+    <p>{entry.data.description}</p>
+    {entry.data.tags.length > 0 && (
+      <ul class="tag-list" aria-label="标签">
+        {entry.data.tags.map((tag) => <li>{tag}</li>)}
+      </ul>
+    )}
+  </a>
+</article>
