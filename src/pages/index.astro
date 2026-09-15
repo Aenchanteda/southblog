@@ -10,34 +10,20 @@ const notes = (await getCollection('notes')).filter(isPublished).sort(byNewest);
 ---
 
 <BaseLayout>
-  <section class="hero">
+  <section class="hero home-hero">
     <div class="hero-content">
-      <p class="eyebrow">Personal Journal · Learning Notes</p>
       <h1>{siteConfig.name}</h1>
       <p>
-        一处安静的个人写作空间：记录长期文章、学习心得，以及那些在中文语境里慢慢生长的技术与生活观察。
+        记录博客、学习心得，以及在中文语境里慢慢生长的技术与生活观察。
       </p>
-      <div class="hero-meta" aria-label="站点内容类型">
-        <span>博客文章</span>
-        <span>学习心得</span>
-        <span>Markdown / MDX</span>
-      </div>
     </div>
-    <aside class="hero-card" aria-label="站点简介">
-      <div class="stamp">记</div>
-      <p class="eyebrow">Today</p>
-      <h2>把零散想法，整理成可以回看的文字。</h2>
-      <p>
-        首页会同步展示最新博客和学习笔记；更完整的文章放在博客，更轻量的理解路径留给学习心得。
-      </p>
-    </aside>
   </section>
 
   <section class="home-section" aria-labelledby="latest-blog-heading">
     <div class="section-heading">
       <div>
-        <p class="eyebrow">Latest Blog</p>
-        <h2 id="latest-blog-heading">最新博客</h2>
+        <p class="eyebrow">Latest Posts</p>
+        <h2 id="latest-blog-heading">最新博文</h2>
       </div>
       <a href="/blog">查看全部博客</a>
     </div>
