@@ -7,6 +7,7 @@ export const siteConfig = {
     { href: '/', label: '首页' },
     { href: '/blog', label: '博客' },
     { href: '/notes', label: '学习心得' },
+    { href: '/ai-pharma', label: 'AI制药' },
     { href: '/about', label: '关于' },
   ],
 };

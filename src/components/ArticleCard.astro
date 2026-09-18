@@ -1,15 +1,20 @@
 ---
-import type { ArticleEntry } from '../lib/content';
+import type { ArticleEntry, ArticleSection } from '../lib/content';
 import { formatDate, getEntrySlug } from '../lib/content';
 
 interface Props {
   entry: ArticleEntry;
-  section: 'blog' | 'notes';
+  section: ArticleSection;
 }
 
 const { entry, section } = Astro.props;
 const href = `/${section}/${getEntrySlug(entry)}`;
-const sectionLabel = section === 'blog' ? '博客' : '学习心得';
+const sectionLabels: Record<ArticleSection, string> = {
+  blog: '博客',
+  notes: '学习心得',
+  'ai-pharma': 'AI制药',
+};
+const sectionLabel = sectionLabels[section];
 ---
 
 <article class="article-card">
