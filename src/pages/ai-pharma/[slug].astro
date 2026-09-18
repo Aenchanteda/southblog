@@ -1,0 +1,44 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { formatDate, getEntrySlug, isPublished } from '../../lib/content';
+
+type AiPharmaEntry = CollectionEntry<'aiPharma'>;
+
+export async function getStaticPaths() {
+  const posts = (await getCollection('aiPharma')).filter(isPublished);
+  return posts.map((post) => ({
+    params: { slug: getEntrySlug(post) },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props as { post: AiPharmaEntry };
+const { Content } = await render(post);
+---
+
+<BaseLayout title={post.data.title} description={post.data.description}>
+  <div class="post-shell">
+    <a class="back-link" href="/ai-pharma"><span aria-hidden="true">&larr;</span> 返回AI制药</a>
+    <article class="post longform-post">
+      <header class="post-header">
+        <p class="post-kicker">AI Drug Discovery</p>
+        <h1>{post.data.title}</h1>
+        <p class="lead">{post.data.description}</p>
+        <div class="post-meta-row">
+          <span>AI制药</span>
+          <span class="dot" aria-hidden="true"></span>
+          <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
+        </div>
+        {post.data.tags.length > 0 && (
+          <ul class="tag-list" aria-label="标签">
+            {post.data.tags.map((tag) => <li>{tag}</li>)}
+          </ul>
+        )}
+      </header>
+      <div class="prose longform-prose">
+        <Content />
+      </div>
+    </article>
+  </div>
+</BaseLayout>

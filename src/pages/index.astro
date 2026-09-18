@@ -7,6 +7,7 @@ import { byNewest, isPublished } from '../lib/content';
 
 const blogPosts = (await getCollection('blog')).filter(isPublished).sort(byNewest);
 const notes = (await getCollection('notes')).filter(isPublished).sort(byNewest);
+const aiPharmaPosts = (await getCollection('aiPharma')).filter(isPublished).sort(byNewest);
 ---
 
 <BaseLayout>
@@ -42,6 +43,19 @@ const notes = (await getCollection('notes')).filter(isPublished).sort(byNewest);
     </div>
     <div class="article-grid">
       {notes.slice(0, 2).map((entry) => <ArticleCard entry={entry} section="notes" />)}
+    </div>
+  </section>
+
+  <section class="home-section compact-section" aria-labelledby="latest-ai-pharma-heading">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">AI Drug Discovery</p>
+        <h2 id="latest-ai-pharma-heading">AI制药</h2>
+      </div>
+      <a href="/ai-pharma">查看全部文章</a>
+    </div>
+    <div class="article-grid compact-grid">
+      {aiPharmaPosts.slice(0, 2).map((entry) => <ArticleCard entry={entry} section="ai-pharma" />)}
     </div>
   </section>
 </BaseLayout>

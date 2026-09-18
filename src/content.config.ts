@@ -19,4 +19,9 @@ const notes = defineCollection({
   schema: articleSchema,
 });
 
-export const collections = { blog, notes };
+const aiPharma = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/ai-pharma' }),
+  schema: articleSchema,
+});
+
+export const collections = { blog, notes, aiPharma };

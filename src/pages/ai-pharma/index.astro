@@ -1,0 +1,21 @@
+---
+import { getCollection } from 'astro:content';
+import ArticleCard from '../../components/ArticleCard.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { byNewest, isPublished } from '../../lib/content';
+
+const posts = (await getCollection('aiPharma')).filter(isPublished).sort(byNewest);
+---
+
+<BaseLayout title="AI制药" description="南边小站的 AI 制药与小分子药物发现学习文章。">
+  <section class="content-panel ai-pharma-panel">
+    <div class="list-header">
+      <p class="eyebrow">AI Drug Discovery</p>
+      <h1>AI制药</h1>
+      <p class="lead">聚焦小分子药物发现、分子表示、性质预测、生成式模型与学习路线的长期笔记。</p>
+    </div>
+    <div class="article-grid compact-grid">
+      {posts.map((entry) => <ArticleCard entry={entry} section="ai-pharma" />)}
+    </div>
+  </section>
+</BaseLayout>
