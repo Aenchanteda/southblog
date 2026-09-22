@@ -1,0 +1,37 @@
+---
+import { getCollection } from 'astro:content';
+import ArticleCard from '../../components/ArticleCard.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { byNewest, getEntrySlug, isPublished } from '../../lib/content';
+
+const knownBciSlugs = new Set(['0915-blog-bci-lesson-1', '0922-blog-bci-lesson-2']);
+const posts = (await getCollection('blog'))
+  .filter(isPublished)
+  .filter((entry) => {
+    const slug = getEntrySlug(entry);
+    const title = entry.data.title.toLowerCase();
+    const tags = entry.data.tags.map((tag) => tag.toLowerCase());
+    return (
+      knownBciSlugs.has(slug) ||
+      slug.includes('bci') ||
+      title.includes('bci') ||
+      entry.data.title.includes('脑机接口') ||
+      tags.includes('bci') ||
+      tags.includes('脑机接口')
+    );
+  })
+  .sort(byNewest);
+---
+
+<BaseLayout title="脑机接口" description="南边小站的脑机接口课程笔记与相关文章。">
+  <section class="content-panel topic-panel">
+    <div class="list-header">
+      <p class="eyebrow">BCI Notes</p>
+      <h1>脑机接口</h1>
+      <p class="lead">收集脑机接口课程笔记与相关博客文章，按发布日期倒序排列。</p>
+    </div>
+    <div class="article-grid">
+      {posts.map((entry) => <ArticleCard entry={entry} section="blog" />)}
+    </div>
+  </section>
+</BaseLayout>

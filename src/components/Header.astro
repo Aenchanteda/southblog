@@ -2,6 +2,13 @@
 import { siteConfig } from '../site.config';
 
 const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isActivePath = (href: string) => {
+  const itemPath = href.replace(/\/$/, '') || '/';
+  return currentPath === itemPath || (itemPath !== '/' && currentPath.startsWith(`${itemPath}/`));
+};
+const topicActive = siteConfig.topics.some((item) => isActivePath(item.href));
+const primaryNav = siteConfig.nav.filter((item) => item.href !== '/about');
+const trailingNav = siteConfig.nav.filter((item) => item.href === '/about');
 ---
 
 <header class="site-header">
@@ -14,11 +21,65 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
       </span>
     </a>
     <nav class="site-nav" aria-label="主导航">
-      {siteConfig.nav.map((item) => {
-        const itemPath = item.href.replace(/\/$/, '') || '/';
-        const isActive = currentPath === itemPath || (itemPath !== '/' && currentPath.startsWith(`${itemPath}/`));
-        return <a href={item.href} aria-current={isActive ? 'page' : undefined}>{item.label}</a>;
-      })}
+      {primaryNav.map((item) => (
+        <a href={item.href} aria-current={isActivePath(item.href) ? 'page' : undefined}>{item.label}</a>
+      ))}
+      <div class="topic-dropdown" data-topic-dropdown>
+        <button
+          class="topic-trigger"
+          type="button"
+          aria-haspopup="true"
+          aria-expanded="false"
+          aria-current={topicActive ? 'page' : undefined}
+          data-topic-trigger
+        >
+          专题
+          <span aria-hidden="true">▾</span>
+        </button>
+        <div class="topic-menu" role="menu" data-topic-menu>
+          {siteConfig.topics.map((item) => (
+            <a href={item.href} role="menuitem" aria-current={isActivePath(item.href) ? 'page' : undefined}>{item.label}</a>
+          ))}
+        </div>
+      </div>
+      {trailingNav.map((item) => (
+        <a href={item.href} aria-current={isActivePath(item.href) ? 'page' : undefined}>{item.label}</a>
+      ))}
     </nav>
   </div>
 </header>
+
+<script is:inline>
+  (() => {
+    const dropdowns = document.querySelectorAll('[data-topic-dropdown]');
+
+    const closeDropdown = (dropdown) => {
+      dropdown.classList.remove('is-open');
+      dropdown.querySelector('[data-topic-trigger]')?.setAttribute('aria-expanded', 'false');
+    };
+
+    dropdowns.forEach((dropdown) => {
+      const trigger = dropdown.querySelector('[data-topic-trigger]');
+      const menu = dropdown.querySelector('[data-topic-menu]');
+      if (!trigger || !menu) return;
+
+      trigger.addEventListener('click', () => {
+        const isOpen = dropdown.classList.toggle('is-open');
+        trigger.setAttribute('aria-expanded', String(isOpen));
+      });
+
+      dropdown.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          closeDropdown(dropdown);
+          trigger.focus();
+        }
+      });
+    });
+
+    document.addEventListener('click', (event) => {
+      dropdowns.forEach((dropdown) => {
+        if (!dropdown.contains(event.target)) closeDropdown(dropdown);
+      });
+    });
+  })();
+</script>
