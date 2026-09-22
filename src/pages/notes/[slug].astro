@@ -1,5 +1,6 @@
 ---
 import { getCollection, render, type CollectionEntry } from 'astro:content';
+import ArticleToc from '../../components/ArticleToc.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { formatDate, getEntrySlug, isPublished } from '../../lib/content';
 
@@ -14,31 +15,34 @@ export async function getStaticPaths() {
 }
 
 const { note } = Astro.props as { note: NoteEntry };
-const { Content } = await render(note);
+const { Content, headings } = await render(note);
 ---
 
 <BaseLayout title={note.data.title} description={note.data.description}>
-  <div class="post-shell">
+  <div class="post-shell with-toc">
     <a class="back-link" href="/notes"><span aria-hidden="true">&larr;</span> 返回学习心得</a>
-    <article class="post">
-      <header class="post-header">
-        <p class="post-kicker">Learning Notes</p>
-        <h1>{note.data.title}</h1>
-        <p class="lead">{note.data.description}</p>
-        <div class="post-meta-row">
-          <span>学习心得</span>
-          <span class="dot" aria-hidden="true"></span>
-          <time datetime={note.data.pubDate.toISOString()}>{formatDate(note.data.pubDate)}</time>
+    <div class="reading-layout">
+      <ArticleToc headings={headings} />
+      <article class="post">
+        <header class="post-header">
+          <p class="post-kicker">Learning Notes</p>
+          <h1>{note.data.title}</h1>
+          <p class="lead">{note.data.description}</p>
+          <div class="post-meta-row">
+            <span>学习心得</span>
+            <span class="dot" aria-hidden="true"></span>
+            <time datetime={note.data.pubDate.toISOString()}>{formatDate(note.data.pubDate)}</time>
+          </div>
+          {note.data.tags.length > 0 && (
+            <ul class="tag-list" aria-label="标签">
+              {note.data.tags.map((tag) => <li>{tag}</li>)}
+            </ul>
+          )}
+        </header>
+        <div class="prose">
+          <Content />
         </div>
-        {note.data.tags.length > 0 && (
-          <ul class="tag-list" aria-label="标签">
-            {note.data.tags.map((tag) => <li>{tag}</li>)}
-          </ul>
-        )}
-      </header>
-      <div class="prose">
-        <Content />
-      </div>
-    </article>
+      </article>
+    </div>
   </div>
 </BaseLayout>
