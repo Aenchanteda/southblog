@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="820" viewBox="0 0 1400 820">
+  <rect width="1400" height="820" fill="#f6f3ec"/>
+  <text x="36" y="42" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="28" font-weight="700" fill="#1c2428">三类节律机制：膜电位怎样自己变正、再变负</text>
+  <text x="36" y="72" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="16" fill="#5c676c">教学示意图，根据 Marder 与 Bucher（2001）图3前三格改绘，不是原图。</text>
+
+  <!-- panel 1 -->
+  <rect x="24" y="96" width="440" height="520" rx="16" fill="#ffffff" stroke="#e4ddd0"/>
+  <text x="44" y="136" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="22" font-weight="700" fill="#1c2428">1  内源爆发</text>
+  <text x="44" y="164" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="15" fill="#5c676c">不需要每个周期从外面推一下</text>
+  <text x="48" y="210" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="13" fill="#8a8175">膜电位</text>
+  <line x1="56" y1="230" x2="56" y2="430" stroke="#d9d3c7" stroke-width="1.5"/>
+  <line x1="56" y1="430" x2="420" y2="430" stroke="#d9d3c7" stroke-width="1.5"/>
+  <text x="390" y="448" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="13" fill="#8a8175">时间</text>
+  <!-- slow wave + spikes, two bursts -->
+  <path d="M70 400
+           C110 400 130 360 160 330
+           L168 250 L176 330 L184 248 L192 330 L200 252 L208 330
+           C230 350 250 410 290 410
+           C330 410 350 360 380 330
+           L388 250 L396 330 L404 248"
+        fill="none" stroke="#1c2428" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+  <text x="44" y="490" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="15" fill="#1c2428">慢内向电流把电位抬上爆发平台。</text>
+  <text x="44" y="516" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="15" fill="#1c2428">外向电流再把它拉回，下一拍又开始。</text>
+  <text x="44" y="548" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="14" fill="#5c676c">节拍在这个细胞的离子通道里。</text>
+  <text x="44" y="580" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="14" fill="#8a8175">口胃节的 AB 就是这类起搏细胞。</text>
+
+  <!-- panel 2 -->
+  <rect x="480" y="96" width="440" height="520" rx="16" fill="#ffffff" stroke="#e4ddd0"/>
+  <text x="500" y="136" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="22" font-weight="700" fill="#1c2428">2  平台电位</text>
+  <text x="500" y="164" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="15" fill="#5c676c">短脉冲打开后，平台比脉冲更长</text>
+  <text x="504" y="210" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="13" fill="#8a8175">膜电位</text>
+  <line x1="512" y1="230" x2="512" y2="400" stroke="#d9d3c7" stroke-width="1.5"/>
+  <line x1="512" y1="400" x2="880" y2="400" stroke="#d9d3c7" stroke-width="1.5"/>
+  <!-- current pulses -->
+  <text x="504" y="428" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="13" fill="#8a8175">注入电流</text>
+  <rect x="560" y="444" width="36" height="16" rx="2" fill="#1d4e89"/>
+  <rect x="760" y="468" width="36" height="16" rx="2" fill="#c44536"/>
+  <text x="602" y="456" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="13" fill="#1d4e89">去极化</text>
+  <text x="802" y="480" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="13" fill="#c44536">超极化</text>
+  <!-- voltage: rest, jump at pulse, plateau with spikes, fall at hyperpolarization -->
+  <path d="M530 370 L560 370 L560 300
+           L575 230 L588 300 L600 228 L612 300 L624 232 L636 300
+           L760 300 L760 385 L860 385"
+        fill="none" stroke="#1c2428" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+  <text x="500" y="530" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="15" fill="#1c2428">去极化脉冲结束后，电位仍停在高处。</text>
+  <text x="500" y="556" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="15" fill="#1c2428">超极化脉冲把它关掉，回到静息。</text>
+  <text x="500" y="588" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="14" fill="#5c676c">细胞记住的是上一次突触输入的符号。</text>
+
+  <!-- panel 3 -->
+  <rect x="936" y="96" width="440" height="520" rx="16" fill="#ffffff" stroke="#e4ddd0"/>
+  <text x="956" y="136" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="22" font-weight="700" fill="#1c2428">3  抑制后反跳</text>
+  <text x="956" y="164" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="15" fill="#5c676c">抑制本身不让它放电，结束时才放</text>
+  <text x="960" y="210" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="13" fill="#8a8175">膜电位</text>
+  <line x1="968" y1="230" x2="968" y2="430" stroke="#d9d3c7" stroke-width="1.5"/>
+  <line x1="968" y1="360" x2="1330" y2="360" stroke="#d9d3c7" stroke-width="1.5"/>
+  <text x="1296" y="380" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="13" fill="#8a8175">时间</text>
+  <path d="M990 360 L1060 360
+           C1080 360 1090 400 1110 420
+           L1220 420
+           C1240 420 1250 340 1270 300
+           L1282 230 L1294 310 L1306 228 L1318 310"
+        fill="none" stroke="#1c2428" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+  <line x1="1090" y1="448" x2="1230" y2="448" stroke="#c44536" stroke-width="8" stroke-linecap="round"/>
+  <text x="1090" y="472" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="13" fill="#c44536">抑制性输入</text>
+  <text x="956" y="520" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="15" fill="#1c2428">超极化把反跳所需的电流准备好。</text>
+  <text x="956" y="546" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="15" fill="#1c2428">抑制一撤，膜电位冲过阈值，打出一串锋电位。</text>
+  <text x="956" y="578" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="14" fill="#5c676c">半中枢振荡里，这一拍的时刻常由对方的抑制结束来定。</text>
+
+  <rect x="24" y="636" width="1352" height="156" rx="16" fill="#ffffff" stroke="#e4ddd0"/>
+  <text x="44" y="674" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="18" font-weight="700" fill="#1c2428">和“单独培养仍打节拍”的关系</text>
+  <text x="44" y="708" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="15" fill="#1c2428">整团口胃神经节放进盐水里，没有感觉、也没有上级在计时，幽门节律仍在。这是环路离体，不是单个细胞的培养。</text>
+  <text x="44" y="736" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="15" fill="#1c2428">再把 AB 从突触里隔开：不加单胺时它沉默。浴加多巴胺、五羟色胺或章鱼胺后，它用自己的离子通道重新爆发，而且三种胺依赖的电流并不相同。</text>
+  <text x="44" y="764" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="14" fill="#8a8175">同一篇综述的图3还画了第4种：锋电位频率适应。恒定去极化下放电变慢，也能让半中枢从这一拍换到下一拍。课堂说的三类是图中的前三种。</text>
+</svg>

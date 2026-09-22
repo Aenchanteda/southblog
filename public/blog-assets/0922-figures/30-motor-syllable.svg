@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="520" viewBox="0 0 1400 520">
+  <rect width="1400" height="520" fill="#f6f3ec"/>
+  <text x="36" y="46" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="28" font-weight="700" fill="#1c2428">运动音节理论：用少量短单元拼出动作</text>
+  <text x="36" y="78" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="16" fill="#5c676c">教学示意图。单元的叫法来自 Wiltschko 等（2015）：可复用、亚秒级、彼此有转移规则。</text>
+
+  <rect x="24" y="108" width="1352" height="280" rx="16" fill="#ffffff" stroke="#e4ddd0"/>
+
+  <text x="48" y="150" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="16" fill="#5c676c">音节库里已有的短动作</text>
+
+  <rect x="48" y="176" width="200" height="88" rx="12" fill="#e7f0ee" stroke="#2f6f6a" stroke-width="2"/>
+  <text x="148" y="216" text-anchor="middle" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="22" font-weight="700" fill="#1c2428">伸</text>
+  <text x="148" y="244" text-anchor="middle" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="14" fill="#5c676c">音节 1</text>
+
+  <rect x="300" y="176" width="200" height="88" rx="12" fill="#e7f0ee" stroke="#2f6f6a" stroke-width="2"/>
+  <text x="400" y="216" text-anchor="middle" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="22" font-weight="700" fill="#1c2428">抓</text>
+  <text x="400" y="244" text-anchor="middle" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="14" fill="#5c676c">音节 2</text>
+
+  <rect x="552" y="176" width="200" height="88" rx="12" fill="#e7f0ee" stroke="#2f6f6a" stroke-width="2"/>
+  <text x="652" y="216" text-anchor="middle" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="22" font-weight="700" fill="#1c2428">收回</text>
+  <text x="652" y="244" text-anchor="middle" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="14" fill="#5c676c">音节 3</text>
+
+  <text x="820" y="228" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="28" fill="#8a8175">→</text>
+
+  <rect x="870" y="160" width="460" height="120" rx="12" fill="#f8efe4" stroke="#c44536" stroke-width="2"/>
+  <text x="1100" y="206" text-anchor="middle" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="22" font-weight="700" fill="#1c2428">伸 → 抓 → 收回</text>
+  <text x="1100" y="242" text-anchor="middle" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="16" fill="#5c676c">拼成一次够取。换顺序，就是另一个动作。</text>
+
+  <text x="48" y="320" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="16" fill="#1c2428">要决定的是调用哪几个音节、按什么顺序接上。音节内部的肌肉搭配不必每次重算。</text>
+  <text x="48" y="352" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="15" fill="#5c676c">小鼠全身动作被拆成反复使用的亚秒级音节。下一步接到哪一个，由转移概率决定，这套关系统称为行为语法。</text>
+
+  <text x="36" y="440" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="16" fill="#1c2428">课堂用视觉打比方：圆斑组成条形，条形再组成面孔。运动侧与之对应的，是短音节组成完整动作。</text>
+  <text x="36" y="472" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="15" fill="#8a8175">协同管一个音节里的肌肉怎么搭配；反射和 CPG 管节律音节不必逐拍下命令；随意动作则把成功的短单元留下来复用。</text>
+</svg>

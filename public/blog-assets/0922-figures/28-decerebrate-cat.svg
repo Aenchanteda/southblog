@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="820" viewBox="0 0 1400 820">
+  <rect width="1400" height="820" fill="#f6f3ec"/>
+  <text x="36" y="42" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="28" font-weight="700" fill="#1c2428">去大脑猫与脊髓猫：跑步机上的踏步</text>
+  <text x="36" y="70" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="16" fill="#5c676c">教学示意图，不是期刊原图。左：切面高度决定会不会自己走。右：胸髓横断并训练后，后肢可以踏步。</text>
+
+  <rect x="24" y="92" width="668" height="704" rx="16" fill="#ffffff" stroke="#e4ddd0"/>
+  <text x="48" y="132" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="22" font-weight="700" fill="#1c2428">A  去大脑：高切和低切不一样</text>
+  <text x="48" y="160" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="15" fill="#5c676c">都没有皮层的目标导向起步。差别在丘脑下行走区还在不在。</text>
+
+  <g transform="translate(48,186)">
+    <ellipse cx="86" cy="52" rx="74" ry="44" fill="#d9d3c7" stroke="#1c2428" stroke-width="1.6"/>
+    <path d="M140 18 C176 22 196 56 184 90 C170 112 144 114 126 96 L140 18 Z" fill="#2f6f6a" stroke="#1c2428" stroke-width="1.6"/>
+    <line x1="62" y1="14" x2="62" y2="96" stroke="#1d4e89" stroke-width="3.2"/>
+    <line x1="124" y1="8" x2="152" y2="104" stroke="#c44536" stroke-width="3.2"/>
+    <text x="28" y="8" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="14" fill="#1d4e89">高切</text>
+    <text x="128" y="4" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="14" fill="#c44536">低切</text>
+    <text x="4" y="124" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="14" fill="#1d4e89">留住丘脑下行走区</text>
+    <text x="150" y="124" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="14" fill="#c44536">这块也被切掉</text>
+  </g>
+
+  <g transform="translate(250,250)">
+    <line x1="40" y1="-8" x2="250" y2="-8" stroke="#8a8175" stroke-width="3"/>
+    <line x1="160" y1="-8" x2="160" y2="28" stroke="#8a8175" stroke-width="2" stroke-dasharray="4 3"/>
+    <text x="48" y="-18" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="14" fill="#5c676c">躯干被吊住、固定</text>
+    <path d="M36 78 C20 78 8 96 16 108 C28 92 48 90 62 96" fill="none" stroke="#1c2428" stroke-width="3" stroke-linecap="round"/>
+    <ellipse cx="168" cy="78" rx="118" ry="38" fill="#f3d7b5" stroke="#1c2428" stroke-width="2"/>
+    <circle cx="276" cy="58" r="26" fill="#f3d7b5" stroke="#1c2428" stroke-width="2"/>
+    <path d="M262 38 L272 16 L284 40 Z" fill="#f3d7b5" stroke="#1c2428" stroke-width="2" stroke-linejoin="round"/>
+    <circle cx="286" cy="54" r="2.3" fill="#1c2428"/>
+    <path d="M214 108 L200 168" stroke="#1c2428" stroke-width="4" stroke-linecap="round"/>
+    <path d="M244 110 L262 168" stroke="#1c2428" stroke-width="4" stroke-linecap="round"/>
+    <path d="M108 110 L82 154 L112 172" fill="none" stroke="#1c2428" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M146 112 L176 148 L150 172" fill="none" stroke="#1c2428" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <g transform="translate(64,560)">
+    <rect width="560" height="32" rx="6" fill="#3d5a4c"/>
+    <polygon points="28,16 50,6 50,26" fill="#f6f3ec"/>
+    <polygon points="78,16 100,6 100,26" fill="#f6f3ec"/>
+    <polygon points="128,16 150,6 150,26" fill="#f6f3ec"/>
+    <polygon points="178,16 200,6 200,26" fill="#f6f3ec"/>
+    <text x="250" y="21" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="16" fill="#f6f3ec">传送带向后动</text>
+    <rect x="10" y="32" width="14" height="36" fill="#2c4036"/>
+    <rect x="536" y="32" width="14" height="36" fill="#2c4036"/>
+  </g>
+  <text x="48" y="672" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="16" fill="#1d4e89">高切：丘前到乳头体前。带子一动，猫可以自己走。</text>
+  <text x="48" y="700" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="16" fill="#c44536">低切：上下丘之间，或乳头体后。带子单独转，不起步。</text>
+  <text x="48" y="728" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="15" fill="#5c676c">低切要电刺激中脑行走区。刺激加强，步频变快，走可以变成跑。</text>
+  <text x="48" y="756" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="14" fill="#8a8175">课堂把“切在上下丘之间”和“带子一拖就会跑”记成了一次手术。</text>
+
+  <rect x="708" y="92" width="668" height="704" rx="16" fill="#ffffff" stroke="#e4ddd0"/>
+  <text x="732" y="132" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="22" font-weight="700" fill="#1c2428">B  脊髓完全横断</text>
+  <text x="732" y="160" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="15" fill="#5c676c">胸髓横断后，大脑和脑干的下行通路到不了后肢。</text>
+
+  <g transform="translate(748,196)">
+    <rect x="0" y="28" width="92" height="36" rx="8" fill="#d9d3c7" stroke="#1c2428" stroke-width="1.4"/>
+    <rect x="116" y="28" width="78" height="36" rx="8" fill="#d9d3c7" stroke="#1c2428" stroke-width="1.4"/>
+    <rect x="230" y="34" width="180" height="24" rx="8" fill="#2f6f6a" stroke="#1c2428" stroke-width="1.4"/>
+    <line x1="206" y1="6" x2="206" y2="86" stroke="#c44536" stroke-width="3.2"/>
+    <text x="184" y="2" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="14" fill="#c44536">横断</text>
+    <text x="30" y="88" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="14" fill="#8a8175">脑</text>
+    <text x="132" y="88" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="14" fill="#8a8175">脑干</text>
+    <text x="258" y="88" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="14" fill="#2f6f6a">腰骶脊髓仍在</text>
+  </g>
+
+  <g transform="translate(860,360)">
+    <ellipse cx="150" cy="58" rx="120" ry="36" fill="#f3d7b5" stroke="#1c2428" stroke-width="2"/>
+    <circle cx="258" cy="40" r="24" fill="#f3d7b5" stroke="#1c2428" stroke-width="2"/>
+    <path d="M246 22 L256 4 L268 24 Z" fill="#f3d7b5" stroke="#1c2428" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M40 70 C18 78 8 96 18 104" fill="none" stroke="#1c2428" stroke-width="3" stroke-linecap="round"/>
+    <path d="M196 88 L188 132" stroke="#c5b8a8" stroke-width="4" stroke-linecap="round"/>
+    <path d="M224 90 L232 132" stroke="#c5b8a8" stroke-width="4" stroke-linecap="round"/>
+    <path d="M70 88 L42 132 L76 154" fill="none" stroke="#1c2428" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M112 90 L146 128 L114 154" fill="none" stroke="#1c2428" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="292" y="46" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="14" fill="#8a8175">前肢不再参与</text>
+    <text x="36" y="176" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="14" fill="#1c2428">后肢仍在踏步</text>
+  </g>
+
+  <g transform="translate(748,600)">
+    <rect width="560" height="32" rx="6" fill="#3d5a4c"/>
+    <polygon points="300,16 322,6 322,26" fill="#f6f3ec"/>
+    <polygon points="352,16 374,6 374,26" fill="#f6f3ec"/>
+    <polygon points="404,16 426,6 426,26" fill="#f6f3ec"/>
+    <text x="20" y="21" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="16" fill="#f6f3ec">后肢下方的传送带</text>
+    <rect x="10" y="32" width="14" height="30" fill="#2c4036"/>
+    <rect x="536" y="32" width="14" height="30" fill="#2c4036"/>
+  </g>
+  <text x="732" y="688" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="16" fill="#1c2428">不是一刀下去立刻走。急性期常有脊髓休克。</text>
+  <text x="732" y="716" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="16" fill="#1c2428">慢性期托住躯干、经跑步机训练后，后肢可以踏步。</text>
+  <text x="732" y="744" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="15" fill="#5c676c">带子把髋拉向伸展并给肢体负重，用来诱发和调节节律。</text>
+  <text x="732" y="772" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="14" fill="#8a8175">肌肉麻痹、没有运动反馈时，神经仍可有节律放电。</text>
+</svg>

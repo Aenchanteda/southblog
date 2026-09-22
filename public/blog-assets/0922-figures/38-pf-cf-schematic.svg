@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1560" height="920" viewBox="0 0 1560 920">
+  <rect width="1560" height="920" fill="#f6f3ec"/>
+  <text x="36" y="44" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="28" font-weight="700" fill="#1c2428">爬行纤维报错，平行纤维记住当时的情境</text>
+  <text x="36" y="74" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="16" fill="#5c676c">教学示意图。两条一起到达，才把那一条平行纤维突触压低；只来其中一条，突触不动。</text>
+
+  <rect x="24" y="96" width="744" height="640" rx="16" fill="#ffffff" stroke="#e4ddd0"/>
+  <text x="48" y="136" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="22" font-weight="700" fill="#1c2428">第一次：镖偏了</text>
+  <text x="236" y="136" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="15" fill="#5c676c">情境和误差同时到达</text>
+
+  <rect x="792" y="96" width="744" height="640" rx="16" fill="#ffffff" stroke="#e4ddd0"/>
+  <text x="816" y="136" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="22" font-weight="700" fill="#1c2428">以后：同样的情境</text>
+  <text x="1052" y="136" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="15" fill="#5c676c">误差不再来，输出已经改了</text>
+
+  <defs>
+    <g id="arbor">
+      <path d="M210 400 C170 370 110 340 72 292" fill="none" stroke="#1e6b5a" stroke-width="8" stroke-linecap="round"/>
+      <path d="M72 292 C52 262 62 228 98 208" fill="none" stroke="#1e6b5a" stroke-width="4.5" stroke-linecap="round"/>
+      <path d="M120 322 C92 292 96 248 128 226" fill="none" stroke="#1e6b5a" stroke-width="3.5" stroke-linecap="round"/>
+      <path d="M208 368 C155 340 108 286 96 232" fill="none" stroke="#1e6b5a" stroke-width="6.5" stroke-linecap="round"/>
+      <path d="M96 232 C78 196 102 158 142 148" fill="none" stroke="#1e6b5a" stroke-width="3.5" stroke-linecap="round"/>
+      <path d="M206 328 C158 298 128 246 138 188" fill="none" stroke="#1e6b5a" stroke-width="5.5" stroke-linecap="round"/>
+      <path d="M138 188 C128 156 156 124 196 122" fill="none" stroke="#1e6b5a" stroke-width="3.5" stroke-linecap="round"/>
+      <path d="M210 448 L210 250" fill="none" stroke="#1e6b5a" stroke-width="11" stroke-linecap="round"/>
+      <path d="M210 268 C188 220 198 168 218 124" fill="none" stroke="#1e6b5a" stroke-width="6" stroke-linecap="round"/>
+      <path d="M214 210 C242 172 262 136 250 100" fill="none" stroke="#1e6b5a" stroke-width="4" stroke-linecap="round"/>
+      <path d="M208 236 C246 198 292 168 318 132" fill="none" stroke="#1e6b5a" stroke-width="4.5" stroke-linecap="round"/>
+      <path d="M212 378 C275 350 345 322 402 286" fill="none" stroke="#1e6b5a" stroke-width="8" stroke-linecap="round"/>
+      <path d="M402 286 C440 258 458 220 438 182" fill="none" stroke="#1e6b5a" stroke-width="4.5" stroke-linecap="round"/>
+      <path d="M340 314 C378 286 408 240 396 202" fill="none" stroke="#1e6b5a" stroke-width="3.5" stroke-linecap="round"/>
+      <path d="M212 332 C282 304 358 258 418 220" fill="none" stroke="#1e6b5a" stroke-width="6.5" stroke-linecap="round"/>
+      <path d="M418 220 C456 192 472 154 450 124" fill="none" stroke="#1e6b5a" stroke-width="3.5" stroke-linecap="round"/>
+      <path d="M212 286 C274 256 334 210 372 172" fill="none" stroke="#1e6b5a" stroke-width="5.5" stroke-linecap="round"/>
+      <path d="M372 172 C402 144 428 114 408 90" fill="none" stroke="#1e6b5a" stroke-width="3.5" stroke-linecap="round"/>
+      <ellipse cx="210" cy="478" rx="34" ry="28" fill="#164e44"/>
+      <ellipse cx="198" cy="468" rx="10" ry="7" fill="#3d8f7c" opacity="0.55"/>
+    </g>
+  </defs>
+
+  <!-- LEFT -->
+  <g transform="translate(40,156)">
+    <use href="#arbor"/>
+    <g stroke="#d3cbbf" stroke-width="3" stroke-linecap="round">
+      <line x1="48" y1="132" x2="430" y2="132"/>
+      <line x1="48" y1="186" x2="430" y2="186"/>
+      <line x1="48" y1="300" x2="430" y2="300"/>
+      <line x1="48" y1="352" x2="430" y2="352"/>
+    </g>
+    <g fill="#1e6b5a">
+      <circle cx="210" cy="132" r="4.5"/>
+      <circle cx="210" cy="186" r="4.5"/>
+      <circle cx="210" cy="300" r="4.5"/>
+      <circle cx="138" cy="186" r="4"/>
+      <circle cx="360" cy="300" r="4"/>
+    </g>
+    <line x1="70" y1="244" x2="430" y2="244" stroke="#e0a100" stroke-width="6" stroke-linecap="round"/>
+    <circle cx="36" cy="244" r="16" fill="#fff6df" stroke="#e0a100" stroke-width="2.5"/>
+    <text x="36" y="248" text-anchor="middle" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="11" font-weight="700" fill="#8a6a10">颗粒</text>
+    <circle cx="210" cy="244" r="14" fill="#fff" stroke="#c44536" stroke-width="3"/>
+    <circle cx="210" cy="244" r="6.5" fill="#e0a100"/>
+    <path d="M262 520 C300 486 168 468 238 424 C304 384 160 362 224 318 C292 278 158 252 214 206 C248 174 168 148 206 112" fill="none" stroke="#c44536" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="292" cy="534" r="15" fill="#fdecea" stroke="#c44536" stroke-width="2.5"/>
+    <text x="292" y="538" text-anchor="middle" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="11" font-weight="700" fill="#c44536">橄榄</text>
+    <text x="78" y="486" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="14" fill="#164e44">浦肯野细胞</text>
+    <text x="232" y="236" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="13" font-weight="700" fill="#c44536">变弱</text>
+  </g>
+
+  <text x="500" y="196" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="15" font-weight="700" fill="#8a6a10">平行纤维</text>
+  <text x="500" y="220" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="14" fill="#5c676c">当时的情境</text>
+  <text x="500" y="242" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="14" fill="#5c676c">目光被棱镜弯了</text>
+  <text x="500" y="286" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="15" font-weight="700" fill="#c44536">爬行纤维</text>
+  <text x="500" y="310" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="14" fill="#5c676c">教学信号：这一镖偏了</text>
+  <rect x="492" y="336" width="248" height="72" rx="10" fill="#f8efe4" stroke="#e0a100"/>
+  <text x="508" y="364" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="15" font-weight="700" fill="#1c2428">两条一起到</text>
+  <text x="508" y="388" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="14" fill="#5c676c">只有黄线这个突触变弱</text>
+
+  <circle cx="560" cy="490" r="32" fill="none" stroke="#1c2428" stroke-width="2"/>
+  <circle cx="560" cy="490" r="18" fill="none" stroke="#1c2428" stroke-width="2"/>
+  <circle cx="560" cy="490" r="6" fill="#c44536"/>
+  <g transform="translate(604,458) rotate(32)">
+    <line x1="0" y1="0" x2="30" y2="0" stroke="#1c2428" stroke-width="2"/>
+    <polygon points="30,-5 44,0 30,5" fill="#c44536"/>
+    <polygon points="0,-6 10,0 0,6" fill="#5c676c"/>
+  </g>
+  <text x="560" y="544" text-anchor="middle" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="14" fill="#c44536">偏在靶外</text>
+
+  <g transform="translate(56,668)" stroke="#164e44" stroke-width="2" stroke-linecap="round">
+    <line x1="0" y1="14" x2="0" y2="4"/>
+    <line x1="12" y1="14" x2="12" y2="1"/>
+    <line x1="24" y1="14" x2="24" y2="6"/>
+  </g>
+  <g transform="translate(96,668)" stroke="#c44536" stroke-width="2.4" stroke-linecap="round">
+    <line x1="0" y1="16" x2="0" y2="-4"/>
+    <line x1="5" y1="16" x2="5" y2="-12"/>
+    <line x1="10" y1="16" x2="10" y2="-2"/>
+  </g>
+  <text x="124" y="682" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="13" fill="#5c676c">误差到达：一次复杂棘波</text>
+
+  <!-- RIGHT -->
+  <g transform="translate(808,156)">
+    <use href="#arbor"/>
+    <g stroke="#d3cbbf" stroke-width="3" stroke-linecap="round">
+      <line x1="48" y1="132" x2="430" y2="132"/>
+      <line x1="48" y1="186" x2="430" y2="186"/>
+      <line x1="48" y1="300" x2="430" y2="300"/>
+      <line x1="48" y1="352" x2="430" y2="352"/>
+    </g>
+    <g fill="#1e6b5a">
+      <circle cx="210" cy="132" r="4.5"/>
+      <circle cx="210" cy="186" r="4.5"/>
+      <circle cx="210" cy="300" r="4.5"/>
+      <circle cx="138" cy="186" r="4"/>
+      <circle cx="360" cy="300" r="4"/>
+    </g>
+    <line x1="70" y1="244" x2="430" y2="244" stroke="#e0a100" stroke-width="6" stroke-linecap="round"/>
+    <circle cx="36" cy="244" r="16" fill="#fff6df" stroke="#e0a100" stroke-width="2.5"/>
+    <text x="36" y="248" text-anchor="middle" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="11" font-weight="700" fill="#8a6a10">颗粒</text>
+    <circle cx="210" cy="244" r="14" fill="#ffffff" stroke="#8a8175" stroke-width="2.5" stroke-dasharray="3 2"/>
+    <path d="M202 244 H218" stroke="#8a8175" stroke-width="2"/>
+    <text x="232" y="236" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="13" font-weight="700" fill="#8a8175">已弱</text>
+    <path d="M262 520 C300 486 168 468 238 424 C304 384 160 362 224 318 C292 278 158 252 214 206 C248 174 168 148 206 112" fill="none" stroke="#d9d1c6" stroke-width="5" stroke-linecap="round" stroke-dasharray="7 6"/>
+    <circle cx="292" cy="534" r="15" fill="#f6f3ec" stroke="#d3cbbf" stroke-width="2.5"/>
+    <text x="292" y="538" text-anchor="middle" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="11" font-weight="700" fill="#b7aea3">橄榄</text>
+    <text x="78" y="486" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="14" fill="#164e44">浦肯野细胞</text>
+  </g>
+
+  <text x="1272" y="196" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="15" font-weight="700" fill="#8a6a10">同一条平行纤维</text>
+  <text x="1272" y="220" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="14" fill="#5c676c">情境还是棱镜</text>
+  <text x="1272" y="244" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="14" fill="#5c676c">灰线是别的情境，还连着</text>
+  <text x="1272" y="286" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="15" font-weight="700" fill="#b7aea3">爬行纤维安静</text>
+  <text x="1272" y="310" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="14" fill="#5c676c">这次没有再报错</text>
+  <rect x="1264" y="336" width="248" height="72" rx="10" fill="#e7f0ee" stroke="#2f6f6a"/>
+  <text x="1280" y="364" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="15" font-weight="700" fill="#1c2428">这条突触已经变弱</text>
+  <text x="1280" y="388" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="14" fill="#5c676c">简单棘波因此改变</text>
+
+  <circle cx="1340" cy="490" r="32" fill="none" stroke="#1c2428" stroke-width="2"/>
+  <circle cx="1340" cy="490" r="18" fill="none" stroke="#1c2428" stroke-width="2"/>
+  <circle cx="1340" cy="490" r="6" fill="#2f6f6a"/>
+  <g transform="translate(1340,490) rotate(16)">
+    <line x1="-8" y1="0" x2="18" y2="0" stroke="#1c2428" stroke-width="2"/>
+    <polygon points="18,-5 32,0 18,5" fill="#2f6f6a"/>
+    <polygon points="-18,-6 -8,0 -18,6" fill="#5c676c"/>
+  </g>
+  <text x="1340" y="544" text-anchor="middle" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="14" fill="#2f6f6a">镖改准了</text>
+
+  <g transform="translate(848,668)" stroke="#164e44" stroke-width="2" stroke-linecap="round">
+    <line x1="0" y1="14" x2="0" y2="7"/>
+    <line x1="14" y1="14" x2="14" y2="0"/>
+    <line x1="28" y1="14" x2="28" y2="5"/>
+    <line x1="42" y1="14" x2="42" y2="1"/>
+    <line x1="56" y1="14" x2="56" y2="8"/>
+    <line x1="70" y1="14" x2="70" y2="2"/>
+  </g>
+  <text x="936" y="682" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="13" fill="#5c676c">同样情境下，简单棘波变了</text>
+
+  <rect x="24" y="756" width="1512" height="140" rx="16" fill="#ffffff" stroke="#e4ddd0"/>
+  <text x="48" y="796" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="16" font-weight="700" fill="#1c2428">什么时候突触才变</text>
+  <text x="48" y="834" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="15" fill="#5c676c">只来平行纤维</text>
+  <text x="48" y="858" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="15" fill="#1c2428">突触不动</text>
+  <text x="340" y="834" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="15" fill="#5c676c">只来爬行纤维</text>
+  <text x="340" y="858" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="15" fill="#1c2428">突触不动</text>
+  <text x="640" y="834" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="15" fill="#5c676c">两条一起，而且是这一条情境</text>
+  <text x="640" y="858" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="15" fill="#1c2428">只有这个突触变弱</text>
+  <text x="1040" y="834" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="15" fill="#5c676c">学会的是这一次的映射</text>
+  <text x="1040" y="858" font-family="PingFang SC, Hiragino Sans GB, Heiti SC, sans-serif" font-size="15" fill="#1c2428">不是把整个细胞关掉</text>
+</svg>
