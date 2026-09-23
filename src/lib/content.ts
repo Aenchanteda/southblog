@@ -1,7 +1,11 @@
 import type { CollectionEntry } from 'astro:content';
 
-export type ArticleEntry = CollectionEntry<'blog'> | CollectionEntry<'notes'> | CollectionEntry<'aiPharma'>;
-export type ArticleSection = 'blog' | 'notes' | 'ai-pharma';
+export type ArticleEntry =
+  | CollectionEntry<'blog'>
+  | CollectionEntry<'notes'>
+  | CollectionEntry<'aiPharma'>
+  | CollectionEntry<'genomics'>;
+export type ArticleSection = 'blog' | 'notes' | 'ai-pharma' | 'genomics';
 
 export function formatDate(date: Date) {
   return new Intl.DateTimeFormat('zh-CN', {

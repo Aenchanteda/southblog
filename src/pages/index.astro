@@ -8,6 +8,7 @@ import { byNewest, isPublished } from '../lib/content';
 const blogPosts = (await getCollection('blog')).filter(isPublished).sort(byNewest);
 const notes = (await getCollection('notes')).filter(isPublished).sort(byNewest);
 const aiPharmaPosts = (await getCollection('aiPharma')).filter(isPublished).sort(byNewest);
+const genomicsPosts = (await getCollection('genomics')).filter(isPublished).sort(byNewest);
 ---
 
 <BaseLayout>
@@ -56,6 +57,19 @@ const aiPharmaPosts = (await getCollection('aiPharma')).filter(isPublished).sort
     </div>
     <div class="article-grid compact-grid">
       {aiPharmaPosts.slice(0, 2).map((entry) => <ArticleCard entry={entry} section="ai-pharma" />)}
+    </div>
+  </section>
+
+  <section class="home-section compact-section" aria-labelledby="latest-genomics-heading">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Genomics</p>
+        <h2 id="latest-genomics-heading">基因组学</h2>
+      </div>
+      <a href="/genomics">查看全部文章</a>
+    </div>
+    <div class="article-grid compact-grid">
+      {genomicsPosts.slice(0, 2).map((entry) => <ArticleCard entry={entry} section="genomics" />)}
     </div>
   </section>
 </BaseLayout>

@@ -1,0 +1,21 @@
+---
+import { getCollection } from 'astro:content';
+import ArticleCard from '../../components/ArticleCard.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { byNewest, isPublished } from '../../lib/content';
+
+const posts = (await getCollection('genomics')).filter(isPublished).sort(byNewest);
+---
+
+<BaseLayout title="基因组学" description="南边小站的基因组学与分子基础学习文章。">
+  <section class="content-panel topic-panel">
+    <div class="list-header">
+      <p class="eyebrow">Genomics</p>
+      <h1>基因组学</h1>
+      <p class="lead">从 DNA、核苷酸与分子结构基础开始，整理可长期回看的基因组学学习笔记。</p>
+    </div>
+    <div class="article-grid compact-grid">
+      {posts.map((entry) => <ArticleCard entry={entry} section="genomics" />)}
+    </div>
+  </section>
+</BaseLayout>

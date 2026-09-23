@@ -1,0 +1,48 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import ArticleToc from '../../components/ArticleToc.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { formatDate, getEntrySlug, isPublished } from '../../lib/content';
+
+type GenomicsEntry = CollectionEntry<'genomics'>;
+
+export async function getStaticPaths() {
+  const posts = (await getCollection('genomics')).filter(isPublished);
+  return posts.map((post) => ({
+    params: { slug: getEntrySlug(post) },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props as { post: GenomicsEntry };
+const { Content, headings } = await render(post);
+---
+
+<BaseLayout title={post.data.title} description={post.data.description}>
+  <div class="post-shell with-toc">
+    <a class="back-link" href="/genomics"><span aria-hidden="true">&larr;</span> 返回基因组学</a>
+    <div class="reading-layout">
+      <ArticleToc headings={headings} />
+      <article class="post longform-post">
+        <header class="post-header">
+          <p class="post-kicker">Genomics</p>
+          <h1>{post.data.title}</h1>
+          <p class="lead">{post.data.description}</p>
+          <div class="post-meta-row">
+            <span>基因组学</span>
+            <span class="dot" aria-hidden="true"></span>
+            <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
+          </div>
+          {post.data.tags.length > 0 && (
+            <ul class="tag-list" aria-label="标签">
+              {post.data.tags.map((tag) => <li>{tag}</li>)}
+            </ul>
+          )}
+        </header>
+        <div class="prose longform-prose">
+          <Content />
+        </div>
+      </article>
+    </div>
+  </div>
+</BaseLayout>
