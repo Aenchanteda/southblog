@@ -12,5 +12,6 @@ export const siteConfig = {
   topics: [
     { href: '/bci', label: '脑机接口' },
     { href: '/ai-pharma', label: 'AI制药' },
+    { href: '/genomics', label: '基因组学' },
   ],
 };
