@@ -229,12 +229,14 @@ const pageTitle = title ? `${title} · ${siteConfig.name}` : `${siteConfig.name}
     background: transparent;
     color: var(--ink-soft);
     cursor: pointer;
+    flex-shrink: 0;
     font-family: inherit;
     font-size: 0.94rem;
     font-weight: 500;
     line-height: 1;
     padding: 12px 15px;
     transition: background 160ms ease, color 160ms ease, transform 160ms ease;
+    white-space: nowrap;
   }
 
   .site-nav a:hover,
@@ -261,6 +263,7 @@ const pageTitle = title ? `${title} · ${siteConfig.name}` : `${siteConfig.name}
   }
 
   .topic-trigger span {
+    flex-shrink: 0;
     font-size: 0.72rem;
     transition: transform 160ms ease;
   }
@@ -1416,6 +1419,7 @@ const pageTitle = title ? `${title} · ${siteConfig.name}` : `${siteConfig.name}
       display: flex;
       flex: 1;
       flex-wrap: nowrap;
+      gap: 4px;
       justify-content: flex-start;
       min-width: 0;
       overflow-x: auto;
@@ -1432,16 +1436,17 @@ const pageTitle = title ? `${title} · ${siteConfig.name}` : `${siteConfig.name}
       flex: 0 0 auto;
       font-size: 0.84rem;
       text-align: center;
-      padding: 8px 10px;
+      padding: 7px 9px;
     }
 
     .topic-dropdown {
+      flex: 0 0 auto;
       min-width: 0;
     }
 
     .topic-trigger {
       justify-content: center;
-      width: 100%;
+      width: auto;
     }
 
     .topic-menu {
@@ -1649,7 +1654,7 @@ const pageTitle = title ? `${title} · ${siteConfig.name}` : `${siteConfig.name}
     }
 
     .site-nav {
-      gap: 6px;
+      gap: 4px;
       display: flex;
       grid-template-columns: none;
     }
