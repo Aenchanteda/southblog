@@ -2,20 +2,28 @@
 import { getCollection } from 'astro:content';
 import ArticleCard from '../../components/ArticleCard.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { byNewest, isPublished } from '../../lib/content';
+import { byNewest, isBciEntry, isPublished } from '../../lib/content';
 
-const posts = (await getCollection('blog')).filter(isPublished).sort(byNewest);
+const blogPosts = (await getCollection('blog')).filter(isPublished).map((entry) => ({
+  entry,
+  section: 'blog' as const,
+  label: isBciEntry(entry) ? '脑机接口' : '博客',
+}));
+const notes = (await getCollection('notes')).filter(isPublished).map((entry) => ({ entry, section: 'notes' as const, label: '学习心得' }));
+const aiPharmaPosts = (await getCollection('aiPharma')).filter(isPublished).map((entry) => ({ entry, section: 'ai-pharma' as const, label: 'AI制药' }));
+const genomicsPosts = (await getCollection('genomics')).filter(isPublished).map((entry) => ({ entry, section: 'genomics' as const, label: '基因组学' }));
+const posts = [...blogPosts, ...notes, ...aiPharmaPosts, ...genomicsPosts].sort((a, b) => byNewest(a.entry, b.entry));
 ---
 
-<BaseLayout title="博客" description="南边小站的博客文章列表。">
+<BaseLayout title="博客" description="南边小站的全部文章归档。">
   <section class="content-panel">
     <div class="list-header">
-      <p class="eyebrow">Blog Archive</p>
+      <p class="eyebrow">Article Archive</p>
       <h1>博客</h1>
-      <p class="lead">较完整的想法、项目记录与生活观察，适合慢慢读，也适合过一段时间再回来重看。</p>
+      <p class="lead">全部已发布文章归档，包含博客、脑机接口、AI制药、基因组学与学习心得，按发布时间倒序排列。</p>
     </div>
     <div class="article-grid">
-      {posts.map((entry) => <ArticleCard entry={entry} section="blog" />)}
+      {posts.map(({ entry, section, label }) => <ArticleCard entry={entry} section={section} sectionLabel={label} />)}
     </div>
   </section>
 </BaseLayout>

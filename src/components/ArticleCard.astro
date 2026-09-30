@@ -5,9 +5,11 @@ import { formatDate, getEntrySlug } from '../lib/content';
 interface Props {
   entry: ArticleEntry;
   section: ArticleSection;
+  sectionLabel?: string;
+  orderLabel?: string;
 }
 
-const { entry, section } = Astro.props;
+const { entry, section, sectionLabel: labelOverride, orderLabel } = Astro.props;
 const href = `/${section}/${getEntrySlug(entry)}`;
 const sectionLabels: Record<ArticleSection, string> = {
   blog: '博客',
@@ -15,13 +17,16 @@ const sectionLabels: Record<ArticleSection, string> = {
   'ai-pharma': 'AI制药',
   genomics: '基因组学',
 };
-const sectionLabel = sectionLabels[section];
+const sectionLabel = labelOverride ?? sectionLabels[section];
 ---
 
 <article class="article-card">
   <a class="article-link" href={href}>
     <div class="card-topline">
-      <span class="section-pill">{sectionLabel}</span>
+      <div class="card-badges">
+        {orderLabel && <span class="order-badge">{orderLabel}</span>}
+        <span class="section-pill">{sectionLabel}</span>
+      </div>
       <time datetime={entry.data.pubDate.toISOString()}>{formatDate(entry.data.pubDate)}</time>
     </div>
     <div class="card-body">

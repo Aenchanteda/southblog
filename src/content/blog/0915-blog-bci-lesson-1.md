@@ -1,20 +1,10 @@
 ---
-title: "第一节：脑机接口概论"
-description: "从 BCI 核心概念、发展脉络到半侵入式系统转化实践"
+title: "第1讲 · 脑机接口概论"
+description: "第一章概论与第二章北脑一号：从 BCI 核心概念、发展脉络到半侵入式系统转化实践。"
 pubDate: 2026-09-15
-tags: ["BCI", "北脑一号"]
+tags: ["脑机接口", "BCI", "北脑一号", "笔记"]
+order: 1
 draft: false
----
-
----
-title: 脑机接口概论 · Lesson 1
-description: 第一章概论与第二章北脑一号：从 BCI 核心概念、发展脉络到半侵入式系统转化实践。
-pubDate: 2025-09-15
-tags:
-  - 脑机接口
-  - BCI
-  - 北脑一号
-  - 笔记
 ---
 
 # 脑机接口概论 · Lesson 1
