@@ -506,8 +506,7 @@ const pageTitle = title ? `${title} · ${siteConfig.name}` : `${siteConfig.name}
   }
 
   .home-section .eyebrow {
-    font-size: 0.72rem;
-    letter-spacing: 0.11em;
+    display: none;
   }
 
   .home-section h2 {
@@ -524,62 +523,86 @@ const pageTitle = title ? `${title} · ${siteConfig.name}` : `${siteConfig.name}
   }
 
   .home-heading-chip {
-    --chip-bg: rgba(255, 250, 241, 0.86);
-    --chip-border: rgba(159, 79, 47, 0.16);
+    --chip-bg: rgba(255, 250, 241, 0.92);
+    --chip-border: rgba(159, 79, 47, 0.28);
     --chip-accent: var(--accent);
+    --icon-bg: #f9dfcf;
+    --icon-fg: var(--accent);
     display: inline-flex;
     align-items: center;
-    gap: 7px;
-    min-height: 26px;
+    gap: 8px;
+    min-height: 36px;
     border: 1px solid var(--chip-border);
     border-radius: 999px;
     background: var(--chip-bg);
-    box-shadow: 0 8px 22px rgba(61, 44, 25, 0.05);
-    padding: 3px 10px 3px 4px;
+    box-shadow: 0 10px 26px rgba(61, 44, 25, 0.07), inset 0 1px 0 rgba(255, 255, 255, 0.62);
+    padding: 4px 12px 4px 5px;
+  }
+
+  .home-heading-chip::after {
+    content: "";
+    width: 5px;
+    height: 5px;
+    border-radius: 999px;
+    background: var(--chip-accent);
+    opacity: 0.46;
   }
 
   .home-heading-latest {
-    --chip-bg: #fff3d6;
-    --chip-border: rgba(190, 120, 32, 0.2);
-    --chip-accent: #b86b1f;
+    --chip-bg: #ffe8b8;
+    --chip-border: rgba(184, 107, 31, 0.36);
+    --chip-accent: #a65f18;
+    --icon-bg: #fff7df;
+    --icon-fg: #a65f18;
   }
 
   .home-heading-bci {
-    --chip-bg: #edf2df;
-    --chip-border: rgba(84, 117, 75, 0.2);
-    --chip-accent: #587447;
+    --chip-bg: #dfeccf;
+    --chip-border: rgba(79, 112, 62, 0.34);
+    --chip-accent: #4f703e;
+    --icon-bg: #f5faec;
+    --icon-fg: #4f703e;
   }
 
   .home-heading-pharma {
-    --chip-bg: #f4e4dc;
-    --chip-border: rgba(159, 79, 47, 0.2);
-    --chip-accent: var(--accent);
+    --chip-bg: #f2d6ca;
+    --chip-border: rgba(159, 79, 47, 0.34);
+    --chip-accent: #8f4328;
+    --icon-bg: #fff2eb;
+    --icon-fg: #8f4328;
   }
 
   .home-heading-genomics {
-    --chip-bg: #e7f0ea;
-    --chip-border: rgba(71, 112, 106, 0.2);
-    --chip-accent: #47706a;
+    --chip-bg: #d8ebe2;
+    --chip-border: rgba(62, 105, 96, 0.34);
+    --chip-accent: #3e6960;
+    --icon-bg: #f1faf5;
+    --icon-fg: #3e6960;
   }
 
   .home-heading-icon {
     display: grid;
-    width: 20px;
-    height: 20px;
+    width: 28px;
+    height: 28px;
     place-items: center;
     flex: 0 0 auto;
+    border: 1px solid color-mix(in srgb, var(--icon-fg) 24%, transparent);
     border-radius: 999px;
-    background: var(--chip-accent);
-    color: var(--paper-strong);
+    background: var(--icon-bg);
+    color: var(--icon-fg);
+  }
+
+  .home-heading-pharma .home-heading-icon {
+    background: linear-gradient(135deg, #fff6ef 0 49%, #f4c1af 50% 100%);
   }
 
   .home-heading-icon svg {
-    width: 13px;
-    height: 13px;
+    width: 18px;
+    height: 18px;
     stroke: currentColor;
     stroke-linecap: round;
     stroke-linejoin: round;
-    stroke-width: 1.8;
+    stroke-width: 1.9;
   }
 
   .home-heading-chip:hover .home-heading-icon {
@@ -1276,22 +1299,18 @@ const pageTitle = title ? `${title} · ${siteConfig.name}` : `${siteConfig.name}
 
     .home-heading-chip {
       gap: 6px;
-      min-height: 24px;
-      padding: 3px 9px 3px 4px;
+      min-height: 34px;
+      padding: 4px 10px 4px 5px;
     }
 
     .home-heading-icon {
-      width: 18px;
-      height: 18px;
+      width: 26px;
+      height: 26px;
     }
 
     .home-heading-icon svg {
-      width: 12px;
-      height: 12px;
-    }
-
-    .home-section .eyebrow {
-      font-size: 0.68rem;
+      width: 17px;
+      height: 17px;
     }
 
     .home-section .section-heading a {
