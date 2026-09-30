@@ -2,21 +2,26 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { siteConfig } from '../site.config';
-import { byNewest, byOldest, formatDate, getEntrySlug, isBciEntry, isPublished } from '../lib/content';
+import { byNewest, byOldest, formatDate, getEntrySlug, isBciEntry, isPublished, getOrderLabel, type ArticleEntry } from '../lib/content';
 
-const blogPosts = (await getCollection('blog')).filter(isPublished).sort(byNewest);
-const bciPosts = blogPosts.filter(isBciEntry).sort(byOldest);
-const aiPharmaPosts = (await getCollection('aiPharma')).filter(isPublished).sort(byOldest);
-const genomicsPosts = (await getCollection('genomics')).filter(isPublished).sort(byOldest);
+const byLessonOrder = (a: ArticleEntry, b: ArticleEntry) =>
+  (a.data.order ?? Number.MAX_SAFE_INTEGER) - (b.data.order ?? Number.MAX_SAFE_INTEGER) || byOldest(a, b);
 
+const blogPosts = (await getCollection('blog')).filter(isPublished);
+const notesPosts = (await getCollection('notes')).filter(isPublished);
+const bciPosts = blogPosts.filter(isBciEntry).sort(byLessonOrder);
+const aiPharmaPosts = (await getCollection('aiPharma')).filter(isPublished).sort(byLessonOrder);
+const genomicsPosts = (await getCollection('genomics')).filter(isPublished).sort(byLessonOrder);
+
+// 最新更新：与 /blog 归档同源（全部内容集合），严格按发布日期倒序，取最新 6 篇。
 const latestItems = [
-  ...blogPosts.filter((entry) => !isBciEntry(entry)).slice(0, 2).map((entry) => ({ entry, href: `/blog/${getEntrySlug(entry)}`, label: '博客' })),
-  ...blogPosts.filter(isBciEntry).slice(0, 1).map((entry) => ({ entry, href: `/blog/${getEntrySlug(entry)}`, label: '脑机接口' })),
-  ...aiPharmaPosts.slice(-1).map((entry) => ({ entry, href: `/ai-pharma/${getEntrySlug(entry)}`, label: 'AI制药' })),
-  ...genomicsPosts.slice(-1).map((entry) => ({ entry, href: `/genomics/${getEntrySlug(entry)}`, label: '基因组学' })),
+  ...blogPosts.map((entry) => ({ entry, href: `/blog/${getEntrySlug(entry)}`, label: isBciEntry(entry) ? '脑机接口' : '博客' })),
+  ...notesPosts.map((entry) => ({ entry, href: `/notes/${getEntrySlug(entry)}`, label: '学习心得' })),
+  ...aiPharmaPosts.map((entry) => ({ entry, href: `/ai-pharma/${getEntrySlug(entry)}`, label: 'AI制药' })),
+  ...genomicsPosts.map((entry) => ({ entry, href: `/genomics/${getEntrySlug(entry)}`, label: '基因组学' })),
 ]
   .sort((a, b) => byNewest(a.entry, b.entry))
-  .slice(0, 5);
+  .slice(0, 6);
 
 const sections = [
   {
@@ -33,7 +38,7 @@ const sections = [
     title: '脑机接口',
     href: '/bci',
     linkText: '全部文章',
-    items: bciPosts.map((entry, index) => ({ entry, href: `/blog/${getEntrySlug(entry)}`, label: `第${index + 1}讲` })),
+    items: bciPosts.map((entry, index) => ({ entry, href: `/blog/${getEntrySlug(entry)}`, label: `第${entry.data.order ?? index + 1}讲` })),
   },
   {
     index: '03',
@@ -41,7 +46,7 @@ const sections = [
     title: 'AI制药',
     href: '/ai-pharma',
     linkText: '全部文章',
-    items: aiPharmaPosts.map((entry, index) => ({ entry, href: `/ai-pharma/${getEntrySlug(entry)}`, label: String(index + 1).padStart(2, '0') })),
+    items: aiPharmaPosts.map((entry, index) => ({ entry, href: `/ai-pharma/${getEntrySlug(entry)}`, label: getOrderLabel(entry, index) })),
   },
   {
     index: '04',
@@ -49,7 +54,7 @@ const sections = [
     title: '基因组学',
     href: '/genomics',
     linkText: '全部文章',
-    items: genomicsPosts.map((entry, index) => ({ entry, href: `/genomics/${getEntrySlug(entry)}`, label: String(index + 1).padStart(2, '0') })),
+    items: genomicsPosts.map((entry, index) => ({ entry, href: `/genomics/${getEntrySlug(entry)}`, label: getOrderLabel(entry, index) })),
   },
 ];
 ---
