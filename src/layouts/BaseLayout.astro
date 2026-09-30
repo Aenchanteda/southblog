@@ -1,6 +1,7 @@
 ---
 import Header from '../components/Header.astro';
 import { siteConfig } from '../site.config';
+import 'katex/dist/katex.min.css';
 
 interface Props {
   title?: string;
@@ -37,6 +38,26 @@ const pageTitle = title ? `${title} · ${siteConfig.name}` : `${siteConfig.name}
 </html>
 
 <style is:global>
+  /* KaTeX math: centered display blocks, scroll sideways on narrow screens, inherit text color. */
+  .katex {
+    color: inherit;
+    font-size: 1.08em;
+  }
+
+  .katex-display {
+    margin: 1.4em 0;
+    padding: 0.2em 0;
+    text-align: center;
+    overflow-x: auto;
+    overflow-y: hidden;
+    max-width: 100%;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .katex-display > .katex {
+    text-align: center;
+  }
+
   /*
    * Minimal academic style, modelled on leimao.github.io (Hexo Icarus):
    * serif text, neutral grays, one blue link color, plain date + title lists,

@@ -158,7 +158,7 @@ draft: false
 
 ### 2.3 脑干核团（brainstem nuclei）：脑干在运动控制中的作用
 
-> **原始笔记：** 电刺激中脑行走区（electrical stimulation in the mesencephalic locomotor region(MLR)）可以启动行走。光遗传刺激启动 MLR 行走(opogenetic stimulation initiates MLR locomotion)：低频行走，高频奔跑。MLR 能设定小鼠的速度和步态选择(MLR can set mices' speed and gait selection)。延髓网状结构腹侧部（medullary reticular formation, ventral part，MdV）的脑干神经元特异投射到支配前肢的运动神经元(brainstem MdV neurons specifically project to motor neurons invervating forelimbs)。有的只支配前肢，如果化学损毁会导致小鼠前肢运动有缺陷。脑干运动相关神经元可能编码多种前肢动作：4类细胞，光遗传分别激活携带特定细胞的小鼠，特定小鼠类出现特定动作。
+> **原始笔记：** 电刺激中脑行走区（electrical stimulation in the mesencephalic locomotor region(MLR)）可以启动行走。光遗传刺激启动 MLR 行走(opogenetic stimulation initiates MLR locomotion)：低频行走，高频奔跑。MLR 能设定小鼠的速度和步态选择(MLR can set mices’ speed and gait selection)。延髓网状结构腹侧部（medullary reticular formation, ventral part，MdV）的脑干神经元特异投射到支配前肢的运动神经元(brainstem MdV neurons specifically project to motor neurons invervating forelimbs)。有的只支配前肢，如果化学损毁会导致小鼠前肢运动有缺陷。脑干运动相关神经元可能编码多种前肢动作：4类细胞，光遗传分别激活携带特定细胞的小鼠，特定小鼠类出现特定动作。
 
 MLR 不是一个均匀的“行走按钮”。Caggiano 等（2018）表明，中脑里两群谷氨酸能神经元分工：脚桥核（pedunculopontine nucleus，PPN）更支持较慢的探索性交替步态；楔状核（cuneiform nucleus，CnF）对高速、同步步态是必要的。刺激强度或频率升高，动物从走转到跑。论文题目就是“设定行走速度和步态选择的中脑环路”。
 
