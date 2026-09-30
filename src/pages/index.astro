@@ -1,119 +1,94 @@
 ---
 import { getCollection } from 'astro:content';
-import ArticleCard from '../components/ArticleCard.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { siteConfig } from '../site.config';
-import { byNewest, isBciEntry, isPublished } from '../lib/content';
+import { byNewest, byOldest, formatDate, getEntrySlug, isBciEntry, isPublished } from '../lib/content';
 
 const blogPosts = (await getCollection('blog')).filter(isPublished).sort(byNewest);
-const bciPosts = blogPosts.filter(isBciEntry);
-const aiPharmaPosts = (await getCollection('aiPharma')).filter(isPublished).sort(byNewest);
-const genomicsPosts = (await getCollection('genomics')).filter(isPublished).sort(byNewest);
+const bciPosts = blogPosts.filter(isBciEntry).sort(byOldest);
+const aiPharmaPosts = (await getCollection('aiPharma')).filter(isPublished).sort(byOldest);
+const genomicsPosts = (await getCollection('genomics')).filter(isPublished).sort(byOldest);
+
+const latestItems = [
+  ...blogPosts.filter((entry) => !isBciEntry(entry)).slice(0, 2).map((entry) => ({ entry, href: `/blog/${getEntrySlug(entry)}`, label: '博客' })),
+  ...blogPosts.filter(isBciEntry).slice(0, 1).map((entry) => ({ entry, href: `/blog/${getEntrySlug(entry)}`, label: '脑机接口' })),
+  ...aiPharmaPosts.slice(-1).map((entry) => ({ entry, href: `/ai-pharma/${getEntrySlug(entry)}`, label: 'AI制药' })),
+  ...genomicsPosts.slice(-1).map((entry) => ({ entry, href: `/genomics/${getEntrySlug(entry)}`, label: '基因组学' })),
+]
+  .sort((a, b) => byNewest(a.entry, b.entry))
+  .slice(0, 5);
+
+const sections = [
+  {
+    index: '01',
+    eyebrow: 'Latest',
+    title: '最新更新',
+    href: '/blog',
+    linkText: '全部文章',
+    items: latestItems,
+  },
+  {
+    index: '02',
+    eyebrow: 'BCI',
+    title: '脑机接口',
+    href: '/bci',
+    linkText: '课程笔记',
+    items: bciPosts.map((entry, index) => ({ entry, href: `/blog/${getEntrySlug(entry)}`, label: `第${index + 1}讲` })),
+  },
+  {
+    index: '03',
+    eyebrow: 'AI Drug Discovery',
+    title: 'AI制药',
+    href: '/ai-pharma',
+    linkText: '全部文章',
+    items: aiPharmaPosts.map((entry, index) => ({ entry, href: `/ai-pharma/${getEntrySlug(entry)}`, label: String(index + 1).padStart(2, '0') })),
+  },
+  {
+    index: '04',
+    eyebrow: 'Genomics',
+    title: '基因组学',
+    href: '/genomics',
+    linkText: '全部文章',
+    items: genomicsPosts.map((entry, index) => ({ entry, href: `/genomics/${getEntrySlug(entry)}`, label: String(index + 1).padStart(2, '0') })),
+  },
+];
 ---
 
 <BaseLayout>
-  <section class="hero home-hero">
-    <div class="hero-content">
-      <h1>{siteConfig.name}</h1>
-      <p>
-        记录博客、学习心得，以及在中文语境里慢慢生长的技术与生活观察。
-      </p>
-    </div>
+  <section class="home-intro" aria-labelledby="home-title">
+    <p class="home-kicker">Personal notes / digital garden</p>
+    <h1 id="home-title">{siteConfig.name}</h1>
+    <p>
+      写博客，也整理课程笔记。主题从脑机接口到 AI 制药、基因组学，尽量把学习路径留下清楚的索引。
+    </p>
   </section>
 
-  <section class="home-section" aria-labelledby="latest-blog-heading">
-    <div class="section-heading">
-      <div>
-        <p class="eyebrow">Latest Posts</p>
-        <h2 id="latest-blog-heading">
-          <span class="home-heading-chip home-heading-latest">
-            <span class="home-heading-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M12 3.5l1.8 5 5 1.8-5 1.9-1.8 5-1.8-5-5-1.9 5-1.8L12 3.5Z" />
-                <path d="M18.5 15.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7.7-1.8Z" />
-              </svg>
-            </span>
-            <span>最新博文</span>
-          </span>
-        </h2>
-      </div>
-      <a href="/blog">查看全部文章</a>
-    </div>
-    <div class="article-grid home-card-grid">
-      {blogPosts.slice(0, 3).map((entry) => <ArticleCard entry={entry} section="blog" sectionLabel={isBciEntry(entry) ? '脑机接口' : '博客'} variant="compact" />)}
-    </div>
-  </section>
-
-  <section class="home-section compact-section" aria-labelledby="latest-bci-heading">
-    <div class="section-heading">
-      <div>
-        <p class="eyebrow">BCI Notes</p>
-        <h2 id="latest-bci-heading">
-          <span class="home-heading-chip home-heading-bci">
-            <span class="home-heading-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M9 7.2c-2.1 0-3.8 1.6-3.8 3.7 0 .6.1 1.1.4 1.6-1 .6-1.6 1.6-1.6 2.8 0 1.9 1.5 3.4 3.4 3.4h1.2" />
-                <path d="M15 7.2c2.1 0 3.8 1.6 3.8 3.7 0 .6-.1 1.1-.4 1.6 1 .6 1.6 1.6 1.6 2.8 0 1.9-1.5 3.4-3.4 3.4h-1.2" />
-                <path d="M9 7.2c0-1.7 1.3-3 3-3s3 1.3 3 3v11.5" />
-                <path d="M9 11.2h2.2M12.8 11.2H15M8.5 15h2.3M13.2 15h2.3" />
-              </svg>
-            </span>
-            <span>脑机接口</span>
-          </span>
-        </h2>
-      </div>
-      <a href="/bci">查看全部课程笔记</a>
-    </div>
-    <div class="article-grid home-card-grid">
-      {bciPosts.slice(0, 3).map((entry) => <ArticleCard entry={entry} section="blog" sectionLabel="脑机接口" variant="compact" />)}
-    </div>
-  </section>
-
-  <section class="home-section compact-section" aria-labelledby="latest-ai-pharma-heading">
-    <div class="section-heading">
-      <div>
-        <p class="eyebrow">AI Drug Discovery</p>
-        <h2 id="latest-ai-pharma-heading">
-          <span class="home-heading-chip home-heading-pharma">
-            <span class="home-heading-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M7.2 16.8 16.8 7.2a3.4 3.4 0 0 1 4.8 4.8L12 21.6a3.4 3.4 0 0 1-4.8-4.8Z" />
-                <path d="m12 12 4 4" />
-                <path d="M5.2 10.2c1.8-.8 3.4-.8 5.2 0" />
-              </svg>
-            </span>
-            <span>AI制药</span>
-          </span>
-        </h2>
-      </div>
-      <a href="/ai-pharma">查看全部文章</a>
-    </div>
-    <div class="article-grid home-card-grid">
-      {aiPharmaPosts.slice(0, 3).map((entry) => <ArticleCard entry={entry} section="ai-pharma" variant="compact" />)}
-    </div>
-  </section>
-
-  <section class="home-section compact-section" aria-labelledby="latest-genomics-heading">
-    <div class="section-heading">
-      <div>
-        <p class="eyebrow">Genomics</p>
-        <h2 id="latest-genomics-heading">
-          <span class="home-heading-chip home-heading-genomics">
-            <span class="home-heading-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M8 4c6 3 10 6 8 16" />
-                <path d="M16 4C10 7 6 10 8 20" />
-                <path d="M9.2 7.2h5.6M8.4 11.2h7.2M9.2 15.2h5.6" />
-              </svg>
-            </span>
-            <span>基因组学</span>
-          </span>
-        </h2>
-      </div>
-      <a href="/genomics">查看全部文章</a>
-    </div>
-    <div class="article-grid home-card-grid">
-      {genomicsPosts.slice(0, 3).map((entry) => <ArticleCard entry={entry} section="genomics" variant="compact" />)}
-    </div>
-  </section>
+  <div class="home-stream">
+    {sections.map((section) => (
+      <section class="home-list-section" aria-labelledby={`home-section-${section.index}`}>
+        <div class="home-list-heading">
+          <div class="home-list-titleline">
+            <span class="home-list-index">{section.index}</span>
+            <div>
+              <p>{section.eyebrow}</p>
+              <h2 id={`home-section-${section.index}`}>{section.title}</h2>
+            </div>
+          </div>
+          <a href={section.href}>{section.linkText}</a>
+        </div>
+        <div class="home-post-list">
+          {section.items.map(({ entry, href, label }) => (
+            <a class="home-post-row" href={href}>
+              <time datetime={entry.data.pubDate.toISOString()}>{formatDate(entry.data.pubDate)}</time>
+              <div class="home-post-main">
+                <h3>{entry.data.title}</h3>
+                <p>{entry.data.description}</p>
+              </div>
+              <span>{label}</span>
+            </a>
+          ))}
+        </div>
+      </section>
+    ))}
+  </div>
 </BaseLayout>
