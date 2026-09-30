@@ -1,48 +1,35 @@
 ---
 import { getCollection, render, type CollectionEntry } from 'astro:content';
-import ArticleToc from '../../components/ArticleToc.astro';
+import ArticleView from '../../components/ArticleView.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { formatDate, getEntrySlug, isPublished } from '../../lib/content';
+import { getEntrySlug, isPublished } from '../../lib/content';
 
-type NoteEntry = CollectionEntry<'notes'>;
+type Entry = CollectionEntry<'notes'>;
 
 export async function getStaticPaths() {
-  const notes = (await getCollection('notes')).filter(isPublished);
-  return notes.map((note) => ({
-    params: { slug: getEntrySlug(note) },
-    props: { note },
+  const posts = (await getCollection('notes')).filter(isPublished);
+  return posts.map((post) => ({
+    params: { slug: getEntrySlug(post) },
+    props: { post },
   }));
 }
 
-const { note } = Astro.props as { note: NoteEntry };
-const { Content, headings } = await render(note);
+const { post } = Astro.props as { post: Entry };
+const { Content, headings } = await render(post);
+const sectionLabel = '学习心得';
+const sectionHref = '/notes';
 ---
 
-<BaseLayout title={note.data.title} description={note.data.description}>
-  <div class="post-shell with-toc">
-    <a class="back-link" href="/notes"><span aria-hidden="true">&larr;</span> 返回学习心得</a>
-    <div class="reading-layout">
-      <ArticleToc headings={headings} />
-      <article class="post">
-        <header class="post-header">
-          <p class="post-kicker">Learning Notes</p>
-          <h1>{note.data.title}</h1>
-          <p class="lead">{note.data.description}</p>
-          <div class="post-meta-row">
-            <span>学习心得</span>
-            <span class="dot" aria-hidden="true"></span>
-            <time datetime={note.data.pubDate.toISOString()}>{formatDate(note.data.pubDate)}</time>
-          </div>
-          {note.data.tags.length > 0 && (
-            <ul class="tag-list" aria-label="标签">
-              {note.data.tags.map((tag) => <li>{tag}</li>)}
-            </ul>
-          )}
-        </header>
-        <div class="prose">
-          <Content />
-        </div>
-      </article>
-    </div>
-  </div>
+<BaseLayout title={post.data.title} description={post.data.description}>
+  <ArticleView
+    title={post.data.title}
+    description={post.data.description}
+    pubDate={post.data.pubDate}
+    sectionLabel={sectionLabel}
+    sectionHref={sectionHref}
+    tags={post.data.tags}
+    headings={headings}
+  >
+    <Content />
+  </ArticleView>
 </BaseLayout>

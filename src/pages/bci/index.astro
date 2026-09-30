@@ -1,24 +1,25 @@
 ---
 import { getCollection } from 'astro:content';
-import ArticleCard from '../../components/ArticleCard.astro';
+import PostList from '../../components/PostList.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { byOldest, getOrderLabel, isBciEntry, isPublished } from '../../lib/content';
+import { byLessonOrder, getEntrySlug, isPublished, isBciEntry } from '../../lib/content';
 
 const posts = (await getCollection('blog'))
   .filter(isPublished)
   .filter(isBciEntry)
-  .sort(byOldest);
+  .sort(byLessonOrder);
+const items = posts.map((entry, index) => ({
+  href: `/blog/${getEntrySlug(entry)}`,
+  title: entry.data.title.replace(/^第\s*\d+\s*讲\s*[·・:：\-—]\s*/, ''),
+  date: entry.data.pubDate,
+  label: `第${entry.data.order ?? index + 1}讲`,
+}));
 ---
 
 <BaseLayout title="脑机接口" description="南边小站的脑机接口课程笔记与相关文章。">
-  <section class="content-panel topic-panel">
-    <div class="list-header">
-      <p class="eyebrow">BCI Notes</p>
-      <h1>脑机接口</h1>
-      <p class="lead">收集脑机接口课程笔记与相关博客文章，按课程阅读顺序排列。</p>
-    </div>
-    <div class="article-grid">
-      {posts.map((entry, index) => <ArticleCard entry={entry} section="blog" sectionLabel="脑机接口" orderLabel={getOrderLabel(entry, index)} />)}
-    </div>
-  </section>
+  <header class="list-header">
+    <h1>脑机接口</h1>
+    <p>脑机接口课程笔记与相关文章，按课程顺序排列。</p>
+  </header>
+  <PostList items={items} variant="ordered" />
 </BaseLayout>
