@@ -3,10 +3,10 @@ import { getCollection } from 'astro:content';
 import ArticleCard from '../components/ArticleCard.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { siteConfig } from '../site.config';
-import { byNewest, isPublished } from '../lib/content';
+import { byNewest, isBciEntry, isPublished } from '../lib/content';
 
 const blogPosts = (await getCollection('blog')).filter(isPublished).sort(byNewest);
-const notes = (await getCollection('notes')).filter(isPublished).sort(byNewest);
+const bciPosts = blogPosts.filter(isBciEntry);
 const aiPharmaPosts = (await getCollection('aiPharma')).filter(isPublished).sort(byNewest);
 const genomicsPosts = (await getCollection('genomics')).filter(isPublished).sort(byNewest);
 ---
@@ -27,23 +27,23 @@ const genomicsPosts = (await getCollection('genomics')).filter(isPublished).sort
         <p class="eyebrow">Latest Posts</p>
         <h2 id="latest-blog-heading">最新博文</h2>
       </div>
-      <a href="/blog">查看全部博客</a>
+      <a href="/blog">查看全部文章</a>
     </div>
     <div class="article-grid">
-      {blogPosts.slice(0, 2).map((entry) => <ArticleCard entry={entry} section="blog" />)}
+      {blogPosts.slice(0, 2).map((entry) => <ArticleCard entry={entry} section="blog" sectionLabel={isBciEntry(entry) ? '脑机接口' : '博客'} />)}
     </div>
   </section>
 
-  <section class="home-section" aria-labelledby="latest-notes-heading">
+  <section class="home-section compact-section" aria-labelledby="latest-bci-heading">
     <div class="section-heading">
       <div>
-        <p class="eyebrow">Learning Notes</p>
-        <h2 id="latest-notes-heading">学习心得</h2>
+        <p class="eyebrow">BCI Notes</p>
+        <h2 id="latest-bci-heading">脑机接口</h2>
       </div>
-      <a href="/notes">查看全部心得</a>
+      <a href="/bci">查看全部课程笔记</a>
     </div>
-    <div class="article-grid">
-      {notes.slice(0, 2).map((entry) => <ArticleCard entry={entry} section="notes" />)}
+    <div class="article-grid compact-grid">
+      {bciPosts.slice(0, 2).map((entry) => <ArticleCard entry={entry} section="blog" sectionLabel="脑机接口" />)}
     </div>
   </section>
 

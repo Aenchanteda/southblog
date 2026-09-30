@@ -2,9 +2,9 @@
 import { getCollection } from 'astro:content';
 import ArticleCard from '../../components/ArticleCard.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { byNewest, isPublished } from '../../lib/content';
+import { byOldest, getOrderLabel, isPublished } from '../../lib/content';
 
-const posts = (await getCollection('genomics')).filter(isPublished).sort(byNewest);
+const posts = (await getCollection('genomics')).filter(isPublished).sort(byOldest);
 ---
 
 <BaseLayout title="基因组学" description="南边小站的基因组学与分子基础学习文章。">
@@ -15,7 +15,7 @@ const posts = (await getCollection('genomics')).filter(isPublished).sort(byNewes
       <p class="lead">从 DNA、核苷酸与分子结构基础开始，整理可长期回看的基因组学学习笔记。</p>
     </div>
     <div class="article-grid compact-grid">
-      {posts.map((entry) => <ArticleCard entry={entry} section="genomics" />)}
+      {posts.map((entry, index) => <ArticleCard entry={entry} section="genomics" orderLabel={getOrderLabel(entry, index)} />)}
     </div>
   </section>
 </BaseLayout>

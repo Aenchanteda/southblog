@@ -394,6 +394,7 @@ const pageTitle = title ? `${title} · ${siteConfig.name}` : `${siteConfig.name}
 
   .hero-meta span,
   .section-pill,
+  .order-badge,
   .tag-list li {
     border: 1px solid rgba(159, 79, 47, 0.16);
     border-radius: 999px;
@@ -558,6 +559,20 @@ const pageTitle = title ? `${title} · ${siteConfig.name}` : `${siteConfig.name}
     color: var(--muted);
     font-size: 0.88rem;
     white-space: nowrap;
+  }
+
+  .card-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .order-badge {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--paper-strong);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.05em;
   }
 
   .card-body {
@@ -923,6 +938,10 @@ const pageTitle = title ? `${title} · ${siteConfig.name}` : `${siteConfig.name}
     letter-spacing: 0.14em;
     line-height: 1;
     padding: 5px 8px;
+  }
+
+  .prose blockquote:first-of-type::before {
+    content: "课程信息";
   }
 
   .prose blockquote > :first-child {

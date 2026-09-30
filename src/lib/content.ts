@@ -24,6 +24,28 @@ export function byNewest(a: ArticleEntry, b: ArticleEntry) {
   return b.data.pubDate.getTime() - a.data.pubDate.getTime();
 }
 
+export function byOldest(a: ArticleEntry, b: ArticleEntry) {
+  return a.data.pubDate.getTime() - b.data.pubDate.getTime();
+}
+
 export function isPublished(entry: ArticleEntry) {
   return !entry.data.draft;
+}
+
+export function isBciEntry(entry: ArticleEntry) {
+  const slug = getEntrySlug(entry).toLowerCase();
+  const title = entry.data.title.toLowerCase();
+  const tags = entry.data.tags.map((tag) => tag.toLowerCase());
+  return (
+    slug.includes('bci') ||
+    title.includes('bci') ||
+    entry.data.title.includes('脑机接口') ||
+    tags.includes('bci') ||
+    tags.includes('脑机接口')
+  );
+}
+
+export function getOrderLabel(entry: ArticleEntry, index: number) {
+  const order = entry.data.order ?? index + 1;
+  return String(order).padStart(2, '0');
 }

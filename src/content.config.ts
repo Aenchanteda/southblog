@@ -6,6 +6,7 @@ const articleSchema = z.object({
   description: z.string(),
   pubDate: z.coerce.date(),
   tags: z.array(z.string()).optional().default([]),
+  order: z.number().optional(),
   draft: z.boolean().optional().default(false),
 });
 
