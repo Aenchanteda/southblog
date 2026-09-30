@@ -513,6 +513,7 @@ const pageTitle = title ? `${title} · ${siteConfig.name}` : `${siteConfig.name}
   .home-section h2 {
     font-size: clamp(1.25rem, 1.55vw, 1.38rem);
     letter-spacing: -0.025em;
+    line-height: 1;
   }
 
   .home-section .section-heading a {
@@ -520,6 +521,88 @@ const pageTitle = title ? `${title} · ${siteConfig.name}` : `${siteConfig.name}
     font-size: 0.88rem;
     line-height: 1.3;
     padding-bottom: 1px;
+  }
+
+  .home-heading-chip {
+    --chip-bg: rgba(255, 250, 241, 0.86);
+    --chip-border: rgba(159, 79, 47, 0.16);
+    --chip-accent: var(--accent);
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    min-height: 26px;
+    border: 1px solid var(--chip-border);
+    border-radius: 999px;
+    background: var(--chip-bg);
+    box-shadow: 0 8px 22px rgba(61, 44, 25, 0.05);
+    padding: 3px 10px 3px 4px;
+  }
+
+  .home-heading-latest {
+    --chip-bg: #fff3d6;
+    --chip-border: rgba(190, 120, 32, 0.2);
+    --chip-accent: #b86b1f;
+  }
+
+  .home-heading-bci {
+    --chip-bg: #edf2df;
+    --chip-border: rgba(84, 117, 75, 0.2);
+    --chip-accent: #587447;
+  }
+
+  .home-heading-pharma {
+    --chip-bg: #f4e4dc;
+    --chip-border: rgba(159, 79, 47, 0.2);
+    --chip-accent: var(--accent);
+  }
+
+  .home-heading-genomics {
+    --chip-bg: #e7f0ea;
+    --chip-border: rgba(71, 112, 106, 0.2);
+    --chip-accent: #47706a;
+  }
+
+  .home-heading-icon {
+    display: grid;
+    width: 20px;
+    height: 20px;
+    place-items: center;
+    flex: 0 0 auto;
+    border-radius: 999px;
+    background: var(--chip-accent);
+    color: var(--paper-strong);
+  }
+
+  .home-heading-icon svg {
+    width: 13px;
+    height: 13px;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.8;
+  }
+
+  .home-heading-chip:hover .home-heading-icon {
+    animation: home-icon-wiggle 520ms ease both;
+  }
+
+  @keyframes home-icon-wiggle {
+    0%,
+    100% {
+      transform: rotate(0deg) scale(1);
+    }
+    35% {
+      transform: rotate(-8deg) scale(1.06);
+    }
+    70% {
+      transform: rotate(6deg) scale(1.03);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .home-heading-chip:hover .home-heading-icon {
+      animation: none;
+    }
   }
 
   .grid,
@@ -1189,6 +1272,22 @@ const pageTitle = title ? `${title} · ${siteConfig.name}` : `${siteConfig.name}
 
     .home-section h2 {
       font-size: clamp(1.12rem, 5vw, 1.24rem);
+    }
+
+    .home-heading-chip {
+      gap: 6px;
+      min-height: 24px;
+      padding: 3px 9px 3px 4px;
+    }
+
+    .home-heading-icon {
+      width: 18px;
+      height: 18px;
+    }
+
+    .home-heading-icon svg {
+      width: 12px;
+      height: 12px;
     }
 
     .home-section .eyebrow {

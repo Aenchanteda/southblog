@@ -25,7 +25,17 @@ const genomicsPosts = (await getCollection('genomics')).filter(isPublished).sort
     <div class="section-heading">
       <div>
         <p class="eyebrow">Latest Posts</p>
-        <h2 id="latest-blog-heading">最新博文</h2>
+        <h2 id="latest-blog-heading">
+          <span class="home-heading-chip home-heading-latest">
+            <span class="home-heading-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 3.5l1.8 5 5 1.8-5 1.9-1.8 5-1.8-5-5-1.9 5-1.8L12 3.5Z" />
+                <path d="M18.5 15.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7.7-1.8Z" />
+              </svg>
+            </span>
+            <span>最新博文</span>
+          </span>
+        </h2>
       </div>
       <a href="/blog">查看全部文章</a>
     </div>
@@ -38,7 +48,19 @@ const genomicsPosts = (await getCollection('genomics')).filter(isPublished).sort
     <div class="section-heading">
       <div>
         <p class="eyebrow">BCI Notes</p>
-        <h2 id="latest-bci-heading">脑机接口</h2>
+        <h2 id="latest-bci-heading">
+          <span class="home-heading-chip home-heading-bci">
+            <span class="home-heading-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M9 7.2c-2.1 0-3.8 1.6-3.8 3.7 0 .6.1 1.1.4 1.6-1 .6-1.6 1.6-1.6 2.8 0 1.9 1.5 3.4 3.4 3.4h1.2" />
+                <path d="M15 7.2c2.1 0 3.8 1.6 3.8 3.7 0 .6-.1 1.1-.4 1.6 1 .6 1.6 1.6 1.6 2.8 0 1.9-1.5 3.4-3.4 3.4h-1.2" />
+                <path d="M9 7.2c0-1.7 1.3-3 3-3s3 1.3 3 3v11.5" />
+                <path d="M9 11.2h2.2M12.8 11.2H15M8.5 15h2.3M13.2 15h2.3" />
+              </svg>
+            </span>
+            <span>脑机接口</span>
+          </span>
+        </h2>
       </div>
       <a href="/bci">查看全部课程笔记</a>
     </div>
@@ -51,7 +73,18 @@ const genomicsPosts = (await getCollection('genomics')).filter(isPublished).sort
     <div class="section-heading">
       <div>
         <p class="eyebrow">AI Drug Discovery</p>
-        <h2 id="latest-ai-pharma-heading">AI制药</h2>
+        <h2 id="latest-ai-pharma-heading">
+          <span class="home-heading-chip home-heading-pharma">
+            <span class="home-heading-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M7.2 16.8 16.8 7.2a3.4 3.4 0 0 1 4.8 4.8L12 21.6a3.4 3.4 0 0 1-4.8-4.8Z" />
+                <path d="m12 12 4 4" />
+                <path d="M5.2 10.2c1.8-.8 3.4-.8 5.2 0" />
+              </svg>
+            </span>
+            <span>AI制药</span>
+          </span>
+        </h2>
       </div>
       <a href="/ai-pharma">查看全部文章</a>
     </div>
@@ -64,7 +97,18 @@ const genomicsPosts = (await getCollection('genomics')).filter(isPublished).sort
     <div class="section-heading">
       <div>
         <p class="eyebrow">Genomics</p>
-        <h2 id="latest-genomics-heading">基因组学</h2>
+        <h2 id="latest-genomics-heading">
+          <span class="home-heading-chip home-heading-genomics">
+            <span class="home-heading-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M8 4c6 3 10 6 8 16" />
+                <path d="M16 4C10 7 6 10 8 20" />
+                <path d="M9.2 7.2h5.6M8.4 11.2h7.2M9.2 15.2h5.6" />
+              </svg>
+            </span>
+            <span>基因组学</span>
+          </span>
+        </h2>
       </div>
       <a href="/genomics">查看全部文章</a>
     </div>
