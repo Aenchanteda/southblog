@@ -15,6 +15,20 @@ export function formatDate(date: Date) {
   }).format(date);
 }
 
+/** 2026-09-29 */
+export function formatIsoDate(date: Date) {
+  return date.toISOString().slice(0, 10);
+}
+
+/** 09-29 */
+export function formatMonthDay(date: Date) {
+  return date.toISOString().slice(5, 10);
+}
+
+export function getYear(date: Date) {
+  return date.getUTCFullYear();
+}
+
 export function getEntrySlug(entry: ArticleEntry) {
   const maybeSlug = 'slug' in entry ? entry.slug : undefined;
   return maybeSlug ?? entry.id.replace(/\.(md|mdx)$/i, '');
@@ -26,6 +40,10 @@ export function byNewest(a: ArticleEntry, b: ArticleEntry) {
 
 export function byOldest(a: ArticleEntry, b: ArticleEntry) {
   return a.data.pubDate.getTime() - b.data.pubDate.getTime();
+}
+
+export function byLessonOrder(a: ArticleEntry, b: ArticleEntry) {
+  return (a.data.order ?? Number.MAX_SAFE_INTEGER) - (b.data.order ?? Number.MAX_SAFE_INTEGER) || byOldest(a, b);
 }
 
 export function isPublished(entry: ArticleEntry) {

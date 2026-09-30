@@ -9,20 +9,25 @@ interface Props {
   headings?: Heading[];
 }
 
-const headings = (Astro.props.headings ?? []).filter((heading) => heading.depth === 2 || heading.depth === 3);
+let currentSection = '';
+const headings = (Astro.props.headings ?? [])
+  .filter((heading) => heading.depth === 2 || heading.depth === 3)
+  .map((heading) => {
+    if (heading.depth === 2) currentSection = heading.slug;
+    return { ...heading, section: currentSection || heading.slug };
+  });
 ---
 
 {headings.length > 0 && (
   <aside class="article-toc" data-article-toc>
     <button class="toc-toggle" type="button" aria-expanded="false" data-toc-toggle>
-      文章目录
-      <span aria-hidden="true">▾</span>
+      目录 <span aria-hidden="true">▾</span>
     </button>
     <nav class="toc-panel" aria-label="文章目录" data-toc-panel>
-      <p class="toc-title">文章目录</p>
+      <p class="toc-title">目录</p>
       <ol class="toc-list">
         {headings.map((heading) => (
-          <li class={`toc-depth-${heading.depth}`}>
+          <li class={`toc-depth-${heading.depth}`} data-toc-section={heading.section}>
             <a href={`#${heading.slug}`} data-toc-link={heading.slug}>{heading.text}</a>
           </li>
         ))}
@@ -33,6 +38,8 @@ const headings = (Astro.props.headings ?? []).filter((heading) => heading.depth 
 
 <script is:inline>
   (() => {
+    // The TOC renders before the article body, so wait for the headings to exist.
+    const init = () => {
     const tocRoots = document.querySelectorAll('[data-article-toc]');
 
     tocRoots.forEach((root) => {
@@ -62,8 +69,15 @@ const headings = (Astro.props.headings ?? []).filter((heading) => heading.depth 
       });
 
       const setActive = (id) => {
+        let section = '';
         links.forEach((link) => {
-          link.toggleAttribute('aria-current', link.dataset.tocLink === id);
+          const isActive = link.dataset.tocLink === id;
+          link.toggleAttribute('aria-current', isActive);
+          if (isActive) section = link.parentElement?.dataset.tocSection ?? '';
+        });
+        // Wide-screen sidebar only expands the sub-headings of the current chapter.
+        root.querySelectorAll('[data-toc-section]').forEach((item) => {
+          item.classList.toggle('is-current-section', item.dataset.tocSection === section);
         });
       };
 
@@ -83,12 +97,19 @@ const headings = (Astro.props.headings ?? []).filter((heading) => heading.depth 
           if (visible[0]) setActive(visible[0].target.id);
         },
         {
-          rootMargin: '-22% 0px -62% 0px',
+          rootMargin: '-10% 0px -70% 0px',
           threshold: [0, 1],
         }
       );
 
       headings.forEach((heading) => observer.observe(heading));
     });
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init, { once: true });
+    } else {
+      init();
+    }
   })();
 </script>

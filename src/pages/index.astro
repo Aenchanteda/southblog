@@ -1,11 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
+import PostList, { type PostListItem } from '../components/PostList.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { siteConfig } from '../site.config';
-import { byNewest, byOldest, formatDate, getEntrySlug, isBciEntry, isPublished, getOrderLabel, type ArticleEntry } from '../lib/content';
-
-const byLessonOrder = (a: ArticleEntry, b: ArticleEntry) =>
-  (a.data.order ?? Number.MAX_SAFE_INTEGER) - (b.data.order ?? Number.MAX_SAFE_INTEGER) || byOldest(a, b);
+import { byLessonOrder, byNewest, getEntrySlug, getOrderLabel, isBciEntry, isPublished, type ArticleEntry } from '../lib/content';
 
 const blogPosts = (await getCollection('blog')).filter(isPublished);
 const notesPosts = (await getCollection('notes')).filter(isPublished);
@@ -13,87 +11,70 @@ const bciPosts = blogPosts.filter(isBciEntry).sort(byLessonOrder);
 const aiPharmaPosts = (await getCollection('aiPharma')).filter(isPublished).sort(byLessonOrder);
 const genomicsPosts = (await getCollection('genomics')).filter(isPublished).sort(byLessonOrder);
 
+const toItem = (entry: ArticleEntry, href: string, label?: string, title = entry.data.title): PostListItem => ({
+  href,
+  title,
+  date: entry.data.pubDate,
+  label,
+  summary: entry.data.description,
+});
+
+// 课程标题里已带「第N讲 · 」前缀时，序号列已经显示，这里去掉重复。
+const stripLessonPrefix = (title: string) => title.replace(/^第\s*\d+\s*讲\s*[·・:：\-—]\s*/, '');
+
 // 最新更新：与 /blog 归档同源（全部内容集合），严格按发布日期倒序，取最新 6 篇。
 const latestItems = [
-  ...blogPosts.map((entry) => ({ entry, href: `/blog/${getEntrySlug(entry)}`, label: isBciEntry(entry) ? '脑机接口' : '博客' })),
-  ...notesPosts.map((entry) => ({ entry, href: `/notes/${getEntrySlug(entry)}`, label: '学习心得' })),
-  ...aiPharmaPosts.map((entry) => ({ entry, href: `/ai-pharma/${getEntrySlug(entry)}`, label: 'AI制药' })),
-  ...genomicsPosts.map((entry) => ({ entry, href: `/genomics/${getEntrySlug(entry)}`, label: '基因组学' })),
+  ...blogPosts.map((entry) => toItem(entry, `/blog/${getEntrySlug(entry)}`, isBciEntry(entry) ? '脑机接口' : '博客')),
+  ...notesPosts.map((entry) => toItem(entry, `/notes/${getEntrySlug(entry)}`, '学习心得')),
+  ...aiPharmaPosts.map((entry) => toItem(entry, `/ai-pharma/${getEntrySlug(entry)}`, 'AI制药')),
+  ...genomicsPosts.map((entry) => toItem(entry, `/genomics/${getEntrySlug(entry)}`, '基因组学')),
 ]
-  .sort((a, b) => byNewest(a.entry, b.entry))
+  .sort((a, b) => b.date.getTime() - a.date.getTime())
   .slice(0, 6);
 
-const sections = [
+const topicSections = [
   {
-    index: '01',
-    eyebrow: 'Latest',
-    title: '最新更新',
-    href: '/blog',
-    linkText: '全部文章',
-    items: latestItems,
-  },
-  {
-    index: '02',
-    eyebrow: 'BCI',
+    id: 'bci',
     title: '脑机接口',
     href: '/bci',
-    linkText: '全部文章',
-    items: bciPosts.map((entry, index) => ({ entry, href: `/blog/${getEntrySlug(entry)}`, label: `第${entry.data.order ?? index + 1}讲` })),
+    items: bciPosts.map((entry, index) =>
+      toItem(entry, `/blog/${getEntrySlug(entry)}`, `第${entry.data.order ?? index + 1}讲`, stripLessonPrefix(entry.data.title))
+    ),
   },
   {
-    index: '03',
-    eyebrow: 'AI Drug Discovery',
+    id: 'ai-pharma',
     title: 'AI制药',
     href: '/ai-pharma',
-    linkText: '全部文章',
-    items: aiPharmaPosts.map((entry, index) => ({ entry, href: `/ai-pharma/${getEntrySlug(entry)}`, label: getOrderLabel(entry, index) })),
+    items: aiPharmaPosts.map((entry, index) => toItem(entry, `/ai-pharma/${getEntrySlug(entry)}`, getOrderLabel(entry, index))),
   },
   {
-    index: '04',
-    eyebrow: 'Genomics',
+    id: 'genomics',
     title: '基因组学',
     href: '/genomics',
-    linkText: '全部文章',
-    items: genomicsPosts.map((entry, index) => ({ entry, href: `/genomics/${getEntrySlug(entry)}`, label: getOrderLabel(entry, index) })),
+    items: genomicsPosts.map((entry, index) => toItem(entry, `/genomics/${getEntrySlug(entry)}`, getOrderLabel(entry, index))),
   },
-];
+].filter((section) => section.items.length > 0);
 ---
 
 <BaseLayout>
-  <section class="home-intro" aria-labelledby="home-title">
-    <p class="home-kicker">Personal notes / digital garden</p>
-    <h1 id="home-title">{siteConfig.name}</h1>
-    <p>
-      写博客，也整理课程笔记。主题从脑机接口到 AI 制药、基因组学，尽量把学习路径留下清楚的索引。
-    </p>
+  <h1 class="sr-only">{siteConfig.name}</h1>
+  <p class="home-intro">{siteConfig.intro}</p>
+
+  <section class="home-section" aria-labelledby="home-latest">
+    <div class="section-head">
+      <h2 id="home-latest">最新更新</h2>
+      <a href="/blog">全部文章 →</a>
+    </div>
+    <PostList items={latestItems} showSummary />
   </section>
 
-  <div class="home-stream">
-    {sections.map((section) => (
-      <section class="home-list-section" aria-labelledby={`home-section-${section.index}`}>
-        <div class="home-list-heading">
-          <div class="home-list-titleline">
-            <span class="home-list-index">{section.index}</span>
-            <div>
-              <p>{section.eyebrow}</p>
-              <h2 id={`home-section-${section.index}`}>{section.title}</h2>
-            </div>
-          </div>
-          <a href={section.href}>{section.linkText}</a>
-        </div>
-        <div class="home-post-list">
-          {section.items.map(({ entry, href, label }) => (
-            <a class="home-post-row" href={href}>
-              <time datetime={entry.data.pubDate.toISOString()}>{formatDate(entry.data.pubDate)}</time>
-              <div class="home-post-main">
-                <h3>{entry.data.title}</h3>
-                <p>{entry.data.description}</p>
-              </div>
-              <span>{label}</span>
-            </a>
-          ))}
-        </div>
-      </section>
-    ))}
-  </div>
+  {topicSections.map((section) => (
+    <section class="home-section" aria-labelledby={`home-${section.id}`}>
+      <div class="section-head">
+        <h2 id={`home-${section.id}`}>{section.title}</h2>
+        <a href={section.href}>全部文章 →</a>
+      </div>
+      <PostList items={section.items} variant="ordered" />
+    </section>
+  ))}
 </BaseLayout>

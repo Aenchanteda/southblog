@@ -1,0 +1,48 @@
+---
+export interface PostListItem {
+  href: string;
+  title: string;
+  date: Date;
+  /** Short gray text label, e.g. 脑机接口 / 第3讲 / 01 */
+  label?: string;
+  summary?: string;
+}
+
+interface Props {
+  items: PostListItem[];
+  /** dated: date column + title; ordered: lesson label column + title + date */
+  variant?: 'dated' | 'ordered';
+  dateFormat?: 'full' | 'month-day';
+  showSummary?: boolean;
+}
+
+import { formatIsoDate, formatMonthDay } from '../lib/content';
+
+const { items, variant = 'dated', dateFormat = 'full', showSummary = false } = Astro.props;
+const fmt = dateFormat === 'month-day' ? formatMonthDay : formatIsoDate;
+const ListTag = variant === 'ordered' ? 'ol' : 'ul';
+---
+
+<ListTag class:list={['post-list', `post-list-${variant}`, dateFormat === 'month-day' && 'post-list-month-day']}>
+  {items.map((item) => (
+    <li class="post-row">
+      {variant === 'ordered' ? (
+        <span class="post-row-index">{item.label}</span>
+      ) : (
+        <time class="post-row-date" datetime={item.date.toISOString()}>{fmt(item.date)}</time>
+      )}
+      <div class="post-row-main">
+        <a class="post-row-title" href={item.href}>{item.title}</a>
+        {(showSummary || (variant === 'dated' && item.label)) && (
+          <p class="post-row-sub">
+            {variant === 'dated' && item.label && <span class="post-row-label">{item.label}</span>}
+            {showSummary && item.summary && <span class="post-row-summary">{item.summary}</span>}
+          </p>
+        )}
+      </div>
+      {variant === 'ordered' && (
+        <time class="post-row-date post-row-date-end" datetime={item.date.toISOString()}>{formatIsoDate(item.date)}</time>
+      )}
+    </li>
+  ))}
+</ListTag>

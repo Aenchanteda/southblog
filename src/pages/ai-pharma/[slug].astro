@@ -1,10 +1,10 @@
 ---
 import { getCollection, render, type CollectionEntry } from 'astro:content';
-import ArticleToc from '../../components/ArticleToc.astro';
+import ArticleView from '../../components/ArticleView.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { formatDate, getEntrySlug, isPublished } from '../../lib/content';
+import { getEntrySlug, isPublished } from '../../lib/content';
 
-type AiPharmaEntry = CollectionEntry<'aiPharma'>;
+type Entry = CollectionEntry<'aiPharma'>;
 
 export async function getStaticPaths() {
   const posts = (await getCollection('aiPharma')).filter(isPublished);
@@ -14,35 +14,22 @@ export async function getStaticPaths() {
   }));
 }
 
-const { post } = Astro.props as { post: AiPharmaEntry };
+const { post } = Astro.props as { post: Entry };
 const { Content, headings } = await render(post);
+const sectionLabel = 'AI制药';
+const sectionHref = '/ai-pharma';
 ---
 
 <BaseLayout title={post.data.title} description={post.data.description}>
-  <div class="post-shell with-toc">
-    <a class="back-link" href="/ai-pharma"><span aria-hidden="true">&larr;</span> 返回AI制药</a>
-    <div class="reading-layout">
-      <ArticleToc headings={headings} />
-      <article class="post longform-post">
-        <header class="post-header">
-          <p class="post-kicker">AI Drug Discovery</p>
-          <h1>{post.data.title}</h1>
-          <p class="lead">{post.data.description}</p>
-          <div class="post-meta-row">
-            <span>AI制药</span>
-            <span class="dot" aria-hidden="true"></span>
-            <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
-          </div>
-          {post.data.tags.length > 0 && (
-            <ul class="tag-list" aria-label="标签">
-              {post.data.tags.map((tag) => <li>{tag}</li>)}
-            </ul>
-          )}
-        </header>
-        <div class="prose longform-prose">
-          <Content />
-        </div>
-      </article>
-    </div>
-  </div>
+  <ArticleView
+    title={post.data.title}
+    description={post.data.description}
+    pubDate={post.data.pubDate}
+    sectionLabel={sectionLabel}
+    sectionHref={sectionHref}
+    tags={post.data.tags}
+    headings={headings}
+  >
+    <Content />
+  </ArticleView>
 </BaseLayout>
