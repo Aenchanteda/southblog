@@ -29,8 +29,8 @@ const genomicsPosts = (await getCollection('genomics')).filter(isPublished).sort
       </div>
       <a href="/blog">查看全部文章</a>
     </div>
-    <div class="article-grid">
-      {blogPosts.slice(0, 2).map((entry) => <ArticleCard entry={entry} section="blog" sectionLabel={isBciEntry(entry) ? '脑机接口' : '博客'} />)}
+    <div class="article-grid home-card-grid">
+      {blogPosts.slice(0, 3).map((entry) => <ArticleCard entry={entry} section="blog" sectionLabel={isBciEntry(entry) ? '脑机接口' : '博客'} variant="compact" />)}
     </div>
   </section>
 
@@ -42,8 +42,8 @@ const genomicsPosts = (await getCollection('genomics')).filter(isPublished).sort
       </div>
       <a href="/bci">查看全部课程笔记</a>
     </div>
-    <div class="article-grid compact-grid">
-      {bciPosts.slice(0, 2).map((entry) => <ArticleCard entry={entry} section="blog" sectionLabel="脑机接口" />)}
+    <div class="article-grid home-card-grid">
+      {bciPosts.slice(0, 3).map((entry) => <ArticleCard entry={entry} section="blog" sectionLabel="脑机接口" variant="compact" />)}
     </div>
   </section>
 
@@ -55,8 +55,8 @@ const genomicsPosts = (await getCollection('genomics')).filter(isPublished).sort
       </div>
       <a href="/ai-pharma">查看全部文章</a>
     </div>
-    <div class="article-grid compact-grid">
-      {aiPharmaPosts.slice(0, 2).map((entry) => <ArticleCard entry={entry} section="ai-pharma" />)}
+    <div class="article-grid home-card-grid">
+      {aiPharmaPosts.slice(0, 3).map((entry) => <ArticleCard entry={entry} section="ai-pharma" variant="compact" />)}
     </div>
   </section>
 
@@ -68,8 +68,8 @@ const genomicsPosts = (await getCollection('genomics')).filter(isPublished).sort
       </div>
       <a href="/genomics">查看全部文章</a>
     </div>
-    <div class="article-grid compact-grid">
-      {genomicsPosts.slice(0, 2).map((entry) => <ArticleCard entry={entry} section="genomics" />)}
+    <div class="article-grid home-card-grid">
+      {genomicsPosts.slice(0, 3).map((entry) => <ArticleCard entry={entry} section="genomics" variant="compact" />)}
     </div>
   </section>
 </BaseLayout>

@@ -7,9 +7,10 @@ interface Props {
   section: ArticleSection;
   sectionLabel?: string;
   orderLabel?: string;
+  variant?: 'default' | 'compact';
 }
 
-const { entry, section, sectionLabel: labelOverride, orderLabel } = Astro.props;
+const { entry, section, sectionLabel: labelOverride, orderLabel, variant = 'default' } = Astro.props;
 const href = `/${section}/${getEntrySlug(entry)}`;
 const sectionLabels: Record<ArticleSection, string> = {
   blog: '博客',
@@ -20,7 +21,7 @@ const sectionLabels: Record<ArticleSection, string> = {
 const sectionLabel = labelOverride ?? sectionLabels[section];
 ---
 
-<article class="article-card">
+<article class:list={['article-card', variant === 'compact' && 'article-card-compact']}>
   <a class="article-link" href={href}>
     <div class="card-topline">
       <div class="card-badges">
