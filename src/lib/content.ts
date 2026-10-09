@@ -67,3 +67,24 @@ export function getOrderLabel(entry: ArticleEntry, index: number) {
   const order = entry.data.order ?? index + 1;
   return String(order).padStart(2, '0');
 }
+
+export interface ArticleLink {
+  href: string;
+  title: string;
+}
+
+/** Earlier entry is previous, later entry is next. `entries` must already be in reading order. */
+export function adjacentLinks(
+  entries: ArticleEntry[],
+  currentId: string,
+  hrefFor: (entry: ArticleEntry) => string,
+): { prev?: ArticleLink; next?: ArticleLink } {
+  const index = entries.findIndex((entry) => entry.id === currentId);
+  if (index < 0) return {};
+  const prevEntry = entries[index - 1];
+  const nextEntry = entries[index + 1];
+  return {
+    prev: prevEntry ? { href: hrefFor(prevEntry), title: prevEntry.data.title } : undefined,
+    next: nextEntry ? { href: hrefFor(nextEntry), title: nextEntry.data.title } : undefined,
+  };
+}

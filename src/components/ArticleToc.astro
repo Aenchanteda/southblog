@@ -23,6 +23,7 @@ const headings = (Astro.props.headings ?? [])
     <button class="toc-toggle" type="button" aria-expanded="false" data-toc-toggle>
       目录 <span aria-hidden="true">▾</span>
     </button>
+    <button class="toc-backdrop" type="button" data-toc-backdrop hidden aria-label="关闭目录"></button>
     <nav class="toc-panel" aria-label="文章目录" data-toc-panel>
       <p class="toc-title">目录</p>
       <ol class="toc-list">
@@ -45,40 +46,54 @@ const headings = (Astro.props.headings ?? [])
     tocRoots.forEach((root) => {
       const toggle = root.querySelector('[data-toc-toggle]');
       const panel = root.querySelector('[data-toc-panel]');
+      const backdrop = root.querySelector('[data-toc-backdrop]');
       const links = [...root.querySelectorAll('[data-toc-link]')];
       if (!panel || links.length === 0) return;
 
+      const setOpen = (open) => {
+        root.classList.toggle('is-open', open);
+        toggle?.setAttribute('aria-expanded', String(open));
+        if (backdrop) backdrop.hidden = !open;
+      };
+
       toggle?.addEventListener('click', () => {
-        const isOpen = root.classList.toggle('is-open');
-        toggle.setAttribute('aria-expanded', String(isOpen));
+        setOpen(!root.classList.contains('is-open'));
       });
+
+      backdrop?.addEventListener('click', () => setOpen(false));
 
       root.addEventListener('keydown', (event) => {
         if (event.key === 'Escape') {
-          root.classList.remove('is-open');
-          toggle?.setAttribute('aria-expanded', 'false');
+          setOpen(false);
           toggle?.focus();
         }
       });
 
       links.forEach((link) => {
-        link.addEventListener('click', () => {
-          root.classList.remove('is-open');
-          toggle?.setAttribute('aria-expanded', 'false');
-        });
+        link.addEventListener('click', () => setOpen(false));
       });
 
       const setActive = (id) => {
         let section = '';
+        let activeLink = null;
         links.forEach((link) => {
           const isActive = link.dataset.tocLink === id;
           link.toggleAttribute('aria-current', isActive);
-          if (isActive) section = link.parentElement?.dataset.tocSection ?? '';
+          if (isActive) {
+            section = link.parentElement?.dataset.tocSection ?? '';
+            activeLink = link;
+          }
         });
-        // Wide-screen sidebar only expands the sub-headings of the current chapter.
         root.querySelectorAll('[data-toc-section]').forEach((item) => {
           item.classList.toggle('is-current-section', item.dataset.tocSection === section);
         });
+        if (!activeLink) return;
+        const scroller = panel.scrollHeight > panel.clientHeight + 8 ? panel : root;
+        const rail = scroller.getBoundingClientRect();
+        const item = activeLink.getBoundingClientRect();
+        if (item.top < rail.top || item.bottom > rail.bottom) {
+          scroller.scrollTop += item.top - rail.top - scroller.clientHeight / 3;
+        }
       };
 
       const headings = links
