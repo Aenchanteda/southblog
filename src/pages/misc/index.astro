@@ -1,0 +1,24 @@
+---
+import { getCollection } from 'astro:content';
+import PostList from '../../components/PostList.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { byLessonOrder, getEntrySlug, isPublished } from '../../lib/content';
+
+const posts = (await getCollection('misc'))
+  .filter(isPublished)
+  .sort(byLessonOrder);
+const items = posts.map((entry, index) => ({
+  href: `/misc/${getEntrySlug(entry)}`,
+  title: entry.data.title,
+  date: entry.data.pubDate,
+  label: String(entry.data.order ?? index + 1).padStart(2, '0'),
+}));
+---
+
+<BaseLayout title="杂谈" description="南边小站的杂谈：公开材料整理与主题笔记。">
+  <header class="list-header">
+    <h1>杂谈</h1>
+    <p>公开材料整理成的主题笔记，按阅读顺序排列。文内附原文 PDF。</p>
+  </header>
+  <PostList items={items} variant="ordered" />
+</BaseLayout>

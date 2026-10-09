@@ -16,6 +16,7 @@ const posts = [
   ...(await getCollection('notes')).filter(isPublished).map((entry) => toItem(entry, `/notes/${getEntrySlug(entry)}`, '学习心得')),
   ...(await getCollection('aiPharma')).filter(isPublished).map((entry) => toItem(entry, `/ai-pharma/${getEntrySlug(entry)}`, 'AI制药')),
   ...(await getCollection('genomics')).filter(isPublished).map((entry) => toItem(entry, `/genomics/${getEntrySlug(entry)}`, '基因组学')),
+  ...(await getCollection('misc')).filter(isPublished).map((entry) => toItem(entry, `/misc/${getEntrySlug(entry)}`, '杂谈')),
 ].sort((a, b) => b.date.getTime() - a.date.getTime());
 
 const years = [...new Set(posts.map((post) => getYear(post.date)))];

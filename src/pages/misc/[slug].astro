@@ -1,0 +1,35 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import ArticleView from '../../components/ArticleView.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getEntrySlug, isPublished } from '../../lib/content';
+
+type Entry = CollectionEntry<'misc'>;
+
+export async function getStaticPaths() {
+  const posts = (await getCollection('misc')).filter(isPublished);
+  return posts.map((post) => ({
+    params: { slug: getEntrySlug(post) },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props as { post: Entry };
+const { Content, headings } = await render(post);
+const sectionLabel = '杂谈';
+const sectionHref = '/misc';
+---
+
+<BaseLayout title={post.data.title} description={post.data.description}>
+  <ArticleView
+    title={post.data.title}
+    description={post.data.description}
+    pubDate={post.data.pubDate}
+    sectionLabel={sectionLabel}
+    sectionHref={sectionHref}
+    tags={post.data.tags}
+    headings={headings}
+  >
+    <Content />
+  </ArticleView>
+</BaseLayout>
