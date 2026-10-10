@@ -20,8 +20,8 @@ const toItem = (entry: ArticleEntry, href: string, label?: string, title = entry
   summary: entry.data.description,
 });
 
-// 列表序号列已显示讲次；这里去掉「课堂笔记 ·」「第N讲 ·」前缀避免重复。
-const stripLessonPrefix = (title: string) => title.replace(/^课堂笔记\s*[·・:：\-—]\s*/, '').replace(/^第\s*\d+\s*讲\s*[·・:：\-—]\s*/, '');
+// 列表序号列已显示讲次；这里只去掉「第N讲 ·」，保留「课堂笔记 ·」。
+const stripLessonPrefix = (title: string) => title.replace(/^(课堂笔记\s*[·・:：\-—]\s*)?第\s*\d+\s*讲\s*[·・:：\-—]\s*/, '$1');
 
 // 最新更新：与 /blog 归档同源（全部内容集合），严格按发布日期倒序，取最新 6 篇。
 const latestItems = [
