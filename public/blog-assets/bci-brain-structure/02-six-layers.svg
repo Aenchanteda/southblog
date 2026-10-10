@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="760" viewBox="0 0 1080 760">
+  <rect width="1080" height="760" rx="16" fill="#f4f6f8"/>
+  <style>
+    text { font-family: "PingFang SC","Hiragino Sans GB","Noto Sans SC","Source Han Sans SC",sans-serif; fill: #1c2430; }
+    .title { font-size: 20px; font-weight: 700; }
+    .label { font-size: 15px; font-weight: 650; }
+    .small { font-size: 13px; fill: #3d4b5c; }
+    .muted { font-size: 12px; fill: #5c6b7a; }
+  </style>
+  <text x="36" y="40" class="title">新皮层六层：输入从哪里进，输出从哪里出</text>
+  <text x="36" y="64" class="muted">层的相对顺序是固定的。每一层的绝对厚度随脑区变化，这里不按比例。</text>
+  <g>
+    <rect x="48" y="96" width="460" height="64" fill="#f8fafc" stroke="#cbd5e1"/>
+    <text x="64" y="122" class="label">I 分子层</text>
+    <text x="64" y="144" class="small">神经元少。锥体细胞的顶端树突伸到这里。</text>
+    <rect x="48" y="160" width="460" height="72" fill="#e0e7ff" stroke="#6366f1"/>
+    <text x="64" y="188" class="label">II 外颗粒层</text>
+    <text x="64" y="210" class="small">小型锥体细胞，主要连到其他皮层。</text>
+    <rect x="48" y="232" width="460" height="86" fill="#c7d2fe" stroke="#4338ca"/>
+    <text x="64" y="260" class="label">III 外锥体层</text>
+    <text x="64" y="282" class="small">中型锥体细胞。皮层之间、两侧半球之间的投射。</text>
+    <text x="64" y="302" class="small">长的垂直树突是远处场电位的重要来源。</text>
+    <rect x="48" y="318" width="460" height="86" fill="#fef3c7" stroke="#d97706"/>
+    <text x="64" y="346" class="label">IV 内颗粒层</text>
+    <text x="64" y="368" class="small">丘脑感觉纤维主要停在这里。体感皮层这一层厚。</text>
+    <text x="64" y="388" class="small">初级运动皮层这一层很薄，叫无颗粒皮层。</text>
+    <rect x="48" y="404" width="460" height="96" fill="#ddd6fe" stroke="#6d28d9"/>
+    <text x="64" y="432" class="label">V 内锥体层</text>
+    <text x="64" y="454" class="small">大型锥体细胞。皮质脊髓束从这里离开皮层。</text>
+    <text x="64" y="476" class="small">运动皮层里有 Betz 细胞，胞体明显大于周围细胞。</text>
+    <rect x="48" y="500" width="460" height="72" fill="#e2e8f0" stroke="#475569"/>
+    <text x="64" y="528" class="label">VI 多形层</text>
+    <text x="64" y="550" class="small">主要投回丘脑。再往下是白质。</text>
+  </g>
+  <line x1="36" y1="96" x2="36" y2="360" stroke="#0f766e" stroke-width="4"/>
+  <text x="548" y="120" class="label">一根锥体细胞</text>
+  <polygon points="700,150 676,200 724,200" fill="#1d4ed8"/>
+  <rect x="694" y="200" width="12" height="220" fill="#1d4ed8"/>
+  <polygon points="700,430 664,392 736,392" fill="#1d4ed8"/>
+  <line x1="700" y1="440" x2="700" y2="530" stroke="#1d4ed8" stroke-width="3"/>
+  <text x="748" y="170" class="small">顶端树突到 I 层</text>
+  <text x="748" y="250" class="small">树突突触电流</text>
+  <text x="748" y="272" class="small">→ LFP、ECoG、EEG</text>
+  <text x="748" y="430" class="small">胞体发出锋电位</text>
+  <text x="748" y="520" class="small">轴突进入白质</text>
+  <rect x="48" y="600" width="984" height="130" rx="12" fill="#ffffff" stroke="#e2e8f0"/>
+  <text x="68" y="630" class="small">左侧绿线：按颞叶层厚，1.5 mm 大约下到第 IV 层上部，而不是第 V 层。</text>
+  <text x="68" y="656" class="small">Mohan 等（2015）的人颞叶测量，经 Dickey 等（2020 预印本）引用：第 II 层约从 252 μm 开始，第 III 层约到 1201 μm。</text>
+  <text x="68" y="682" class="small">运动皮层更厚，第 IV 层又极薄。同一根 1.5 mm 的针插在手结上，层位要用那一块皮层自己的厚度计算。</text>
+  <text x="68" y="708" class="muted">绿线是层位示意，不是按毫米画的比例尺。</text>
+</svg>

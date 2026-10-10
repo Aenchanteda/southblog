@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="640" viewBox="0 0 1080 640">
+  <rect width="1080" height="640" rx="16" fill="#f4f6f8"/>
+  <style>
+    text { font-family: "PingFang SC","Hiragino Sans GB","Noto Sans SC","Source Han Sans SC",sans-serif; fill: #1c2430; }
+    .title { font-size: 20px; font-weight: 700; }
+    .label { font-size: 15px; font-weight: 650; }
+    .small { font-size: 13px; fill: #3d4b5c; }
+    .muted { font-size: 12px; fill: #5c6b7a; }
+  </style>
+  <text x="36" y="40" class="title">手结是沟上的膝；直接通往运动神经元的细胞集中在沟壁</text>
+  <text x="48" y="88" class="label">轴位上看手结</text>
+  <rect x="40" y="104" width="480" height="220" rx="12" fill="#ffffff" stroke="#e2e8f0"/>
+  <path d="M80 210 C130 210 150 150 190 145 C230 140 245 200 290 210 C340 222 370 150 430 160" fill="none" stroke="#334155" stroke-width="10" stroke-linecap="round"/>
+  <path d="M175 160 C195 205 245 205 265 160" fill="none" stroke="#1d4ed8" stroke-width="10" stroke-linecap="round"/>
+  <text x="190" y="250" class="small" fill="#1d4ed8">倒 Ω · 手结</text>
+  <text x="70" y="190" class="muted">前</text>
+  <text x="400" y="190" class="muted">后</text>
+  <text x="48" y="352" class="small">Yousry 等（1997），fMRI：手运动功能最常落在这块结上。</text>
+  <text x="48" y="376" class="small">轴位 90% 为倒 Ω，10% 为横置 ε。矢状位 92% 为向后的钩。</text>
+  <text x="48" y="400" class="small">它构成中央沟的中膝，用来在影像上认出中央前回。</text>
+  <text x="560" y="88" class="label">穿过中央沟</text>
+  <rect x="540" y="104" width="500" height="220" rx="12" fill="#ffffff" stroke="#e2e8f0"/>
+  <path d="M590 270 L590 180 C620 140 690 140 710 190 L730 250 L790 290 L850 210 C870 160 940 160 950 210 L950 270 Z" fill="#ddd6fe" stroke="#334155" stroke-width="2"/>
+  <text x="610" y="230" class="small">中央前回</text>
+  <text x="860" y="240" class="small">中央后回</text>
+  <rect x="640" y="155" width="40" height="8" fill="#b45309"/>
+  <text x="690" y="164" class="muted">回顶上的表面电极</text>
+  <line x1="652" y1="163" x2="652" y2="198" stroke="#0f766e" stroke-width="2"/>
+  <line x1="664" y1="163" x2="664" y2="198" stroke="#0f766e" stroke-width="2"/>
+  <circle cx="735" cy="230" r="5" fill="#1d4ed8"/>
+  <text x="748" y="226" class="small" fill="#1d4ed8">沟前壁</text>
+  <text x="560" y="360" class="small">猕猴：直接联系脊髓运动神经元的细胞集中在沟前壁。</text>
+  <text x="560" y="384" class="small">回顶的初级运动皮层主要经脊髓中间神经元间接起作用。</text>
+  <text x="560" y="408" class="small">Rathelot 与 Strick，2009。狂犬病毒追踪，对象是猕猴。</text>
+  <text x="48" y="470" class="small">垂直扎进回顶的针，取的是回顶自己从表到里的层。沟壁上的细胞隔着一条沟。</text>
+  <text x="48" y="494" class="small">表面电极铺在回顶，覆盖的是回顶；沟里的灰质要靠容积传导，或者改用深部电极。</text>
+  <text x="48" y="530" class="small">人的 4 区也有很大一部分贴在中央沟前壁。把猴的“旧 / 新运动皮层”直接写成人类细胞类型图，证据不够。</text>
+  <text x="48" y="566" class="muted">它在人的手术里的用途是几何提醒：中央前回的冠面不等于整块初级运动皮层。</text>
+  <text x="48" y="602" class="muted">一名梗死局限在手结的病人出现选择性手瘫，是 Yousry 等用来对照的病例，不是大样本。</text>
+</svg>
