@@ -2,7 +2,7 @@
 import { getCollection, render, type CollectionEntry } from 'astro:content';
 import ArticleView from '../../components/ArticleView.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getEntrySlug, isPublished, isBciEntry } from '../../lib/content';
+import { adjacentLinks, byLessonOrder, byOldest, getEntrySlug, isBciEntry, isPublished } from '../../lib/content';
 
 type Entry = CollectionEntry<'blog'>;
 
@@ -19,6 +19,11 @@ const { Content, headings } = await render(post);
 const isBci = isBciEntry(post);
 const sectionLabel = isBci ? '脑机接口' : '博客';
 const sectionHref = isBci ? '/bci' : '/blog';
+const published = (await getCollection('blog')).filter(isPublished);
+const series = (isBci ? published.filter(isBciEntry) : published.filter((entry) => !isBciEntry(entry))).sort(
+  isBci ? byLessonOrder : byOldest,
+);
+const { prev, next } = adjacentLinks(series, post.id, (entry) => `/blog/${getEntrySlug(entry)}`);
 ---
 
 <BaseLayout title={post.data.title} description={post.data.description}>
@@ -30,6 +35,8 @@ const sectionHref = isBci ? '/bci' : '/blog';
     sectionHref={sectionHref}
     tags={post.data.tags}
     headings={headings}
+    prev={prev}
+    next={next}
   >
     <Content />
   </ArticleView>

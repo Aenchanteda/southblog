@@ -8,6 +8,11 @@ interface Heading {
   text: string;
 }
 
+interface ArticleLink {
+  href: string;
+  title: string;
+}
+
 interface Props {
   title: string;
   description?: string;
@@ -16,13 +21,16 @@ interface Props {
   sectionHref: string;
   tags?: string[];
   headings?: Heading[];
+  prev?: ArticleLink;
+  next?: ArticleLink;
 }
 
-const { title, description, pubDate, sectionLabel, sectionHref, tags = [], headings = [] } = Astro.props;
+const { title, description, pubDate, sectionLabel, sectionHref, tags = [], headings = [], prev, next } = Astro.props;
 const visibleTags = tags.filter((tag) => tag !== sectionLabel);
 const hasToc = headings.some((heading) => heading.depth === 2 || heading.depth === 3);
 ---
 
+<div class="read-progress" data-read-progress aria-hidden="true"><span></span></div>
 <div class:list={['post-shell', hasToc && 'with-toc']}>
   <header class="post-header">
     <h1>{title}</h1>
@@ -31,16 +39,91 @@ const hasToc = headings.some((heading) => heading.depth === 2 || heading.depth =
       <span aria-hidden="true">·</span>
       <a href={sectionHref}>{sectionLabel}</a>
       {visibleTags.length > 0 && (
-        <>
-          <span aria-hidden="true">·</span>
-          <span class="post-tags">{visibleTags.join(', ')}</span>
-        </>
+        <span class="post-tags">
+          {visibleTags.map((tag) => <span>{tag}</span>)}
+        </span>
       )}
     </p>
     {description && <p class="post-lead">{description}</p>}
   </header>
   {hasToc && <ArticleToc headings={headings} />}
-  <article class="prose">
-    <slot />
-  </article>
+  <div class="post-body">
+    <article class="prose">
+      <slot />
+    </article>
+    {(prev || next) && (
+      <nav class="post-pager" aria-label="相邻文章">
+        {prev ? (
+          <a class="pager-prev" href={prev.href}>
+            <span>上一篇</span>
+            <strong>{prev.title}</strong>
+          </a>
+        ) : <span class="pager-empty"></span>}
+        {next ? (
+          <a class="pager-next" href={next.href}>
+            <span>下一篇</span>
+            <strong>{next.title}</strong>
+          </a>
+        ) : <span class="pager-empty"></span>}
+      </nav>
+    )}
+  </div>
 </div>
+<button class="to-top" type="button" data-to-top hidden>回到顶部</button>
+<dialog class="figure-lightbox" data-lightbox>
+  <img alt="" />
+</dialog>
+
+<script is:inline>
+  (() => {
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const article = document.querySelector('.post-body .prose');
+    const bar = document.querySelector('[data-read-progress] span');
+    const toTop = document.querySelector('[data-to-top]');
+    const dialog = document.querySelector('[data-lightbox]');
+    const dialogImg = dialog?.querySelector('img');
+
+    document.querySelectorAll('.prose h2[id], .prose h3[id]').forEach((heading) => {
+      if (heading.querySelector('.heading-anchor')) return;
+      const link = document.createElement('a');
+      link.className = 'heading-anchor';
+      link.href = `#${heading.id}`;
+      link.setAttribute('aria-label', '本节链接');
+      link.textContent = '#';
+      heading.append(link);
+    });
+
+    const update = () => {
+      if (!article || !bar) return;
+      const start = window.scrollY + article.getBoundingClientRect().top;
+      const end = start + article.offsetHeight - window.innerHeight;
+      const progress = end <= start ? (window.scrollY > start ? 1 : 0) : (window.scrollY - start) / (end - start);
+      bar.style.transform = `scaleX(${Math.min(1, Math.max(0, progress))})`;
+      if (toTop) toTop.hidden = window.scrollY < 640;
+    };
+
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+
+    toTop?.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' });
+    });
+
+    if (dialog && dialogImg) {
+      document.querySelectorAll('.prose img').forEach((source) => {
+        source.addEventListener('click', () => {
+          dialogImg.src = source.currentSrc || source.src;
+          dialogImg.alt = source.alt || '';
+          dialog.showModal();
+        });
+      });
+      dialog.addEventListener('click', (event) => {
+        if (event.target === dialog) dialog.close();
+      });
+      dialog.addEventListener('close', () => {
+        dialogImg.removeAttribute('src');
+      });
+    }
+  })();
+</script>
