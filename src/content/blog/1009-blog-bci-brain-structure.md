@@ -16,7 +16,7 @@ draft: false
 
 ## 1. 电极先遇到的是一套膜，不是一个脑区
 
-![头皮、颅骨、硬膜、脑脊液、灰质和白质的分层](../../../public/blog-assets/bci-brain-structure/mccann2019-fig1.png)
+![头皮、颅骨、硬膜、脑脊液、灰质和白质的分层](/blog-assets/bci-brain-structure/mccann2019-fig1.png)
 
 **图 1.** McCann、Pisano 与 Beltrachini（2019）图 1。上：轴位上的组织隔室，头皮分成皮、脂肪和肌肉，颅骨分成密质骨、板障和骨缝，其内是硬膜、脑脊液、灰质和白质。下：同一套层次的局部放大，硬膜再分成骨膜层和脑膜层。许可：CC BY 4.0。[10.1007/s10548-019-00710-2](https://doi.org/10.1007/s10548-019-00710-2)。这张图没有画电极；电极停在哪一层，见下文四类记录。
 
@@ -33,7 +33,7 @@ Fischl 与 Dale（2000）用磁共振测量人的新皮层厚度：大约 1–4.
 
 Maynard、Nordhausen 与 Normann（1997）用这种阵列做了脑机接口取向的记录：小群神经元的平均信噪比约 6:1。他们的结论是，稳定、对刺激有选择性的信号来自小的神经元群体，而不是每一个针尖都必须分出干净的单细胞。通道变多之后，可以同时看到空间上和时间上的发放模式。
 
-![硬膜、蛛网膜、软膜和上矢状窦](../../../public/blog-assets/bci-brain-structure/openstax-13-17-meninges.jpg)
+![硬膜、蛛网膜、软膜和上矢状窦](/blog-assets/bci-brain-structure/openstax-13-17-meninges.jpg)
 
 **图 2.** 上矢状窦处的脑膜。硬膜贴着颅骨并在中线围成上矢状窦；蛛网膜和软膜之间是蛛网膜下腔；软膜跟着皮层进入纵裂。OpenStax《Anatomy and Physiology 2e》图 13.17，CC BY 4.0。[原书页面](https://openstax.org/books/anatomy-and-physiology-2e/pages/13-3-circulation-and-the-central-nervous-system)
 
@@ -43,7 +43,7 @@ Maynard、Nordhausen 与 Normann（1997）用这种阵列做了脑机接口取�
 
 ## 2. 这几毫米灰质分成六层
 
-![新皮层 I 到 VI 层、锥体细胞，以及颞叶上 1.5 mm 针尖的大致深度](../../../public/blog-assets/bci-brain-structure/02-six-layers.svg)
+![新皮层 I 到 VI 层、锥体细胞，以及颞叶上 1.5 mm 针尖的大致深度](/blog-assets/bci-brain-structure/02-six-layers.svg)
 
 **图 3.** 示意图，按 Mohan 等（2015）的层厚和投射关系重画。新皮层六层的输入和输出，以及一根锥体细胞从顶端树突到轴突的方向。左侧绿线是颞叶层厚下 1.5 mm 的层位示意，不是比例尺。层厚数字由 Dickey 等（2020）引用。Mohan 的原图受版权限制，不嵌进页面。
 
@@ -71,7 +71,7 @@ Azevedo 等（2009）用各向同性组分器计数了 4 个成人男性的脑�
 
 ## 3. 远处能看见的，是排成一列的锥体细胞
 
-![开放电场与远处互相抵消](../../../public/blog-assets/bci-brain-structure/07-open-closed-field.svg)
+![开放电场与远处互相抵消](/blog-assets/bci-brain-structure/07-open-closed-field.svg)
 
 **图 4.** 示意图，按 Buzsáki、Anastassiou 与 Koch（2012）的开放电场与闭合电场重画。左：新皮层锥体细胞平行排列，突触电流在远处相加。右：放射状排列用来表示远离结构之后的抵消；海马本身是卷曲的古皮层，局部仍有整齐的锥体细胞。原图受版权限制，不嵌进页面。
 
@@ -87,7 +87,7 @@ Hampson 等（2018）的记忆实验因此用深部电极。他们在已经因�
 
 ## 4. 颅骨和脑脊液改写同一块皮层
 
-![各组织电导率的文献分布，以及脑与颅骨电导率比](../../../public/blog-assets/bci-brain-structure/mccann2019-fig2.png)
+![各组织电导率的文献分布，以及脑与颅骨电导率比](/blog-assets/bci-brain-structure/mccann2019-fig2.png)
 
 **图 5.** McCann 等（2019）图 2。各组织电导率（S/m）的文献分布，插图把颅骨各层放大；右侧单独画脑 / 颅骨电导率比。叉号是各篇报道，箱子是四分位。许可：CC BY 4.0。[10.1007/s10548-019-00710-2](https://doi.org/10.1007/s10548-019-00710-2)。2020 年的更正把纳入文献改为 41 篇，并把脑脊液、灰质、白质的加权平均改为 1.736、0.379 和 0.146 S/m；下表仍是 2019 年原文摘要里的加权平均，与这张未更正的图一致。
 
@@ -112,7 +112,7 @@ ECoG 已经躲开了颅骨，所以高 gamma 还在。它仍然贴在软膜或�
 
 ## 5. 沟把表面电极留在脑回顶上
 
-![手结的倒 Ω，以及中央沟前壁与回顶电极的关系](../../../public/blog-assets/bci-brain-structure/05-central-sulcus.svg)
+![手结的倒 Ω，以及中央沟前壁与回顶电极的关系](/blog-assets/bci-brain-structure/05-central-sulcus.svg)
 
 **图 6.** 示意图，按 Yousry 等（1997）最常见的倒 Ω 重画。左：轴位上的手结。右：中央沟两侧的脑回。表面电极和垂直插入的针都画在回顶；蓝点在沟前壁。Yousry 的磁共振原图受版权限制，不嵌进页面。
 
@@ -126,7 +126,7 @@ Yousry 等（1997）用功能磁共振看手的运动激活落在中央前回的
 
 ## 6. 运动地图在手结附近被分成几段
 
-![体感皮层上的感觉小人](../../../public/blog-assets/bci-brain-structure/openstax-14-23-homunculus.jpg)
+![体感皮层上的感觉小人](/blog-assets/bci-brain-structure/openstax-14-23-homunculus.jpg)
 
 **图 7.** 中央后回上的感觉小人。足、趾和生殖器画在切面的上方，对应半球内侧面；手、唇和舌依次更靠外侧，代表区大。OpenStax《Anatomy and Physiology 2e》图 14.23，CC BY 4.0。[原书页面](https://openstax.org/books/anatomy-and-physiology-2e/pages/14-2-central-processing)
 
@@ -148,19 +148,19 @@ Hochberg 等（2006）把 96 通道阵列植入一位脊髓损伤后四肢瘫痪
 
 ## 7. 三条路靠近的不是同一块运动皮层
 
-![支架电极放在上矢状窦，以及十名被试的矢状位影像](../../../public/blog-assets/bci-brain-structure/schone2025-fig1.jpg)
+![支架电极放在上矢状窦，以及十名被试的矢状位影像](/blog-assets/bci-brain-structure/schone2025-fig1.jpg)
 
 **图 8.** Schone 等（2025）预印本图 1。A 左：支架电极位于大脑表面的静脉内，冠状小图表示它在中线窦里、贴近两侧皮层。A 右是使用场景，不是解剖。D：十名被试植入后的矢状位影像，箭头指向支架。许可：CC BY 4.0。
 
 血管内路线从颈内静脉逆行进入上矢状窦，把带电极的支架张开在窦壁上。Oxley 等（2016）在绵羊的皮层表面静脉里记录到最长 190 天，频谱和硬膜外阵列相当，管腔保持通畅。Mitchell 等（2023）报告 SWITCH 早期可行性研究：4 名进入分析的重症上肢瘫痪被试完成 12 个月随访，没有装置移位或血管闭塞；信号带宽平均 233 ± 16 Hz，并且在研究期间保持稳定；离线至少能区分 5 类尝试动作，每位被试用这个接口控制了电脑。233 Hz 的带宽和“电极在血管里、不在灰质里”一致，它更接近场电位，而不是 Utah 针尖上的锋电位。
 
-![十名被试的支架与 SMA、M1、S1 的位置](../../../public/blog-assets/bci-brain-structure/schone2025-fig3.jpg)
+![十名被试的支架与 SMA、M1、S1 的位置](/blog-assets/bci-brain-structure/schone2025-fig3.jpg)
 
 **图 9.** Schone 等（2025）预印本图 3。蓝是辅助运动区，绿是初级运动皮层，紫是初级体感皮层，黑网是支架。每名被试配矢状面和上面观。P8 带剑号。许可：CC BY 4.0。
 
 图 9 里的支架都贴着中线，盖在背内侧的辅助运动区、初级运动皮层和初级体感皮层上。外侧凸面上的手结不在这张覆盖范围的中心。上矢状窦的解剖入口先决定了它靠近半球内侧面和背侧冠面，也就是图 7 里足、腿那一段所在的旁中央小叶及其紧邻的背侧运动皮层，而不是外侧的手结。
 
-![支架到皮层表面的距离，以及与 SMA、M1、S1 的重叠](../../../public/blog-assets/bci-brain-structure/schone2025-fig4.jpg)
+![支架到皮层表面的距离，以及与 SMA、M1、S1 的重叠](/blog-assets/bci-brain-structure/schone2025-fig4.jpg)
 
 **图 10.** Schone 等（2025）预印本图 4。C：到皮层表面的平均距离标为 6.1 mm，最短距离标为 3.7 mm。D、E：支架与辅助运动区、初级运动皮层、初级体感皮层的重叠比例和距离。H：运动神经元病被试的初级运动皮层厚度随患病年数变薄。许可：CC BY 4.0。预印本，尚未作为期刊论文发表。
 
@@ -168,7 +168,7 @@ Hochberg 等（2006）把 96 通道阵列植入一位脊髓损伤后四肢瘫痪
 
 这 10 人的距离和重叠来自预印本。可以用来理解“窦里的电极离哪一块皮层更近”，不宜写成已经完成同行评议的植入规范。同行评议的人体安全性证据仍是 Mitchell 等（2023）的 4 人、12 个月数据。
 
-![硬膜窦把血液引向颈内静脉](../../../public/blog-assets/bci-brain-structure/openstax-13-16-sinuses.jpg)
+![硬膜窦把血液引向颈内静脉](/blog-assets/bci-brain-structure/openstax-13-16-sinuses.jpg)
 
 **图 11.** 头颅矢状面的硬膜窦。上矢状窦沿颅顶中线向后，经窦汇、横窦和乙状窦进入颈内静脉。OpenStax《Anatomy and Physiology 2e》图 13.16，CC BY 4.0。
 
@@ -186,7 +186,7 @@ Flesher 等（2021）把这种刺激接进闭环，标题中的结果是：能�
 
 ## 9. 言语皮层分成三块，信号种类不同
 
-![四枚阵列放在腹侧 6v 和 44 区，以及口面动作、音素和词的分类](../../../public/blog-assets/bci-brain-structure/willett2023-fig1.png)
+![四枚阵列放在腹侧 6v 和 44 区，以及口面动作、音素和词的分类](/blog-assets/bci-brain-structure/willett2023-fig1.png)
 
 **图 12.** Willett 等（2023）图 1。a：中央沟（CS，红线）附近的皮层内阵列。d：口面动作、音素和词的分类准确率，6v 远高于 44 区。f：额、眼睑、颌、唇、舌、喉、音素和词在各电极上的解释方差，深浅点混在同一块阵列里。许可：CC BY 4.0。[10.1038/s41586-023-06377-x](https://doi.org/10.1038/s41586-023-06377-x)。颞上回的语音感知不在这张图里，见 Mesgarani 等（2014）。
 
@@ -202,7 +202,7 @@ Willett 等（2023）把四枚 64 通道、针长 1.5 mm 的阵列植入一名�
 
 ## 10. 初级视觉皮层折在距状沟里
 
-![左右视野在视交叉交换后进入对侧视觉皮层](../../../public/blog-assets/bci-brain-structure/openstax-14-24-visual-map.jpg)
+![左右视野在视交叉交换后进入对侧视觉皮层](/blog-assets/bci-brain-structure/openstax-14-24-visual-map.jpg)
 
 **图 13.** 视野如何进入视觉皮层。左、右视野在视交叉处交换鼻侧纤维，一侧半球接收对侧视野。图上把视觉皮层分成上方和下方，分别对应下视野和上视野。最下方是两侧合起来的完整画面。OpenStax《Anatomy and Physiology 2e》图 14.24，CC BY 4.0。[原书页面](https://openstax.org/books/anatomy-and-physiology-2e/pages/14-2-central-processing)
 
@@ -220,7 +220,7 @@ Aflalo 等（2015）把阵列植入一位四肢瘫痪者的后顶叶，解码的
 
 ## 12. 白质是出口，核团是另一套坐标
 
-![额状切面上的纹状体和苍白球](../../../public/blog-assets/bci-brain-structure/openstax-13-9-basal-nuclei.jpg)
+![额状切面上的纹状体和苍白球](/blog-assets/bci-brain-structure/openstax-13-9-basal-nuclei.jpg)
 
 **图 14.** 额状切面。图上标出尾状核、壳核、苍白球、侧脑室和胼胝体。尾状核与壳核之间那条浅色白质是内囊，图本身没有写这个名字。丘脑底核不在这一层切面上。OpenStax《Anatomy and Physiology 2e》图 13.9，CC BY 4.0。
 
@@ -232,7 +232,7 @@ Aflalo 等（2015）把阵列植入一位四肢瘫痪者的后顶叶，解码的
 
 ## 13. 分区图给出名字，沟给出这一位被试的坐标
 
-![Brodmann 1909 年分区在外侧和内侧表面的教学图](../../../public/blog-assets/bci-brain-structure/openstax-13-8-brodmann.jpg)
+![Brodmann 1909 年分区在外侧和内侧表面的教学图](/blog-assets/bci-brain-structure/openstax-13-8-brodmann.jpg)
 
 **图 15.** Brodmann 分区的外侧观和内侧观。绿是 4 区，蓝是 3、1、2 区，橙黄是 44、45 区，内侧后部的粉红是 17 区。OpenStax《Anatomy and Physiology 2e》图 13.8，CC BY 4.0。OpenStax 写 Brodmann 按细胞构筑分成 52 个区；人脑图上并不是每个编号都有对应皮层。
 
