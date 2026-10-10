@@ -4,13 +4,12 @@ description: "动作电位、局部场电位、皮层脑电图，以及 EEG、ME
 pubDate: 2026-10-09
 tags: ["脑机接口", "BCI", "spike", "LFP", "ECoG", "EEG"]
 order: 4
-draft: true
+draft: false
 ---
 
 # 神经电信号：从离子电流到解码与反馈
 
-> **审阅稿** · 2026-10-09  
-> 本文按站点草稿发布，列表里还不会出现。第 3 讲已经按课堂尺度列过 spike、LFP、ECoG 和 EEG。这一篇改从生理机制写起，并为每一种信号给出一条能对上论文的研究闭环：信号如何产生，电极或传感器看到什么，解码器用什么特征，输出送到哪里，反馈又如何回到使用者。图 1–6 是这些闭环论文里可以按 CC BY 转载的原图。  
+> 第 3 讲已经按课堂尺度列过 spike、LFP、ECoG 和 EEG。这一篇改从生理机制写起，并为每一种信号给出一条能对上论文的研究闭环：信号如何产生，电极或传感器看到什么，解码器用什么特征，输出送到哪里，反馈又如何回到使用者。图 1–6 是这些闭环论文里可以按 CC BY 转载的原图。  
 > 文中的性能数字来自所引论文的摘要或正文。多数侵入式闭环仍是单名或数名被试，段落里会标明。离线解码不会被写成已经能在家使用的通信装置。
 
 第 1 讲把脑机接口收成四步：神经界面、神经解码、神经控制、神经反馈。这四步作用在同一种物理量上。神经元膜上的离子流过膜，细胞外液体里出现回流，电极量到的就是这个回流造成的电位。头皮脑电、皮层脑电、局部场电位和锋电位，是同一过程在不同距离、不同频段上的样子（Buzsáki、Anastassiou 与 Koch，2012）。
@@ -345,13 +344,3 @@ Wittevrongel 等（2021）做的就是光泵传感器上的在线解码，任务
 - Willett, F. R., Avansino, D. T., Hochberg, L. R., Henderson, J. M., & Shenoy, K. V. (2021). High-performance brain-to-text communication via handwriting. *Nature, 593*, 249–254. https://doi.org/10.1038/s41586-021-03506-2
 - Willett, F. R., Kunz, E. M., Fan, C., Avansino, D. T., Wilson, G. H., Choi, E. Y., Kamdar, F., Glasser, M. F., Hochberg, L. R., Druckmann, S., Shenoy, K. V., & Henderson, J. M. (2023). A high-performance speech neuroprosthesis. *Nature, 620*, 1031–1036. https://doi.org/10.1038/s41586-023-06377-x
 - Wittevrongel, B., et al. (2021). Practical real-time MEG-based neural interfacing with optically pumped magnetometers. *BMC Biology, 19*, 158. https://doi.org/10.1186/s12915-021-01073-6
-
-## 审阅时想先听你定的几件事
-
-这篇现在是草稿，文件在 `src/content/blog/1009-neural-electrical-signals.md`，`draft: true`，站点列表里不会出现。
-
-有三处写法等你拍板后再改：
-
-1. 它现在是独立文章，`order: 4`，紧跟在三讲课堂笔记后面。若要收成第 4 讲，标题和开头的课堂口吻可以再改。
-2. 言语 ECoG 的三篇出自同一临床试验。Moses 等（2021）早于 2022 年那次 253 通道植入；Metzger 等与 Littlejohn 等用的是这块阵列。若你希望篇幅更短，Metzger 等（2023）可以收成一句过渡。
-3. 周围神经电和血氧只保留了边界，没有各自做完整闭环。若要加，下一批最合适的是外周神经的感觉写入，以及 fNIRS 的运动想象康复试验。
