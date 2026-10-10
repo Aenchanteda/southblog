@@ -30,4 +30,9 @@ const genomics = defineCollection({
   schema: articleSchema,
 });
 
-export const collections = { blog, notes, aiPharma, genomics };
+const misc = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/misc' }),
+  schema: articleSchema,
+});
+
+export const collections = { blog, notes, aiPharma, genomics, misc };

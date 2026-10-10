@@ -10,6 +10,7 @@ const notesPosts = (await getCollection('notes')).filter(isPublished);
 const bciPosts = blogPosts.filter(isBciEntry).sort(byLessonOrder);
 const aiPharmaPosts = (await getCollection('aiPharma')).filter(isPublished).sort(byLessonOrder);
 const genomicsPosts = (await getCollection('genomics')).filter(isPublished).sort(byLessonOrder);
+const miscPosts = (await getCollection('misc')).filter(isPublished).sort(byLessonOrder);
 
 const toItem = (entry: ArticleEntry, href: string, label?: string, title = entry.data.title): PostListItem => ({
   href,
@@ -28,6 +29,7 @@ const latestItems = [
   ...notesPosts.map((entry) => toItem(entry, `/notes/${getEntrySlug(entry)}`, '学习心得')),
   ...aiPharmaPosts.map((entry) => toItem(entry, `/ai-pharma/${getEntrySlug(entry)}`, 'AI制药')),
   ...genomicsPosts.map((entry) => toItem(entry, `/genomics/${getEntrySlug(entry)}`, '基因组学')),
+  ...miscPosts.map((entry) => toItem(entry, `/misc/${getEntrySlug(entry)}`, '杂谈')),
 ]
   .sort((a, b) => b.date.getTime() - a.date.getTime())
   .slice(0, 6);
@@ -52,6 +54,12 @@ const topicSections = [
     title: '基因组学',
     href: '/genomics',
     items: genomicsPosts.map((entry, index) => toItem(entry, `/genomics/${getEntrySlug(entry)}`, getOrderLabel(entry, index))),
+  },
+  {
+    id: 'misc',
+    title: '杂谈',
+    href: '/misc',
+    items: miscPosts.map((entry, index) => toItem(entry, `/misc/${getEntrySlug(entry)}`, getOrderLabel(entry, index))),
   },
 ].filter((section) => section.items.length > 0);
 ---
