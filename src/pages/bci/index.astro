@@ -10,7 +10,7 @@ const posts = (await getCollection('blog'))
   .sort(byLessonOrder);
 const items = posts.map((entry, index) => ({
   href: `/blog/${getEntrySlug(entry)}`,
-  title: entry.data.title.replace(/^第\s*\d+\s*讲\s*[·・:：\-—]\s*/, ''),
+  title: entry.data.title.replace(/^课堂笔记\s*[·・:：\-—]\s*/, '').replace(/^第\s*\d+\s*讲\s*[·・:：\-—]\s*/, ''),
   date: entry.data.pubDate,
   label: `第${entry.data.order ?? index + 1}讲`,
 }));
