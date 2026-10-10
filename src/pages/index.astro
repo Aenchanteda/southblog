@@ -20,9 +20,6 @@ const toItem = (entry: ArticleEntry, href: string, label?: string, title = entry
   summary: entry.data.description,
 });
 
-// 列表序号列已显示讲次；这里去掉「课堂笔记 ·」「第N讲 ·」前缀避免重复。
-const stripLessonPrefix = (title: string) => title.replace(/^课堂笔记\s*[·・:：\-—]\s*/, '').replace(/^第\s*\d+\s*讲\s*[·・:：\-—]\s*/, '');
-
 // 最新更新：与 /blog 归档同源（全部内容集合），严格按发布日期倒序，取最新 6 篇。
 const latestItems = [
   ...blogPosts.map((entry) => toItem(entry, `/blog/${getEntrySlug(entry)}`, isBciEntry(entry) ? '脑机接口' : '博客')),
@@ -40,7 +37,7 @@ const topicSections = [
     title: '脑机接口',
     href: '/bci',
     items: bciPosts.map((entry, index) =>
-      toItem(entry, `/blog/${getEntrySlug(entry)}`, `第${entry.data.order ?? index + 1}讲`, stripLessonPrefix(entry.data.title))
+      toItem(entry, `/blog/${getEntrySlug(entry)}`, getOrderLabel(entry, index), entry.data.title)
     ),
   },
   {
