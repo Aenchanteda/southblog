@@ -32,6 +32,7 @@ const hasToc = headings.some((heading) => heading.depth === 2 || heading.depth =
 
 <div class="read-progress" data-read-progress aria-hidden="true"><span></span></div>
 <div class:list={['post-shell', hasToc && 'with-toc']}>
+  <p class="post-back"><a href={sectionHref}>← 返回{sectionLabel}</a></p>
   <header class="post-header">
     <h1>{title}</h1>
     <p class="post-meta">
