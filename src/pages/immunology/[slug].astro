@@ -1,0 +1,39 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import ArticleView from '../../components/ArticleView.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { adjacentLinks, byOldest, getEntrySlug, isPublished } from '../../lib/content';
+
+type Entry = CollectionEntry<'immunology'>;
+
+export async function getStaticPaths() {
+  const posts = (await getCollection('immunology')).filter(isPublished);
+  return posts.map((post) => ({
+    params: { slug: getEntrySlug(post) },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props as { post: Entry };
+const { Content, headings } = await render(post);
+const sectionLabel = '基础免疫学';
+const sectionHref = '/immunology';
+const published = (await getCollection('immunology')).filter(isPublished).sort(byOldest);
+const { prev, next } = adjacentLinks(published, post.id, (entry) => `/immunology/${getEntrySlug(entry)}`);
+---
+
+<BaseLayout title={post.data.title} description={post.data.description}>
+  <ArticleView
+    title={post.data.title}
+    description={post.data.description}
+    pubDate={post.data.pubDate}
+    sectionLabel={sectionLabel}
+    sectionHref={sectionHref}
+    tags={post.data.tags}
+    headings={headings}
+    prev={prev}
+    next={next}
+  >
+    <Content />
+  </ArticleView>
+</BaseLayout>

@@ -1,0 +1,24 @@
+---
+import { getCollection } from 'astro:content';
+import PostList from '../../components/PostList.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { byLessonOrder, getEntrySlug, getOrderLabel, isPublished } from '../../lib/content';
+
+const posts = (await getCollection('immunology'))
+  .filter(isPublished)
+  .sort(byLessonOrder);
+const items = posts.map((entry, index) => ({
+  href: `/immunology/${getEntrySlug(entry)}`,
+  title: entry.data.title,
+  date: entry.data.pubDate,
+  label: getOrderLabel(entry, index),
+}));
+---
+
+<BaseLayout title="基础免疫学" description="南边小站的基础免疫学栏目：教材与课程相关笔记。">
+  <header class="list-header">
+    <h1>基础免疫学</h1>
+    <p>整理基础免疫学教材与课程参考材料，便于在浏览器中查阅。</p>
+  </header>
+  <PostList items={items} variant="ordered" />
+</BaseLayout>
