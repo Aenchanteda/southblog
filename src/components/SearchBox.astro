@@ -1,0 +1,247 @@
+---
+/**
+ * Homepage client-side article search.
+ * Index is built at compile time into /search-index.json (Fuse.js ranks results).
+ */
+---
+
+<div class="home-search" data-home-search>
+  <label class="sr-only" for="home-search-input">搜索文章</label>
+  <div class="home-search-field">
+    <input
+      id="home-search-input"
+      class="home-search-input"
+      type="search"
+      name="q"
+      placeholder="搜索文章…"
+      autocomplete="off"
+      spellcheck="false"
+      enterkeyhint="search"
+      aria-autocomplete="list"
+      aria-controls="home-search-results"
+      aria-expanded="false"
+      aria-haspopup="listbox"
+    />
+  </div>
+  <ul
+    id="home-search-results"
+    class="home-search-results"
+    role="listbox"
+    aria-label="搜索结果"
+    hidden
+  ></ul>
+  <p class="home-search-empty" hidden>没有找到相关文章</p>
+</div>
+
+<script>
+  import Fuse from 'fuse.js';
+
+  type SearchDoc = {
+    id: string;
+    title: string;
+    description: string;
+    tags: string[];
+    body: string;
+    href: string;
+    section: string;
+    pubDate: string;
+  };
+
+  const root = document.querySelector<HTMLElement>('[data-home-search]');
+  if (root) {
+    const input = root.querySelector<HTMLInputElement>('.home-search-input');
+    const list = root.querySelector<HTMLUListElement>('.home-search-results');
+    const empty = root.querySelector<HTMLElement>('.home-search-empty');
+
+    if (input && list && empty) {
+      let fuse: Fuse<SearchDoc> | null = null;
+      let docs: SearchDoc[] = [];
+      let active = -1;
+      let loadPromise: Promise<void> | null = null;
+
+      const MAX_RESULTS = 8;
+
+      async function ensureIndex() {
+        if (fuse) return;
+        if (!loadPromise) {
+          loadPromise = fetch('/search-index.json')
+            .then((res) => {
+              if (!res.ok) throw new Error(`search index ${res.status}`);
+              return res.json() as Promise<SearchDoc[]>;
+            })
+            .then((data) => {
+              docs = data;
+              fuse = new Fuse(docs, {
+                keys: [
+                  { name: 'title', weight: 0.55 },
+                  { name: 'description', weight: 0.2 },
+                  { name: 'tags', weight: 0.15 },
+                  { name: 'body', weight: 0.1 },
+                ],
+                threshold: 0.35,
+                ignoreLocation: true,
+                includeScore: true,
+                minMatchCharLength: 1,
+                useExtendedSearch: false,
+              });
+            })
+            .catch(() => {
+              loadPromise = null;
+              fuse = null;
+              docs = [];
+            });
+        }
+        await loadPromise;
+      }
+
+      function hidePanel() {
+        list.hidden = true;
+        empty.hidden = true;
+        list.innerHTML = '';
+        active = -1;
+        input.setAttribute('aria-expanded', 'false');
+        input.removeAttribute('aria-activedescendant');
+      }
+
+      function setActive(next: number) {
+        const items = [...list.querySelectorAll<HTMLElement>('[role="option"]')];
+        if (!items.length) {
+          active = -1;
+          input.removeAttribute('aria-activedescendant');
+          return;
+        }
+        active = ((next % items.length) + items.length) % items.length;
+        items.forEach((el, i) => {
+          const on = i === active;
+          el.classList.toggle('is-active', on);
+          el.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+        input.setAttribute('aria-activedescendant', items[active].id);
+        items[active].scrollIntoView({ block: 'nearest' });
+      }
+
+      function render(results: SearchDoc[]) {
+        if (!input.value.trim()) {
+          hidePanel();
+          return;
+        }
+
+        if (!results.length) {
+          list.hidden = true;
+          list.innerHTML = '';
+          empty.hidden = false;
+          active = -1;
+          input.setAttribute('aria-expanded', 'true');
+          input.removeAttribute('aria-activedescendant');
+          return;
+        }
+
+        empty.hidden = true;
+        list.hidden = false;
+        input.setAttribute('aria-expanded', 'true');
+        list.innerHTML = results
+          .map((doc, i) => {
+            const id = `home-search-option-${i}`;
+            const desc = doc.description ? escapeHtml(doc.description) : '';
+            return `<li role="option" id="${id}" class="home-search-item" data-href="${escapeAttr(doc.href)}" aria-selected="false">
+              <a class="home-search-link" href="${escapeAttr(doc.href)}" tabindex="-1">
+                <span class="home-search-title">${escapeHtml(doc.title)}</span>
+                <span class="home-search-meta">
+                  <span class="home-search-section">${escapeHtml(doc.section)}</span>
+                  ${desc ? `<span class="home-search-desc">${desc}</span>` : ''}
+                </span>
+              </a>
+            </li>`;
+          })
+          .join('');
+        setActive(0);
+      }
+
+      function escapeHtml(value: string) {
+        return value
+          .replaceAll('&', '&amp;')
+          .replaceAll('<', '&lt;')
+          .replaceAll('>', '&gt;')
+          .replaceAll('"', '&quot;');
+      }
+
+      function escapeAttr(value: string) {
+        return escapeHtml(value).replaceAll("'", '&#39;');
+      }
+
+      async function runSearch() {
+        const q = input.value.trim();
+        if (!q) {
+          hidePanel();
+          return;
+        }
+        await ensureIndex();
+        if (!fuse) {
+          empty.hidden = false;
+          empty.textContent = '搜索暂时不可用';
+          list.hidden = true;
+          return;
+        }
+        empty.textContent = '没有找到相关文章';
+        const hits = fuse.search(q, { limit: MAX_RESULTS }).map((r) => r.item);
+        render(hits);
+      }
+
+      let timer = 0;
+      input.addEventListener('input', () => {
+        window.clearTimeout(timer);
+        timer = window.setTimeout(() => {
+          void runSearch();
+        }, 80);
+      });
+
+      input.addEventListener('focus', () => {
+        void ensureIndex();
+        if (input.value.trim()) void runSearch();
+      });
+
+      input.addEventListener('keydown', (event) => {
+        if (list.hidden && event.key !== 'Escape') return;
+
+        if (event.key === 'ArrowDown') {
+          event.preventDefault();
+          setActive(active + 1);
+        } else if (event.key === 'ArrowUp') {
+          event.preventDefault();
+          setActive(active - 1);
+        } else if (event.key === 'Enter') {
+          const current = list.querySelector<HTMLElement>('.home-search-item.is-active');
+          if (current) {
+            event.preventDefault();
+            const href = current.dataset.href;
+            if (href) window.location.assign(href);
+          }
+        } else if (event.key === 'Escape') {
+          hidePanel();
+          input.blur();
+        }
+      });
+
+      list.addEventListener('mousedown', (event) => {
+        const item = (event.target as HTMLElement).closest<HTMLElement>('.home-search-item');
+        if (!item) return;
+        // Allow the click to navigate via the inner <a>; keep focus behavior tidy.
+        event.preventDefault();
+        const href = item.dataset.href;
+        if (href) window.location.assign(href);
+      });
+
+      list.addEventListener('mousemove', (event) => {
+        const item = (event.target as HTMLElement).closest<HTMLElement>('.home-search-item');
+        if (!item) return;
+        const items = [...list.querySelectorAll<HTMLElement>('.home-search-item')];
+        const idx = items.indexOf(item);
+        if (idx >= 0 && idx !== active) setActive(idx);
+      });
+
+      document.addEventListener('click', (event) => {
+        if (!root.contains(event.target as Node)) hidePanel();
+      });
+    }
+  }
+</script>
