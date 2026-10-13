@@ -3,7 +3,7 @@ export const siteConfig = {
   alternateName: 'South Blog',
   author: 'Nan Jiale',
   description: '记录博客文章与学习心得的个人静态小站。',
-  intro: '写博客，也整理课程笔记：脑机接口、AI 制药、基因组学，以及杂谈。',
+  intro: '写博客，也整理课程笔记：脑机接口、AI 制药、基因组学、基础免疫学，以及杂谈。',
   nav: [
     { href: '/', label: '首页' },
     { href: '/blog', label: '博客' },
@@ -15,5 +15,6 @@ export const siteConfig = {
     { href: '/ai-pharma', label: 'AI制药' },
     { href: '/genomics', label: '基因组学' },
     { href: '/misc', label: '杂谈' },
+    { href: '/immunology', label: '基础免疫学' },
   ],
 };
