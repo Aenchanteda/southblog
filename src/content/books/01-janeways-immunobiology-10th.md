@@ -1,5 +1,5 @@
 ---
-title: "Janeway's Immunobiology 第10版（中英 PDF）"
+title: "【基础免疫学】Janeway's Immunobiology 第10版（中英 PDF）"
 description: "基础免疫学推荐教材：Janeway's Immunobiology 第10版英文原版（2022）与中文译本，浏览器内打开阅读。"
 pubDate: 2026-10-12
 tags: ["推荐书目", "基础免疫学", "教材", "Janeway", "免疫生物学"]
