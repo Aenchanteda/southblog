@@ -10,6 +10,10 @@ const articleSchema = z.object({
   draft: z.boolean().optional().default(false),
 });
 
+const bookSchema = articleSchema.extend({
+  field: z.string(),
+});
+
 const blog = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/blog' }),
   schema: articleSchema,
@@ -35,9 +39,9 @@ const misc = defineCollection({
   schema: articleSchema,
 });
 
-const immunology = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/immunology' }),
-  schema: articleSchema,
+const books = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/books' }),
+  schema: bookSchema,
 });
 
-export const collections = { blog, notes, aiPharma, genomics, misc, immunology };
+export const collections = { blog, notes, aiPharma, genomics, misc, books };

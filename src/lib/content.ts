@@ -6,8 +6,8 @@ export type ArticleEntry =
   | CollectionEntry<'aiPharma'>
   | CollectionEntry<'genomics'>
   | CollectionEntry<'misc'>
-  | CollectionEntry<'immunology'>;
-export type ArticleSection = 'blog' | 'notes' | 'ai-pharma' | 'genomics' | 'misc' | 'immunology';
+  | CollectionEntry<'books'>;
+export type ArticleSection = 'blog' | 'notes' | 'ai-pharma' | 'genomics' | 'misc' | 'books';
 
 export function formatDate(date: Date) {
   return new Intl.DateTimeFormat('zh-CN', {

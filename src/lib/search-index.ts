@@ -21,7 +21,7 @@ const SECTION_META: Record<
   aiPharma: { label: 'AI制药', href: (slug) => `/ai-pharma/${slug}` },
   genomics: { label: '基因组学', href: (slug) => `/genomics/${slug}` },
   misc: { label: '杂谈', href: (slug) => `/misc/${slug}` },
-  immunology: { label: '基础免疫学', href: (slug) => `/immunology/${slug}` },
+  books: { label: '推荐书目', href: (slug) => `/books/${slug}` },
 };
 
 /** Strip markdown noise so Fuse can match readable Chinese/Latin text. */
@@ -73,13 +73,13 @@ function toDoc(entry: ArticleEntry, collection: keyof typeof SECTION_META): Sear
 }
 
 export async function buildSearchIndex(): Promise<SearchDoc[]> {
-  const [blog, notes, aiPharma, genomics, misc, immunology] = await Promise.all([
+  const [blog, notes, aiPharma, genomics, misc, books] = await Promise.all([
     getCollection('blog'),
     getCollection('notes'),
     getCollection('aiPharma'),
     getCollection('genomics'),
     getCollection('misc'),
-    getCollection('immunology'),
+    getCollection('books'),
   ]);
 
   const docs: SearchDoc[] = [
@@ -88,7 +88,7 @@ export async function buildSearchIndex(): Promise<SearchDoc[]> {
     ...aiPharma.filter(isPublished).map((entry) => toDoc(entry, 'aiPharma')),
     ...genomics.filter(isPublished).map((entry) => toDoc(entry, 'genomics')),
     ...misc.filter(isPublished).map((entry) => toDoc(entry, 'misc')),
-    ...immunology.filter(isPublished).map((entry) => toDoc(entry, 'immunology')),
+    ...books.filter(isPublished).map((entry) => toDoc(entry, 'books')),
   ];
 
   docs.sort((a, b) => b.pubDate.localeCompare(a.pubDate));

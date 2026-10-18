@@ -3,7 +3,7 @@ title: "神经电信号：从离子电流到解码与反馈"
 description: "动作电位、局部场电位、皮层脑电图，以及 EEG、MEG、立体脑电和深部场电位：每一种信号如何产生，又如何在一项研究里走完记录、解码和反馈。"
 pubDate: 2026-10-09
 tags: ["脑机接口", "BCI", "spike", "LFP", "ECoG", "EEG"]
-order: 4
+order: 5
 draft: false
 ---
 

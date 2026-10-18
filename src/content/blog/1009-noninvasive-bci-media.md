@@ -3,6 +3,7 @@ title: "非侵入式脑机接口的介质与信号"
 description: "从生物医学机制写脑磁图、功能超声、功能性近红外光谱和功能性磁共振：各自读的物理量、设备和已经做成的应用。"
 pubDate: 2026-10-09
 tags: ["脑机接口", "BCI", "MEG", "fNIRS", "fMRI", "超声"]
+order: 7
 draft: false
 ---
 

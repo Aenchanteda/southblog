@@ -19,4 +19,7 @@ export default defineConfig({
     }),
   },
   integrations: [mdx()],
+  redirects: {
+    '/immunology/01-janeways-immunobiology-10th': '/books/01-janeways-immunobiology-10th',
+  },
 });
