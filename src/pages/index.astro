@@ -12,7 +12,7 @@ const bciPosts = blogPosts.filter(isBciEntry).sort(byLessonOrder);
 const aiPharmaPosts = (await getCollection('aiPharma')).filter(isPublished).sort(byLessonOrder);
 const genomicsPosts = (await getCollection('genomics')).filter(isPublished).sort(byLessonOrder);
 const miscPosts = (await getCollection('misc')).filter(isPublished).sort(byLessonOrder);
-const immunologyPosts = (await getCollection('immunology')).filter(isPublished).sort(byLessonOrder);
+const booksPosts = (await getCollection('books')).filter(isPublished).sort(byLessonOrder);
 
 const toItem = (entry: ArticleEntry, href: string, label?: string, title = entry.data.title): PostListItem => ({
   href,
@@ -29,7 +29,7 @@ const latestItems = [
   ...aiPharmaPosts.map((entry) => toItem(entry, `/ai-pharma/${getEntrySlug(entry)}`, 'AI制药')),
   ...genomicsPosts.map((entry) => toItem(entry, `/genomics/${getEntrySlug(entry)}`, '基因组学')),
   ...miscPosts.map((entry) => toItem(entry, `/misc/${getEntrySlug(entry)}`, '杂谈')),
-  ...immunologyPosts.map((entry) => toItem(entry, `/immunology/${getEntrySlug(entry)}`, '基础免疫学')),
+  ...booksPosts.map((entry) => toItem(entry, `/books/${getEntrySlug(entry)}`, '推荐书目')),
 ]
   .sort((a, b) => b.date.getTime() - a.date.getTime())
   .slice(0, 6);
@@ -62,10 +62,10 @@ const topicSections = [
     items: miscPosts.map((entry, index) => toItem(entry, `/misc/${getEntrySlug(entry)}`, getOrderLabel(entry, index))),
   },
   {
-    id: 'immunology',
-    title: '基础免疫学',
-    href: '/immunology',
-    items: immunologyPosts.map((entry, index) => toItem(entry, `/immunology/${getEntrySlug(entry)}`, getOrderLabel(entry, index))),
+    id: 'books',
+    title: '推荐书目',
+    href: '/books',
+    items: booksPosts.map((entry, index) => toItem(entry, `/books/${getEntrySlug(entry)}`, getOrderLabel(entry, index))),
   },
 ].filter((section) => section.items.length > 0);
 ---

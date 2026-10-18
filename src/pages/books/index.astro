@@ -1,0 +1,47 @@
+---
+import { getCollection } from 'astro:content';
+import PostList from '../../components/PostList.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { byLessonOrder, getEntrySlug, getOrderLabel, isPublished } from '../../lib/content';
+
+const posts = (await getCollection('books'))
+  .filter(isPublished)
+  .sort(byLessonOrder);
+
+const fieldOrder = ['基础免疫学', '神经解剖与神经科学'];
+const fieldSet = new Set(posts.map((p) => p.data.field || '其他'));
+const fields = [
+  ...fieldOrder.filter((f) => fieldSet.has(f)),
+  ...[...fieldSet].filter((f) => !fieldOrder.includes(f)).sort(),
+];
+
+const groups = fields.map((field) => {
+  const entries = posts.filter((p) => (p.data.field || '其他') === field);
+  return {
+    field,
+    items: entries.map((entry, index) => ({
+      href: `/books/${getEntrySlug(entry)}`,
+      title: entry.data.title,
+      date: entry.data.pubDate,
+      label: getOrderLabel(entry, index),
+      summary: entry.data.description,
+    })),
+  };
+});
+---
+
+<BaseLayout title="推荐书目" description="南边小站的推荐书目：按学科整理教材，浏览器内阅读 PDF。">
+  <p class="post-back"><a href="/">← 返回首页</a></p>
+  <header class="list-header">
+    <h1>推荐书目</h1>
+    <p>按学科整理自学教材与课程参考书。点击条目进入详情，可在浏览器中直接打开 PDF。</p>
+  </header>
+  {groups.map((group) => (
+    <section class="home-section" aria-labelledby={`field-${group.field}`}>
+      <div class="section-head">
+        <h2 id={`field-${group.field}`}>{group.field}</h2>
+      </div>
+      <PostList items={group.items} variant="ordered" showSummary />
+    </section>
+  ))}
+</BaseLayout>
