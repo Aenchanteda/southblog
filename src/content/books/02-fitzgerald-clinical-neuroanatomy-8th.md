@@ -1,5 +1,5 @@
 ---
-title: "Fitzgerald's Clinical Neuroanatomy and Neuroscience 第8版"
+title: "【神经解剖与神经科学】Fitzgerald's Clinical Neuroanatomy and Neuroscience 第8版"
 description: "神经解剖与神经科学推荐教材：Fitzgerald's Clinical Neuroanatomy and Neuroscience 第8版英文 PDF，浏览器内打开阅读。"
 pubDate: 2026-10-18
 tags: ["推荐书目", "神经解剖", "神经科学", "教材", "Fitzgerald", "BCI"]

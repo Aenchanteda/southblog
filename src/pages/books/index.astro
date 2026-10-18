@@ -8,7 +8,7 @@ const posts = (await getCollection('books'))
   .filter(isPublished)
   .sort(byLessonOrder);
 
-const fieldOrder = ['基础免疫学', '神经解剖与神经科学'];
+const fieldOrder = ['基础免疫学', '神经解剖与神经科学', '脑机接口'];
 const fieldSet = new Set(posts.map((p) => p.data.field || '其他'));
 const fields = [
   ...fieldOrder.filter((f) => fieldSet.has(f)),
@@ -34,7 +34,7 @@ const groups = fields.map((field) => {
   <p class="post-back"><a href="/">← 返回首页</a></p>
   <header class="list-header">
     <h1>推荐书目</h1>
-    <p>按学科整理自学教材与课程参考书。点击条目进入详情，可在浏览器中直接打开 PDF。</p>
+    <p>按学科整理自学教材与课程参考书。标题前的【标签】标明主题；点击条目进入详情，可在浏览器中打开 PDF（个别为 EPUB）。</p>
   </header>
   {groups.map((group) => (
     <section class="home-section" aria-labelledby={`field-${group.field}`}>
