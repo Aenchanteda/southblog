@@ -20,6 +20,7 @@ const SECTION_META: Record<
   notes: { label: '学习心得', href: (slug) => `/notes/${slug}` },
   aiPharma: { label: 'AI制药', href: (slug) => `/ai-pharma/${slug}` },
   genomics: { label: '基因组学', href: (slug) => `/genomics/${slug}` },
+  immunology: { label: '基础免疫学', href: (slug) => `/immunology/${slug}` },
   misc: { label: '杂谈', href: (slug) => `/misc/${slug}` },
   books: { label: '推荐书目', href: (slug) => `/books/${slug}` },
 };
@@ -73,11 +74,12 @@ function toDoc(entry: ArticleEntry, collection: keyof typeof SECTION_META): Sear
 }
 
 export async function buildSearchIndex(): Promise<SearchDoc[]> {
-  const [blog, notes, aiPharma, genomics, misc, books] = await Promise.all([
+  const [blog, notes, aiPharma, genomics, immunology, misc, books] = await Promise.all([
     getCollection('blog'),
     getCollection('notes'),
     getCollection('aiPharma'),
     getCollection('genomics'),
+    getCollection('immunology'),
     getCollection('misc'),
     getCollection('books'),
   ]);
@@ -87,6 +89,7 @@ export async function buildSearchIndex(): Promise<SearchDoc[]> {
     ...notes.filter(isPublished).map((entry) => toDoc(entry, 'notes')),
     ...aiPharma.filter(isPublished).map((entry) => toDoc(entry, 'aiPharma')),
     ...genomics.filter(isPublished).map((entry) => toDoc(entry, 'genomics')),
+    ...immunology.filter(isPublished).map((entry) => toDoc(entry, 'immunology')),
     ...misc.filter(isPublished).map((entry) => toDoc(entry, 'misc')),
     ...books.filter(isPublished).map((entry) => toDoc(entry, 'books')),
   ];

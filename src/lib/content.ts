@@ -5,9 +5,10 @@ export type ArticleEntry =
   | CollectionEntry<'notes'>
   | CollectionEntry<'aiPharma'>
   | CollectionEntry<'genomics'>
+  | CollectionEntry<'immunology'>
   | CollectionEntry<'misc'>
   | CollectionEntry<'books'>;
-export type ArticleSection = 'blog' | 'notes' | 'ai-pharma' | 'genomics' | 'misc' | 'books';
+export type ArticleSection = 'blog' | 'notes' | 'ai-pharma' | 'genomics' | 'immunology' | 'misc' | 'books';
 
 export function formatDate(date: Date) {
   return new Intl.DateTimeFormat('zh-CN', {
