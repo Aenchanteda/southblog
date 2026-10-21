@@ -34,6 +34,11 @@ const genomics = defineCollection({
   schema: articleSchema,
 });
 
+const immunology = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/immunology' }),
+  schema: articleSchema,
+});
+
 const misc = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/misc' }),
   schema: articleSchema,
@@ -44,4 +49,4 @@ const books = defineCollection({
   schema: bookSchema,
 });
 
-export const collections = { blog, notes, aiPharma, genomics, misc, books };
+export const collections = { blog, notes, aiPharma, genomics, immunology, misc, books };
