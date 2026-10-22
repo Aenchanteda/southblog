@@ -2,6 +2,7 @@
 title: "DNA 核苷酸组成"
 description: "从脱氧核苷酸的碱基、脱氧核糖和磷酸组成出发，梳理 DNA 链方向、碱基配对、双螺旋和经典文献图。"
 pubDate: 2026-09-23
+order: 1
 tags: ["基因组学", "DNA", "分子基础"]
 draft: false
 ---
