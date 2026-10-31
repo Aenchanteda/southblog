@@ -1,0 +1,1348 @@
+---
+title: "基因组学信息的解读：148页中文标注与逐页讲解"
+description: "测序技术、数据分析、临床变异解读与AI：148页原图内中文译注及分层讲解。"
+pubDate: 2026-10-31
+order: 4
+tags: ["基因组学", "课堂笔记", "测序", "变异解读", "AI"]
+draft: false
+---
+
+import LecturePageControls from "../../components/LecturePageControls.astro";
+
+依据王晓月《基因组学信息的解读》课堂讲义（2026年10月30日），按原PDF第1—148页整理，包含重复过渡页、结束页与数据库附录。保留原页英文和图示，把中文译注放在原图内部空白处，并裁去外部留白；图下逐页解释，重点概念另有展开。密集截图优先译注核心标签和要点，未逐词翻译全部嵌图小字。
+
+<LecturePageControls pageCount={148} storageKey="southblog:genome-interpretation:page" />
+
+AI辅助整理、翻译与版面制作。补充辨析是本笔记内容，不替代讲义原文；历史仪器性能、价格、队列结果与产品表格不视为当前通用规格或临床建议。关键疑点附官方资料或文献核验，未系统复核所有引用。原PDF未修改，派生图遮去第139页联系方式。
+
+
+## 从生命之书到生物信息学
+
+
+### 第001页｜课程导读：基因组学信息的解读
+
+<div id="lecture-page-1"></div>
+<figure class="lecture-figure" data-lecture-page="1"><img src="/notes/genome-interpretation-2026/page-001.webp" width="1602" height="1277" loading="lazy" decoding="async" alt="第1页：课程导读：基因组学信息的解读，原图内中文译注" /><figcaption>原讲义第1页 · 点击图片放大</figcaption></figure>
+
+这堂课把测序仪、数据文件、算法和医学解释接成一条链。先问DNA怎样被读出，再问读段怎样变成变异，最后问变异能支持什么生物学或临床判断。后半的AI工具也应放回这条证据链，不能因为换成模型就跳过实验质量、数据验证和解释边界。
+
+
+### 第002页｜读出生命之书，为什么仍然难懂
+
+<div id="lecture-page-2"></div>
+<figure class="lecture-figure" data-lecture-page="2"><img src="/notes/genome-interpretation-2026/page-002.webp" width="1918" height="1250" loading="lazy" decoding="async" alt="第2页：读出生命之书，为什么仍然难懂，原图内中文译注" /><figcaption>原讲义第2页 · 点击图片放大</figcaption></figure>
+
+测序提供的是字母排列，理解则需要识别基因、调控元件、变异作用及其细胞背景。好比得到一篇陌生语言的全文，字符正确并不代表已经理解句子。课程后面分别处理字母是否可靠、位置在哪里、功能可能怎样改变，以及是否足以解释疾病这几个层级。
+
+
+### 第003页｜生物信息学做什么
+
+<div id="lecture-page-3"></div>
+<figure class="lecture-figure" data-lecture-page="3"><img src="/notes/genome-interpretation-2026/page-003.webp" width="2044" height="1161" loading="lazy" decoding="async" alt="第3页：生物信息学做什么，原图内中文译注" /><figcaption>原讲义第3页 · 点击图片放大</figcaption></figure>
+
+生物信息学不是把实验数据画成图而已。序列比对解决位置对应，统计模型帮助区分信号与噪声，数据库让结果可复用，功能注释把坐标连接到生物过程。一个软件成功运行只证明完成了计算；它输出的结果是否回答了生物学问题，还要检查数据与假设。
+
+
+### 第004页｜基因组学与计算技术共同发展
+
+<div id="lecture-page-4"></div>
+<figure class="lecture-figure" data-lecture-page="4"><img src="/notes/genome-interpretation-2026/page-004.webp" width="2064" height="1442" loading="lazy" decoding="async" alt="第4页：基因组学与计算技术共同发展，原图内中文译注" /><figcaption>原讲义第4页 · 点击图片放大</figcaption></figure>
+
+测序数据增长推动数据库、快速检索和算力发展，计算工具又使更大规模研究成为可能。时间轴是教学概览，各个技术可能同时有提出、实现和普及多个日期。人类基因组计划正式启动于1990年，2001年发表草图，2003年宣布完成，不能把图中不同里程碑混成同一天。
+
+补充核验：[NHGRI：人类基因组计划时间轴](https://www.genome.gov/human-genome-project/timeline)。
+
+
+### 第005页｜Smith–Waterman：找局部最佳匹配
+
+<div id="lecture-page-5"></div>
+<figure class="lecture-figure" data-lecture-page="5"><img src="/notes/genome-interpretation-2026/page-005.webp" width="1921" height="1400" loading="lazy" decoding="async" alt="第5页：Smith–Waterman：找局部最佳匹配，原图内中文译注" /><figcaption>原讲义第5页 · 点击图片放大</figcaption></figure>
+
+矩阵的格子记录两条序列走到某位置时可获得的最佳局部得分。递推在匹配、错配、插入或缺失的候选中取优，并允许从零重新开始，最后从高分处回溯。因此它并非把所有完整路径逐条枚举一遍，而是复用子问题的最优结果；这正是动态规划节约计算的原因。
+
+#### 深入理解：动态规划：为什么不必枚举所有路径
+
+令矩阵格子代表两条序列各走到某位置。每个格子只需比较几种前一步状态的得分：对角来自匹配或错配，水平、竖直对应缺口，再与零比较。保留最佳值后，后续格子就能复用它，不必把所有历史路径重算。局部比对允许从零重新开始，因此找的是最相似局部；与要求覆盖整条序列的全局比对有不同目标。
+
+
+### 第006页｜GenBank：序列与注释的公共档案
+
+<div id="lecture-page-6"></div>
+<figure class="lecture-figure" data-lecture-page="6"><img src="/notes/genome-interpretation-2026/page-006.webp" width="1836" height="978" loading="lazy" decoding="async" alt="第6页：GenBank：序列与注释的公共档案，原图内中文译注" /><figcaption>原讲义第6页 · 点击图片放大</figcaption></figure>
+
+数据库条目同时包含序列、来源、功能说明和版本信息。下载时应记录登录号与版本，例如末尾“.1”与“.2”可能指不同序列版本。公开提交的条目并不保证所有功能注释都已实验验证；序列档案、参考序列集合和临床变异判读数据库承担不同任务。
+
+
+### 第007页｜FASTA：搜索算法与文件格式
+
+<div id="lecture-page-7"></div>
+<figure class="lecture-figure" data-lecture-page="7"><img src="/notes/genome-interpretation-2026/page-007.webp" width="2001" height="945" loading="lazy" decoding="async" alt="第7页：FASTA：搜索算法与文件格式，原图内中文译注" /><figcaption>原讲义第7页 · 点击图片放大</figcaption></figure>
+
+FASTA既可指一类序列搜索程序，也常指最简单的序列文本格式。说明行用于辨认条目，下面的A、C、G、T才是DNA序列，换行通常不改变其含义。它不携带每个碱基的测量质量；这一点与后面FASTQ区别很大。整理数据时不要把说明文字混进序列本身。
+
+
+### 第008页｜BLAST：快速寻找相似序列
+
+<div id="lecture-page-8"></div>
+<figure class="lecture-figure" data-lecture-page="8"><img src="/notes/genome-interpretation-2026/page-008.webp" width="2070" height="1444" loading="lazy" decoding="async" alt="第8页：BLAST：快速寻找相似序列，原图内中文译注" /><figcaption>原讲义第8页 · 点击图片放大</figcaption></figure>
+
+给定一段序列，BLAST在数据库中找局部相似片段，帮助提出同源、功能或来源线索。相似命中需要连同比对长度、覆盖、统计显著性和数据库范围理解；一段很短的相同片段未必说明两个完整基因有相同功能。它适合数据库搜索，不等同于为数亿短读段设计的高通量定位器。
+
+
+### 第009页｜UCSC：把序列信息放回坐标
+
+<div id="lecture-page-9"></div>
+<figure class="lecture-figure" data-lecture-page="9"><img src="/notes/genome-interpretation-2026/page-009.webp" width="2049" height="1354" loading="lazy" decoding="async" alt="第9页：UCSC：把序列信息放回坐标，原图内中文译注" /><figcaption>原讲义第9页 · 点击图片放大</figcaption></figure>
+
+浏览器的价值是让基因、变异和功能实验共享同一套染色体坐标。阅读前先确定物种、组装版本和当前区域，然后辨认每条轨道的数据来源。同名基因在不同组装中的坐标可能变化；截图只是一种界面示例，不应把旧截图上的菜单位置当作当前网站的固定操作说明。
+
+
+### 第010页｜UCSC轨道：同一位置，多层证据
+
+<div id="lecture-page-10"></div>
+<figure class="lecture-figure" data-lecture-page="10"><img src="/notes/genome-interpretation-2026/page-010.webp" width="2109" height="1453" loading="lazy" decoding="async" alt="第10页：UCSC轨道：同一位置，多层证据，原图内中文译注" /><figcaption>原讲义第10页 · 点击图片放大</figcaption></figure>
+
+把每一行看作一种独立证据，沿竖直方向比较同一坐标的基因结构、序列保守性或实验信号。信号峰与基因重叠只是空间关系，未必证明直接调控；不同转录本也可能有不同外显子。后面判读变异时，这种坐标意识帮助区分基因内、编码区内和具体转录本的功能区域。
+
+
+### 第011页｜Ensembl：自动注释与比较基因组
+
+<div id="lecture-page-11"></div>
+<figure class="lecture-figure" data-lecture-page="11"><img src="/notes/genome-interpretation-2026/page-011.webp" width="2089" height="1156" loading="lazy" decoding="async" alt="第11页：Ensembl：自动注释与比较基因组，原图内中文译注" /><figcaption>原讲义第11页 · 点击图片放大</figcaption></figure>
+
+自动注释整合序列、转录和同源证据预测基因结构，让大规模基因组有可查询的功能地图。但注释是基于证据构建的模型，可能随版本更新。使用时记录基因、转录本和蛋白的稳定标识及版本，比只记一个可变的基因别名更可靠。
+
+
+### 第012页｜Ensembl的物种与参考组装入口
+
+<div id="lecture-page-12"></div>
+<figure class="lecture-figure" data-lecture-page="12"><img src="/notes/genome-interpretation-2026/page-012.webp" width="2089" height="1406" loading="lazy" decoding="async" alt="第12页：Ensembl的物种与参考组装入口，原图内中文译注" /><figcaption>原讲义第12页 · 点击图片放大</figcaption></figure>
+
+选物种之后还要选版本。GRCh37、GRCh38或更新参考之间不能直接混用坐标；工具即使都能搜索同一个基因，也可能返回不同转录本集合。遇到两个数据库显示不一致时，优先核对组装、注释发布版本和转录本，而不是马上认定其中一方有误。
+
+
+### 第013页｜2005年后的技术扩展
+
+<div id="lecture-page-13"></div>
+<figure class="lecture-figure" data-lecture-page="13"><img src="/notes/genome-interpretation-2026/page-013.webp" width="2054" height="1226" loading="lazy" decoding="async" alt="第13页：2005年后的技术扩展，原图内中文译注" /><figcaption>原讲义第13页 · 点击图片放大</figcaption></figure>
+
+技术发展不只是读得更便宜，还改变了可问的问题：单细胞区分细胞差异，Hi-C提供空间联系，长读长帮助跨越重复，编辑提供扰动验证。图把多个年份压缩成路径，应按概念发展理解；T2T-CHM13完整组装论文发表于2022年，图中2020不是所有人类染色体均已完成的统一日期。
+
+
+### 第014页｜同一张时间轴为何再次出现
+
+<div id="lecture-page-14"></div>
+<figure class="lecture-figure" data-lecture-page="14"><img src="/notes/genome-interpretation-2026/page-014.webp" width="1989" height="1224" loading="lazy" decoding="async" alt="第14页：同一张时间轴为何再次出现，原图内中文译注" /><figcaption>原讲义第14页 · 点击图片放大</figcaption></figure>
+
+这是一张强调重点的重复页，不是新增了一套独立事实。把左侧测量技术和右侧AI联系起来：数据量和模态增长给模型提供训练材料，模型又用于识别变异、预测功能或辅助设计。模型能力必须按具体任务验证，不能用时间轴上的位置说明它已经全面超过实验或临床判断。
+
+
+### 第015页｜从参考序列走向每个碱基的意义
+
+<div id="lecture-page-15"></div>
+<figure class="lecture-figure" data-lecture-page="15"><img src="/notes/genome-interpretation-2026/page-015.webp" width="1939" height="956" loading="lazy" decoding="async" alt="第15页：从参考序列走向每个碱基的意义，原图内中文译注" /><figcaption>原讲义第15页 · 点击图片放大</figcaption></figure>
+
+这组封面对应研究问题的升级：先建立序列参考，再定位疾病关联，接着尝试解释变异怎样影响表型。致病性不是一个碱基脱离背景的固有标签，还取决于具体疾病、遗传方式和证据。知道某位点与功能有关，也不意味着已经证明它解释了某个患者的症状。
+
+
+### 第016页｜人类基因组：草图与计划完成不同
+
+<div id="lecture-page-16"></div>
+<figure class="lecture-figure" data-lecture-page="16"><img src="/notes/genome-interpretation-2026/page-016.webp" width="1919" height="1419" loading="lazy" decoding="async" alt="第16页：人类基因组：草图与计划完成不同，原图内中文译注" /><figcaption>原讲义第16页 · 点击图片放大</figcaption></figure>
+
+本页标题谈2001年草图，下面却同时列出整个计划的工期与经费，容易误读成2001年已完成所有目标。2003年的完成标准仍未覆盖后来T2T解决的全部复杂重复区。所谓“完整”应明确是哪个时代的组装和项目标准，而不是承诺已经读出了所有人的两套染色体。
+
+补充核验：[NHGRI：人类基因组计划时间轴](https://www.genome.gov/human-genome-project/timeline)。
+
+
+### 第017页｜读、解释、预测：三类不同任务
+
+<div id="lecture-page-17"></div>
+<figure class="lecture-figure" data-lecture-page="17"><img src="/notes/genome-interpretation-2026/page-017.webp" width="1984" height="931" loading="lazy" decoding="async" alt="第17页：读、解释、预测：三类不同任务，原图内中文译注" /><figcaption>原讲义第17页 · 点击图片放大</figcaption></figure>
+
+测量错误会污染后续解释，解释框架的错误也无法用更深测序自动补救。预测模型则利用已有数据估计未知样本的输出，它是否有效需要独立测试。沿三步追问输入、输出和验证方式，有助避免把“找到了变异”“预测有害”“确认致病”当作同一个结论。
+
+
+### 第018页｜从读懂序列走向生成设计
+
+<div id="lecture-page-18"></div>
+<figure class="lecture-figure" data-lecture-page="18"><img src="/notes/genome-interpretation-2026/page-018.webp" width="1933" height="1145" loading="lazy" decoding="async" alt="第18页：从读懂序列走向生成设计，原图内中文译注" /><figcaption>原讲义第18页 · 点击图片放大</figcaption></figure>
+
+序列模型可以估计已有序列的规律，也可以生成候选设计，但生成、功能验证和安全可用是不同阶段。封面与年份是课程选取的代表例子，不能把图中文字当作各模型首次发布的精确年表；例如模型名称、模型家族与配套设计方法也可能被概括放在同一个格子里。
+
+
+### 第019页｜Evo：跨DNA、RNA与蛋白联系建模
+
+<div id="lecture-page-19"></div>
+<figure class="lecture-figure" data-lecture-page="19"><img src="/notes/genome-interpretation-2026/page-019.webp" width="1895" height="1209" loading="lazy" decoding="async" alt="第19页：Evo：跨DNA、RNA与蛋白联系建模，原图内中文译注" /><figcaption>原讲义第19页 · 点击图片放大</figcaption></figure>
+
+模型从大规模序列学习统计规律，进而对部分功能任务评分或提出新序列。重要的是分清研究中实际测过的功能样本，与仅在序列层面看起来合理的生成结果。长序列具有基因组样结构，并不等于它已能在细胞中稳定复制、表达或形成一个可存活的生物体。
+
+
+### 第020页｜Evo 2与可解释特征
+
+<div id="lecture-page-20"></div>
+<figure class="lecture-figure" data-lecture-page="20"><img src="/notes/genome-interpretation-2026/page-020.webp" width="2045" height="1167" loading="lazy" decoding="async" alt="第20页：Evo 2与可解释特征，原图内中文译注" /><figcaption>原讲义第20页 · 点击图片放大</figcaption></figure>
+
+本页引用Brixi等2026年Evo 2研究。模型评估序列变化，也用特征分析寻找与已知生物结构对应的内部表示。一个特征与外显子边界相关，支持它编码某种序列信息，但不能据此断言模型以人类理解的机制进行推理；生成的基因组尺度序列也需与实验验证范围分别报告。
+
+补充核验：[Brixi等2026：Evo 2原始研究](https://pubmed.ncbi.nlm.nih.gov/41781614/)。
+
+
+### 第021页｜科学智能体：把工具组织成流程
+
+<div id="lecture-page-21"></div>
+<figure class="lecture-figure" data-lecture-page="21"><img src="/notes/genome-interpretation-2026/page-021.webp" width="2076" height="1489" loading="lazy" decoding="async" alt="第21页：科学智能体：把工具组织成流程，原图内中文译注" /><figcaption>原讲义第21页 · 点击图片放大</figcaption></figure>
+
+相较只返回文字的模型，智能体能规划步骤、检索资料并调用计算或实验接口。本页比较不同系统的任务和验证路径，并不表示它们都能独立完成所有学科研究。学习时沿“提出假设—执行工具—检查结果—人类判断”读图，尤其区分自动化工作量与可靠科学发现的证据。
+
+补充核验：[Guo等2026：科学智能体综述](https://pubmed.ncbi.nlm.nih.gov/42753735/)。
+
+
+### 第022页｜全课结构：先理解数据怎样产生
+
+<div id="lecture-page-22"></div>
+<figure class="lecture-figure" data-lecture-page="22"><img src="/notes/genome-interpretation-2026/page-022.webp" width="1360" height="1076" loading="lazy" decoding="async" alt="第22页：全课结构：先理解数据怎样产生，原图内中文译注" /><figcaption>原讲义第22页 · 点击图片放大</figcaption></figure>
+
+接下来先讲测序技术，因为读段长度、错误类型和样本制备方式决定后续算法能看到什么。四部分并非互不相关：同一条变异记录要经过实验产生信号、计算处理、临床解释，最后才可能由AI辅助某些步骤。先建立这条流程，就不会把不同技术的指标直接混用。
+
+
+## Sanger与短读长测序
+
+
+### 第023页｜测序技术的五个学习入口
+
+<div id="lecture-page-23"></div>
+<figure class="lecture-figure" data-lecture-page="23"><img src="/notes/genome-interpretation-2026/page-023.webp" width="1836" height="1085" loading="lazy" decoding="async" alt="第23页：测序技术的五个学习入口，原图内中文译注" /><figcaption>原讲义第23页 · 点击图片放大</figcaption></figure>
+
+比较技术时抓住四个轴：测什么物理信号、是否需要扩增、单条读段多长、主要错误是什么。所谓代际命名是常用分类，不是质量从低到高的单一排名。短读长和长读长仍可互补，适合的方案取决于研究目标，而组装还需要算法把零散读段组织成较长序列。
+
+
+### 第024页｜Sanger：双脱氧核苷酸终止延伸
+
+<div id="lecture-page-24"></div>
+<figure class="lecture-figure" data-lecture-page="24"><img src="/notes/genome-interpretation-2026/page-024.webp" width="2057" height="1521" loading="lazy" decoding="async" alt="第24页：Sanger：双脱氧核苷酸终止延伸，原图内中文译注" /><figcaption>原讲义第24页 · 点击图片放大</figcaption></figure>
+
+DNA聚合酶需要新链末端的3′羟基继续形成磷酸二酯键；掺入ddNTP后缺少这个接点，链便停止。由此得到终止在不同碱基处的一组片段。Sanger因蛋白与核酸序列研究分别获1958、1980年诺贝尔化学奖；页脚Sharpless的2001、2022年不能记成Sanger的年份。
+
+#### 深入理解：聚合酶为什么需要3′羟基
+
+新核苷酸通过其5′磷酸与已有链末端3′羟基反应，使DNA沿5′→3′方向延长。ddNTP缺少继续反应所需的3′羟基，一旦掺入，后续核苷酸无法按常规方式接上。正常底物负责继续生长，少量终止底物让不同分子停在不同位置。分离这些片段后，就能根据长度和末端类型重建顺序。
+
+补充核验：[Nobel：Frederick Sanger获奖记录](https://www.nobelprize.org/nomination/archive/show_people.php?id=8092)。
+
+
+### 第025页｜荧光标记与毛细管读出
+
+<div id="lecture-page-25"></div>
+<figure class="lecture-figure" data-lecture-page="25"><img src="/notes/genome-interpretation-2026/page-025.webp" width="2013" height="1503" loading="lazy" decoding="async" alt="第25页：荧光标记与毛细管读出，原图内中文译注" /><figcaption>原讲义第25页 · 点击图片放大</figcaption></figure>
+
+在反应中混入不同颜色的链终止底物，片段按长度在毛细管中分离，依次通过检测器，得到彩色峰图。按片段从短到长读出新合成链的序列，再依据研究问题决定是否需要反向互补。峰形混杂可能来自混合模板或技术问题，不能只按软件输出字母忽略原始信号。
+
+
+### 第026页｜NGS：大量模板并行测序
+
+<div id="lecture-page-26"></div>
+<figure class="lecture-figure" data-lecture-page="26"><img src="/notes/genome-interpretation-2026/page-026.webp" width="1831" height="1086" loading="lazy" decoding="async" alt="第26页：NGS：大量模板并行测序，原图内中文译注" /><figcaption>原讲义第26页 · 点击图片放大</figcaption></figure>
+
+NGS的核心是同时读取大量分子或克隆簇，而不是一条序列无限延长。扩增方式与检测化学决定错误和偏差。讲义列35—700 bp、0.1%—15%是混合平台及历史条件的概括，不应作为某一当前仪器的性能承诺；后面的2019年平台表也应按其年代理解。
+
+
+### 第027页｜通量与读长是两个指标
+
+<div id="lecture-page-27"></div>
+<figure class="lecture-figure" data-lecture-page="27"><img src="/notes/genome-interpretation-2026/page-027.webp" width="1768" height="1411" loading="lazy" decoding="async" alt="第27页：通量与读长是两个指标，原图内中文译注" /><figcaption>原讲义第27页 · 点击图片放大</figcaption></figure>
+
+一台仪器可以产生很多很短的读段，也可以产生较少很长的读段；两者对重复区域解析、变异识别和成本的意义不同。图上的型号及趋势属于所引资料的时代快照。不要只看总Gb数选择平台，读长、准确度、覆盖均匀性和样本要求都影响最终能回答的问题。
+
+
+### 第028页｜平台比较表：读懂历史条件
+
+<div id="lecture-page-28"></div>
+<figure class="lecture-figure" data-lecture-page="28"><img src="/notes/genome-interpretation-2026/page-028.webp" width="2008" height="1509" loading="lazy" decoding="async" alt="第28页：平台比较表：读懂历史条件，原图内中文译注" /><figcaption>原讲义第28页 · 点击图片放大</figcaption></figure>
+
+本页适合比较方法类别，不适合用来购买或评估2026年设备。单次读取错误率与多次共识后的错误率必须分开，同一型号的试剂和模式也会改变性能。表中长读长、短读长平台混排，先辨认测量定义再比较数字，尤其不能把不同层级的原始错误率当作最终变异检出错误率。
+
+
+### 第029页｜合成测序的总体流程
+
+<div id="lecture-page-29"></div>
+<figure class="lecture-figure" data-lecture-page="29"><img src="/notes/genome-interpretation-2026/page-029.webp" width="2023" height="1505" loading="lazy" decoding="async" alt="第29页：合成测序的总体流程，原图内中文译注" /><figcaption>原讲义第29页 · 点击图片放大</figcaption></figure>
+
+从单个DNA片段出发，加入接头并把模板固定或组织起来，生成足以检测的信号，再在合成过程中识别掺入碱基。流程图中的扩增主要增强测量信号，不会创造新的独立原始分子。因此一个原分子的许多复制品，不能在后续分析中都算作独立生物学证据。
+
+
+### 第030页｜桥式扩增怎样形成克隆簇
+
+<div id="lecture-page-30"></div>
+<figure class="lecture-figure" data-lecture-page="30"><img src="/notes/genome-interpretation-2026/page-030.webp" width="2029" height="1330" loading="lazy" decoding="async" alt="第30页：桥式扩增怎样形成克隆簇，原图内中文译注" /><figcaption>原讲义第30页 · 点击图片放大</figcaption></figure>
+
+片段两端的接头可与表面寡核苷酸结合，弯成桥状后被复制，反复循环形成局部同源模板簇。一个簇通常贡献一条读段的测量信号，簇内分子需要足够同步才容易判读。理解模板簇有助解释荧光强度为什么能代表某次掺入，也有助区分簇数量与样本原始分子复杂度。
+
+
+### 第031页｜可逆终止：每轮只前进一步
+
+<div id="lecture-page-31"></div>
+<figure class="lecture-figure" data-lecture-page="31"><img src="/notes/genome-interpretation-2026/page-031.webp" width="2028" height="1438" loading="lazy" decoding="async" alt="第31页：可逆终止：每轮只前进一步，原图内中文译注" /><figcaption>原讲义第31页 · 点击图片放大</figcaption></figure>
+
+这一循环控制每条模板每轮主要加入一个碱基，拍照识别颜色后，再去除阻断让下一轮继续。与Sanger的永久链终止不同，这里终止是可解除的。图中四种颜色是原理示意，不等于所有代际Illumina仪器都采用完全相同的染料和颜色编码；关键是循环、信号与碱基映射。
+
+
+### 第032页｜视频过渡页：回忆每轮发生什么
+
+<div id="lecture-page-32"></div>
+<figure class="lecture-figure" data-lecture-page="32"><img src="/notes/genome-interpretation-2026/page-032.webp" width="1929" height="532" loading="lazy" decoding="async" alt="第32页：视频过渡页：回忆每轮发生什么，原图内中文译注" /><figcaption>原讲义第32页 · 点击图片放大</figcaption></figure>
+
+这页主要承接演示，可用上一页流程自行复述：加入带标记底物、控制单次延伸、成像、去除标记及阻断，再进入下一轮。不要为无画面的静态页虚构视频实验结果。理解后面base calling时，只需带着一个问题：如何把每个簇在各轮的信号串成一条序列。
+
+
+### 第033页｜Base calling：从图像信号到字母
+
+<div id="lecture-page-33"></div>
+<figure class="lecture-figure" data-lecture-page="33"><img src="/notes/genome-interpretation-2026/page-033.webp" width="2056" height="1259" loading="lazy" decoding="async" alt="第33页：Base calling：从图像信号到字母，原图内中文译注" /><figcaption>原讲义第33页 · 点击图片放大</figcaption></figure>
+
+同一簇在第1、2、3轮产生不同信号，把各轮最可能的碱基连起来才得到一条read。图中两条序列可对应不同簇，不是同一条DNA同时具有两个确定字母。信号并不总是清晰，算法还应为识别结果给出质量估计，这引出下一页的FASTQ和Q值。
+
+
+### 第034页｜FASTQ：序列还带着质量信息
+
+<div id="lecture-page-34"></div>
+<figure class="lecture-figure" data-lecture-page="34"><img src="/notes/genome-interpretation-2026/page-034.webp" width="2099" height="1149" loading="lazy" decoding="async" alt="第34页：FASTQ：序列还带着质量信息，原图内中文译注" /><figcaption>原讲义第34页 · 点击图片放大</figcaption></figure>
+
+一个FASTQ条目通常有四行，最后一行的每个字符对应序列中的一个位置。常见Phred+33编码用字符ASCII码减33得到Q值；Q30表示模型估计错误概率约0.001，不是字符“30”直接写在文件中。质量是测量置信度，不代表某个字母是否致病，序列行与质量行长度也应一致。
+
+
+### 第035页｜读段标识和拆样本
+
+<div id="lecture-page-35"></div>
+<figure class="lecture-figure" data-lecture-page="35"><img src="/notes/genome-interpretation-2026/page-035.webp" width="1928" height="1278" loading="lazy" decoding="async" alt="第35页：读段标识和拆样本，原图内中文译注" /><figcaption>原讲义第35页 · 点击图片放大</figcaption></figure>
+
+许多样本可混在一次测序中，再依据index分配回各自文件。read名称还记录簇位置等技术来源，方便追踪批次和质量问题。条形码用于辨认样本，并不是DNA片段在参考基因组中的坐标；拆分错误或index串扰会影响样本归属，后续比对不能自动消除这些问题。
+
+
+### 第036页｜Phred质量值的对数尺度
+
+<div id="lecture-page-36"></div>
+<figure class="lecture-figure" data-lecture-page="36"><img src="/notes/genome-interpretation-2026/page-036.webp" width="1966" height="1190" loading="lazy" decoding="async" alt="第36页：Phred质量值的对数尺度，原图内中文译注" /><figcaption>原讲义第36页 · 点击图片放大</figcaption></figure>
+
+Q增加10，表示错误概率下降十倍，而不是准确率增加十个百分点。若某碱基Q30，含义是模型在相应校准条件下估计其错误概率约千分之一，不保证每一千个位置恰好错一个。比较整条read时还要看各位置分布，不能只凭一个平均Q值认定所有末端碱基都可靠。
+
+#### 深入理解：亲手计算一个FASTQ质量字符
+
+假设使用Phred+33编码，字符I的ASCII码为73，减33得到Q40；错误概率为10^(−40/10)=0.0001，即约万分之一。Q20则为百分之一，两个Q40和Q20不能简单按质量分值求平均后当作错误概率平均。这里得到的是仪器模型的测量置信度，与基因型概率、变异质量及临床致病概率是不同层级。
+
+
+### 第037页｜再次阅读FASTQ：把四行一一配对
+
+<div id="lecture-page-37"></div>
+<figure class="lecture-figure" data-lecture-page="37"><img src="/notes/genome-interpretation-2026/page-037.webp" width="2074" height="1149" loading="lazy" decoding="async" alt="第37页：再次阅读FASTQ：把四行一一配对，原图内中文译注" /><figcaption>原讲义第37页 · 点击图片放大</figcaption></figure>
+
+这张重复页可当成自测：找到起始“@”、序列、“+”和质量四行，任取质量字符算Q，再换算错误概率。标识行里的数字是技术来源，不是临床病历信息或变异坐标。读段字母看似正常却质量很差是可能的，因此后续过滤必须同时读取质量字段。
+
+
+### 第038页｜原始数据质控的三类问题
+
+<div id="lecture-page-38"></div>
+<figure class="lecture-figure" data-lecture-page="38"><img src="/notes/genome-interpretation-2026/page-038.webp" width="1544" height="715" loading="lazy" decoding="async" alt="第38页：原始数据质控的三类问题，原图内中文译注" /><figcaption>原讲义第38页 · 点击图片放大</figcaption></figure>
+
+质控不是看到红色就机械删除数据。低质量位置、接头和PCR重复各有不同来源，应选相应处理方法。重复率也受实验类型影响：RNA-seq高表达基因、靶向测序的捕获区域都可能天然产生很多重复。先结合文库设计解释，再决定是否标记、去重或进一步调查。
+
+
+### 第039页｜逐碱基质量图怎样读
+
+<div id="lecture-page-39"></div>
+<figure class="lecture-figure" data-lecture-page="39"><img src="/notes/genome-interpretation-2026/page-039.webp" width="2100" height="1270" loading="lazy" decoding="async" alt="第39页：逐碱基质量图怎样读，原图内中文译注" /><figcaption>原讲义第39页 · 点击图片放大</figcaption></figure>
+
+每个位置汇总许多读段，箱线和须表示分布而非一条read的连续轨迹。末端质量下降常见，但是否剪切要结合下降幅度、保留长度与下游任务。图中背景颜色是软件的经验提示，不能代替样本与平台判断，也不能把某个位置箱线低简单理解成那里存在真实变异。
+
+
+### 第040页｜过度出现的序列提示什么
+
+<div id="lecture-page-40"></div>
+<figure class="lecture-figure" data-lecture-page="40"><img src="/notes/genome-interpretation-2026/page-040.webp" width="2083" height="952" loading="lazy" decoding="async" alt="第40页：过度出现的序列提示什么，原图内中文译注" /><figcaption>原讲义第40页 · 点击图片放大</figcaption></figure>
+
+少数序列出现得异常多，可能是接头、污染，也可能是样本中真实丰富的序列。表中possible source是匹配提示，并非已证明污染来自某个样本。判断时将序列比对到接头或预期目标，结合实验类型及其在read中的位置，而不是仅凭告警标记整份数据无效。
+
+
+### 第041页｜接头为何在read末端升高
+
+<div id="lecture-page-41"></div>
+<figure class="lecture-figure" data-lecture-page="41"><img src="/notes/genome-interpretation-2026/page-041.webp" width="1749" height="1150" loading="lazy" decoding="async" alt="第41页：接头为何在read末端升高，原图内中文译注" /><figcaption>原讲义第41页 · 点击图片放大</figcaption></figure>
+
+当DNA插入片段短于测序读长，仪器读穿真实片段后便进入接头，常见末端匹配比例升高。接头剪切应识别正确序列并同步处理质量、配对关系和最短保留长度。图中的趋势可定位技术问题，但不能据此算出全部片段的精确长度分布。
+
+
+## 单分子与长读长测序
+
+
+### 第042页｜转向三代：直接读取单分子
+
+<div id="lecture-page-42"></div>
+<figure class="lecture-figure" data-lecture-page="42"><img src="/notes/genome-interpretation-2026/page-042.webp" width="1836" height="1065" loading="lazy" decoding="async" alt="第42页：转向三代：直接读取单分子，原图内中文译注" /><figcaption>原讲义第42页 · 点击图片放大</figcaption></figure>
+
+前面NGS通过大量并行模板提高产出，接下来长读长技术重点解决跨越长重复、连接结构和单倍型的问题。单分子测序减少某些扩增影响，但仍受样本质量和信号识别限制。学习时继续区分原始单次read与处理后共识read，不把“第三代”当作任何指标都必然更优。
+
+
+### 第043页｜PacBio SMRT：在小孔中观察聚合
+
+<div id="lecture-page-43"></div>
+<figure class="lecture-figure" data-lecture-page="43"><img src="/notes/genome-interpretation-2026/page-043.webp" width="1698" height="1367" loading="lazy" decoding="async" alt="第43页：PacBio SMRT：在小孔中观察聚合，原图内中文译注" /><figcaption>原讲义第43页 · 点击图片放大</figcaption></figure>
+
+单个聚合酶在光学观察区域持续合成DNA，标记碱基的掺入信号用于识别序列。原始单次读取存在随机错误，但同一模板反复读取可提升共识准确度。本页列13%等数字应与对应年代、单次读数定义一起看，不能套用到后面的HiFi成品读段。
+
+
+### 第044页｜HiFi：同一分子多次读取求共识
+
+<div id="lecture-page-44"></div>
+<figure class="lecture-figure" data-lecture-page="44"><img src="/notes/genome-interpretation-2026/page-044.webp" width="1616" height="1372" loading="lazy" decoding="async" alt="第44页：HiFi：同一分子多次读取求共识，原图内中文译注" /><figcaption>原讲义第44页 · 点击图片放大</figcaption></figure>
+
+将双链片段接成可循环读取的结构，聚合酶多次经过同一插入片段，再整合证据。若主要错误近似随机，多次观察能降低误差；覆盖不足或系统偏差仍会影响结果。这里重复读取同一分子用于改善其测量，不等于获得了同样数量的独立原始DNA分子。
+
+#### 深入理解：共识深度与基因组深度别混淆
+
+同一个DNA分子读十遍，可以改善这一个分子的共识；十个独立分子各读一遍，则提供了十个原始分子的证据。两者都可能被口头说成十次读取，但对于纠错、估计等位基因比例和识别低频变异的意义不同。判断报告中的coverage时，应先问分母是同一模板、某个参考位置，还是一组目标区域。
+
+
+### 第045页｜纳米孔：电流变化识别分子
+
+<div id="lecture-page-45"></div>
+<figure class="lecture-figure" data-lecture-page="45"><img src="/notes/genome-interpretation-2026/page-045.webp" width="1833" height="1486" loading="lazy" decoding="async" alt="第45页：纳米孔：电流变化识别分子，原图内中文译注" /><figcaption>原讲义第45页 · 点击图片放大</figcaption></figure>
+
+DNA经过孔时，不同局部序列产生不同电流模式，马达控制通过速度，算法把时间信号解码为序列。长片段有助跨越重复，但实际读长受DNA完整性和实验过程影响，最大读长不是每条read的常见长度。旧文献中的错误率不能作为当前化学版本和识别模型的固定性能。
+
+
+### 第046页｜视频页：把电流想成连续轨迹
+
+<div id="lecture-page-46"></div>
+<figure class="lecture-figure" data-lecture-page="46"><img src="/notes/genome-interpretation-2026/page-046.webp" width="1640" height="1486" loading="lazy" decoding="async" alt="第46页：视频页：把电流想成连续轨迹，原图内中文译注" /><figcaption>原讲义第46页 · 点击图片放大</figcaption></figure>
+
+可以用上一页原理补齐理解：一个分子连续过孔，电流随局部碱基组合变化，算法需要区分真实序列变化、停顿和噪声。它不是每个孤立碱基产生一个永远不变的唯一电压值。因为PDF没有视频帧和音频，本页不补写未经看到的具体演示操作或实验结论。
+
+
+### 第047页｜纳米孔准确度来自多环节改进
+
+<div id="lecture-page-47"></div>
+<figure class="lecture-figure" data-lecture-page="47"><img src="/notes/genome-interpretation-2026/page-047.webp" width="2045" height="1363" loading="lazy" decoding="async" alt="第47页：纳米孔准确度来自多环节改进，原图内中文译注" /><figcaption>原讲义第47页 · 点击图片放大</figcaption></figure>
+
+准确度变化并不只归功于一个神经网络：孔结构、通过速度、信号质量和模型训练共同决定表现。比较数据时应记录试剂版本、模型、单链还是双链组合以及测量对象。碱基准确度提高有利于变异识别，但最终调用性能还受覆盖、比对和基因组区域难度影响。
+
+
+### 第048页｜双链联合读取：2D与1D²
+
+<div id="lecture-page-48"></div>
+<figure class="lecture-figure" data-lecture-page="48"><img src="/notes/genome-interpretation-2026/page-048.webp" width="2005" height="1344" loading="lazy" decoding="async" alt="第48页：双链联合读取：2D与1D²，原图内中文译注" /><figcaption>原讲义第48页 · 点击图片放大</figcaption></figure>
+
+互补链为同一分子提供另一份信息，综合后可改善错误识别。要区分“读到两条链的概率”和“每个碱基的准确率”，图中的60%不是最终准确度。2D、1D²是技术发展中的方案，不能把它们当作当前所有纳米孔模式的统一称呼或保证每个分子均能完整双链读取。
+
+
+### 第049页｜从电流解码序列，也识别修饰
+
+<div id="lecture-page-49"></div>
+<figure class="lecture-figure" data-lecture-page="49"><img src="/notes/genome-interpretation-2026/page-049.webp" width="2045" height="1377" loading="lazy" decoding="async" alt="第49页：从电流解码序列，也识别修饰，原图内中文译注" /><figcaption>原讲义第49页 · 点击图片放大</figcaption></figure>
+
+局部修饰可改变电流模式，因此模型不只输出A、C、G、T，也能在合适训练和验证下估计部分碱基修饰。这里的修饰识别依赖具体模型、化学版本与覆盖，不能把所有电流差异都归为甲基化。读段序列与修饰概率通常是不同输出，分析时需要保留对应位置及置信度。
+
+
+### 第050页｜三代测序能帮助哪些任务
+
+<div id="lecture-page-50"></div>
+<figure class="lecture-figure" data-lecture-page="50"><img src="/notes/genome-interpretation-2026/page-050.webp" width="2044" height="1360" loading="lazy" decoding="async" alt="第50页：三代测序能帮助哪些任务，原图内中文译注" /><figcaption>原讲义第50页 · 点击图片放大</figcaption></figure>
+
+长读段的共同优势是保留更长距离的连接信息：一个read可能跨越完整转录本、复杂断点或多个变异。它同时也要求适合的DNA/RNA制备、足够覆盖和针对任务的算法。图中应用分类展示技术潜力，不表示一次测序自动完成所有分析，也不替代每项结果的验证。
+
+
+## 基因组组装与T2T
+
+
+### 第051页｜从测序走向组装
+
+<div id="lecture-page-51"></div>
+<figure class="lecture-figure" data-lecture-page="51"><img src="/notes/genome-interpretation-2026/page-051.webp" width="1905" height="1030" loading="lazy" decoding="async" alt="第51页：从测序走向组装，原图内中文译注" /><figcaption>原讲义第51页 · 点击图片放大</figcaption></figure>
+
+测序结果通常不是按染色体顺序排好的一整段文本。组装要判断哪些read相互重叠、哪些片段相邻，以及重复拷贝应怎样区分。它与把read定位到现有参考的mapping不同：从头组装尤其依赖读段自身的连接信息，后面再引入Hi-C和光学图谱帮助组织更长结构。
+
+
+### 第052页｜从头组装的工作流
+
+<div id="lecture-page-52"></div>
+<figure class="lecture-figure" data-lecture-page="52"><img src="/notes/genome-interpretation-2026/page-052.webp" width="2009" height="1337" loading="lazy" decoding="async" alt="第52页：从头组装的工作流，原图内中文译注" /><figcaption>原讲义第52页 · 点击图片放大</figcaption></figure>
+
+先了解基因组大小、重复和杂合背景，再选择文库与测序策略。初始组装后还要纠错、搭架、补洞和验证。Hi-C提供长距离接触，光学图谱提供大分子结构，不能把它们当成直接读取每个碱基的替代品；流程中的连续性、准确度和完整度也需要分开评估。
+
+
+### 第053页｜Paired-end与mate-pair提供距离线索
+
+<div id="lecture-page-53"></div>
+<figure class="lecture-figure" data-lecture-page="53"><img src="/notes/genome-interpretation-2026/page-053.webp" width="1987" height="1097" loading="lazy" decoding="async" alt="第53页：Paired-end与mate-pair提供距离线索，原图内中文译注" /><figcaption>原讲义第53页 · 点击图片放大</figcaption></figure>
+
+两端read不仅贡献字母，还提供方向和间隔约束。短插入片段便于局部比对，较长跨度可连接重复区两侧的唯一序列，帮助搭建骨架。两类文库的方向约定和制备流程不同，不能只因为都是“两条read”就混用参数；跨距线索通常也不能直接补出中间未知序列。
+
+
+### 第054页｜Contig、scaffold与补洞
+
+<div id="lecture-page-54"></div>
+<figure class="lecture-figure" data-lecture-page="54"><img src="/notes/genome-interpretation-2026/page-054.webp" width="1851" height="1519" loading="lazy" decoding="async" alt="第54页：Contig、scaffold与补洞，原图内中文译注" /><figcaption>原讲义第54页 · 点击图片放大</figcaption></figure>
+
+contig通常表示没有未知间隙的连续组装序列；scaffold把若干contig按顺序和方向连接，中间可能仍有N。更长的scaffold不一定意味着碱基都已读出，也可能只是增加了连接推断。读图时先找重叠关系如何形成图，再看哪些证据支持跨越重复与合并片段。
+
+
+### 第055页｜OLC与de Bruijn图
+
+<div id="lecture-page-55"></div>
+<figure class="lecture-figure" data-lecture-page="55"><img src="/notes/genome-interpretation-2026/page-055.webp" width="1993" height="1358" loading="lazy" decoding="async" alt="第55页：OLC与de Bruijn图，原图内中文译注" /><figcaption>原讲义第55页 · 点击图片放大</figcaption></figure>
+
+OLC更直接保留长read的重叠关系；DBG把共享短片段压缩到图结构中，适合处理大量短读段，但重复可能形成分叉。k取值改变重复区分能力和对错误的敏感性。它们是组装框架，不是两种固定测序仪；现代方法也可能结合多个思想，不能仅凭图名称判断结果一定优劣。
+
+
+### 第056页｜大熊猫案例：读懂N50
+
+<div id="lecture-page-56"></div>
+<figure class="lecture-figure" data-lecture-page="56"><img src="/notes/genome-interpretation-2026/page-056.webp" width="1969" height="1352" loading="lazy" decoding="async" alt="第56页：大熊猫案例：读懂N50，原图内中文译注" /><figcaption>原讲义第56页 · 点击图片放大</figcaption></figure>
+
+把所有片段按长度从长到短排序，累计到组装总长一半时所遇片段的长度，就是对应的N50。它不是片段长度平均数，也不是“50%的基因完整”。scaffold N50高于contig N50，说明连接信息跨越了部分间隙。评估仍需同时看总长、缺失、错接和基因完整性，不能只比较一个N50。
+
+#### 深入理解：用五个片段算出N50
+
+假设contig长度依次为8、5、4、2、1 kb，总长20 kb，一半是10 kb。从最长累计：8还未达到10，再加5得到13，因此N50为5 kb。N50既不是总长的一半，也不是这五个数的中位数。若把片段错误拼得很长，N50也会增加，所以还需独立检查正确性和缺失，不能只追求这个数字。
+
+
+### 第057页｜混合组装：不同数据各补什么
+
+<div id="lecture-page-57"></div>
+<figure class="lecture-figure" data-lecture-page="57"><img src="/notes/genome-interpretation-2026/page-057.webp" width="2067" height="1327" loading="lazy" decoding="async" alt="第57页：混合组装：不同数据各补什么，原图内中文译注" /><figcaption>原讲义第57页 · 点击图片放大</figcaption></figure>
+
+短读段可帮助检查局部准确度，长读段跨越重复并连接片段，Hi-C和光学图谱提供更长尺度约束。混合并不是把所有文件直接拼到一起，数据层次与错误模式需要相应算法整合。若一种证据与其他证据冲突，应调查断点、重复和样本来源，而不是无条件相信数据量最大的一组。
+
+
+### 第058页｜补齐剩余8%：难点在重复区域
+
+<div id="lecture-page-58"></div>
+<figure class="lecture-figure" data-lecture-page="58"><img src="/notes/genome-interpretation-2026/page-058.webp" width="2024" height="1357" loading="lazy" decoding="async" alt="第58页：补齐剩余8%：难点在重复区域，原图内中文译注" /><figcaption>原讲义第58页 · 点击图片放大</figcaption></figure>
+
+较早参考更容易覆盖相对唯一的区域，着丝粒、近端着丝粒短臂等复杂重复则难以确定拷贝数和排列。长读长与更准确的共识使这些问题更可解。8%不是指所有异染色质恰好只占这个比例，也不能理解成每个人固定有8%的DNA此前完全没有任何研究。
+
+补充核验：[Nurk等2022：T2T-CHM13](https://pmc.ncbi.nlm.nih.gov/articles/PMC9186530/)。
+
+
+### 第059页｜T2T-CHM13论文回答了什么
+
+<div id="lecture-page-59"></div>
+<figure class="lecture-figure" data-lecture-page="59"><img src="/notes/genome-interpretation-2026/page-059.webp" width="1932" height="1372" loading="lazy" decoding="async" alt="第59页：T2T-CHM13论文回答了什么，原图内中文译注" /><figcaption>原讲义第59页 · 点击图片放大</figcaption></figure>
+
+本页原论文截图提供“完整”的对象和出处。CHM13使许多此前难以解析区域获得连续参考，但它不是所有人群变异的全集，也不是同一个普通个体的两套单倍型都已完整表达。后来独立完成的Y染色体工作需要另一个样本，不能把不同研究混成同一个细胞系。
+
+补充核验：[Nurk等2022：T2T-CHM13](https://pmc.ncbi.nlm.nih.gov/articles/PMC9186530/)。
+
+
+### 第060页｜CHM13与HG002：原页样本说明需辨析
+
+<div id="lecture-page-60"></div>
+<figure class="lecture-figure" data-lecture-page="60"><img src="/notes/genome-interpretation-2026/page-060.webp" width="1984" height="1276" loading="lazy" decoding="async" alt="第60页：CHM13与HG002：原页样本说明需辨析，原图内中文译注" /><figcaption>原讲义第60页 · 点击图片放大</figcaption></figure>
+
+近乎纯合让两套高度相似序列较少互相混淆，简化组装。CHM13没有Y；Rhie等后来从HG002完成Y并与CHM13结合。原页把“另一个葡萄胎样本GM24385”和X/Y补全混写，应纠正。纯合也不等于生物学上只有一套染色体，仍要区分细胞倍性与用于组装的序列复杂度。
+
+#### 深入理解：近乎纯合为什么让拼图更容易
+
+普通二倍体包含父、母两套略有差异的染色体，read混在一起时既要区分重复拷贝，又要区分单倍型。CHM13的高度纯合性减少了后一个困难，但它仍是46,XX的细胞系。其序列特点帮助完成参考，不代表能够覆盖所有个体的变异；完整Y后来来自HG002，不是CHM13突然多出一条Y。
+
+补充核验：[Nurk等2022：T2T-CHM13](https://pmc.ncbi.nlm.nih.gov/articles/PMC9186530/)；[Rhie等2023：完整人类Y染色体](https://pubmed.ncbi.nlm.nih.gov/37612512/)。
+
+
+### 第061页｜HiFi、超长ONT和正交验证
+
+<div id="lecture-page-61"></div>
+<figure class="lecture-figure" data-lecture-page="61"><img src="/notes/genome-interpretation-2026/page-061.webp" width="1977" height="1225" loading="lazy" decoding="async" alt="第61页：HiFi、超长ONT和正交验证，原图内中文译注" /><figcaption>原讲义第61页 · 点击图片放大</figcaption></figure>
+
+把任务拆开就容易理解组合：准确的长片段先搭局部图，超长read帮助选择跨重复路径，其他技术再检查方向与连接。不同证据相互支持，比反复用同一类数据自我验证更有说服力。页中读长与准确度属于T2T研究条件，不应直接改写为2026年所有平台的标准参数。
+
+补充核验：[Nurk等2022：T2T-CHM13](https://pmc.ncbi.nlm.nih.gov/articles/PMC9186530/)。
+
+
+### 第062页｜近端着丝粒染色体的rDNA阵列
+
+<div id="lecture-page-62"></div>
+<figure class="lecture-figure" data-lecture-page="62"><img src="/notes/genome-interpretation-2026/page-062.webp" width="1978" height="1427" loading="lazy" decoding="async" alt="第62页：近端着丝粒染色体的rDNA阵列，原图内中文译注" /><figcaption>原讲义第62页 · 点击图片放大</figcaption></figure>
+
+人类13、14、15、21、22号染色体短臂的rDNA重复高度相似，难以确定每一拷贝的归属和排列。这里需要结合超长连接和高准确度读段。原文各阵列大小约0.7—3.6 Mb；原页“五个10 Mb阵列”的说法不宜按每条固定10 Mb理解。重复单元与整个阵列长度是不同尺度。
+
+补充核验：[Nurk等2022：T2T-CHM13](https://pmc.ncbi.nlm.nih.gov/articles/PMC9186530/)。
+
+
+### 第063页｜片段重复怎样让组装变难
+
+<div id="lecture-page-63"></div>
+<figure class="lecture-figure" data-lecture-page="63"><img src="/notes/genome-interpretation-2026/page-063.webp" width="1826" height="1277" loading="lazy" decoding="async" alt="第63页：片段重复怎样让组装变难，原图内中文译注" /><figcaption>原讲义第63页 · 点击图片放大</figcaption></figure>
+
+两段很长且高度相似的序列会让read看起来能来自多个位置，导致拷贝折叠或错接。长read若跨越到两侧独特序列，就能提供归属线索。连线密集强调区域之间共享序列，不能把所有连线直接当成同一细胞中的物理接触或已经确认的重组事件。
+
+
+### 第064页｜组装统计：不只看总长度
+
+<div id="lecture-page-64"></div>
+<figure class="lecture-figure" data-lecture-page="64"><img src="/notes/genome-interpretation-2026/page-064.webp" width="2046" height="1149" loading="lazy" decoding="async" alt="第64页：组装统计：不只看总长度，原图内中文译注" /><figcaption>原讲义第64页 · 点击图片放大</figcaption></figure>
+
+与GRCh38比较时，序列变长、缺口减少和连续性提高各回答不同问题。N50单位可能为Mb，表中数值不能脱离单位直接比较。某项统计更优不保证每个单点都正确，组装评估还需要检验错接、碱基错误和难区间，尤其不能仅凭“缺口为零”断言所有生物学解释都已解决。
+
+
+### 第065页｜新补齐的序列包含哪些重复
+
+<div id="lecture-page-65"></div>
+<figure class="lecture-figure" data-lecture-page="65"><img src="/notes/genome-interpretation-2026/page-065.webp" width="2049" height="1423" loading="lazy" decoding="async" alt="第65页：新补齐的序列包含哪些重复，原图内中文译注" /><figcaption>原讲义第65页 · 点击图片放大</figcaption></figure>
+
+新增序列并非随机平均分布，原来难以处理的卫星、简单重复和rDNA可有更明显增量。百分比变化大可能同时受原先数量小、参考缺失和注释方法影响。这里比较的是两个组装及其注释，不是在观察同一个体突然长出了这些DNA，也不能据此推算所有人群的真实拷贝数。
+
+
+### 第066页｜更完整参考带来什么机会
+
+<div id="lecture-page-66"></div>
+<figure class="lecture-figure" data-lecture-page="66"><img src="/notes/genome-interpretation-2026/page-066.webp" width="1919" height="1142" loading="lazy" decoding="async" alt="第66页：更完整参考带来什么机会，原图内中文译注" /><figcaption>原讲义第66页 · 点击图片放大</figcaption></figure>
+
+参考更完整可以减少某些误比对和漏检，但具体临床流程仍需重新验证，不能自动保证所有假阳性、假阴性都下降。坐标体系改变后，还要迁移既有注释和解释资源。补齐序列是后续研究的起点，功能、群体差异与致病机制仍需独立证据。
+
+
+## 从FASTQ到变异记录
+
+
+### 第067页｜转向NGS数据分析
+
+<div id="lecture-page-67"></div>
+<figure class="lecture-figure" data-lecture-page="67"><img src="/notes/genome-interpretation-2026/page-067.webp" width="1360" height="1000" loading="lazy" decoding="async" alt="第67页：转向NGS数据分析，原图内中文译注" /><figcaption>原讲义第67页 · 点击图片放大</figcaption></figure>
+
+前面解释了数据怎样产生，现在倒过来重建信息：从零散读段判断来源坐标，再识别与参考不同之处。分析不能忘记实验背景，因为文库类型、测序长度和错误模式都会影响算法选择。每个文件的含义及坐标约定，是理解整条流程的基础。
+
+
+### 第068页｜FASTQ、BAM、VCF各处在哪一步
+
+<div id="lecture-page-68"></div>
+<figure class="lecture-figure" data-lecture-page="68"><img src="/notes/genome-interpretation-2026/page-068.webp" width="1934" height="1255" loading="lazy" decoding="async" alt="第68页：FASTQ、BAM、VCF各处在哪一步，原图内中文译注" /><figcaption>原讲义第68页 · 点击图片放大</figcaption></figure>
+
+先分清不同分析分支：从头组装要重建序列，比对分析则依赖既有参考。峰识别、差异表达和变异调用对应不同实验任务，并非每份DNA测序都要依次全部执行。文件后缀表示表达方式，不能代替数据生成方法；不同格式还可能使用不同坐标起点和区间端点约定。
+
+
+### 第069页｜WGS与WES：覆盖目标不同
+
+<div id="lecture-page-69"></div>
+<figure class="lecture-figure" data-lecture-page="69"><img src="/notes/genome-interpretation-2026/page-069.webp" width="2010" height="1056" loading="lazy" decoding="async" alt="第69页：WGS与WES：覆盖目标不同，原图内中文译注" /><figcaption>原讲义第69页 · 点击图片放大</figcaption></figure>
+
+WES通过捕获富集目标外显子，在预算约束下可获得较高目标深度；WGS更广泛覆盖编码与非编码序列。两者都存在难测和难比对区域。原页“发现所有变异”应理解为检测范围更广的概括，而不是任何深度WGS都能找到所有SV；WES检测CNV也需针对捕获与覆盖偏差专门验证。
+
+
+### 第070页｜分析为什么像实验的逆过程
+
+<div id="lecture-page-70"></div>
+<figure class="lecture-figure" data-lecture-page="70"><img src="/notes/genome-interpretation-2026/page-070.webp" width="1838" height="1398" loading="lazy" decoding="async" alt="第70页：分析为什么像实验的逆过程，原图内中文译注" /><figcaption>原讲义第70页 · 点击图片放大</figcaption></figure>
+
+实验把完整DNA切成片段并读取两端，分析再利用参考与重叠信息推断片段原来的位置。它不是把每个步骤在物理上倒放，丢失的信息未必能恢复。先质控、再定位、再调用变异的顺序，说明低质量或错归属的read会把错误传递到后面的候选变异中。
+
+
+### 第071页｜短读段比对为什么需要索引
+
+<div id="lecture-page-71"></div>
+<figure class="lecture-figure" data-lecture-page="71"><img src="/notes/genome-interpretation-2026/page-071.webp" width="2036" height="1275" loading="lazy" decoding="async" alt="第71页：短读段比对为什么需要索引，原图内中文译注" /><figcaption>原讲义第71页 · 点击图片放大</figcaption></figure>
+
+若对每条read在整个基因组逐个位置完整尝试，计算量会很大。索引像书末目录，先缩小候选位置，再详细核对。真实差异与测序错误都可能造成不完全匹配，所以定位器需要允许一定错配或缺口，并给出定位置信度。定位成功并不保证位置唯一。
+
+
+### 第072页｜哈希索引：先找种子再延伸
+
+<div id="lecture-page-72"></div>
+<figure class="lecture-figure" data-lecture-page="72"><img src="/notes/genome-interpretation-2026/page-072.webp" width="1812" height="1523" loading="lazy" decoding="async" alt="第72页：哈希索引：先找种子再延伸，原图内中文译注" /><figcaption>原讲义第72页 · 点击图片放大</figcaption></figure>
+
+把read或参考中的短片段作为种子，建立可快速检索的索引，命中后再检查附近完整匹配。种子太短会出现许多候选，太严格又可能漏掉带变异或错误的read。图中MAQ、SOAP等是方法发展实例，不应当作所有现代比对器的统一内部实现。
+
+
+### 第073页｜BWT与压缩索引
+
+<div id="lecture-page-73"></div>
+<figure class="lecture-figure" data-lecture-page="73"><img src="/notes/genome-interpretation-2026/page-073.webp" width="1875" height="1525" loading="lazy" decoding="async" alt="第73页：BWT与压缩索引，原图内中文译注" /><figcaption>原讲义第73页 · 点击图片放大</figcaption></figure>
+
+BWT配合相应索引可在较小内存中支持序列检索。核心直觉是把参考整理成利于搜索的结构，用read字符逐步约束候选范围；它并不是把生物体DNA本身改变了。带错误或缺口时仍需额外搜索策略，最终还要处理多个可行位置与配对约束。
+
+
+### 第074页｜比对后也要质控
+
+<div id="lecture-page-74"></div>
+<figure class="lecture-figure" data-lecture-page="74"><img src="/notes/genome-interpretation-2026/page-074.webp" width="1919" height="1217" loading="lazy" decoding="async" alt="第74页：比对后也要质控，原图内中文译注" /><figcaption>原讲义第74页 · 点击图片放大</figcaption></figure>
+
+原始read质量良好，仍可能因为参考不匹配、污染或重复而定位不好。表格先看总数和分母，再看比例；first/second of pair可揭示两端差异。高比对率不能单独证明样本正确，也不等于所有比对都具有高可信度，后面还应检查MAPQ、覆盖分布和文库结构。
+
+
+### 第075页｜插入片段与质量分布
+
+<div id="lecture-page-75"></div>
+<figure class="lecture-figure" data-lecture-page="75"><img src="/notes/genome-interpretation-2026/page-075.webp" width="1948" height="1204" loading="lazy" decoding="async" alt="第75页：插入片段与质量分布，原图内中文译注" /><figcaption>原讲义第75页 · 点击图片放大</figcaption></figure>
+
+插入片段长度通常指文库DNA片段跨度，不是单条read长度。分布异常可能影响配对定位和某些结构变异判断，也可能与实验设计一致。质量分布汇总整体数据，不能代替各位置或各区域检查；两个样本平均质量相近，也可能有完全不同的覆盖盲区。
+
+
+### 第076页｜SAM：一条read的定位记录
+
+<div id="lecture-page-76"></div>
+<figure class="lecture-figure" data-lecture-page="76"><img src="/notes/genome-interpretation-2026/page-076.webp" width="1939" height="1219" loading="lazy" decoding="async" alt="第76页：SAM：一条read的定位记录，原图内中文译注" /><figcaption>原讲义第76页 · 点击图片放大</figcaption></figure>
+
+SAM把测量结果和参考坐标连接起来，BAM是相应的二进制表达。FLAG可同时编码多个状态，不能把数字看成单一类别；CIGAR说明read与参考怎样对应。SAM的POS采用1起点，而BED常用0起点半开区间，转换时若忽略这一点，就可能把变异或区域整体错移一个碱基。
+
+补充核验：[SAMtools：HTS文件格式官方规范](https://samtools.github.io/hts-specs/)。
+
+
+### 第077页｜IGV：先看读段，再谈变异
+
+<div id="lecture-page-77"></div>
+<figure class="lecture-figure" data-lecture-page="77"><img src="/notes/genome-interpretation-2026/page-077.webp" width="1993" height="1344" loading="lazy" decoding="async" alt="第77页：IGV：先看读段，再谈变异，原图内中文译注" /><figcaption>原讲义第77页 · 点击图片放大</figcaption></figure>
+
+先辨认参考序列、覆盖轨道和read排列，再查看同一位置是否被多条独立高质量read支持。少数彩色字母可能是错误、错比对或真实变异，图中的弧线或缺口也不自动等于致病事件。局部放大结合链方向、配对和质量，比只看一个颜色更可靠。
+
+
+### 第078页｜测序深度与覆盖广度
+
+<div id="lecture-page-78"></div>
+<figure class="lecture-figure" data-lecture-page="78"><img src="/notes/genome-interpretation-2026/page-078.webp" width="1966" height="1374" loading="lazy" decoding="async" alt="第78页：测序深度与覆盖广度，原图内中文译注" /><figcaption>原讲义第78页 · 点击图片放大</figcaption></figure>
+
+若获得30 Gb读段，对3 Gb参考的平均深度约10×，但实际分布可能极不均匀。WES常报告目标区域至少达到10×、20×等阈值的比例，因为平均100×也可能留下完全没读到的外显子。公式中的N若按成对read计数，要确保L和数据总量的定义一致。
+
+#### 深入理解：10×平均深度怎样仍会有0×区域
+
+如果前一半区域平均20×、后一半完全未覆盖，整体平均仍是10×。因此平均深度只概括总数据量，不能说明每个重要外显子都被可靠测量。实际还应检查达到阈值的目标比例、最低深度与均匀性。PCR重复也不能无限增加独立支持，尤其低频变异识别需要考虑原始分子复杂度。
+
+
+### 第079页｜从候选到联合分型
+
+<div id="lecture-page-79"></div>
+<figure class="lecture-figure" data-lecture-page="79"><img src="/notes/genome-interpretation-2026/page-079.webp" width="2058" height="1354" loading="lazy" decoding="async" alt="第79页：从候选到联合分型，原图内中文译注" /><figcaption>原讲义第79页 · 点击图片放大</figcaption></figure>
+
+先把read和质量整理到可用于分析的状态，再产生候选并估计基因型，必要时联合多个样本作一致性分析。图中流程包含历史版本步骤，不能直接当作当前软件命令清单。变异质量评估回答“这个调用是否可信”，功能注释回答“位于哪里、可能影响什么”，两个问题不能替代。
+
+
+### 第080页｜Indel附近的局部对齐
+
+<div id="lecture-page-80"></div>
+<figure class="lecture-figure" data-lecture-page="80"><img src="/notes/genome-interpretation-2026/page-080.webp" width="2006" height="1116" loading="lazy" decoding="async" alt="第80页：Indel附近的局部对齐，原图内中文译注" /><figcaption>原讲义第80页 · 点击图片放大</figcaption></figure>
+
+一个真实缺失可能被逐条read分别解释成多个错配，局部协调能让证据更一致。现代某些调用器通过局部组装处理这类问题，因此并不都需要单独运行旧式IndelRealigner。应理解图中的计算动机，再按实际工具版本选择流程，避免机械照抄历史步骤。
+
+补充核验：[GATK：HaplotypeCaller局部组装说明](https://gatk.broadinstitute.org/hc/en-us/articles/4405451272731-HaplotypeCaller)。
+
+
+### 第081页｜Pileup图：观察同一位置的支持模式
+
+<div id="lecture-page-81"></div>
+<figure class="lecture-figure" data-lecture-page="81"><img src="/notes/genome-interpretation-2026/page-081.webp" width="1901" height="1450" loading="lazy" decoding="async" alt="第81页：Pileup图：观察同一位置的支持模式，原图内中文译注" /><figcaption>原讲义第81页 · 点击图片放大</figcaption></figure>
+
+一列表示参考附近某位置，多行表示不同read；若同一列有一致偏离，就形成候选线索。还要看偏离是否集中在read末端、单一链或相同起点，否则技术伪影可能被误当作多数支持。图中颜色是编码手段，并不自带生物学上的好坏含义。
+
+
+### 第082页｜VCF：把变异写成标准记录
+
+<div id="lecture-page-82"></div>
+<figure class="lecture-figure" data-lecture-page="82"><img src="/notes/genome-interpretation-2026/page-082.webp" width="1955" height="1229" loading="lazy" decoding="async" alt="第82页：VCF：把变异写成标准记录，原图内中文译注" /><figcaption>原讲义第82页 · 点击图片放大</figcaption></figure>
+
+REF是参考等位基因，ALT是候选替代；样本的GT、DP、AD等字段则描述基因型和支持信息。一个位置可有多个ALT，indel还需按格式规则规范表达。VCF保存调用结果，不保证每条都真实，更不保证每条都致病；参考版本、软件和过滤过程必须同时记录。
+
+#### 深入理解：VCF中的0/1究竟表示什么
+
+GT=0/1通常表示在记录所定义的REF与第一个ALT之间为杂合调用，而不是“0代表正常人、1代表患者”。若ALT有多个值，编号2还可表示第二个ALT；斜杠与竖线分别表示未定相和定相的常见写法。具体字段由头部及FORMAT定义。调用结果还需与AD、DP、质量和参考版本一起读，不能脱离记录语境解释。
+
+补充核验：[SAMtools：HTS文件格式官方规范](https://samtools.github.io/hts-specs/)。
+
+
+### 第083页｜调用过滤：每个质量维度问什么
+
+<div id="lecture-page-83"></div>
+<figure class="lecture-figure" data-lecture-page="83"><img src="/notes/genome-interpretation-2026/page-083.webp" width="1770" height="814" loading="lazy" decoding="async" alt="第83页：调用过滤：每个质量维度问什么，原图内中文译注" /><figcaption>原讲义第83页 · 点击图片放大</figcaption></figure>
+
+碱基本身清晰，却定位到错误重复拷贝，仍可能产生假变异；只在一条链或read末端出现的改变也值得警惕。等位基因比例不总是50%，还受拷贝数、肿瘤纯度和克隆性影响。各指标用于综合评估，不应跨平台、样本类型和任务无条件套用一组阈值。
+
+
+### 第084页｜DeepVariant：从堆叠证据学习分型
+
+<div id="lecture-page-84"></div>
+<figure class="lecture-figure" data-lecture-page="84"><img src="/notes/genome-interpretation-2026/page-084.webp" width="2087" height="1265" loading="lazy" decoding="async" alt="第84页：DeepVariant：从堆叠证据学习分型，原图内中文译注" /><figcaption>原讲义第84页 · 点击图片放大</figcaption></figure>
+
+原研究把局部read证据转成多通道表示，让网络学习候选位置的基因型分类。它处理的是经过上游比对的证据，不是直接从原始电流生成临床报告。训练和评估的参考真值、平台和困难区域决定结果适用范围；识别变异与判断变异致病性仍是不同任务。
+
+补充核验：[Poplin等2018：DeepVariant原始研究](https://www.nature.com/articles/nbt.4235)。
+
+
+### 第085页｜DeepVariant图像的各通道
+
+<div id="lecture-page-85"></div>
+<figure class="lecture-figure" data-lecture-page="85"><img src="/notes/genome-interpretation-2026/page-085.webp" width="2008" height="1351" loading="lazy" decoding="async" alt="第85页：DeepVariant图像的各通道，原图内中文译注" /><figcaption>原讲义第85页 · 点击图片放大</figcaption></figure>
+
+这些图像不是显微镜拍摄的细胞，而是把表格信息编码成像素。每个通道提供不同线索，使网络有机会区分真实等位基因与技术错误。通道越多并不自动代表解释越清楚，理解输出仍需要知道输入特征怎样生成、候选如何选择，以及训练标签是否可靠。
+
+补充核验：[Poplin等2018：DeepVariant原始研究](https://www.nature.com/articles/nbt.4235)。
+
+
+### 第086页｜候选生成、神经网络与最终结果
+
+<div id="lecture-page-86"></div>
+<figure class="lecture-figure" data-lecture-page="86"><img src="/notes/genome-interpretation-2026/page-086.webp" width="2011" height="1454" loading="lazy" decoding="async" alt="第86页：候选生成、神经网络与最终结果，原图内中文译注" /><figcaption>原讲义第86页 · 点击图片放大</figcaption></figure>
+
+端到端流程仍包含非神经网络步骤，例如读取比对、筛候选、组织特征和输出规范。模型分数是在这些预处理条件下产生的，不能把全部性能都归功于某一层网络。若上游漏掉候选或错比对，后面再高分也不等于恢复了未看到的真实信息。
+
+补充核验：[Poplin等2018：DeepVariant原始研究](https://www.nature.com/articles/nbt.4235)。
+
+
+### 第087页｜高准确度需要明确评估边界
+
+<div id="lecture-page-87"></div>
+<figure class="lecture-figure" data-lecture-page="87"><img src="/notes/genome-interpretation-2026/page-087.webp" width="1767" height="1307" loading="lazy" decoding="async" alt="第87页：高准确度需要明确评估边界，原图内中文译注" /><figcaption>原讲义第87页 · 点击图片放大</figcaption></figure>
+
+“超过99.9% F1”必须附带基准样本、可信区域、变异类别和软件模型版本。它不是说所有人的整个基因组都只有万分之一错误，也不证明跨平台直接使用一个模型同样可靠。不同测序体系应使用适配模型和独立验证，临床报告更需要整条流程的质量保证。
+
+#### 深入理解：F1高分与患者层面的正确性
+
+精确率关注报出的阳性中有多少是真的，召回率关注真实阳性中找回多少，F1综合两者。基准只对一组定义好的变异和区域计算，不能直接变成整份临床报告或患者结局的准确率。若把困难区域排除、样本类型改变或真正任务换成低频体细胞变异，性能需要重新评估；测试设计是结论的一部分。
+
+
+### 第088页｜再看高分：哪些区域没有被算进去
+
+<div id="lecture-page-88"></div>
+<figure class="lecture-figure" data-lecture-page="88"><img src="/notes/genome-interpretation-2026/page-088.webp" width="2039" height="1377" loading="lazy" decoding="async" alt="第88页：再看高分：哪些区域没有被算进去，原图内中文译注" /><figcaption>原讲义第88页 · 点击图片放大</figcaption></figure>
+
+基准数据常规定一组可信区域，极难重复或结构复杂区可能未被充分评价。高分应作为该测试范围的结果，而不是覆盖盲区已经消失的证明。重复强调准确度时，复习重点是同时说出分母与评估范围；若任务改成低频体细胞变异，也不能照搬生殖系小变异基准的结论。
+
+
+### 第089页｜不同变异留下不同测序线索
+
+<div id="lecture-page-89"></div>
+<figure class="lecture-figure" data-lecture-page="89"><img src="/notes/genome-interpretation-2026/page-089.webp" width="2036" height="1337" loading="lazy" decoding="async" alt="第89页：不同变异留下不同测序线索，原图内中文译注" /><figcaption>原讲义第89页 · 点击图片放大</figcaption></figure>
+
+单碱基变化主要看位置一致的替换支持，拷贝数变化看相对深度，重排还要看异常配对和跨断点read。没有一种信号能独自覆盖全部变异类别。也要把未比对read视为待解释信息，而不是全部扔掉：它们可能来自参考缺失、低质量、污染或其他生物序列。
+
+
+### 第090页｜临床测序的不同覆盖范围
+
+<div id="lecture-page-90"></div>
+<figure class="lecture-figure" data-lecture-page="90"><img src="/notes/genome-interpretation-2026/page-090.webp" width="2063" height="1264" loading="lazy" decoding="async" alt="第90页：临床测序的不同覆盖范围，原图内中文译注" /><figcaption>原讲义第90页 · 点击图片放大</figcaption></figure>
+
+检测范围、灵敏度和适用问题随方案改变。小panel可能在少数位点做到较深覆盖，WGS则更广；RNA可提供融合和表达信息，但受组织、转录状态和稳定性影响。临床检测选择要由问题驱动，不能仅按“技术更新”排序，也不能把一次阴性结果解释为已排除范围外的遗传机制。
+
+
+## 临床基因组学与证据分级
+
+
+### 第091页｜临床基因组学：从调用到解释
+
+<div id="lecture-page-91"></div>
+<figure class="lecture-figure" data-lecture-page="91"><img src="/notes/genome-interpretation-2026/page-091.webp" width="1360" height="1076" loading="lazy" decoding="async" alt="第91页：临床基因组学：从调用到解释，原图内中文译注" /><figcaption>原讲义第91页 · 点击图片放大</figcaption></figure>
+
+临床解释要把变异与样本来源、疾病表型、遗传方式及证据等级联系起来。实验室能检测到某个改变，并不等于该改变能指导治疗；不同应用还会采用不同验证要求。接下来先区分遗传病诊断、肿瘤检测和液体活检，再理解各自的证据与局限。
+
+
+### 第092页｜样本类型决定可以问的问题
+
+<div id="lecture-page-92"></div>
+<figure class="lecture-figure" data-lecture-page="92"><img src="/notes/genome-interpretation-2026/page-092.webp" width="1825" height="1018" loading="lazy" decoding="async" alt="第92页：样本类型决定可以问的问题，原图内中文译注" /><figcaption>原讲义第92页 · 点击图片放大</figcaption></figure>
+
+血液可用于生殖系检测，也可在肿瘤背景中提供体细胞信号，具体取决于检测对象。组织检测关注肿瘤分子特征，血浆cfDNA中只有一部分可能是ctDNA。产前筛查、诊断和肿瘤MRD虽然都可能使用测序，却不是相同的临床问题，不能把一个场景的性能数字直接搬到另一个。
+
+
+### 第093页｜TCGA：多组学肿瘤研究资源
+
+<div id="lecture-page-93"></div>
+<figure class="lecture-figure" data-lecture-page="93"><img src="/notes/genome-interpretation-2026/page-093.webp" width="1932" height="1122" loading="lazy" decoding="async" alt="第93页：TCGA：多组学肿瘤研究资源，原图内中文译注" /><figcaption>原讲义第93页 · 点击图片放大</figcaption></figure>
+
+TCGA将不同肿瘤的分子特征与临床信息关联，帮助识别驱动改变和亚型。资源中的病例来自特定纳入与采样过程，不自动代表所有癌症患者；配对正常样本有助区分生殖系与肿瘤相关变化，但仍需严格处理。数据库是研究证据入口，不是自动给个人生成治疗结论的服务。
+
+
+### 第094页｜TCGA的规模与整合价值
+
+<div id="lecture-page-94"></div>
+<figure class="lecture-figure" data-lecture-page="94"><img src="/notes/genome-interpretation-2026/page-094.webp" width="1999" height="1172" loading="lazy" decoding="async" alt="第94页：TCGA的规模与整合价值，原图内中文译注" /><figcaption>原讲义第94页 · 点击图片放大</figcaption></figure>
+
+价值不只在样本数，还在同一样本的突变、拷贝数、表达和其他模态可联读。不同组学并不总是每位患者都有，分析前应检查缺失与可用交集。不能把图中的全部检测次数当作独立患者数，也不能把不同癌种的统计关联未经校正合并成统一机制。
+
+
+### 第095页｜胶质瘤：形态与分子特征共同分类
+
+<div id="lecture-page-95"></div>
+<figure class="lecture-figure" data-lecture-page="95"><img src="/notes/genome-interpretation-2026/page-095.webp" width="1693" height="1123" loading="lazy" decoding="async" alt="第95页：胶质瘤：形态与分子特征共同分类，原图内中文译注" /><figcaption>原讲义第95页 · 点击图片放大</figcaption></figure>
+
+外观相近的肿瘤可能具有不同分子背景，分子标志因此改变分类与预后分层。这里学习的是综合诊断思想，不把旧流程图当成当前完整诊断标准；分类版本、患者年龄和实体范围都会影响实际规则。基因检测应与病理、影像和临床信息共同解释。
+
+
+### 第096页｜癌症既可按器官，也可按分子分组
+
+<div id="lecture-page-96"></div>
+<figure class="lecture-figure" data-lecture-page="96"><img src="/notes/genome-interpretation-2026/page-096.webp" width="1668" height="1233" loading="lazy" decoding="async" alt="第96页：癌症既可按器官，也可按分子分组，原图内中文译注" /><figcaption>原讲义第96页 · 点击图片放大</figcaption></figure>
+
+分子特征揭示器官分类内部差异，也发现不同组织之间的共同程序。但跨器官相似不代表治疗可以无条件互换，微环境和其他分子背景仍可能改变药物效应。图中聚类首先是一种研究分组，是否具有独立预测和治疗价值，需要对应的临床验证。
+
+
+### 第097页｜MSK-IMPACT大队列的研究背景
+
+<div id="lecture-page-97"></div>
+<figure class="lecture-figure" data-lecture-page="97"><img src="/notes/genome-interpretation-2026/page-097.webp" width="1737" height="1309" loading="lazy" decoding="async" alt="第97页：MSK-IMPACT大队列的研究背景，原图内中文译注" /><figcaption>原讲义第97页 · 点击图片放大</figcaption></figure>
+
+临床队列能展示真实检测中不同癌种的改变分布，也带有转诊、分期和治疗背景的选择。panel范围内未发现某类改变，不等于肿瘤全基因组没有相关机制。读这类队列时先确认患者数、样本数、检测版本和纳入条件，再解释比例。
+
+
+### 第098页｜“可行动变异”不等于已获益
+
+<div id="lecture-page-98"></div>
+<figure class="lecture-figure" data-lecture-page="98"><img src="/notes/genome-interpretation-2026/page-098.webp" width="1960" height="1164" loading="lazy" decoding="async" alt="第98页：“可行动变异”不等于已获益，原图内中文译注" /><figcaption>原讲义第98页 · 点击图片放大</figcaption></figure>
+
+actionable的定义可涵盖不同证据层级或研究机会，并不意味着所有这些患者都接受了匹配药物，也不意味着都产生临床获益。应把发现靶点、具备治疗机会、实际用药和观察获益分层统计。36.7%属于该队列和定义，不能当成任意检测的普遍成功率。
+
+#### 深入理解：四种“成功率”不能相互替换
+
+发现潜在可行动变异的比例、医生认为可考虑治疗的比例、患者真正接受匹配治疗的比例，以及治疗后达到预设获益的比例，分母与终点都不同。药物可及性、入组条件和患者状态会让后一阶段人数减少。看到研究标题里的百分比，先把它放到这四层中的某一层，才能判断它究竟证明了什么。
+
+
+### 第099页｜篮式与伞式试验
+
+<div id="lecture-page-99"></div>
+<figure class="lecture-figure" data-lecture-page="99"><img src="/notes/genome-interpretation-2026/page-099.webp" width="1868" height="1089" loading="lazy" decoding="async" alt="第99页：篮式与伞式试验，原图内中文译注" /><figcaption>原讲义第99页 · 点击图片放大</figcaption></figure>
+
+篮式像把来自不同器官、共享靶点的病例放进同一框架，伞式像在一个癌种内分出多个分支。分组方式改变了纳入和比较逻辑，但都需要预设终点、样本量及证据标准。共享分子标志是入组线索，不是已经证明共享同等疗效。
+
+
+### 第100页｜MSI与PD-1响应：读瀑布图
+
+<div id="lecture-page-100"></div>
+<figure class="lecture-figure" data-lecture-page="100"><img src="/notes/genome-interpretation-2026/page-100.webp" width="1921" height="990" loading="lazy" decoding="async" alt="第100页：MSI与PD-1响应：读瀑布图，原图内中文译注" /><figcaption>原讲义第100页 · 点击图片放大</figcaption></figure>
+
+每根柱通常表示一位可评估患者的肿瘤负荷相对变化，下降提示缩小，具体阈值须按原研究标准。图支持特定研究中修复缺陷与疗效的关联，不是说MSI阳性患者一定响应。检测方法、癌种、既往治疗和随访都影响解释；临床应用应按具体检测及药物批准要求。
+
+
+### 第101页｜TMB与响应率：群体相关怎样读
+
+<div id="lecture-page-101"></div>
+<figure class="lecture-figure" data-lecture-page="101"><img src="/notes/genome-interpretation-2026/page-101.webp" width="1711" height="1148" loading="lazy" decoding="async" alt="第101页：TMB与响应率：群体相关怎样读，原图内中文译注" /><figcaption>原讲义第101页 · 点击图片放大</figcaption></figure>
+
+散点相关不等于能精确预测单个患者，也不能把跨癌种关系直接当作同一癌种内部的效应。TMB还受检测范围、变异类型、过滤与校准影响。把测量方法、阈值和适用癌种分开讨论，才能避免“越高就一定越有效”的简化；图中的引用次数也不是临床证据等级。
+
+
+### 第102页｜从实验技术到临床检测
+
+<div id="lecture-page-102"></div>
+<figure class="lecture-figure" data-lecture-page="102"><img src="/notes/genome-interpretation-2026/page-102.webp" width="1962" height="1012" loading="lazy" decoding="async" alt="第102页：从实验技术到临床检测，原图内中文译注" /><figcaption>原讲义第102页 · 点击图片放大</figcaption></figure>
+
+研究发现要变成临床检测，需要证明分析性能、解释规则及特定用途的临床意义。TCGA、企业成立与某产品获批是不同类型事件，时间轴相邻不代表自动因果链。历史获批年份可以帮助理解发展，但不能据旧图概括现在所有药物和检测的适应证。
+
+
+### 第103页｜FoundationOne CDx：检测范围与适用范围
+
+<div id="lecture-page-103"></div>
+<figure class="lecture-figure" data-lecture-page="103"><img src="/notes/genome-interpretation-2026/page-103.webp" width="1726" height="1129" loading="lazy" decoding="async" alt="第103页：FoundationOne CDx：检测范围与适用范围，原图内中文译注" /><figcaption>原讲义第103页 · 点击图片放大</figcaption></figure>
+
+能分析多类实体瘤样本，不等于任何检测到的变异都能对应一种获批治疗。基因总数、重排区域及具体药物匹配表会随版本变化；原页“40个基因易位”须按对应版本核实，不据此列为当前固定清单。报告中的泛癌标志与特定癌种靶点，也有不同解释层级。
+
+补充核验：[FDA：FoundationOne CDx初始批准记录](https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpma/pma.cfm?id=P170019)。
+
+
+### 第104页｜伴随诊断表怎样阅读
+
+<div id="lecture-page-104"></div>
+<figure class="lecture-figure" data-lecture-page="104"><img src="/notes/genome-interpretation-2026/page-104.webp" width="1870" height="1349" loading="lazy" decoding="async" alt="第104页：伴随诊断表怎样阅读，原图内中文译注" /><figcaption>原讲义第104页 · 点击图片放大</figcaption></figure>
+
+横向读取一行，必须把癌种、具体分子条件与药物连在一起，不能只摘出基因名。某药对应的变异可能限定突变类别、融合或拷贝数状态，治疗线次等条件也可能重要。本笔记解释表的结构，不将旧截图转成当前用药清单；实际用途需查对应最新标签。
+
+补充核验：[FDA：FoundationOne CDx初始批准记录](https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpma/pma.cfm?id=P170019)。
+
+
+### 第105页｜液体活检：血中测到的是什么
+
+<div id="lecture-page-105"></div>
+<figure class="lecture-figure" data-lecture-page="105"><img src="/notes/genome-interpretation-2026/page-105.webp" width="1536" height="996" loading="lazy" decoding="async" alt="第105页：液体活检：血中测到的是什么，原图内中文译注" /><figcaption>原讲义第105页 · 点击图片放大</figcaption></figure>
+
+血浆中多数游离DNA可能来自非肿瘤组织，肿瘤比例受负荷、部位和治疗影响。不同液体活检对象有不同检测方法，不能把cfDNA、ctDNA和完整肿瘤细胞混为一谈。阴性既可能是真没有目标，也可能是释放少、采样或检测灵敏度不足；血细胞克隆相关改变也会干扰某些解释。
+
+
+### 第106页｜ctDNA与术后免疫治疗研究
+
+<div id="lecture-page-106"></div>
+<figure class="lecture-figure" data-lecture-page="106"><img src="/notes/genome-interpretation-2026/page-106.webp" width="1711" height="1149" loading="lazy" decoding="async" alt="第106页：ctDNA与术后免疫治疗研究，原图内中文译注" /><figcaption>原讲义第106页 · 点击图片放大</figcaption></figure>
+
+读生存曲线先看分组依据、治疗组、风险人数和置信区间。本研究中的ctDNA分析提供残留病变及疗效分层线索，但亚组或探索性结果不能自动等同于前瞻性按ctDNA指导用药已被普遍验证。未检出ctDNA也不意味着没有残留肿瘤，解释要连同取样时点和检测性能。
+
+补充核验：[Powles等2021：ctDNA与辅助免疫治疗](https://pubmed.ncbi.nlm.nih.gov/34135506/)。
+
+
+### 第107页｜FoundationOne Liquid CDx：血浆检测版本
+
+<div id="lecture-page-107"></div>
+<figure class="lecture-figure" data-lecture-page="107"><img src="/notes/genome-interpretation-2026/page-107.webp" width="1875" height="1076" loading="lazy" decoding="async" alt="第107页：FoundationOne Liquid CDx：血浆检测版本，原图内中文译注" /><figcaption>原讲义第107页 · 点击图片放大</figcaption></figure>
+
+血浆panel与组织panel的覆盖、样本要求和检出限并不完全相同。一个目标不在panel或肿瘤DNA比例过低，都可能产生未检出结果。原图数字和表格不作为当前产品规格，具体临床用途需对应版本与监管标签，也不应把检测有标志物直接等同于患者适合所有相关治疗。
+
+
+### 第108页｜错误来源贯穿整条流程
+
+<div id="lecture-page-108"></div>
+<figure class="lecture-figure" data-lecture-page="108"><img src="/notes/genome-interpretation-2026/page-108.webp" width="1939" height="1429" loading="lazy" decoding="async" alt="第108页：错误来源贯穿整条流程，原图内中文译注" /><figcaption>原讲义第108页 · 点击图片放大</figcaption></figure>
+
+有些错误在测量阶段产生，有些来自参考或定位算法，再有些来自过滤与解释。图中一个看似普通的未比对read，可能提示质量差，也可能提示参考缺少相关序列。定位失败的位置不能被当作“与参考相同”，更不能仅凭全局质量合格就忽略局部困难区。
+
+
+### 第109页｜过滤会改变最终看到的变异集合
+
+<div id="lecture-page-109"></div>
+<figure class="lecture-figure" data-lecture-page="109"><img src="/notes/genome-interpretation-2026/page-109.webp" width="1939" height="1441" loading="lazy" decoding="async" alt="第109页：过滤会改变最终看到的变异集合，原图内中文译注" /><figcaption>原讲义第109页 · 点击图片放大</figcaption></figure>
+
+过滤可以减少假阳性，同时也可能把真实但证据异常的变异排除。多个相邻改变还可能在不同软件中被拆成不同表示。临床分析应保留可追溯的过滤理由，必要时回看原始read与局部组装，而不是把最终表格当成实验中所有可见变化的完整清单。
+
+
+### 第110页｜KCNH2覆盖图：平均深度会掩盖盲区
+
+<div id="lecture-page-110"></div>
+<figure class="lecture-figure" data-lecture-page="110"><img src="/notes/genome-interpretation-2026/page-110.webp" width="1929" height="1300" loading="lazy" decoding="async" alt="第110页：KCNH2覆盖图：平均深度会掩盖盲区，原图内中文译注" /><figcaption>原讲义第110页 · 点击图片放大</figcaption></figure>
+
+同一基因不同外显子的捕获和定位难度可能不同，WES平均深度很高也可能有局部谷底。增强捕获可改善某些区域，但具体表现依试剂和样本而定。遇到重要区域未充分覆盖，应把它作为检测局限报告，而不是把阴性解读为该基因已经完全排除异常。
+
+
+### 第111页｜56个基因中的未覆盖碱基
+
+<div id="lecture-page-111"></div>
+<figure class="lecture-figure" data-lecture-page="111"><img src="/notes/genome-interpretation-2026/page-111.webp" width="1972" height="1340" loading="lazy" decoding="async" alt="第111页：56个基因中的未覆盖碱基，原图内中文译注" /><figcaption>原讲义第111页 · 点击图片放大</figcaption></figure>
+
+横轴是未覆盖的碱基数量，不是漏诊患者数量。不同检测方案在该研究集合中有不同盲区，误差线和样本数也需结合原文理解。这里的56个基因不能当作当前二次发现推荐名单的固定总数，也不能据这张图给所有现行WES试剂排序。
+
+
+### 第112页｜同一比较的数字表格
+
+<div id="lecture-page-112"></div>
+<figure class="lecture-figure" data-lecture-page="112"><img src="/notes/genome-interpretation-2026/page-112.webp" width="1972" height="1340" loading="lazy" decoding="async" alt="第112页：同一比较的数字表格，原图内中文译注" /><figcaption>原讲义第112页 · 点击图片放大</figcaption></figure>
+
+本表为前页定量背景，提醒产量多不必然等于关键区域覆盖完整。比较时同时看目标范围、样本数和未覆盖定义；Gb与“缺少多少个碱基”是两个不同单位。表中数据来自特定历史研究，不是各厂家当前承诺，也不直接代表对所有致病变异的总体灵敏度。
+
+
+### 第113页｜ACMG/AMP：从证据组织到分类
+
+<div id="lecture-page-113"></div>
+<figure class="lecture-figure" data-lecture-page="113"><img src="/notes/genome-interpretation-2026/page-113.webp" width="1962" height="1223" loading="lazy" decoding="async" alt="第113页：ACMG/AMP：从证据组织到分类，原图内中文译注" /><figcaption>原讲义第113页 · 点击图片放大</figcaption></figure>
+
+该框架主要面向孟德尔遗传病相关序列变异，把不同证据系统组织成分类。它不等同于肿瘤体细胞变异的治疗行动性分级，也不意味着任意软件分数都可直接替代专家判断。实际解读还需对应基因、疾病和遗传方式，并结合后续疾病特异的细化规则。
+
+补充核验：[Richards等2015：ACMG/AMP序列变异解读指南](https://pubmed.ncbi.nlm.nih.gov/25741868/)。
+
+
+### 第114页｜五级分类：未知就是未知
+
+<div id="lecture-page-114"></div>
+<figure class="lecture-figure" data-lecture-page="114"><img src="/notes/genome-interpretation-2026/page-114.webp" width="1864" height="1331" loading="lazy" decoding="async" alt="第114页：五级分类：未知就是未知，原图内中文译注" /><figcaption>原讲义第114页 · 点击图片放大</figcaption></figure>
+
+分类表达当前证据对某疾病相关性的支持程度。VUS不是“轻度致病”，也不能简单按风险高低放在致病与良性之间作线性推断；它表示证据不足或矛盾。按原指南，VUS不应单独用于临床决策。随着家系、功能或人群证据增加，分类可能重新评估。
+
+补充核验：[Richards等2015：ACMG/AMP序列变异解读指南](https://pubmed.ncbi.nlm.nih.gov/25741868/)。
+
+
+### 第115页｜证据类型：为何不能简单投票
+
+<div id="lecture-page-115"></div>
+<figure class="lecture-figure" data-lecture-page="115"><img src="/notes/genome-interpretation-2026/page-115.webp" width="1855" height="1434" loading="lazy" decoding="async" alt="第115页：证据类型：为何不能简单投票，原图内中文译注" /><figcaption>原讲义第115页 · 点击图片放大</figcaption></figure>
+
+罕见性不是致病性的充分证据；功能实验需看是否与疾病机制相关；多个相似模型的预测可能高度相关，不能当成多份完全独立证据。共分离还受家系规模、外显率和表型定义影响。真正的分类要按规则组合证据，明确冲突和不足，而不是看支持票比反对票多。
+
+#### 深入理解：功能有影响，为什么仍不等于致病
+
+功能实验可证明某分子性质改变，但疾病还需要对应基因—疾病关系、遗传方式、效应方向和临床表型。一个功能下降变异在某机制中有害，在另一机制中未必解释症状；人群频率和家系证据也可能与简单推论冲突。计算预测通常只是证据的一类，不能通过多个相关模型重复投票，就把意义未明自动升级为致病。
+
+补充核验：[Richards等2015：ACMG/AMP序列变异解读指南](https://pubmed.ncbi.nlm.nih.gov/25741868/)。
+
+
+### 第116页｜回看临床应用：各场景的解释目标
+
+<div id="lecture-page-116"></div>
+<figure class="lecture-figure" data-lecture-page="116"><img src="/notes/genome-interpretation-2026/page-116.webp" width="1825" height="988" loading="lazy" decoding="async" alt="第116页：回看临床应用：各场景的解释目标，原图内中文译注" /><figcaption>原讲义第116页 · 点击图片放大</figcaption></figure>
+
+现在回看同一张图，应能给每条分支加上限制条件：检测到变异不等于解释病因，匹配靶点不等于观察到获益，血浆阴性不等于完全排除残留。复习时选一个场景，依次说清样本、检测对象、质量要求、输出及临床问题，比只背技术名称更有效。
+
+
+## AI如何辅助基因组解读
+
+
+### 第117页｜转向AI：它在哪些环节帮助解读
+
+<div id="lecture-page-117"></div>
+<figure class="lecture-figure" data-lecture-page="117"><img src="/notes/genome-interpretation-2026/page-117.webp" width="1360" height="1076" loading="lazy" decoding="async" alt="第117页：转向AI：它在哪些环节帮助解读，原图内中文译注" /><figcaption>原讲义第117页 · 点击图片放大</figcaption></figure>
+
+前面已经见过DeepVariant这种特定任务模型，接下来讨论更广泛的预测与表示学习。始终先确定模型输出是什么：变异存在概率、蛋白影响、表达变化，还是患者结局。不同任务需要不同标签和验证，不能把一个任务高分迁移成另一个任务已获临床证实。
+
+
+### 第118页｜四类AI应用
+
+<div id="lecture-page-118"></div>
+<figure class="lecture-figure" data-lecture-page="118"><img src="/notes/genome-interpretation-2026/page-118.webp" width="1521" height="961" loading="lazy" decoding="async" alt="第118页：四类AI应用，原图内中文译注" /><figcaption>原讲义第118页 · 点击图片放大</figcaption></figure>
+
+识别回答“是否发生改变”，解释回答“可能有什么作用”，基础模型提供可迁移的表示，而临床应用还要把信息连接到患者需求。四类任务会共享技术，但验证目标不同。一个模型把局部序列分得很好，不代表能可靠预测所有疾病或替代整条临床检测流程。
+
+
+### 第119页｜AI、ML、DL与基础模型
+
+<div id="lecture-page-119"></div>
+<figure class="lecture-figure" data-lecture-page="119"><img src="/notes/genome-interpretation-2026/page-119.webp" width="1694" height="1100" loading="lazy" decoding="async" alt="第119页：AI、ML、DL与基础模型，原图内中文译注" /><figcaption>原讲义第119页 · 点击图片放大</figcaption></figure>
+
+机器学习从数据学习规则，深度学习常用多层神经网络，基础模型强调大规模预训练和跨任务复用。图适合入门，但不是严格完备的分类学；并非所有Transformer都是基础模型，也不是所有有效临床预测都必须用深度网络。模型选择应服务于数据和任务，而非层级名称。
+
+
+### 第120页｜训练、验证和真正未知数据
+
+<div id="lecture-page-120"></div>
+<figure class="lecture-figure" data-lecture-page="120"><img src="/notes/genome-interpretation-2026/page-120.webp" width="1942" height="1247" loading="lazy" decoding="async" alt="第120页：训练、验证和真正未知数据，原图内中文译注" /><figcaption>原讲义第120页 · 点击图片放大</figcaption></figure>
+
+训练用来调整参数，验证常用于选择模型或超参数，而最终测试应评估未参与这些选择的数据。若同一患者、亲缘个体或高度相似序列泄漏到两边，性能可能被高估。具体如何划分取决于拟回答的问题，独立人群、机构或基因区域验证往往比随机拆行更有信息。
+
+#### 深入理解：为什么按患者或区域划分很重要
+
+同一患者的多次检测、同一家系的近亲样本，或相邻高度相似的DNA窗口，可能共享大量信息。若随机分到训练与测试，模型看似面对新行，实际可能早已见过近似对象。应按研究用途划分独立单位：预测新患者、跨机构应用或跨基因区域泛化，对应的测试设计并不相同。调参后反复查看测试集也会削弱独立性。
+
+
+### 第121页｜CNN怎样从DNA预测调控信号
+
+<div id="lecture-page-121"></div>
+<figure class="lecture-figure" data-lecture-page="121"><img src="/notes/genome-interpretation-2026/page-121.webp" width="1544" height="1117" loading="lazy" decoding="async" alt="第121页：CNN怎样从DNA预测调控信号，原图内中文译注" /><figcaption>原讲义第121页 · 点击图片放大</figcaption></figure>
+
+将A、C、G、T编码成数值阵列后，卷积核可学习类似序列基序的局部特征，再逐层组合成预测。学习出的滤波器与某因子基序相似，是解释线索而非直接证明结合。输出的表达或调控读数还依赖训练时的细胞类型和实验标签，不能把任意DNA片段都当成在所有组织中同样作用。
+
+
+### 第122页｜注意力帮助连接较远的序列位置
+
+<div id="lecture-page-122"></div>
+<figure class="lecture-figure" data-lecture-page="122"><img src="/notes/genome-interpretation-2026/page-122.webp" width="2015" height="1060" loading="lazy" decoding="async" alt="第122页：注意力帮助连接较远的序列位置，原图内中文译注" /><figcaption>原讲义第122页 · 点击图片放大</figcaption></figure>
+
+局部卷积擅长识别短模式，注意力机制可让一个位置结合其他位置的信息，从而表示较远距离的依赖。模型窗口仍然有限，且注意力权重不自动等于真实物理接触或因果调控强度。预测某组织实验信号与证明某增强子必需，还隔着扰动等证据。
+
+
+### 第123页｜Transformer的基本部件
+
+<div id="lecture-page-123"></div>
+<figure class="lecture-figure" data-lecture-page="123"><img src="/notes/genome-interpretation-2026/page-123.webp" width="1915" height="1275" loading="lazy" decoding="async" alt="第123页：Transformer的基本部件，原图内中文译注" /><figcaption>原讲义第123页 · 点击图片放大</figcaption></figure>
+
+注意力按当前输入计算哪些位置的信息值得组合，多头提供多种表示关系；位置信息帮助区分顺序，前馈层再变换特征。原始架构包含编码器与解码器，具体基因组模型可能只采用其中部分结构。因此看到Transformer名称时，应继续查输入单位、上下文长度、训练目标与输出任务。
+
+
+### 第124页｜从统计到基础模型：不是单线替代
+
+<div id="lecture-page-124"></div>
+<figure class="lecture-figure" data-lecture-page="124"><img src="/notes/genome-interpretation-2026/page-124.webp" width="1817" height="875" loading="lazy" decoding="async" alt="第124页：从统计到基础模型：不是单线替代，原图内中文译注" /><figcaption>原讲义第124页 · 点击图片放大</figcaption></figure>
+
+这些类别并非前者已经失效、后者全面取代前者。神经网络同样依赖统计学习原则，基础模型也需要合适的评估设计和不确定性分析。对小样本或特定机制问题，较简单、可解释且验证充分的方法可能更合适；真正要比较的是任务表现和证据，而不是名称新旧。
+
+
+### 第125页｜SIFT：保守位点为何值得关注
+
+<div id="lecture-page-125"></div>
+<figure class="lecture-figure" data-lecture-page="125"><img src="/notes/genome-interpretation-2026/page-125.webp" width="1793" height="1359" loading="lazy" decoding="async" alt="第125页：SIFT：保守位点为何值得关注，原图内中文译注" /><figcaption>原讲义第125页 · 点击图片放大</figcaption></figure>
+
+若某位置在多种同源蛋白中长期保持同一类氨基酸，改变它可能更容易影响功能，SIFT利用这类序列统计进行预测。保守性是功能限制的线索，不是直接临床诊断；比对质量、同源序列选择和疾病机制会影响解释。原页标题的词序与常用全称不同，在此作术语辨析。
+
+
+### 第126页｜非编码变异怎样影响转录
+
+<div id="lecture-page-126"></div>
+<figure class="lecture-figure" data-lecture-page="126"><img src="/notes/genome-interpretation-2026/page-126.webp" width="1823" height="1354" loading="lazy" decoding="async" alt="第126页：非编码变异怎样影响转录，原图内中文译注" /><figcaption>原讲义第126页 · 点击图片放大</figcaption></figure>
+
+非编码变异可能改变结合位点、染色质状态或转录过程，因此模型可学习序列与功能实验信号的联系。比较参考和替代序列预测差异，可以提出候选机制。但某一实验轨道改变不自动等于疾病风险改变，仍需明确细胞背景、目标基因及预测效应的验证。
+
+
+### 第127页｜监督学习依靠什么标签
+
+<div id="lecture-page-127"></div>
+<figure class="lecture-figure" data-lecture-page="127"><img src="/notes/genome-interpretation-2026/page-127.webp" width="2087" height="1344" loading="lazy" decoding="async" alt="第127页：监督学习依靠什么标签，原图内中文译注" /><figcaption>原讲义第127页 · 点击图片放大</figcaption></figure>
+
+有标签数据让模型把序列与目标读数连接，再用独立数据检查泛化。标签可能本身含噪声或批次效应，模型也可能学到实验平台而非生物规律。基因组相邻或同源片段高度相似，随机拆分可能过于容易；评估应与“预测新区域、新细胞或新个体”的实际用途匹配。
+
+
+### 第128页｜DeepSEA：参考与替代序列对照
+
+<div id="lecture-page-128"></div>
+<figure class="lecture-figure" data-lecture-page="128"><img src="/notes/genome-interpretation-2026/page-128.webp" width="2035" height="1494" loading="lazy" decoding="async" alt="第128页：DeepSEA：参考与替代序列对照，原图内中文译注" /><figcaption>原讲义第128页 · 点击图片放大</figcaption></figure>
+
+将同一窗口分别放入参考和替代碱基，比较模型在多种功能读数上的输出，就得到可能受影响的调控线索。两次预测的差值仍是模型估计，不是已经完成的细胞实验。分析还需考虑输入窗口、组织标签与附近其他变异，不能只取最大变化就宣布该位点致病。
+
+#### 深入理解：参考—替代差值是一种模型内对照
+
+固定序列窗口，只改变候选位点，可以让两次输入的主要差别集中到该变异，便于解释模型认为哪些输出受影响。然而这只控制了模型输入，不代表真实细胞中所有背景也相同。要进一步讨论因果，需要合适的实验扰动、细胞环境和目标基因读数；差值大小也不能直接换算为患病概率。
+
+
+### 第129页｜编码与非编码变异的解释路线
+
+<div id="lecture-page-129"></div>
+<figure class="lecture-figure" data-lecture-page="129"><img src="/notes/genome-interpretation-2026/page-129.webp" width="1952" height="1124" loading="lazy" decoding="async" alt="第129页：编码与非编码变异的解释路线，原图内中文译注" /><figcaption>原讲义第129页 · 点击图片放大</figcaption></figure>
+
+编码区改变可影响蛋白功能，也可能影响剪接；非编码改变则可能影响调控、剪接或RNA稳定等。图把不同证据汇入致病性，但这需要额外的疾病和遗传背景。功能受损不总等于致病，功能保持也不能在所有机制下排除风险；例如获得功能与单倍剂量不足是不同问题。
+
+
+### 第130页｜自编码器：压缩表示并重建输入
+
+<div id="lecture-page-130"></div>
+<figure class="lecture-figure" data-lecture-page="130"><img src="/notes/genome-interpretation-2026/page-130.webp" width="1924" height="1302" loading="lazy" decoding="async" alt="第130页：自编码器：压缩表示并重建输入，原图内中文译注" /><figcaption>原讲义第130页 · 点击图片放大</figcaption></figure>
+
+模型把高维输入压到较紧凑的表示，再尝试恢复原输入，借此学习数据中的可压缩结构。重建好不等于潜在空间的每一维都有明确生物学含义，也不保证预测临床结局有效。它可以作为特征学习工具，后续任务仍需单独验证；稀疏自编码器还会加入不同约束来帮助分解特征。
+
+
+### 第131页｜VIPUR：引入蛋白结构证据
+
+<div id="lecture-page-131"></div>
+<figure class="lecture-figure" data-lecture-page="131"><img src="/notes/genome-interpretation-2026/page-131.webp" width="1969" height="1436" loading="lazy" decoding="async" alt="第131页：VIPUR：引入蛋白结构证据，原图内中文译注" /><figcaption>原讲义第131页 · 点击图片放大</figcaption></figure>
+
+氨基酸替换可能改变局部相互作用、稳定性或功能界面，结构计算提供保守性以外的信息。预测依赖起始结构、采样和能量模型，不能把一个能量差直接换算成疾病概率。结构与序列证据可以互补，但若它们共享输入或训练来源，也需警惕把相关证据重复计权。
+
+
+### 第132页｜AlphaFold：结构预测的贡献与边界
+
+<div id="lecture-page-132"></div>
+<figure class="lecture-figure" data-lecture-page="132"><img src="/notes/genome-interpretation-2026/page-132.webp" width="2078" height="1438" loading="lazy" decoding="async" alt="第132页：AlphaFold：结构预测的贡献与边界，原图内中文译注" /><figcaption>原讲义第132页 · 点击图片放大</figcaption></figure>
+
+由序列及相关信息预测蛋白三维结构，为解释位点环境和设计实验提供重要资源。并非每个残基、构象或复合状态都同样可靠，需检查局部置信度及适用条件。“仅用序列”的概括也不能忽略其利用的进化信息和训练知识，更不能把结构预测准确直接当作变异效应预测准确。
+
+
+### 第133页｜预测野生型结构不等于预测突变效应
+
+<div id="lecture-page-133"></div>
+<figure class="lecture-figure" data-lecture-page="133"><img src="/notes/genome-interpretation-2026/page-133.webp" width="2012" height="1462" loading="lazy" decoding="async" alt="第133页：预测野生型结构不等于预测突变效应，原图内中文译注" /><figcaption>原讲义第133页 · 点击图片放大</figcaption></figure>
+
+一个变异可能影响稳定性、动力学、相互作用或催化，而平均折叠外观变化很小。分别预测原始与变异序列、看到两张相似结构，并不能断言该变异无害。原页“currently unable”不能当作所有后续模型永久不能处理变异的结论；更合适的是区分结构任务与经过验证的效应预测任务。
+
+
+### 第134页｜AlphaMissense：学习与评价
+
+<div id="lecture-page-134"></div>
+<figure class="lecture-figure" data-lecture-page="134"><img src="/notes/genome-interpretation-2026/page-134.webp" width="1862" height="1249" loading="lazy" decoding="async" alt="第134页：AlphaMissense：学习与评价，原图内中文译注" /><figcaption>原讲义第134页 · 点击图片放大</figcaption></figure>
+
+模型整合序列与结构信息，并用人群频率等间接标签改进预测。弱标签不是对每个变异都做过功能或临床验证，训练策略仍可能受数据分布影响。页中性能数字属于特定测试集和阈值，不代表每个基因或遗传病都同样准确；实际临床解读中，计算预测应与其他证据整合。
+
+补充核验：[Cheng等2023：AlphaMissense原始研究](https://pubmed.ncbi.nlm.nih.gov/37733863/)。
+
+
+### 第135页｜三类基础模型的输入不同
+
+<div id="lecture-page-135"></div>
+<figure class="lecture-figure" data-lecture-page="135"><img src="/notes/genome-interpretation-2026/page-135.webp" width="1989" height="1409" loading="lazy" decoding="async" alt="第135页：三类基础模型的输入不同，原图内中文译注" /><figcaption>原讲义第135页 · 点击图片放大</figcaption></figure>
+
+蛋白序列、DNA上下文和单细胞表达矩阵不是同一种输入，其预训练目标和输出含义也不同。图中“虚拟细胞”是模型方向的概括，不是已完整复制真实细胞全部物理过程。使用之前先确认模型面对的数据层级，再判断能否回答自己的问题，不能凭基础模型名称直接跨模态套用。
+
+
+### 第136页｜基础模型的三种使用方式
+
+<div id="lecture-page-136"></div>
+<figure class="lecture-figure" data-lecture-page="136"><img src="/notes/genome-interpretation-2026/page-136.webp" width="2021" height="1252" loading="lazy" decoding="async" alt="第136页：基础模型的三种使用方式，原图内中文译注" /><figcaption>原讲义第136页 · 点击图片放大</figcaption></figure>
+
+迁移学习会为新任务训练或微调部分参数，直接预测依赖模型原有任务能力，表示分析则把向量用于聚类或其他研究。低维图出现漂亮分群，不等于已发现新的细胞类型或因果机制。比较策略时应说明额外用了什么标签、数据是否独立，以及是否真正优于合理基线。
+
+
+### 第137页｜临床多模态：信息怎样汇合
+
+<div id="lecture-page-137"></div>
+<figure class="lecture-figure" data-lecture-page="137"><img src="/notes/genome-interpretation-2026/page-137.webp" width="1999" height="1165" loading="lazy" decoding="async" alt="第137页：临床多模态：信息怎样汇合，原图内中文译注" /><figcaption>原讲义第137页 · 点击图片放大</figcaption></figure>
+
+多组学和临床信息可能互补，但也会带来缺失、时间错位和机构差异。预测生存需要处理随访及删失，预测疾病状态需要明确病例定义。图中精准诊断、新疗法与健康管理是应用目标，不能当作仅把数据输入模型就已实现的效果；临床效用需在相应用途和流程中评估。
+
+
+### 第138页｜影像、病理与分子数据整合
+
+<div id="lecture-page-138"></div>
+<figure class="lecture-figure" data-lecture-page="138"><img src="/notes/genome-interpretation-2026/page-138.webp" width="1938" height="1490" loading="lazy" decoding="async" alt="第138页：影像、病理与分子数据整合，原图内中文译注" /><figcaption>原讲义第138页 · 点击图片放大</figcaption></figure>
+
+不同模态观察同一疾病的不同尺度，融合前应确认来自同一患者、适当时间和可比处理条件。某模态可能泄漏诊断后或治疗后的信息，使模型在回顾性测试中过于乐观。应根据真实使用时点定义可用输入，并检查增加模态带来的增益是否经过独立验证。
+
+
+### 第139页｜结束页之后还有附录
+
+<div id="lecture-page-139"></div>
+<figure class="lecture-figure" data-lecture-page="139"><img src="/notes/genome-interpretation-2026/page-139.webp" width="1505" height="805" loading="lazy" decoding="async" alt="第139页：结束页之后还有附录，原图内中文译注" /><figcaption>原讲义第139页 · 点击图片放大</figcaption></figure>
+
+主线可以概括为信号、序列、坐标、变异、功能和临床意义六个层级，每层都有各自的误差与验证。遇到AI输出时，先判断它位于哪一层，再看是否跨越了未经验证的推理步骤。后面的资源页不是可以跳过的空白，而是帮助实际查找数据与证据的入口。
+
+
+## 数据库与资源附录
+
+
+### 第140页｜UK Biobank：人群数据资源
+
+<div id="lecture-page-140"></div>
+<figure class="lecture-figure" data-lecture-page="140"><img src="/notes/genome-interpretation-2026/page-140.webp" width="1842" height="1036" loading="lazy" decoding="async" alt="第140页：UK Biobank：人群数据资源，原图内中文译注" /><figcaption>原讲义第140页 · 点击图片放大</figcaption></figure>
+
+人群队列把遗传、测量、生活方式和长期健康记录联系起来，适合研究风险和预测。它不是所有英国居民的随机完整复制，参与者选择和可用数据会影响外推。网站截图用于说明资源类型，实际字段、访问条件和发布版本应到官方文档查询。
+
+
+### 第141页｜基线年龄、随访与影像规模
+
+<div id="lecture-page-141"></div>
+<figure class="lecture-figure" data-lecture-page="141"><img src="/notes/genome-interpretation-2026/page-141.webp" width="1848" height="1059" loading="lazy" decoding="async" alt="第141页：基线年龄、随访与影像规模，原图内中文译注" /><figcaption>原讲义第141页 · 点击图片放大</figcaption></figure>
+
+年龄描述的是入组当时，不是说到2026年所有参与者仍处于40—69岁。不同数据在不同时间采集，分析前要对齐基线、复访、事件及影像日期。50万人规模也不等于每一种组学和影像在所有人中都有，具体样本数应按所用字段和可分析交集报告。
+
+#### 深入理解：队列规模与实际分析人数
+
+50万人描述队列总体，影像、组学、重复测量或特定疾病结局可能只在其中一部分可用。真正样本量应按所需模态交集、纳排条件及随访完整性计算，并评估这部分人是否存在选择偏差。时间对齐同样重要：不能用疾病发生后的测量预测疾病发生前的风险，却把它称为前瞻性预测。
+
+补充核验：[UK Biobank：2025年完成10万人影像里程碑](https://www.ukbiobank.ac.uk/news/uk-biobank-celebrates-completion-of-worlds-largest-human-imaging-study-with-landmark-events/)。
+
+
+### 第142页｜把数据分层用于问题设计
+
+<div id="lecture-page-142"></div>
+<figure class="lecture-figure" data-lecture-page="142"><img src="/notes/genome-interpretation-2026/page-142.webp" width="2047" height="1049" loading="lazy" decoding="async" alt="第142页：把数据分层用于问题设计，原图内中文译注" /><figcaption>原讲义第142页 · 点击图片放大</figcaption></figure>
+
+先从问题反推需要哪些数据，再确认拥有这些模态的样本交集、缺失原因与采集时间。若只分析有影像且有某组学的子集，不能继续用50万人作为实际分析样本数。图中数字是当时资源概览，应按具体发布版本核对，而不是写成永久固定规模。
+
+
+### 第143页｜孟德尔随机化：把遗传关联用于因果问题
+
+<div id="lecture-page-143"></div>
+<figure class="lecture-figure" data-lecture-page="143"><img src="/notes/genome-interpretation-2026/page-143.webp" width="1945" height="1164" loading="lazy" decoding="async" alt="第143页：孟德尔随机化：把遗传关联用于因果问题，原图内中文译注" /><figcaption>原讲义第143页 · 点击图片放大</figcaption></figure>
+
+遗传工具可帮助研究暴露与结局的因果关系，但依赖工具与暴露相关、无关键混杂通路及不通过其他途径影响结局等假设。基因在出生前确定并不自动保证这些条件，水平多效性、群体结构和选择偏差仍需评估。本页论文示例说明资源能支持研究，不是所有遗传相关都已成为因果证据。
+
+
+### 第144页｜脑影像遗传研究：关联需要解释边界
+
+<div id="lecture-page-144"></div>
+<figure class="lecture-figure" data-lecture-page="144"><img src="/notes/genome-interpretation-2026/page-144.webp" width="1951" height="1119" loading="lazy" decoding="async" alt="第144页：脑影像遗传研究：关联需要解释边界，原图内中文译注" /><figcaption>原讲义第144页 · 点击图片放大</figcaption></figure>
+
+影像表型可与基因型进行关联分析，定位候选位点和生物过程。统计命中不直接证明某基因通过特定细胞机制改变影像，磁化率也不是单一物质的绝对含量。理解时分清表型定义、关联单位、混杂调整和功能验证，再决定结果能支持到哪一步。
+
+
+### 第145页｜TCGA/GDC：寻找可追溯的肿瘤数据
+
+<div id="lecture-page-145"></div>
+<figure class="lecture-figure" data-lecture-page="145"><img src="/notes/genome-interpretation-2026/page-145.webp" width="1830" height="1254" loading="lazy" decoding="async" alt="第145页：TCGA/GDC：寻找可追溯的肿瘤数据，原图内中文译注" /><figcaption>原讲义第145页 · 点击图片放大</figcaption></figure>
+
+门户里的文件数量往往远多于患者数量，因为一个病例有多份样本、检测和处理结果。下载前记录项目、样本类型、分析流程和数据层级；开放与受控数据也有不同访问条件。截图中的数量属于当时页面，不能当作当前资源总量。
+
+
+### 第146页｜cBioPortal：交互式查看队列改变
+
+<div id="lecture-page-146"></div>
+<figure class="lecture-figure" data-lecture-page="146"><img src="/notes/genome-interpretation-2026/page-146.webp" width="1875" height="1174" loading="lazy" decoding="async" alt="第146页：cBioPortal：交互式查看队列改变，原图内中文译注" /><figcaption>原讲义第146页 · 点击图片放大</figcaption></figure>
+
+选择队列与基因后，可查看哪些样本出现哪些改变，并联系临床或其他组学。不同队列的检测范围和缺失情况不同，图中的空白不一定等于真正无改变。做生存或共现分析还要考虑多重比较、治疗背景与样本量，交互式工具降低操作门槛，不降低统计解释要求。
+
+
+### 第147页｜TCIA：影像资源与临床标签
+
+<div id="lecture-page-147"></div>
+<figure class="lecture-figure" data-lecture-page="147"><img src="/notes/genome-interpretation-2026/page-147.webp" width="1691" height="1099" loading="lazy" decoding="async" alt="第147页：TCIA：影像资源与临床标签，原图内中文译注" /><figcaption>原讲义第147页 · 点击图片放大</figcaption></figure>
+
+影像文件之外还要理解扫描协议、标注定义、患者身份关联规则及使用条款。训练模型时应按患者划分，避免同一人的多张切片或不同检查进入训练和测试两边。与TCGA名字相近并不代表每份影像都自动有配对组学，配对关系需逐集合核对。
+
+
+### 第148页｜GTR：遗传检测登记入口
+
+<div id="lecture-page-148"></div>
+<figure class="lecture-figure" data-lecture-page="148"><img src="/notes/genome-interpretation-2026/page-148.webp" width="1512" height="1202" loading="lazy" decoding="async" alt="第148页：GTR：遗传检测登记入口，原图内中文译注" /><figcaption>原讲义第148页 · 点击图片放大</figcaption></figure>
+
+GTR帮助查询有哪些检测、覆盖什么目标、由谁提供及采用什么方法。登记信息不等于NCBI逐项认可临床效用，也不保证所有检测均完整登记。查完检测条目后仍要核对方法验证、适用范围和解释标准；这也把全课收束到同一原则：找到信息只是起点，可靠解读依赖可追溯证据。
+
+补充核验：[NCBI：GTR数据使用与核验边界](https://www.ncbi.nlm.nih.gov/gtr/docs/maintenance_use/)。
+
+## 关键补充来源
+
+- [NHGRI：人类基因组计划时间轴](https://www.genome.gov/human-genome-project/timeline)
+- [Nobel：Frederick Sanger获奖记录](https://www.nobelprize.org/nomination/archive/show_people.php?id=8092)
+- [Brixi等2026：Evo 2原始研究](https://pubmed.ncbi.nlm.nih.gov/41781614/)
+- [Guo等2026：科学智能体综述](https://pubmed.ncbi.nlm.nih.gov/42753735/)
+- [Nurk等2022：T2T-CHM13](https://pmc.ncbi.nlm.nih.gov/articles/PMC9186530/)
+- [Rhie等2023：完整人类Y染色体](https://pubmed.ncbi.nlm.nih.gov/37612512/)
+- [SAMtools：HTS文件格式官方规范](https://samtools.github.io/hts-specs/)
+- [Poplin等2018：DeepVariant原始研究](https://www.nature.com/articles/nbt.4235)
+- [FDA：FoundationOne CDx初始批准记录](https://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfpma/pma.cfm?id=P170019)
+- [Powles等2021：ctDNA与辅助免疫治疗](https://pubmed.ncbi.nlm.nih.gov/34135506/)
+- [Richards等2015：ACMG/AMP序列变异解读指南](https://pubmed.ncbi.nlm.nih.gov/25741868/)
+- [UK Biobank：2025年完成10万人影像里程碑](https://www.ukbiobank.ac.uk/news/uk-biobank-celebrates-completion-of-worlds-largest-human-imaging-study-with-landmark-events/)
+- [Cheng等2023：AlphaMissense原始研究](https://pubmed.ncbi.nlm.nih.gov/37733863/)
+- [GATK：HaplotypeCaller局部组装说明](https://gatk.broadinstitute.org/hc/en-us/articles/4405451272731-HaplotypeCaller)
+- [NCBI：GTR数据使用与核验边界](https://www.ncbi.nlm.nih.gov/gtr/docs/maintenance_use/)
