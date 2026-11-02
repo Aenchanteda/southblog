@@ -30,6 +30,13 @@ function fixAssetPaths(markdown) {
     .replace(/\]\(figures\//g, `](${assetBase}/figures/`);
 }
 
+/** LaTeX `\(...\)` / `\[...\]` → remark-math `$...$` / `$$...$$`. */
+function normalizeMathDelimiters(markdown) {
+  let out = markdown.replace(/\\\[([\s\S]*?)\\\]/g, (_, body) => `\n$$\n${body.trim()}\n$$\n`);
+  out = out.replace(/\\\(([\s\S]*?)\\\)/g, (_, body) => `$${body.trim()}$`);
+  return out;
+}
+
 const processor = await createMarkdownProcessor({
   smartypants: false,
   remarkPlugins: [remarkMath],
@@ -40,7 +47,7 @@ await fs.mkdir(outDir, { recursive: true });
 
 for (const file of files) {
   const raw = await fs.readFile(path.join(srcDir, file), 'utf8');
-  const markdown = fixAssetPaths(raw);
+  const markdown = normalizeMathDelimiters(fixAssetPaths(raw));
   const { code } = await processor.render(markdown);
   const outName = file.replace(/\.md$/i, '.html');
   const wrapped = `<div class="prose bci-paper-prose">\n${code}\n</div>`;
