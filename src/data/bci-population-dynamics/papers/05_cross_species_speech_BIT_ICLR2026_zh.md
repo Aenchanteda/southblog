@@ -1,0 +1,666 @@
+# 面向端到端言语解码的跨物种神经基础模型
+
+**原英文标题：** A Cross-Species Neural Foundation Model for End-to-End Speech Decoding
+
+**作者：** Yizi Zhang\*,1,† , Linyang He\*,1,† , Chaofei Fan² , Tingkai Liu³ , Han Yu¹ , Trung Le⁴ , Jingyuan Li⁵ , Scott Linderman² , Lea Duncker¹ , Francis R Willett² , Nima Mesgarani¹ , Liam Paninski¹
+
+¹ Columbia University, New York, NY, USA  
+² Stanford University, Palo Alto, CA, USA  
+³ Microsoft, New York, NY, USA  
+⁴ University of Washington, Seattle, WA, USA  
+⁵ Amazon, Seattle, WA, USA  
+
+\* 同等贡献  † {yz4123, lh3288}@columbia.edu
+
+**发表：** ICLR 2026 会议论文
+
+---
+
+## 摘要
+
+言语脑机接口（brain–computer interfaces, BCIs）旨在通过将神经活动翻译为文本，为瘫痪患者恢复交流能力。现有多数系统采用级联框架：先解码音素，再用 n-gram 语言模型（language model, LM）组装句子，因而无法对所有阶段同时进行联合优化。本文提出端到端的脑到文本（BraIn-to-Text, BIT）框架，用单一可微分神经网络将神经活动直接翻译为连贯句子。方法的核心是一个跨任务、跨物种的预训练神经编码器，其表征可迁移到尝试性言语与想象性言语。在与 n-gram LM 组成的级联设定下，该预训练编码器在 Brain-to-Text ’24 与 ’25 基准上刷新了当前最优（state-of-the-art, SOTA）。与音频大语言模型（large language models, LLMs）端到端集成，并以对比学习进行跨模态对齐后，BIT 将此前端到端方法的词错误率（word error rate, WER）从 24.69% 降至 10.22%。值得注意的是，小规模音频 LLM 显著提升了端到端解码表现。除创纪录性能外，BIT 还能对齐尝试性与想象性言语的嵌入，从而实现跨任务泛化。总体而言，本方法推动了大规模、多样化神经数据的整合，为支持无缝、可微分优化的端到端解码框架铺平道路。
+
+---
+
+## 1 引言
+
+言语神经假体近来取得革命性进展，已能解码尝试性与想象性言语，并为丧失说话能力者恢复交流（Akbari et al., 2019; Makin et al., 2020; Moses et al., 2021; Proix et al., 2022; Willett et al., 2023; Fan et al., 2023; Metzger et al., 2023; Card et al., 2024; Littlejohn et al., 2025; Kunz et al., 2025）。尽管成果显著，多数现有系统仍依赖难以端到端优化的级联框架。此类模型中，循环神经网络（recurrent neural networks, RNNs）将神经活动映射为音素，再由 n-gram LM 组装成句（Willett et al., 2023）。对于小规模数据虽高效，但各组件分开优化会导致 RNN 性能与整系统性能脱节。例如，RNN 更低的音素错误率（phoneme error rates, PER）并不总能转化为 n-gram 解码时更低的词错误率（WER）（Willett et al., 2024）。这些局限凸显了对完全端到端优化言语解码框架的需求。
+
+近期，Feng et al. (2024) 将 RNN 与 LLM 相连，以端到端方式把神经活动翻译成句子。该方法虽有前景，但未探索如 Transformer 等现代架构——后者或能更好捕捉复杂神经表征并提升解码性能。相比之下，Feghhi et al. (2025) 引入 Transformer 解码音素，并采用时间掩码缓解过拟合，取得更高性能，但其研究未与 LLM 做端到端训练，也未利用大规模预训练。由于 Transformer 通常需要大规模数据才能充分发挥潜力，我们假设：将基于 Transformer 的神经编码器与大规模预训练相结合，可进一步提升解码性能，并提供稳定表征以有效引导 LLM（Liu et al., 2023b）。
+
+本文提出称为 BIT 的端到端脑到文本神经接口，直接将神经活动翻译为连贯句子。主要创新包括：在来自人类与猴、覆盖言语与上肢相关运动任务的 367 小时犹他阵列（Utah array）记录上，用自监督掩码建模预训练的 Transformer 神经编码器；微调后，解码器可灵活支持级联框架（解码音素后由 n-gram LM 组句）或端到端框架（音频 LLM 解码器在神经与文本嵌入对比对齐下直接生成句子）。类似于 LLaVA（Liu et al., 2023b）为预训练 LLM 配备图像编码器作为“眼睛”以实现视觉感知，BIT 为 LLM 配备“大脑”以解读神经活动。通过基于 Transformer 的预训练与端到端 LLM 集成，BIT 克服了仅用 RNN 编码器与小规模数据的局限，得到可跨任务泛化、并将言语相关神经活动与 LLM 语言结构对齐的神经表征。
+
+我们在 Brain-to-Text Benchmark ’24 与 ’25 数据集（Willett et al., 2023; Card et al., 2024）上评估方法；这些数据为两名人类受试者尝试说出屏幕提示句子时的犹他阵列记录。首先，我们在尝试性言语解码上对预训练编码器做基准测试，表明其在级联框架中优于从零训练的 RNN 与 Transformer。接着评估 LLM 解码器，表明小规模音频 LLM 大幅提升端到端解码，并超越先前工作所用的纯文本 LLM（Feng et al., 2024）。在迁移到想象性言语（Kunz et al., 2025）——标注样本远更少的低数据任务——时，这些增益更为显著。可解释性分析显示，BIT 中尝试性与想象性言语的神经嵌入通过共享语义结构对齐。这些发现确立了 BIT 作为将皮层内 BCI 与 LLM 整合新范式的地位，使神经活动无需依赖中间音素或字符输出即可引导句子生成。总体而言，BIT 向将神经活动直接翻译为连贯句子的端到端言语 BCI 迈出一步。
+
+---
+
+## 2 相关工作
+
+**言语脑机接口。** 早期言语 BCI 将听皮层与运动皮层神经信号转化为可懂输出，实现实时、高性能的脑到文本通信（Bouchard et al., 2013; Akbari et al., 2019; Makin et al., 2020; Moses et al., 2021; Willett et al., 2023; Fan et al., 2023; Card et al., 2024）。这些级联系统通常先将活动映射为音素或字符，再与语言模型组合。近期进展引入 Transformer 以建模长程依赖、流式实现，以及与 LLM 的端到端解码（Feghhi et al., 2025; Littlejohn et al., 2025; Feng et al., 2024）。此外，内言语解码提出了无需尝试运动即可交流的可能（Kunz et al., 2025）。然而，多数先前工作依赖无法端到端训练的级联系统；而此前的端到端解码器又依赖未经预训练的 RNN 编码器，未能利用现代模型架构与训练方法。本工作以跨物种、跨任务、基于 Transformer 的预训练驱动的新端到端框架填补这一空白。
+
+**神经分析的大规模模型。** 越来越多的工作关注大规模预训练，以学习跨模态（fMRI、钙成像、脉冲活动、EEG、EMG）的可泛化神经表征（Scotti et al., 2024; Thomas et al., 2022; Lurz et al., 2020; Azabou et al., 2023; 2024; Ryoo et al., 2025; Ye et al., 2023; 2025; Zhang et al., 2024; 2025; Cui et al., 2024; Kaifosh & Reardon, 2025）。这些新兴“基础模型”在提升性能的同时减少对任务特定数据的依赖，并在行为解码、运动想象、视觉重建、脑区与细胞类型分类、精神状态解码及神经活动预测等方面取得成功（Thomas et al., 2022; Scotti et al., 2024; Cui et al., 2024; Azabou et al., 2024; Yu et al., 2025; Wang et al., 2025）。在脉冲数据方面，POSSM（Ryoo et al., 2025）展示了从猴到人想象手写的跨物种迁移。在此进展之上，我们探索面向人类言语解码的跨物种、跨任务自监督预训练。
+
+**多模态语言模型中的模态对齐。** 视觉语言模型（visual language models, VLMs）的近期进展表明，大规模预训练模型可整合异构模态。早期如 CoCa（Yu et al., 2022）依赖交叉注意力投影器对齐数十亿图文对，图像描述性能强但计算代价高。Li et al. (2023) 通过冻结预训练视觉与语言主干、训练紧凑 Q-former 对齐模态，提出更高效设计。更近的指令微调 LLM（如 LLaVA，Liu et al., 2023a）以直接投影层将视觉特征映射进 LLM 嵌入空间，取代基于查询的中间结构。这一从交叉注意力到 Q-former 再到简单投影的演进表明：随着 LLM 能力增强，模态对齐的计算负担可降低。受此启发，我们研究 LLM 能否类似地泛化到言语相关神经信号。
+
+![图 1. BIT 示意说明。](figures_05_cross_species/fig1.png)
+
+**图 1.** BIT 示意说明。(A) BIT 是端到端言语解码框架，通过结合跨任务、跨物种预训练的神经编码器与音频 LLM 解码器，将神经活动直接翻译为文本。各研究的数据分别获取并预处理（附录 A）。(B) 神经编码器为 Transformer，将阈值尖峰与尖峰带功率的 20 ms bin 嵌入为多 bin 时间斑块（patch）。采用自监督学习（self-supervised learning, SSL）与时间斑块掩码预训练，经受试者特定线性读入/读出层以均方误差（mean squared error, MSE）损失重建斑块 token。预训练后移除掩码模块，用线性分类器与连接时序分类（Connectionist Temporal Classification, CTC）损失微调以解码音素。(C) 神经编码器输出经浅层 MLP 投影器映射到音频 LLM 的文本嵌入空间。以对比学习训练的模态对齐器将均值池化后的神经与文本嵌入投影到共享潜空间以做模态对齐。为引导解码，我们在神经与文本嵌入 token 之间插入提示：“decode the above neural activity into an English sentence:”。微调时更新神经编码器与投影器，并对音频 LLM 注意力与前馈块中的线性层施加 LoRA，其余参数冻结。
+
+---
+
+## 3 方法
+
+本节介绍由基于 Transformer 的神经编码器与音频 LLM 解码器构成的端到端言语 BCI，用于言语翻译（图 1）。编码器与解码器由浅层 MLP 连接，并以对比学习做模态对齐。Transformer 编码器先经自监督掩码建模预训练，再微调做音素解码；随后，该具有音素意识的编码器再被微调，以借助音频 LLM 直接从神经活动翻译出连贯句子。
+
+### 3.1 数据集
+
+Brain-to-Text Benchmark ’24 与 ’25 数据集（Willett et al., 2023; Card et al., 2024）用于尝试性言语解码。’24 数据集包含受试者 T12 在四个月内 25 个会话中的 12,100 句，为腹侧运动皮层 128 电极犹他阵列记录。’25 数据集包含受试者 T15 在 20 个月内 45 个会话中的 10,948 句，为腹侧运动皮层 256 电极记录。想象性言语使用内言语数据集（Kunz et al., 2025），T12 与 T15 分别有 500 与 712 句，在受试者内心说出提示句子时以 128 或 256 电极记录。所有数据集的神经特征包括阈值尖峰计数与尖峰带功率（spiking-band power, SBP）（Nason et al., 2020），按 20 ms 窗口分箱并跨日归一化（z-score），以应对犹他阵列非平稳性（Karpowicz et al.【待核：原文此处未给年份】）。预训练使用约 98 小时人类犹他阵列记录（含上述言语 BCI 数据）与约 269 小时猴在运动任务中的记录（Willett et al., 2021; 2023; Card et al., 2024; Fan et al., 2023; Karpowicz et al., 2024; Kunz et al., 2025; Churchland et al., 2012; Chowdhury et al., 2020; Even-Chen et al., 2019; Ma et al., 2023; Perich et al., 2018）。因部分预训练数据无 SBP，预训练仅用阈值尖峰并跨日归一化。细节见附录 A。
+
+### 3.2 架构
+
+**Transformer 神经编码器。** 我们用 Transformer 从神经活动学习潜表征。原始数据形状为 $(T, C)$，其中 $T$ 为时间 bin 数，$C$ 为电极数。遵循 Feghhi et al. (2025)，将每 $T_{\mathrm{patch}}$ 个时间 bin 组成一个斑块，得到形状 $(T / T_{\mathrm{patch}},\, C \times T_{\mathrm{patch}})$ 的数据。这些斑块经斑块嵌入模块（LayerNorm、Linear、LayerNorm）生成供多头注意力 Transformer 编码器使用的 token。使用时间斑块而非单个 20 ms bin，可将神经记录更细的时间分辨率与言语产生较慢的时间尺度（每分钟 30–60 词）对齐。此外，时间斑块 token 缩短上下文长度，在将神经嵌入馈入 LLM 生成短句时减少信息冗余。
+
+每个 Transformer 块含自注意力层与前馈网络（附录 Q）。相对位置嵌入 RoPE（Su et al., 2024）编码时间信息；双向注意力掩码允许每个时间斑块关注所有其他斑块。自监督预训练时，各受试者神经活动经斑块嵌入模块转为 Transformer 输入，输出再经反向斑块嵌入模块重建为原始神经数据（将潜 token 投影回输入维）。音素解码时，Transformer 输出经线性层生成音素、空白 token 与静音 token 上的 logits。
+
+**LLM 解码器。** 对文本 LLM，编码器输出经浅层 MLP 投影器（Linear、ReLU、Linear）映射到文本嵌入空间；文本经分词并嵌入同一空间。在神经与文本嵌入之间插入文本提示以引导解码，提示设计随编码器输出被当作何种模态而变（图 3B）。训练时模型接收神经嵌入、来自提示与目标句的文本嵌入，并以下一 token 预测生成文本 token。推理时仅用神经嵌入与提示自回归生成解码文本 token。对音频 LLM，神经编码器输出可视为独立神经模态并映射到文本空间，流程与纯文本 LLM 相同。由于编码器在音素解码上预训练，所得嵌入编码语音信息；即便没有音频 token，模型仍可利用 LLM 预训练获得的言语知识。若当作音频模态，神经编码器输出先经 MLP 投影器，再经原用于音频编码器的多模态投影器映射到音频嵌入空间（图 3A）。此时可将神经活动视为音频，因其类似于言语波形。
+
+我们对 LLM 参数子集施加低秩适应（low-rank adaptation, LoRA）（Hu et al., 2022），包括注意力投影与前馈层，以便用少量可训练参数微调。对基于音频的 LLM，LoRA 也施加于多模态投影器，将神经嵌入映射到音频嵌入空间以对齐模型的声学表征。
+
+**跨模态对齐。** 将编码器输出投影到文本嵌入空间后，模态对齐器用独立线性层将均值池化的神经与文本嵌入 token 投影到共享潜空间。所得 L2 归一化向量以对比损失优化，以增大匹配句子嵌入相似度（图 1C）。细节见第 3.3 节与附录 I。
+
+### 3.3 训练目标
+
+**基于掩码建模的自监督预训练。** 预训练采用受掩码自编码器启发的时间掩码策略（He et al., 2022）。神经活动被 token 化为时间斑块，子集被可学习掩码 token 随机替换。掩码斑块可形成可变长度的连续跨度，最长不超过预设最大时间跨度，同时保持整体掩码比例一致（附录 Q）。模型从部分掩码序列重建原始神经活动，从而在无外部监督下学习丰富的上下文表征。因阈值尖峰计数与 SBP 均已归一化，重建损失用 MSE。该掩码策略通过数据增强减轻过拟合，并缓解探针漂移引起的非平稳性（Karpowicz et al.; 2024【待核：原文引用标点为 et al.; 2024】）。此外，预训练限于人类与灵长类犹他阵列数据，使模型学习对电极位置、受试者与行为任务变化稳健的稳定探针表征。
+
+**音素级解码微调。** 预训练后，神经编码器以 CTC 损失（Graves et al., 2006）微调，从神经活动预测音素序列。编码器将神经活动变为潜嵌入，再投影到音素类别加空白 token，得到音素 logits。微调时移除时间掩码模块，因大规模数据增强预训练已缓解过拟合。在端到端模型中，音素 logits 并不馈入音频 LLM 解码器；它们作为中间目标，将语音信息编码进神经表征以引导 LLM 微调，即使最终目标是句子预测（附录 C）。
+
+**句子级解码微调。** 最后阶段，神经编码器将神经表征送入音频 LLM 解码器，以相对真值句子的交叉熵损失微调下一 token 预测。该目标使神经活动与 LLM 中的语言结构对齐，从而生成连贯文本。为强化模态对齐，我们使用对比学习目标。第 3.2 节的模态对齐器将神经与文本嵌入 token 池化为单一“模态 token”并投影到共享潜空间。同一试次、同一句子的神经与文本嵌入构成正对，批次中其余样本为负对。这促使模型拉近匹配嵌入、推开非匹配嵌入，从而学习与文本嵌入语义结构对齐的表征。总损失为交叉熵与对比损失之和（附录 J）。
+
+---
+
+## 4 评估
+
+### 4.1 任务
+
+我们在两项言语解码任务上评估方法。尝试性言语：受试者虽因瘫痪无法产生可懂语音，但仍尝试清晰发音词语时解码神经活动（Willett et al., 2023; Card et al., 2024）。想象性言语：受试者静默想象说话、不尝试调动言语肌肉时解码神经活动（Kunz et al., 2025）。性能以各句平均词错误率（WER）衡量，WER 越低表示解码越准确。
+
+### 4.2 基线
+
+我们以两种解码策略对方法做基准对比：
+
+**级联解码器。** 先用神经编码器从神经活动解码音素；音素 logits 送入 5-gram LM 生成句子假设，再用 OPT（Zhang et al., 2022）重打分（附录 D）。虽非完全可微，该方法在犹他阵列言语 BCI 上取得最低 WER（Willett et al., 2024），并用于基准对比编码器：
+
+1. **RNN：** 先前言语 BCI 的基线 RNN（Willett et al., 2023; Card et al., 2024）。
+2. **BIT-TFS：** 从零训练做音素解码的 Transformer。
+3. **BIT-Human：** 在人类数据上预训练、再微调做音素解码的 Transformer。
+4. **BIT-All：** 在人类+猴数据上预训练、再微调解码音素的 Transformer。
+5. **BIT-Cross-Task-Only：** 先在同一受试者上训练解码尝试性言语，再微调解码想象性言语，以测试跨任务迁移。
+
+**端到端解码器。** 将为音素解码训练的神经编码器与预训练 LLM 配对，通过向 LLM 馈入神经表征（而非音素 logits）微调，直接将神经活动翻译为句子。我们以多种文本与音频 LLM（第 5.2 节）对相同神经编码器（RNN、BIT-TFS、BIT-Human、BIT-All、BIT-Cross-Task-Only）做基准，推理时用 nucleus sampling（Holtzman et al., 2020）生成句子（附录 F）。尽管端到端方法（Feng et al., 2024）尚未超越级联解码器，本方法旨在缩小这一差距。
+
+![图 2. 尝试性与想象性言语解码中 BIT 与基线的基准对比。](figures_05_cross_species/fig2.png)
+
+**图 2.** 尝试性与想象性言语解码中 BIT 与基线的基准对比。(A) 尝试性言语：预训练编码器（BIT-Human、BIT-All）在级联与端到端两种路径下均优于 RNN 与 BIT-TFS。柱状图为竞赛留出句上的平均 WER。(B) 想象性言语（50 词词表）：BIT-All 在级联与端到端设定下均优于其余基线。柱状图为划分测试句上的平均 WER。SSL 预训练对想象性言语的收益大于尝试性言语，因前者标注样本远更少。(C) 散点比较想象性言语解码上 BIT-All 与 BIT-Cross-Task-Only，每点为一测试句，绿色数值为相对提升。结果表明：SSL 预训练（跨受试者、无标注）在微调后比监督预训练（同受试者、跨任务）带来更大迁移收益。(D) BIT-All 端到端解码的示例句子。想象性言语任务词表（50 词）小于尝试性言语。
+
+---
+
+## 5 实验与结果
+
+### 5.1 解码尝试性与想象性言语
+
+为对尝试性与想象性言语解码做基准，模型按受试者（T12 与 T15）分别训练与评估。尝试性言语：我们在 Brain-to-Text ’24 与 ’25 基准训练集上训练，用所给测试集作验证以选模型，并在基准留出集上报告性能（真值未知，但可通过提交竞赛获得分数）。想象性言语：使用原研究提供的训练数据，将评估集对半划分为验证与测试集。WER 在各受试者留出或测试试次上计算。消融研究在验证集上报告性能，因其用于选择最终提交基准的模型。预训练数据划分见附录 A。
+
+**表 1.** 我们在 Brain-to-Text ’24 留出集（1200 句）上对 BIT 做基准，并在同一解码框架（级联或端到端）内与其他言语 BCI 公平比较。背景色标示可比较方法。更多细节见竞赛排行榜。
+
+| 竞赛条目 | WER |
+|---|---|
+| Feng et al. (2024) | 24.69% |
+| BIT End-to-End | 15.67% |
+| BIT End-to-End + Ensemble | 10.22% |
+| RNN (Baseline) | 9.76% |
+| Feghhi et al. (2025) | 7.98% |
+| BIT Cascaded | 6.35% |
+| Li et al. (2024) + Ensemble | 5.77% |
+| Feghhi et al. (2025) + Ensemble | 5.68% |
+| BIT Cascaded + Ensemble | 5.10% |
+
+对尝试性言语，我们比较 BIT-All、BIT-Human、BIT-TFS 与 RNN 基线。对想象性言语，还纳入 BIT-Cross-Task-Only 以评估同受试者跨任务迁移。对 RNN 与 Transformer 架构，均通过从预定义范围随机采样优化器超参初始化 30 个模型做超参调优，选取验证性能最佳配置。细节见附录 Q–R。实验中，BIT-TFS 在尝试性言语解码上优于 RNN（图 2A）；因 RNN 未使用时间掩码，该比较同时反映架构与训练目标差异。大规模预训练（BIT-Human、BIT-All）相对从零训练编码器进一步提升性能。对想象性言语（50 词词表），BIT-Human 与 BIT-All 相对 BIT-TFS 在 WER 上优 39–45%，表明 SSL 预训练在低数据设定中尤其有益。此外，BIT-All 超过 BIT-Cross-Task-Only（图 2B–C），说明跨受试者、无标签 SSL 预训练比同受试者、跨任务监督预训练带来更大迁移收益。尽管 BIT 超越了先前将 RNN 编码器与文本 LLM 解码器结合的端到端基线（Feng et al., 2024），级联与端到端之间仍有 WER 差距。本方法显著缩小该差距，使端到端性能更接近级联解码器。图 2D 给出 BIT-All 在端到端框架下解码的示例句子。
+
+为与其他方法对比，我们参加 Brain-to-Text ’24 与 ’25 竞赛；留出集真值对参赛者隐藏，以 WER 衡量。为公平比较，我们在同一解码框架（级联或端到端）内比较方法；细节见附录 H。表 1 与表 2 中，BIT Cascaded（5-gram LM）与 BIT End-to-End（Aero1-Audio 1.5B）将我们的预训练编码器（BIT-All）与不同解码器耦合。BIT Cascaded 对非集成模型取得 SOTA WER 6.35%，超过此前最佳 7.98%（Feghhi et al., 2025）。用微调 LLM 合并不同种子训练的模型集成所解码的多句（附录 G）后，BIT Cascaded + Ensemble 进一步将 WER 降至 5.10%，优于此前的 5.68%（Feghhi et al., 2025）并排名第一。BIT End-to-End + Ensemble 相对先前端到端条目（Feng et al., 2024）将 WER 从 24.69% 降至 10.22%。在 ’25 公开排行榜上，BIT Cascaded + Ensemble 以 1.76% WER 领先，BIT End-to-End + Ensemble 达到 7.76%。
+
+**表 2.** 我们在 Brain-to-Text ’25 留出集（1450 句）上对 BIT 做基准，并在同一解码框架（级联或端到端）内公平比较。背景色标示可比较方法。更多细节见竞赛排行榜。
+
+| 竞赛条目 | WER |
+|---|---|
+| BIT End-to-End | 11.06% |
+| BIT End-to-End + Ensemble | 7.76% |
+| RNN (Baseline) | 6.67% |
+| BIT Cascaded | 4.06% |
+| RNN-TTA + Pseudo-Ensemble | 4.42% |
+| RNN + Ensemble | 3.09% |
+| BIT Cascaded + Ensemble | 1.76% |
+
+### 5.2 大语言模型解码器消融
+
+我们进行消融研究，量化 LLM 解码器类型与模型设计对尝试性言语解码性能的影响。具体比较基于文本与基于音频的 LLM，并通过将神经嵌入当作音频或神经模态测试不同提示设计（第 3.2 节与图 3B）。最后评估对比学习跨模态对齐对解码性能的影响。我们聚焦约 1～7B 参数模型，以在表达能力与稀缺标注数据下神经解码的可适应性之间取得平衡。
+
+文本 LLM 使用 Qwen2.5-1.5B、Qwen2.5-7B（Qwen et al., 2025）、Qwen3-0.6B 与 Qwen3-1.7B（Yang et al., 2025）。音频 LLM 使用 Aero1-Audio 1.5B（Li et al., 2025）——Qwen2.5-1.5B 的音频扩展版——以及更大的、捕捉更丰富声学表征的 Qwen2-Audio-7B（Chu et al., 2024）。将这些音频扩展模型与其纯文本对应体比较，可分离音频处理相对一般语言建模能力的影响。
+
+实验（图 3C–D）表明：同等规模下，基于音频的 LLM 在解码上优于基于文本的 LLM；作为 Qwen2.5 1.5B 音频扩展的 Aero1-Audio 1.5B（Li et al., 2025）持续取得最佳结果。这表明在音频任务上预训练 LLM 可提供更接近神经解码问题的归纳偏置，使浅层 MLP 能更有效地对齐模态。将神经编码器输出当作神经模态略优于当作音频，说明神经嵌入不必被解释为音频，但 LLM 仍受益于言语知识。我们还发现，在标注样本有限时，较小 LLM 通常比更大 LLM 获得更低 WER，因言语 BCI 任务需要的是英语翻译而非通常见于 7B 以上模型的高级推理。最后，用对比学习对齐神经与文本嵌入可进一步提升性能。
+
+![图 3. 跨模态、模型规模、提示设计与是否使用对比学习的 LLM 解码器消融。](figures_05_cross_species/fig3.png)
+
+**图 3.** 跨模态、模型规模、提示设计与是否使用对比学习的 LLM 解码器消融。(A) 对音频 LLM，神经活动可当作神经或音频模态。神经模态下，编码器输出经 MLP 投影器直接投影到文本嵌入空间；音频模态下，神经编码器输出先经 MLP 投影器，再经音频编码器所用的多模态投影器。(B) 视神经编码器输出当作神经或音频模态使用不同提示，编码器输出插入占位符“#”。(C–D) 柱状图为不同 LLM、模态处理、提示设计与是否使用对比学习时验证句上的平均 WER。此处报告验证 WER，因其用于选择最终提交基准的 LLM 解码器。颜色区分文本（黄）与音频 LLM（蓝），透明度表示神经活动被当作 Neural 或 Audio 模态，斜线纹理表示未使用对比学习。
+
+### 5.3 对齐神经嵌入以实现跨任务泛化
+
+尽管 BIT 为言语解码而训练，我们希望理解其潜嵌入编码了何种语义内容。为此，我们对神经嵌入与 LLM 的表征几何做句子级表征相似性分析（representational similarity analysis, RSA）（Kriegeskorte et al., 2008）。若神经嵌入保留与 LLM 相似的关系结构，则可为解码提供更有信息量的特征。重要的是，RSA 分析中所有神经编码器均取自句子级微调之前，以确保比较的是内在表征几何而非监督适应效应（细节见附录 L.1）。图 4A 给出神经嵌入与音频 LLM 文本嵌入之间的 RSA 分数。预训练编码器输出与音频 LLM 表征的相似度高于 RNN 与 BIT-TFS，表明大规模预训练促进了具有语言结构的表征。
+
+我们还想理解哪个神经编码器学习到尝试性与想象性言语神经嵌入之间的最优映射。作为基线，我们对神经活动做 PCA，跨时间与试次平均嵌入得到词级嵌入，并可视化前两个主成分。对 BIT-All，对神经编码器输出做 PCA，并将词级嵌入投影到前两个主成分。这些嵌入取自句子级微调之后，以确保含有语义信息。对每个词，用欧氏距离量化尝试性与想象性嵌入的相似度（PCA 之前）。
+
+图 4B 显示神经活动投影在尝试性与想象性言语之间清晰分离。因 PCA 仅关注神经方差，该分离反映与句子内容无关的差异。相比之下，BIT 嵌入分离小得多（图 4C），表明在计入语义信息后 BIT 跨任务对齐了神经嵌入。图 4B–C 中颜色强度表明预训练后两任务嵌入相似度更高。此外，我们拟合线性判别分析（linear discriminant analysis, LDA）以寻找最大化任务间分离、最小化任务内方差的投影，并将该判别轴绘制为任务可分性的低维摘要（附录 L.2）。结果显示：原始神经活动中任务嵌入线性可分，经 BIT 对齐后则不然（图 4B–C）。
+
+为理解神经嵌入如何随时间与个别词相关，我们使用可可视化 token 级交互的投影器。实验中虽用 MLP 投影器，线性与交叉注意力投影器亦可得到相近、略低的性能（附录 K）。我们可视化交叉注意力投影器的注意力权重，显示两任务嵌入呈现相似的神经–文本时间对齐（图 4D）。这些结果进一步确认 BIT 可保留语义信息以实现跨任务泛化。
+
+![图 4. BIT 对齐尝试性与想象性言语神经嵌入以实现跨任务泛化。](figures_05_cross_species/fig4.png)
+
+**图 4.** BIT 对齐尝试性与想象性言语神经嵌入以实现跨任务泛化。(A) 神经嵌入与音频 LLM 文本嵌入之间的 RSA 分数。(B) 受试者 T12 神经特征的 PCA 嵌入在前两个主成分上可视化。词级嵌入跨时间与试次平均并以点显示；两任务展示相同词。颜色表示任务，颜色强度表示各词尝试性与想象性言语嵌入距离（颜色越深相似度越高）。线为 LDA 线性判别轴。(C) 对 BIT-All，对受试者 T12 神经编码器输出做 PCA，前两个主成分上的词级嵌入以点可视化。绘图约定同面板 B。(D) 在 BIT 中使用交叉注意力投影器可可视化注意力权重，显示跨任务的神经–文本时间对齐相似。
+
+---
+
+## 6 讨论
+
+**总结：** 本文提出端到端言语解码框架。方法将在人类与猴犹他阵列、跨言语与上肢相关运动任务上预训练的 Transformer 神经编码器，与级联框架中的 n-gram LM 或端到端优化的音频 LLM 相结合。在级联设定下，我们表明跨物种、跨任务预训练经微调后可迁移到尝试性与想象性言语，并在 Brain-to-Text ’24 与 ’25 基准上取得第一。与 Aero1-Audio 1.5B（音频扩展的 Qwen2.5-1.5B）端到端集成后，BIT 相对此前最佳方法将 WER 降低逾 50%。最后，我们证明 BIT 学习到想象性与尝试性言语共享的表征，从而实现跨任务泛化。
+
+**局限与未来方向：** 本方法面临若干挑战与改进空间。首先，端到端路径平均每句约需 0.95 秒，慢于级联路径（0.24 秒），对实时 BCI 效率不足。此外，神经编码器为最大化性能以双向注意力训练，不适合在线解码；改为因果注意力可行，但会损失部分解码精度。类似地，虽采用紧凑的 1.5B 音频 LLM，更大模型无法在设备上运行，进一步限制实时应用。另一考量是预训练：我们发现人类数据收益大于跨物种迁移，可能因人类数据含与言语更相关的任务（以及在较小程度上的手写），而猴伸手数据适用性较低。另外，神经编码器需要大量无标注数据以应对传感器变异，LLM 则需要大量标注数据才能超越级联方法；但我们获取私有人类数据的权限有限。最后，LLM 解码器本身可通过更好的模态对齐与提示设计改进，长期 BCI 使用还广泛需要应对非平稳性（Le et al., 2025）、神经可塑性与用户–界面共适应的方法。
+
+**更广泛影响：** 本工作改进现有级联言语 BCI 系统，为瘫痪用户恢复高准确度交流。它也推进 SOTA 端到端模型，使其更易优化并部署于实时应用。这些进展可使无法交流或运动的患者借助 AI 与外界互动并完成日常任务。同时，它也带来重要的安全与隐私关切：解码内言语必须要求明确用户同意与可靠保障措施（Kunz et al., 2025）。
+
+---
+
+## 参考文献
+
+Hassan Akbari, Bahar Khalighinejad, Jose L Herrero, Ashesh D Mehta, and Nima Mesgarani. Towards reconstructing intelligible speech from the human auditory cortex. *Scientific reports*, 9(1):874, 2019.
+
+Mehdi Azabou, Vinam Arora, Venkataramana Ganesh, Ximeng Mao, Santosh Nachimuthu, Michael Mendelson, Blake Richards, Matthew Perich, Guillaume Lajoie, and Eva Dyer. A unified, scalable framework for neural population decoding. *Advances in Neural Information Processing Systems*, 36:44937–44956, 2023.
+
+Mehdi Azabou, Krystal Xuejing Pan, Vinam Arora, Ian Jarratt Knight, Eva L Dyer, and Blake Aaron Richards. Multi-session, multi-task neural decoding from distinct cell-types and brain regions. In *The Thirteenth International Conference on Learning Representations*, 2024.
+
+Kristofer E Bouchard, Nima Mesgarani, Keith Johnson, and Edward F Chang. Functional organization of human sensorimotor cortex for speech articulation. *Nature*, 495(7441):327–332, 2013.
+
+Nicholas S Card, Maitreyee Wairagkar, Carrina Iacobacci, Xianda Hou, Tyler Singer-Clark, Francis R Willett, Erin M Kunz, Chaofei Fan, Maryam Vahdati Nia, Darrel R Deo, et al. An accurate and rapidly calibrating speech neuroprosthesis. *New England Journal of Medicine*, 391(7):609–618, 2024.
+
+Raeed H Chowdhury, Joshua I Glaser, and Lee E Miller. Area 2 of primary somatosensory cortex encodes kinematics of the whole arm. *Elife*, 9:e48198, 2020.
+
+Yunfei Chu, Jin Xu, Qian Yang, Haojie Wei, Xipin Wei, Zhifang Guo, Yichong Leng, Yuanjun Lv, Jinzheng He, Junyang Lin, et al. Qwen2-audio technical report. *arXiv preprint arXiv:2407.10759*, 2024.
+
+Mark M Churchland, John P Cunningham, Matthew T Kaufman, Justin D Foster, Paul Nuyujukian, Stephen I Ryu, and Krishna V Shenoy. Neural population dynamics during reaching. *Nature*, 487(7405):51–56, 2012.
+
+Wenhui Cui, Woojae Jeong, Philipp Thölke, Takfarinas Medani, Karim Jerbi, Anand A Joshi, and Richard M Leahy. Neuro-gpt: Towards a foundation model for eeg. In *2024 IEEE International Symposium on Biomedical Imaging (ISBI)*, pp. 1–5. IEEE, 2024.
+
+Nir Even-Chen, Blue Sheffer, Saurabh Vyas, Stephen I Ryu, and Krishna V Shenoy. Structure and variability of delay activity in premotor cortex. *PLoS computational biology*, 15(2):e1006808, 2019.
+
+Chaofei Fan, Nick Hahn, Foram Kamdar, Donald Avansino, Guy Wilson, Leigh Hochberg, Krishna V Shenoy, Jaimie Henderson, and Francis Willett. Plug-and-play stability for intracortical brain-computer interfaces: a one-year demonstration of seamless brain-to-text communication. *Advances in neural information processing systems*, 36:42258–42270, 2023.
+
+Ebrahim Feghhi, Shreyas Kaasyap, Nima Hadidi, and Jonathan C Kao. Time-masked transformers with lightweight test-time adaptation for neural speech decoding. *arXiv preprint arXiv:2507.02800*, 2025.
+
+Sheng Feng, Heyang Liu, Yu Wang, and Yanfeng Wang. Towards an end-to-end framework for invasive brain signal decoding with large language models. *arXiv preprint arXiv:2406.11568*, 2024.
+
+Alex Graves, Santiago Fernández, Faustino Gomez, and Jürgen Schmidhuber. Connectionist temporal classification: labelling unsegmented sequence data with recurrent neural networks. In *Proceedings of the 23rd international conference on Machine learning*, pp. 369–376, 2006.
+
+Kaiming He, Xinlei Chen, Saining Xie, Yanghao Li, Piotr Dollár, and Ross Girshick. Masked autoencoders are scalable vision learners. In *Proceedings of the IEEE/CVF conference on computer vision and pattern recognition*, pp. 16000–16009, 2022.
+
+Ari Holtzman, Jan Buys, Li Du, Maxwell Forbes, and Yejin Choi. The curious case of neural text degeneration. In *International Conference on Learning Representations (ICLR)*, 2020. URL https://arxiv.org/abs/1904.09751.
+
+Edward J Hu, Yelong Shen, Phillip Wallis, Zeyuan Allen-Zhu, Yuanzhi Li, Shean Wang, Lu Wang, Weizhu Chen, et al. Lora: Low-rank adaptation of large language models. *ICLR*, 1(2):3, 2022.
+
+Patrick Kaifosh and Thomas R Reardon. A generic non-invasive neuromotor interface for human-computer interaction. *Nature*, pp. 1–10, 2025.
+
+Brianna M Karpowicz, Yahia H Ali, Lahiru N Wimalasena, Andrew R Sedler, Mohammad Reza Keshtkaran, Kevin Bodkin, Xuan Ma, Lee E Miller, and Chethan Pandarinath. Stabilizing brain-computer interfaces through alignment of latent dynamics. nov 2022. doi: 10.1101/2022.04.06.487388.
+
+Brianna M Karpowicz, Joel Ye, Chaofei Fan, Pablo Tostado-Marcos, Fabio Rizzoglio, Clay Washington, Thiago Scodeler, Diogo de Lucena, Samuel R Nason-Tomaszewski, Matthew J Mender, et al. Few-shot algorithms for consistent neural decoding (falcon) benchmark. *Advances in Neural Information Processing Systems*, 37:76578–76615, 2024.
+
+Nikolaus Kriegeskorte, Marieke Mur, and Peter A Bandettini. Representational similarity analysis-connecting the branches of systems neuroscience. *Frontiers in systems neuroscience*, 2:249, 2008.
+
+Erin M Kunz, Benyamin Abramovich Krasa, Foram Kamdar, Donald T Avansino, Nick Hahn, Seonghyun Yoon, Akansha Singh, Samuel R Nason-Tomaszewski, Nicholas S Card, Justin J Jude, et al. Inner speech in motor cortex and implications for speech neuroprostheses. *Cell*, 2025.
+
+Trung Le, Hao Fang, Jingyuan Li, Tung Nguyen, Lu Mi, Amy Orsborn, Uygar Sümbül, and Eli Shlizerman. Spint: Spatial permutation-invariant neural transformer for consistent intracortical motor decoding. *arXiv preprint arXiv:2507.08402*, 2025.
+
+Vladimir I. Levenshtein. Binary codes capable of correcting deletions, insertions, and reversals. *Soviet Physics Doklady*, 10:707–710, 1966.
+
+Bo Li, Chen Change Loy, Pu Fanyi, Yang Jingkang, Zhang Kaichen, Hu Kairui, Thang Luu Minh, Trung Nguyen Quang, Cong Pham Ba, Liu Shuai, Wang Yezhen, and Liu Ziwei. Aero: Audio-enhanced large language models. 2025. URL https://www.lmms-lab.com/posts/aero_audio/.
+
+Jingyuan Li, Trung Le, Chaofei Fan, Mingfei Chen, and Eli Shlizerman. Brain-to-text decoding with context-aware neural representations and large language models. *Journal of Neural Engineering*, 2024.
+
+Junnan Li, Dongxu Li, Silvio Savarese, and Steven Hoi. Blip-2: Bootstrapping language-image pre-training with frozen image encoders and large language models. *arXiv preprint arXiv:2301.12597*, 2023.
+
+Richard Liaw, Eric Liang, Robert Nishihara, Philipp Moritz, Joseph E Gonzalez, and Ion Stoica. Tune: A research platform for distributed model selection and training. In *Proceedings of the 2018 Workshop on ML Systems at NeurIPS*, 2018.
+
+Kaylo T Littlejohn, Cheol Jun Cho, Jessie R Liu, Alexander B Silva, Bohan Yu, Vanessa R Anderson, Cady M Kurtz-Miott, Samantha Brosler, Anshul P Kashyap, Irina P Hallinan, et al. A streaming brain-to-voice neuroprosthesis to restore naturalistic communication. *Nature neuroscience*, pp. 1–11, 2025.
+
+Haotian Liu, Chunyuan Li, Qingyang Wu, and Yong Jae Lee. Llava: Large language and vision assistant. *arXiv preprint arXiv:2304.08485*, 2023a.
+
+Haotian Liu, Chunyuan Li, Qingyang Wu, and Yong Jae Lee. Visual instruction tuning. *Advances in neural information processing systems*, 36:34892–34916, 2023b.
+
+Ilya Loshchilov and Frank Hutter. Decoupled weight decay regularization. *arXiv preprint arXiv:1711.05101*, 2017.
+
+Konstantin-Klemens Lurz, Mohammad Bashiri, Konstantin Willeke, Akshay K Jagadish, Eric Wang, Edgar Y Walker, Santiago A Cadena, Taliah Muhammad, Erick Cobos, Andreas S Tolias, et al. Generalization in data-driven models of primary visual cortex. *BioRxiv*, pp. 2020–10, 2020.
+
+Xuan Ma, Fabio Rizzoglio, Kevin L Bodkin, Eric Perreault, Lee E Miller, and Ann Kennedy. Using adversarial networks to extend brain computer interface decoding accuracy over time. *elife*, 12:e84296, 2023.
+
+Joseph G Makin, David A Moses, and Edward F Chang. Machine translation of cortical activity to text with an encoder–decoder framework. *Nature neuroscience*, 23(4):575–582, 2020.
+
+Sean L Metzger, Kaylo T Littlejohn, Alexander B Silva, David A Moses, Margaret P Seaton, Ran Wang, Maximilian E Dougherty, Jessie R Liu, Peter Wu, Michael A Berger, et al. A high-performance neuroprosthesis for speech decoding and avatar control. *Nature*, 620(7976):1037–1046, 2023.
+
+David A Moses, Sean L Metzger, Jessie R Liu, Gopala K Anumanchipalli, Joseph G Makin, Pengfei F Sun, Josh Chartier, Maximilian E Dougherty, Patricia M Liu, Gary M Abrams, et al. Neuroprosthesis for decoding speech in a paralyzed person with anarthria. *New England Journal of Medicine*, 385(3):217–227, 2021.
+
+Samuel R Nason, Alex K Vaskov, Matthew S Willsey, Elissa J Welle, Hyochan An, Philip P Vu, Autumn J Bullard, Chrono S Nu, Jonathan C Kao, Krishna V Shenoy, et al. A low-power band of neuronal spiking activity dominated by local single units improves the performance of brain–machine interfaces. *Nature biomedical engineering*, 4(10):973–983, 2020.
+
+Aaron van den Oord, Yazhe Li, and Oriol Vinyals. Representation learning with contrastive predictive coding. *arXiv preprint arXiv:1807.03748*, 2018.
+
+Matthew G Perich, Juan A Gallego, and Lee E Miller. A neural population mechanism for rapid learning. *Neuron*, 100(4):964–976, 2018.
+
+Timothée Proix, Jaime Delgado Saa, Andy Christen, Stephanie Martin, Brian N Pasley, Robert T Knight, Xing Tian, David Poeppel, Werner K Doyle, Orrin Devinsky, et al. Imagined speech can be decoded from low-and cross-frequency intracranial eeg features. *Nature communications*, 13(1):48, 2022.
+
+Qwen, :, An Yang, Baosong Yang, Beichen Zhang, Binyuan Hui, Bo Zheng, Bowen Yu, Chengyuan Li, Dayiheng Liu, Fei Huang, Haoran Wei, Huan Lin, Jian Yang, Jianhong Tu, Jianwei Zhang, Jianxin Yang, Jiaxi Yang, Jingren Zhou, Junyang Lin, Kai Dang, Keming Lu, Keqin Bao, Kexin Yang, Le Yu, Mei Li, Mingfeng Xue, Pei Zhang, Qin Zhu, Rui Men, Runji Lin, Tianhao Li, Tianyi Tang, Tingyu Xia, Xingzhang Ren, Xuancheng Ren, Yang Fan, Yang Su, Yichang Zhang, Yu Wan, Yuqiong Liu, Zeyu Cui, Zhenru Zhang, and Zihan Qiu. Qwen2.5 technical report, 2025. URL https://arxiv.org/abs/2412.15115.
+
+Alec Radford, Jong Wook Kim, Chris Hallacy, Aditya Ramesh, Gabriel Goh, Sandhini Agarwal, Girish Sastry, Amanda Askell, Pamela Mishkin, Jack Clark, et al. Learning transferable visual models from natural language supervision. *arXiv preprint arXiv:2103.00020*, 2021.
+
+Avery Hee-Woon Ryoo, Nanda H Krishna, Ximeng Mao, Mehdi Azabou, Eva L Dyer, Matthew G Perich, and Guillaume Lajoie. Generalizable, real-time neural decoding with hybrid state-space models. *arXiv preprint arXiv:2506.05320*, 2025.
+
+Paul S Scotti, Mihir Tripathy, Cesar Kadir Torrico Villanueva, Reese Kneeland, Tong Chen, Ashutosh Narang, Charan Santhirasegaran, Jonathan Xu, Thomas Naselaris, Kenneth A Norman, et al. Mindeye2: Shared-subject models enable fmri-to-image with 1 hour of data. *arXiv preprint arXiv:2403.11207*, 2024.
+
+Jianlin Su, Murtadha Ahmed, Yu Lu, Shengfeng Pan, Wen Bo, and Yunfeng Liu. Roformer: Enhanced transformer with rotary position embedding. *Neurocomputing*, 568:127063, 2024.
+
+Hisham Temmar, Yixuan Wang, Nina Gill, Nicholas Mellon, Chang Liu, Luis Hernan Cubillos, Rio I Parsons, Joseph T Costello, Matteo Ceradini, Madison M Kelberman, et al. Long-term intracortical neural activity and kinematics (link): An intracortical neural dataset for chronic brain-machine interfaces, neuroscience, and machine learning. *The Thirty-ninth Annual Conference on Neural Information Processing Systems Datasets and Benchmarks Track*, 2025.
+
+Armin Thomas, Christopher Ré, and Russell Poldrack. Self-supervised learning of brain dynamics from broad neuroimaging data. *Advances in neural information processing systems*, 35:21255–21269, 2022.
+
+Eric Y Wang, Paul G Fahey, Zhuokun Ding, Stelios Papadopoulos, Kayla Ponder, Marissa A Weis, Andersen Chang, Taliah Muhammad, Saumil Patel, Zhiwei Ding, et al. Foundation model of neural activity predicts response to new stimulus types. *Nature*, 640(8058):470–477, 2025.
+
+Francis R Willett, Donald T Avansino, Leigh R Hochberg, Jaimie M Henderson, and Krishna V Shenoy. High-performance brain-to-text communication via handwriting. *Nature*, 593(7858):249–254, 2021.
+
+Francis R Willett, Erin M Kunz, Chaofei Fan, Donald T Avansino, Guy H Wilson, Eun Young Choi, Foram Kamdar, Matthew F Glasser, Leigh R Hochberg, Shaul Druckmann, et al. A high-performance speech neuroprosthesis. *Nature*, 620(7976):1031–1036, 2023.
+
+Francis R Willett, Jingyuan Li, Trung Le, Chaofei Fan, Mingfei Chen, Eli Shlizerman, Yue Chen, Xin Zheng, Tatsuo S Okubo, Tyler Benster, et al. Brain-to-text benchmark’24: Lessons learned. *arXiv preprint arXiv:2412.17227*, 2024.
+
+An Yang, Anfeng Li, Baosong Yang, Beichen Zhang, Binyuan Hui, Bo Zheng, Bowen Yu, Chang Gao, Chengen Huang, Chenxu Lv, et al. Qwen3 technical report. *arXiv preprint arXiv:2505.09388*, 2025.
+
+Joel Ye, Jennifer Collinger, Leila Wehbe, and Robert Gaunt. Neural data transformer 2: multi-context pretraining for neural spiking activity. *Advances in Neural Information Processing Systems*, 36:80352–80374, 2023.
+
+Joel Ye, Fabio Rizzoglio, Adam Smoulder, Hongwei Mao, Xuan Ma, Patrick Marino, Raeed Chowdhury, Dalton Moore, Gary Blumenthal, William Hockeimer, et al. A generalist intracortical motor decoder. *bioRxiv*, 2025.
+
+Han Yu, Hanrui Lyu, Ethan Yixun Xu, Charlie Windolf, Eric Kenji Lee, Fan Yang, Andrew M Shelton, Shawn Olsen, Sahar Minavi, Olivier Winter, et al. In vivo cell-type and brain region classification via multimodal contrastive learning. *bioRxiv*, pp. 2024–11, 2025.
+
+Jiahui Yu, Zirui Wang, Vijay Vasudevan, Legg Yeung, Mojtaba Seyedhosseini, and Yonghui Wu. Coca: Contrastive captioners are image-text foundation models. *arXiv preprint arXiv:2205.01917*, 2022.
+
+Susan Zhang, Stephen Roller, Naman Goyal, Mikel Artetxe, Moya Chen, Shuohui Chen, Christopher Dewan, Mona Diab, Xian Li, Xi Victoria Lin, et al. Opt: Open pre-trained transformer language models. *arXiv preprint arXiv:2205.01068*, 2022.
+
+Yizi Zhang, Yanchen Wang, Donato Jiménez-Benetó, Zixuan Wang, Mehdi Azabou, Blake Richards, Renee Tung, Olivier Winter, Eva Dyer, Liam Paninski, et al. Towards a” universal translator” for neural dynamics at single-cell, single-spike resolution. *Advances in Neural Information Processing Systems*, 37:80495–80521, 2024.
+
+Yizi Zhang, Yanchen Wang, Mehdi Azabou, Alexandre Andre, Zixuan Wang, Hanrui Lyu, The International Brain Laboratory, Eva Dyer, Liam Paninski, and Cole Hurwitz. Neural encoding and decoding at scale. *arXiv preprint arXiv:2504.08201*, 2025.
+
+---
+
+## 附录 A 数据集细节
+
+本节记录预训练以及尝试性与想象性言语解码所用全部数据集的研究来源，并对各数据集作简要说明。
+
+### A.1 人类数据
+
+**Willett et al. (2021).** 该数据集记录手部瘫痪受试者尝试与想象手写，由皮层内 BCI 实时解码。数据公开于 DRYAD 仓库。仅有 192 电极的阈值交叉可用。
+
+**Willett et al. (2023).** 该数据集与 Brain-to-Text Benchmark ’24 相关，来自一项研究：研究者开发言语 BCI，从皮层内微电极阵列解码神经活动，为肌萎缩侧索硬化（amyotrophic lateral sclerosis, ALS）受试者实时重建言语。数据集含 50 词词表与 125,000 词词表句子。尝试性言语神经记录公开于 DRYAD。256 电极同时提供阈值尖峰与尖峰带功率（SBP）。但解码仅用其中 128 电极，因经验上这带来最佳性能。
+
+**Fan et al. (2023).** 该数据集来自引入言语 BCI 可在不打断用户情况下自重校准框架的研究。神经记录公开于 DRYAD，仅有 192 电极阈值交叉。
+
+**Karpowicz et al. (2024).** 该数据来自少样本一致神经解码算法（Few-shot Algorithms for Consistent Neural Decoding, FALCON）基准，评估皮层内 BCI 解码器跨会话稳定性。我们仅使用人类手写子集（亦与 Fan et al. (2023) 相关），可于 DANDI 获取。该子集阈值尖峰数据亦含 192 电极。
+
+**Card et al. (2024).** 该数据集与 Brain-to-Text Benchmark ’25 相关，来自一项研究：言语 BCI 从一名 ALS 伴严重构音障碍者的左侧中央前回解码神经活动。含 125,000 词词表的尝试性言语神经记录公开于 DRYAD，256 电极同时提供阈值尖峰与 SBP。
+
+**Kunz et al. (2025).** 该数据集来自言语 BCI 从运动皮层活动解码想象性言语、以实现无需发声的实时通信的研究。含四名受试者在尝试性、想象性与感知性言语任务中的记录与句子，公开于 DRYAD，256 电极同时提供阈值尖峰与 SBP。预训练使用全部四名受试者，解码仅用 T12 与 T15。
+
+### A.2 非人灵长类（non-human primates, NHP）数据
+
+**Churchland et al. (2012).** 该数据集记录非人灵长类在中心向外伸手任务中初级运动皮层（primary motor cortex, M1）神经群体活动。含 192 电极阈值尖峰，公开于 DANDI。
+
+**O’Doherty et al. (2017).** 该数据集源自记录 NHP 感觉运动皮层在自定节奏伸手任务中神经活动的研究。含两只猴、192 电极阈值尖峰，公开于 Zenodo。
+
+**Perich et al. (2018).** 该数据集记录四只猕猴 M1 与背侧前运动皮层（dorsal premotor cortex, PMd）在伸手任务中的神经活动。公开于 DANDI，含阈值尖峰；三名受试者为排序后尖峰，第四名为 192 电极阈值交叉。
+
+**Chowdhury et al. (2020).** 该数据集记录恒河猴初级体感皮层 2 区在伸手任务中的神经活动。含 92 通道阈值尖峰，公开于 DRYAD。
+
+**Even-Chen et al. (2019).** 该数据集记录恒河猴 PMd 在有指令延迟的中心向外伸手任务中的神经活动。含 96 通道犹他阵列阈值尖峰，公开于 DANDI。
+
+**Ma et al. (2023).** 该数据集记录恒河猴 M1 在多日多种运动任务（腕力、抓握、操作杆伸手等）中的神经活动。使用 96 通道微电极阵列的阈值多单位尖峰数据，公开于 DRYAD。
+
+**Temmar et al. (2025).** 该数据集记录恒河猴 M1 在自定节奏手指运动任务中的神经活动。含 96 通道犹他微电极阵列阈值多单位尖峰，以及手指位置与速度行为测量，可于 DANDI 获取。
+
+### A.3 数据预处理
+
+对所有数据集，我们将神经活动重采样为 20 ms 时间 bin（若尚未以此分辨率提供），并跨日做 z-score 以缓解非平稳性。若不做该归一化，因严重数据漂移，言语解码 WER 会大幅升高。此外，当 SBP 可用时我们纳入解码，因经验上 SBP 对解码精度的贡献大于仅用阈值尖峰；阈值尖峰与 SBP 组合得到最低 WER（表 3）。人类数据记录质量通常更高，部分猴数据含死通道。若检测到少于两条死通道，用跨时间平均神经活动插值；我们注意到更仔细的处理更为可取。死通道超过两条的数据集排除出预训练。
+
+**表 3.** 言语解码所用特征消融。报告验证 PER。
+
+| 受试者 | 阈值尖峰 | SBP | 阈值尖峰 + SBP |
+|---|---|---|---|
+| T12 | 21.35% | 18.64% | 17.26% |
+
+关于数据质量，我们还考虑过未列入的其他人类与猴数据集，但最终排除出预训练，因其纳入导致预训练性能下降。这可能源于需在未来工作中更仔细检查的数据质量问题，超出本研究范围。
+
+### A.4 预训练数据划分
+
+因 SSL 预训练不依赖标签，可将各数据集全部神经数据纳入训练集，包括 Brain-to-Text ’24 与 ’25 基准提供的评估（验证）与留出数据。然而，因我们主要兴趣在于评估 Transformer 是否有效捕捉受试者 T12 与 T15 的神经表征，我们用这些受试者的验证集、基于神经活动重建质量指标选择最优模型检查点。
+
+---
+
+## 附录 B 指标
+
+**神经活动重建的 $R^2$。** 我们用决定系数（$R^2$）评估 SSL 预训练中神经活动重建质量。$R^2$ 衡量目标神经活动方差中可由模型预测解释的比例，越高表示重建越好。预训练期间用验证 $R^2$ 选择下游言语解码的模型检查点。
+
+**PER。** 我们使用 41 token 音素词表，含全部音素加静音与 CTC 空白 token。音素错误计数先从解码音素序列中去除重复与空白，再相对真值序列计算 Levenshtein 编辑距离（Levenshtein, 1966），计替换、插入与删除。音素错误率再以错误计数除以真值音素总数归一化得到。
+
+**WER。** 词错误率计算类似 PER。从解码句子去除空白与特殊 token 得到词序列，再计算预测与真值词序列的 Levenshtein 编辑距离，计替换、插入与删除。WER 以总错误计数除以真值序列词数归一化得到。
+
+---
+
+## 附录 C 音素级解码
+
+为简洁，主文省略中间音素解码结果。尽管如此，我们观察到：无论与级联框架中的 5-gram LM 还是端到端框架中的 LLM 解码器结合，取得更低 PER 的神经编码器 一致地带来更低 WER。主文给出各基线神经编码器的留出或验证 WER；本节给出基线编码器的验证 PER，汇总于表 4。
+
+**表 4.** 音素解码基准。所示指标为验证 PER。
+
+| 神经编码器 | 尝试性言语 T12 | 尝试性言语 T15 | 想象性言语 T12 | 想象性言语 T15 |
+|---|---|---|---|---|
+| RNN | 18.67% | 9.64% | 30.81% | 24.56% |
+| BIT-TFS | 17.26% | 8.87% | 25.01% | 21.21% |
+| BIT-Human | 15.95% | 7.61% | 19.63% | 18.83% |
+| BIT-All | 14.39% | 7.12% | 18.08% | 17.94% |
+| BIT-Cross-Task-Only | – | – | 20.46% | 19.58% |
+
+在端到端模型中，音素作为中间目标，将语音信息编码进神经表征以引导 LLM 微调，即使最终目标是句子预测。我们观察到：若无音素解码训练，仅在大语料上预训练神经编码器，并不会在句子级解码阶段带来低 WER，凸显语音信息对言语解码任务的重要性。先前端到端方法（Feng et al., 2024）也报告类似现象，其采用先音素预测再句子预测的两阶段解码策略。
+
+---
+
+## 附录 D 级联解码器
+
+级联解码器由 5-gram LM 与用于对 LM 输出重打分的 OPT 模型组成。本节简要描述所用资源与流程；全面细节见原研究（Willett et al., 2023; Card et al., 2024）。
+
+**5-gram LM。** 我们使用 Brain-to-Text Benchmark ’24 与 ’25（Willett et al., 2023; Card et al., 2024）提供的 5-gram LM，从神经编码器输出解码词序列。预训练模型公开于 DRYAD。该 5-gram LM 用 OpenWebText2 语料构建，词表大，来自 6.34 亿句、990 亿词。LM 解码器执行近似 Viterbi（束）搜索，将编码器的 CTC 音素标签序列映射为词。推理时，束搜索将状态转移概率与编码器预测的 CTC 音素标签概率结合，寻找最可能的词序列。5-gram LM 构建与推理细节见补充材料第 8 节。表 5 报告 5-gram LM 束搜索所用参数。
+
+**OPT 重打分。** 给定 5-gram LM 的句子假设，用 OPT 模型（Zhang et al., 2022）对候选句重打分以进一步提高解码精度。使用公开的 6.7B 参数预训练 OPT 对 n-gram LM 的 n-best 输出重打分。重打分同时考虑编码器输出的句子对应 CTC 音素标签序列概率（声学分数）与 n-gram LM 估计的句子概率；OPT 重打分方程与 LM 解码参数见补充材料第 8.5 节。表 5 报告 OPT 语言模型重打分所用参数。
+
+**表 5.** 级联解码器推理超参数（5-gram LM 束搜索 + OPT 句子重打分）。
+
+| 超参数 | 取值 |
+|---|---|
+| 束大小（候选句数） | 100 |
+| 声学分数缩放因子 | 0.325 |
+| 空白惩罚 | 90 |
+| OPT 重打分缩放因子（$\alpha$） | 0.55 |
+
+---
+
+## 附录 E 端到端解码器
+
+**基于文本的 LLM。** 我们纳入 Qwen2.5 与 Qwen3 系列模型。Qwen2.5-1.5B（Qwen et al., 2025）是以改进预训练流水线与指令微调训练的中等规模 LLM。亦纳入 Qwen2.5-7B。为考察模型规模与架构进展的影响，纳入 Qwen3 系列两个近期模型：面向效率优化的紧凑模型 Qwen3-0.6B（Yang et al., 2025），以及在保持计算可行前提下提供更强语言建模能力的更大变体 Qwen3-1.7B。这些模型共同构成约 1B 规模文本 LLM 的代表性集合，便于在相近参数体制下与音频增强对应体比较。
+
+**基于音频的 LLM。** 除纯文本基线外，我们考虑音频增强 LLM。Aero1-Audio 1.5B（Li et al., 2025）为 Qwen2.5-1.5B 增加音频前端，使模型能同时处理声学表征与文本。为理解音频域中模型规模的影响，亦纳入更大的、捕捉更丰富声学与语义特征的 Qwen2-Audio 7B（Chu et al., 2024）。将 Aero1-Audio 1.5B 与 Qwen2-Audio 7B 与相近规模纯文本模型比较，可量化音频条件相对纯文本建模在从神经活动言语解码中的贡献。
+
+---
+
+## 附录 F 端到端解码的 LLM 推理
+
+文本生成使用 nucleus（top-$p$）采样，参数 $p=0.9$、温度 0.7，每序列最多生成 25 个新 token。Top-$p$ 采样将 token 选择限制在累积概率超过 $p$ 的最小 token 集合，聚焦高似然 token 同时允许一定多样性。温度控制随机性：较低值产生更自信、更确定的输出，较高值增加变异。虽可用束搜索等更先进策略，但当束数超过五时推理时间显著增加，故为效率采用 nucleus sampling。我们承认更好的 LLM 推理策略可进一步提升端到端解码性能，但这超出本研究范围。
+
+---
+
+## 附录 G 使用 LLM 合并器的模型集成
+
+为进一步提高级联与端到端解码器在基准提交中的解码精度，我们采用带 LLM 合并的模型集成方法（Li et al., 2024）。虽 5-gram 与 OPT 模型可部分纠正音素解码错误，其输出并非总是完美，且不同神经编码器产生不同句子候选。为缓解这些错误，可用微调 LLM 评估来自级联或端到端编码器集成的多个句子候选。以转录候选及其对应音素序列为输入，Li et al. (2024) 微调 LLM 以生成正确句子。该设定使模型学习预测音素与解码句子之间的关系，并识别跨解码器输出的常见、模型特异性错误。对级联与端到端路径，我们将候选句连同以不同种子随机初始化的神经编码器音素输出提供给微调 LLM，由其生成用于评估的最终最佳句子。
+
+---
+
+## 附录 H Brain-to-Text Benchmark ’24 与 ’25 细节
+
+**Brain-to-Text Benchmark ’24。** 级联与端到端方法排行榜最高分均通过带 LLM 合并的模型集成取得。对本基准，我们以不同随机种子初始化 10 个跨物种、跨任务预训练编码器，各自微调以从受试者 T12 数据解码句子。各模型在基准提供的训练数据上训练，用所给验证集选检查点。10 个模型各自输出音素与句子序列，再交给微调的 GPT-3.5 选择最终最佳句子序列。该流程应用于 BIT Cascaded + Ensemble 与 BIT End-to-End + Ensemble 两项条目，分别为级联与端到端路径排行榜最高提交。我们其余排行榜条目均基于单一种子单一模型。其他排行榜条目信息见 Willett et al. (2024)。
+
+**Brain-to-Text Benchmark ’25。** 公开排行榜上级联与端到端方法最高分同样通过带 LLM 合并的模型集成取得。对本基准，我们以不同随机种子初始化 29 个跨物种、跨任务预训练编码器，各自微调以从受试者 T15 数据解码句子。我们微调 GPT-4 以合并这 29 个模型的音素与句子输出。其余排行榜条目基于单一种子单一模型。表 2 中，RNN（基线）使用单一 RNN 编码器与 5-gram LM，标记为 “UCD-NPL causal RNN + 5gram”。RNN + Ensemble 将多个 RNN 与 LLM 合并结合，标记为 “Stanford-NPTL causal RNN Ensemble + 5gram”。RNN-TTA + Pseudo-Ensemble 通过对单一 RNN 模型注入噪声生成多样输出，再用 LLM 合并器选择最终句子；列为 “Stanford-NPTL causal RNN TTA-Ensemble + 5gram”，其中 TTA 表示测试时适应（test-time adaptation）。
+
+---
+
+## 附录 I 用于模态对齐的对比学习
+
+我们用对比学习在共享潜空间对齐神经与文本嵌入。令 $z^s_i \in \mathbb{R}^{T \times D}$ 与 $z^t_i \in \mathbb{R}^{L \times D}$ 分别表示批次 $B$ 个试次中第 $i$ 个样本的神经与文本嵌入。此处神经嵌入由神经编码器输出经 MLP 投影器投影到文本嵌入空间得到。$z^s_i$ 与 $z^t_i$ 先沿各自序列维（$T$ 与 $L$）均值池化为单向量，再经模态特定线性层投影到维度为 $P$ 的共享潜空间，随后做 $\ell_2$ 归一化。将所得模态特定向量记为 $\tilde{z}^s_i \in \mathbb{R}^{P}$ 与 $\tilde{z}^t_i \in \mathbb{R}^{P}$，称为“模态 token”。
+
+随后施加对比学习：在训练批次内拉近对应的神经与文本模态 token（正对），推开不同样本的 token（负对）。遵循对称 InfoNCE 损失（Oord et al., 2018; Radford et al., 2021），批次损失定义为
+
+$$
+\mathcal{L}_{\mathrm{contrastive}} = \frac{1}{2B}\sum_{i=1}^{B}\Bigg[
+-\log\frac{\exp(\tilde{z}^s_i\cdot\tilde{z}^t_i/\tau)}{\sum_{j=1}^{B}\exp(\tilde{z}^s_i\cdot\tilde{z}^t_j/\tau)}
+-\log\frac{\exp(\tilde{z}^t_i\cdot\tilde{z}^s_i/\tau)}{\sum_{j=1}^{B}\exp(\tilde{z}^t_i\cdot\tilde{z}^s_j/\tau)}
+\Bigg],
+$$
+
+其中 $\tau$ 为缩放余弦相似度的可学习温度参数。
+
+实验中，计算对比学习目标时对相似度 logits 施加可学习缩放因子。该因子由可学习温度参数化，初始化为 0.1，最大约束为 100。由于 LLM 规模大且计算资源有限，对比学习使用较小批次大小（表 13）。虽该批次大小在当前研究中带来可测性能增益，但可能限制对比学习效力——后者通常受益于更大批次以更好采样负对。未来工作应探索更大批次，以充分实现对比学习潜力并进一步改进跨模态对齐。
+
+---
+
+## 附录 J BIT 损失函数
+
+我们以交叉熵损失训练端到端模型做神经到文本翻译，并以对比损失做神经–文本对齐。令 $y_i=(y_{i,1},\ldots,y_{i,L_i})$ 表示大小为 $B$ 的批次中第 $i$ 个样本的真值 token 序列。第 $t$ 个 token 上、词表大小为 $V$ 的预测概率分布记为 $\hat{p}_{i,t}=f\big(\mathrm{concat}(z^s_i,z^t_i)\big)\in\mathbb{R}^{V}$，其中 $f$ 表示 LLM 解码器，神经与文本 token 沿序列维拼接。批次交叉熵损失定义为
+
+$$
+\mathcal{L}_{\mathrm{CE}}=-\frac{1}{B}\sum_{i=1}^{B}\sum_{t=1}^{L_i}\log\hat{p}_{i,t}(y_{i,t}).
+$$
+
+总训练目标为 $\mathcal{L}_{\mathrm{BIT}}=\mathcal{L}_{\mathrm{CE}}+\mathcal{L}_{\mathrm{contrastive}}$。
+
+---
+
+## 附录 K LLM 解码器的投影器
+
+为将神经嵌入投影到 LLM 文本嵌入空间，我们探索线性、MLP 与交叉注意力等不同投影器，并基准其端到端解码性能影响。结果汇总于表 6。
+
+**表 6.** BIT 投影器消融。所示指标为验证 WER。
+
+| 投影器变体 | 想象性言语（T12） | 想象性言语（T15） |
+|---|---|---|
+| BIT（线性投影器） | 19.47% | 18.09% |
+| BIT（交叉注意力投影器） | 17.33% | 17.67% |
+| BIT（MLP 投影器） | 16.39% | 13.61% |
+
+**交叉注意力投影器。** 该模块以神经 token 为查询、文本 token 为键与值施加交叉注意力，实现模态间 token 级交互。输入神经与文本嵌入 $z_s$ 与 $z_t$ 先经层归一化并线性投影到共享隐藏维 $d_{\mathrm{hidden}}$，再施加多头注意力，并以可学习残差连接稳定训练。注意力输出最终投影回文本嵌入维 $d_{\mathrm{text}}$。形式化为
+
+$$
+z^{*},\, A = \mathrm{CrossAttentionProjector}(z_s,\, z_t),
+$$
+
+其中 $z^{*}$ 为对齐后的神经–文本表征，$A$ 为注意力权重（图 4D）。架构含可调参数：隐藏维 $d_{\mathrm{hidden}}$、注意力头数 $n_{\mathrm{heads}}$、dropout 比例，以及可学习残差缩放因子。
+
+**表 7.** 交叉注意力投影器超参数。
+
+| 超参数 | 取值 |
+|---|---|
+| 隐藏维（$d_{\mathrm{hidden}}$） | 256 |
+| 头数（$n_{\mathrm{heads}}$） | 1 |
+| 可学习残差缩放因子 | 0.5 |
+| Dropout 比例 | 0.1 |
+
+---
+
+## 附录 L 可解释性分析
+
+### L.1 表征相似性分析
+
+我们将分析限制在神经时间斑块 token 长度介于 45～80（受试者 T12）与 120～200（受试者 T15）的句子，以确保充分时间分辨率与平衡覆盖（见图 5）。神经嵌入用分段均值池化转为定长向量：每序列分为 10 段，段平均拼接以保留粗时间动态。相比之下，LLM 嵌入跨 token 均值池化为句向量。对每一模态（神经与文本），用一减去余弦相似度计算表征不相似矩阵（representational dissimilarity matrix, RDM）（Kriegeskorte et al., 2008）。为比较表征结构，提取各 RDM 上三角条目，计算神经与 LLM RDM 之间的 Pearson 相关系数。所得 RSA 分数量化神经嵌入几何与 LLM 语言结构对齐程度。将 RSA 作为可解释性工具，该分析表明 Transformer 编码器学习到比 RNN 更一致于语言级结构的表征。RSA 仅应用于研究（Willett et al., 2023; Card et al., 2024）中受试者 T12 与 T15 的尝试性言语数据。
+
+![图 5. RSA 中各句神经 token 长度分布。](figures_05_cross_species/fig5.png)
+
+**图 5.** RSA 中各句神经 token 长度分布。我们将 RSA 限制在 T12 token 长度 45 至 80（平均长度 $\approx 63$）、T15 token 长度 120 至 200（平均长度 $\approx 160$）的句子，因神经嵌入通过将每序列分为十个时间段并拼接其平均转为定长句向量。过短序列缺乏足够分辨率，过长序列引入不平衡。这些范围确保跨模态 RSA 有可靠、可比较的句子级嵌入。
+
+### L.2 LDA 与嵌入距离
+
+我们用 scikit-learn 拟合 LDA。对每个词，神经嵌入先投影到 PCA 子空间，再跨时间与试次平均得到单一特征向量。所得低维神经投影用作特征，拟合 LDA 以预测试次类型（尝试性 vs. 想象性言语的二分类）。我们将 LDA 限制为单一维度，以识别线性分离两任务神经投影的轴，便于可视化。然而，计算尝试性与想象性言语嵌入欧氏距离时，使用 PCA 投影前各词的原始高维嵌入，以确保比较反映嵌入空间中的方向与幅度。这些分析仅应用于研究（Kunz et al., 2025）中受试者 T12 与 T15 的尝试性与想象性言语数据。
+
+---
+
+## 附录 M 监督跨受试者预训练对解码的影响
+
+我们研究监督跨受试者预训练能否增强下游言语解码性能。在音素级与句子级解码中纳入多受试者数据，相对单受试者训练显著更差。性能下降可能源于受试者间功能变异（神经活动与行为关系的差异），而非传感器变异（如电极位置或噪声），因为 SSL 跨受试者预训练在单受试者数据微调后确能提升性能。这些结果表明：以当前模型架构与数据集，监督跨受试者预训练不能改进性能，未来工作需要更复杂的建模策略以应对受试者间功能变异。
+
+---
+
+## 附录 N 解码错误分析
+
+### N.1 神经编码器的音素级解码错误
+
+我们进行详细解码错误分析，以刻画模型在音素级的行为。对每句，先对预测与真值音素序列分词，再计算编辑距离。为研究系统替换模式，用显式建模匹配、替换、删除与插入操作的动态规划算法对齐每个预测序列与对应真值。插入与删除用专用空 token 表示，使对齐后两序列长度匹配。
+
+![图 6. 音素级解码错误矩阵。](figures_05_cross_species/fig6.png)
+
+**图 6.** 音素级解码错误矩阵。预测与真值音素序列对齐后去除正确匹配，其余错误归一化为百分比。音素按总错误频率排序，横轴为真值音素，纵轴为预测音素。可视化突出主导替换模式与系统性解码错误。
+
+基于对齐对，我们在验证集上汇总所有观测到的音素混淆。每出现真值音素与预测音素对齐，即递增全局混淆计数器。由此得到包含替换、删除与插入的完整音素×音素混淆矩阵。为强调解码错误结构，按总非对角错误计数对音素排序。矩阵可视化时将最易错音素置于纵轴底部与横轴右侧，使高错误区域视觉上显著。
+
+检查矩阵进一步揭示若干突出混淆簇。如图 6 所示，/D/ 与 /T/ 频繁互换，/B/ 与 /P/ 出现替换，/S/ 常与 /Z/ 混淆。此外，中心元音 /AH/、/IH/ 与 /EH/ 因声学接近常被误解码。总体而言，观测错误结构与已知语音相似性模式相符，并与预期解码器行为一致。
+
+### N.2 LLM 解码器的词级解码错误
+
+为考察词级解码错误，我们先计算全部预测与真值词上的完整混淆矩阵。图 7-a 显示完整矩阵。因其按字母序包含每个词，矩阵非常大，个别错误像素仅在极高分辨率下可见。即便如此，矩阵呈现清晰对角结构，表明模型达到高词级解码精度。多数预测落在正确位置附近，观测错误往往发生在拼写或音系形式上相似的词之间。
+
+同时我们注意到许多错误仅出现一次。这些稀疏、非复发错误更像噪声或偶发事件，而非一致混淆模式。为突出相对更频繁的错误类型，我们过滤矩阵，仅保留至少出现两次错误的词对。过滤后错误事件总数从 734 降至 58。
+
+![图 7. 词级解码错误矩阵。](figures_05_cross_species/fig7.png)
+
+**图 7.** 词级解码错误矩阵。(a) 在全部解码错误上计算的词级混淆矩阵。两轴词均按字母序 a 至 z 排列。因词表大，完整矩阵需以很大比例查看才能看清个别像素。呈现清晰对角结构，表明多数解码错误发生在拼写或音系形式相似的词之间。(b) 过滤后仅保留至少两次错误的词对的词级混淆矩阵。突出更系统的混淆，并去除面板 a 中大量近零条目。所得矩阵更清晰揭示主导复发错误模式。
+
+![图 8. 逐步增加人类相对猴预训练数据比例对受试者 T15 尝试性言语解码性能的影响。](figures_05_cross_species/fig8.png)
+
+**图 8.** 逐步增加人类相对猴预训练数据比例对受试者 T15 尝试性言语解码性能的影响。在级联与端到端模型中，“human”对应逐步加入的人类预训练数据比例，“monkey”表示在人类数据之上加入的猴预训练数据比例。
+
+过滤后矩阵见图 7-b。虽过滤后最大错误计数仍仅为三，表明模型未在词级形成高度稳定的混淆模式，但这些重复错误至少揭示少数词对上可观测的小倾向。总体而言，这些分析表明模型在词级解码表现良好。错误数量有限，且大体反映边缘或近邻混淆。即使重复错误也仅发生在极小子集词对上，凸显整体较高的解码精度。
+
+---
+
+## 附录 O 规模曲线
+
+我们考察逐步增加人类相对猴预训练数据量如何影响受试者 T15 的尝试性言语解码性能。在仅人类条件下，我们从无人类数据起逐步加入人类犹他阵列数据集，直至完整 97.8 小时，以扩展预训练语料。在跨物种条件下，我们从完整人类语料开始，再逐步纳入猴犹他阵列数据集，最终将跨物种总预训练时长扩展至 366.8 小时。图 8 显示这些比例变化时解码性能如何变化，并突出加入人类数据带来的性能增益大于用猴数据增强模型。
+
+---
+
+## 附录 P 编码器预训练消融
+
+我们的预训练流程包含随后用于微调的人类神经数据，但丢弃全部标签。预训练是否纳入此类数据集取决于所评估的泛化类型：排除它们测试对未见数据的泛化，纳入则测试对未见任务的泛化。因目标是改进向言语解码任务的迁移，我们选择在预训练中纳入可用人类言语数据集。这也使我们能充分利用有限人类数据以帮助稳定所学表征。然而，为测试对完全未见数据的泛化，我们亦在排除全部人类言语数据集的情况下重复预训练。如表 8 所示，纳入或排除用于微调的人类神经数据，对尝试性言语解码性能无实质性差异。
+
+**表 8.** 预训练中纳入相对排除微调数据集对尝试性言语解码性能的影响。排除微调数据集测试对未见数据的泛化，纳入则测试对未见任务的泛化。
+
+**(a) 级联模型**
+
+| 受试者 | 含微调数据 | 不含微调数据 |
+|---|---|---|
+| T12 | 6.35% | 7.24% |
+| T15 | 4.06% | 4.36% |
+
+**(b) 端到端模型**
+
+| 受试者 | 含微调数据 | 不含微调数据 |
+|---|---|---|
+| T12 | 15.67% | 15.34% |
+| T15 | 11.06% | 11.00% |
+
+图 2 中 BIT-All 与 BIT-Cross-Task-Only 在想象性言语解码上的比较未控制数据量差异，因我们的目标是纳入同受试者数据之外的额外数据以充分受益于 SSL 预训练。为控制数据量差异，我们亦进行了用等量数据比较 SSL 与监督预训练的实验，结果见表 9。在控制数据量时，我们发现 SL 与 SSL 预训练对想象性言语解码无实质性性能差异。
+
+**表 9.** 使用等量人类言语数据时 SL 相对 SSL 预训练对想象性言语解码性能的影响。BIT-Cross-Task-Only 用 SL 预训练，BIT-SameParticipant-SSL 用 SSL 预训练，二者均使用受试者 T12 的相同人类言语数据。
+
+| | T12（级联） | T12（端到端） |
+|---|---|---|
+| BIT-Cross-Task-Only | 12.53% | 15.71% |
+| BIT-SameParticipant-SSL | 12.67% | 15.64% |
+
+---
+
+## 附录 Q 模型与超参数细节
+
+**Transformer 编码器。** 我们实现与 Feghhi et al. (2025) 架构相似的 Transformer 编码器。因提交时其官方代码尚未公开，我们用表 10 所列自定义模型参数构建架构。为选择在单受试者数据（T12 与 T15）上训练的最优模型架构与优化器配置，使用 Ray Tune（Liaw et al., 2018）从表 12 所列范围随机采样 30 组优化器超参（批次大小、权重衰减与学习率）组合。单受试者音素级解码的优化器超参基于这些范围选定。想象性言语解码对两受试者复用相同模型超参。预训练复用相同模型架构，同时将学习率、权重衰减与批次大小分别调整为 $5\times10^{-4}$、$1\times10^{-5}$ 与 64。扩展到人类与猴数据时不增加模型深度，因 SSL 预训练性能（以神经活动重建的验证 $R^2$ 评估）未下降，表明模型容量足以处理数据变异。Transformer 模型约含 700 万参数；纳入受试者特定斑块嵌入模块与线性解码器后，总参数增至约 1300 万。
+
+**表 10.** 基于 Transformer 的编码器超参数。
+
+| 超参数 | 取值 |
+|---|---|
+| 嵌入维 | 384 |
+| 头维 | 512 |
+| 头数 | 6 |
+| 深度 | 7 |
+| 掩码比例 | 0.5（T12）与 0（T15） |
+| 最大掩码时间跨度 | 15 |
+| 斑块大小 | 5 |
+| Dropout 率 | 0.2 |
+| 双向 | True |
+| 注意力 Dropout 率 | 0.4 |
+| 白噪声标准差 | 0.2 |
+| 常数偏置标准差 | 0.05 |
+| 高斯平滑宽度 | 2.0 |
+
+**RNN 编码器。** 对 RNN 编码器，我们使用基准主办方在官方 GitHub 仓库提供的 PyTorch 实现。保留原始模型架构（表 11），并用 Ray Tune（Liaw et al., 2018）从表 12 所列范围随机采样 30 组优化器超参（批次大小、权重衰减与学习率）组合，使用受试者 T12 与 T15 的尝试性言语数据。想象性言语解码对两受试者复用相同模型超参，唯日特定读入层数量因数据集而异。
+
+**表 11.** RNN 编码器超参数。
+
+| 超参数 | 取值 |
+|---|---|
+| 嵌入维 | 1024 |
+| 深度 | 5 |
+| 掩码比例 | 0.1 |
+| Dropout 率 | 0.4 |
+| 步长 | 4 |
+| 核长 | 32 |
+| 日层数 | 24（T12）与 45（T15） |
+| 双向 | True |
+| 白噪声标准差 | 0.8 |
+| 常数偏置标准差 | 0.2 |
+| 高斯平滑宽度 | 2.0 |
+
+**表 12.** 训练 Transformer 与 RNN 做音素级解码时优化器超参的可能取值范围，Ray Tune 从中随机采样组合。
+
+| 超参数 | 取值范围 |
+|---|---|
+| 批次大小 | [8, 16, 32, 64] |
+| 权重衰减 | Log-Uniform($5\times10^{-5}$, 0.1) |
+| 学习率 | Log-Uniform($5\times10^{-5}$, 0.001) |
+
+**LLM 解码器与 LoRA。** 我们对所有文本与音频 LLM 解码器采用相同的 MLP 投影器与 LoRA 配置（细节见表 13）。对文本 LLM，MLP 隐藏维设为与 LLM 隐藏维匹配；对音频 LLM，MLP 隐藏维设为与音频编码器多模态投影器匹配。视 LLM 解码器不同，LoRA 施加于不同模块。对所有解码器，我们对多头自注意力机制的查询、键、值与输出投影层以及前馈 MLP 中的投影层施加 LoRA。对基于音频的 Qwen 模型，还对多模态投影器的线性层施加 LoRA。对比学习跨模态对齐的超参数见附录 I。
+
+---
+
+## 附录 R 训练细节
+
+**Transformer 编码器。** 预训练与微调均用 AdamW 优化器（Loshchilov & Hutter, 2017）。在仅人类或人类+猴数据上预训练的编码器在单块 NVIDIA A100 GPU（80 GB 显存）上训练，400 个 epoch 总计不到 2 天。音素解码在单块 NVIDIA A40（48 GB）或 A100 GPU（40 或 80 GB）上进行：T12 不到 8 小时，T15 不到 1 天，共 800 个 epoch。超参调优用 4 块 NVIDIA A40 GPU 做音素解码，不到 2 天完成。训练期间用验证指标（$R^2$、PER）基于最高 $R^2$ 或最低 PER 选择最佳模型检查点。预训练与微调均用混合精度（bfloat16）提升训练效率，全部模型可装入单块 NVIDIA GPU。
+
+**RNN 编码器。** 用 AdamW 优化器训练。音素解码在单块 NVIDIA A40（48 GB）或 A100 GPU（40 或 80 GB）上：T12 不到 1 天，T15 不到 2 天，共 600 个 epoch。超参调优用 16 块 NVIDIA A40 GPU 做音素解码，不到 2 天完成。检查点选择流程与基于 Transformer 的模型相同。
+
+**LLM 解码器。** 对所有解码器，用 AdamW 优化器与 bfloat16 精度训练 150 个 epoch。对 Transformer 编码器，句子级解码在单块 NVIDIA A40 或 A100 GPU 上：T12 不到 1 天，T15 不到 2 天。对 RNN，该过程在单块 NVIDIA A40 或 A100 上：T12 不到 1.5 天，T15 不到 4 天。小规模 LLM（含 0.6B、1.5B 与 1.7B 模型）在单块 NVIDIA A40 或 L40 GPU（48 GB）上训练。约 7B 参数的较大 LLM 在两块 NVIDIA A40 或 L40 GPU 上用 DeepSpeed ZeRO-3 优化训练。所有情形下，检查点选择基于验证 WER。
+
+**表 13.** 端到端模型超参数，含 MLP 投影器、LLM 解码器与 LoRA。
+
+| 超参数 | 取值 |
+|---|---|
+| 激活函数 | ReLU |
+| 学习率 | $5\times10^{-5}$ |
+| 权重衰减 | $1\times10^{-5}$ |
+| 批次大小 | 16（T12）与 8（T15） |
+| 梯度累积步数 | 1（模型 $<$ 7B）与 8（模型 $\geq$ 7B） |
+| LoRA 秩 | 8 |
+| LoRA 缩放因子 | 32 |
+| LoRA Dropout 比例 | 0.2 |
+
+---
+
+## 附录 S 大语言模型（LLM）的使用
+
+我们使用 LLM 润色本论文写作。具体而言，LLM 用于改进语法与清晰度。无科学贡献或结果由 LLM 生成，所有 AI 辅助编辑均经研究者核实。
+
+---
+
+*（全文中译完。图表原图嵌入；参考文献条目保留英文。）*

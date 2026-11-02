@@ -1,0 +1,334 @@
+---
+const papers = [
+  {
+    id: '1',
+    shortTitle: '表征漂移综述',
+    sourceLabel: 'Rule et al., Curr. Opin. Neurobiol. 2019',
+    sourceHref: 'https://doi.org/10.1016/j.conb.2019.08.005',
+    htmlPath: '/blog-assets/bci-population-dynamics/html/01_representational_drift_Rule2019_zh.html',
+  },
+  {
+    id: '2',
+    shortTitle: '跨日潜在动力学稳定',
+    sourceLabel: 'Gallego et al., Nat. Neurosci. 2020',
+    sourceHref: 'https://doi.org/10.1038/s41593-019-0555-4',
+    htmlPath: '/blog-assets/bci-population-dynamics/html/02_longterm_stability_Gallego2020_zh.html',
+  },
+  {
+    id: '3',
+    shortTitle: '跨动物动力学保留',
+    sourceLabel: 'Safaie et al., Nature 2023',
+    sourceHref: 'https://doi.org/10.1038/s41586-023-06714-0',
+    htmlPath: '/blog-assets/bci-population-dynamics/html/03_preserved_dynamics_Safaie2023_zh.html',
+  },
+  {
+    id: '4',
+    shortTitle: '统一可扩展群体解码（POYO）',
+    sourceLabel: 'Azabou et al., NeurIPS 2023',
+    sourceHref: 'https://poyo-brain.github.io',
+    htmlPath: '/blog-assets/bci-population-dynamics/html/06_unified_neural_population_decoding_zh.html',
+  },
+  {
+    id: '5',
+    shortTitle: '实时混合 SSM 解码（POSSM）',
+    sourceLabel: 'Ryoo et al., NeurIPS 2025',
+    sourceHref: 'https://possm-brain.github.io',
+    htmlPath: '/blog-assets/bci-population-dynamics/html/04_POSSM_hybrid_SSM_decoding_zh.html',
+  },
+  {
+    id: '6',
+    shortTitle: '跨物种端到端言语解码',
+    sourceLabel: 'Zhang et al., ICLR 2026',
+    sourceHref: 'https://openreview.net/forum?id=Lp1noMpMUG',
+    htmlPath: '/blog-assets/bci-population-dynamics/html/05_cross_species_speech_BIT_ICLR2026_zh.html',
+  },
+];
+---
+
+<div class="bci-paper-pack" data-bci-paper-pack>
+  <nav class="bci-paper-nav" aria-label="六篇论文">
+    <p class="bci-paper-nav-title">论文</p>
+    <ol class="bci-paper-nav-list">
+      {papers.map((paper) => (
+        <li>
+          <button
+            type="button"
+            class="bci-paper-nav-btn"
+            data-paper-id={paper.id}
+            aria-controls={`bci-paper-pane-${paper.id}`}
+          >
+            <span class="bci-paper-nav-index">{paper.id}</span>
+            {paper.shortTitle}
+          </button>
+        </li>
+      ))}
+    </ol>
+    <label class="bci-paper-nav-mobile">
+      切换论文
+      <select data-paper-select aria-label="选择论文">
+        {papers.map((paper) => (
+          <option value={paper.id}>
+            {paper.id}. {paper.shortTitle}
+          </option>
+        ))}
+      </select>
+    </label>
+  </nav>
+  <div class="bci-paper-main">
+    <p class="bci-paper-source" data-paper-source hidden>
+      原文：<a href="#" rel="noopener noreferrer" target="_blank" data-paper-source-link></a>
+    </p>
+    <div class="bci-paper-pane-host" data-paper-pane-host aria-live="polite">
+      <p class="bci-paper-loading" data-paper-loading>正在加载译文…</p>
+    </div>
+  </div>
+</div>
+
+<script type="application/json" id="bci-paper-pack-data" set:html={JSON.stringify(papers)} />
+
+<style is:global>
+  .bci-paper-pack {
+    display: grid;
+    gap: 28px;
+    margin-top: 8px;
+    min-width: 0;
+  }
+
+  @media (min-width: 900px) {
+    .bci-paper-pack {
+      grid-template-columns: 220px minmax(0, 1fr);
+      column-gap: 40px;
+      align-items: start;
+    }
+  }
+
+  .bci-paper-nav {
+    min-width: 0;
+  }
+
+  @media (min-width: 900px) {
+    .bci-paper-nav {
+      position: sticky;
+      top: 28px;
+      max-height: calc(100vh - 56px);
+      overflow: auto;
+      padding-right: 16px;
+      border-right: 1px solid var(--line);
+    }
+  }
+
+  .bci-paper-nav-title {
+    margin: 0 0 10px;
+    color: var(--faint);
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+  }
+
+  .bci-paper-nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .bci-paper-nav-list li + li {
+    margin-top: 4px;
+  }
+
+  .bci-paper-nav-btn {
+    appearance: none;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    width: 100%;
+    border: 0;
+    border-left: 2px solid transparent;
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    font: inherit;
+    font-size: 0.875rem;
+    line-height: 1.45;
+    padding: 6px 0 6px 10px;
+    text-align: left;
+  }
+
+  .bci-paper-nav-btn:hover {
+    color: var(--link);
+  }
+
+  .bci-paper-nav-btn[aria-current='true'] {
+    border-left-color: var(--link);
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .bci-paper-nav-index {
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+    font-size: 0.8rem;
+    flex-shrink: 0;
+  }
+
+  .bci-paper-nav-mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 12px;
+    font-size: 0.875rem;
+  }
+
+  .bci-paper-nav-mobile select {
+    font: inherit;
+    color: inherit;
+    background: var(--bg);
+    border: 1px solid var(--line-strong);
+    padding: 6px 8px;
+  }
+
+  @media (min-width: 900px) {
+    .bci-paper-nav-mobile {
+      display: none;
+    }
+  }
+
+  @media (max-width: 899px) {
+    .bci-paper-nav-list {
+      display: none;
+    }
+  }
+
+  .bci-paper-main {
+    min-width: 0;
+  }
+
+  .bci-paper-source {
+    margin: 0 0 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+  }
+
+  .bci-paper-source[hidden] {
+    display: none;
+  }
+
+  .bci-paper-pane-host {
+    min-width: 0;
+  }
+
+  .bci-paper-loading {
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  .bci-paper-prose img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  @media print {
+    .bci-paper-nav {
+      display: none;
+    }
+  }
+</style>
+
+<script is:inline>
+  (() => {
+    const init = () => {
+      const root = document.querySelector('[data-bci-paper-pack]');
+      const dataEl = document.getElementById('bci-paper-pack-data');
+      if (!root || !dataEl) return;
+
+      /** @type {Array<{id:string,shortTitle:string,sourceLabel:string,sourceHref:string,htmlPath:string}>} */
+      const papers = JSON.parse(dataEl.textContent || '[]');
+      const host = root.querySelector('[data-paper-pane-host]');
+      const loading = root.querySelector('[data-paper-loading]');
+      const sourceBar = root.querySelector('[data-paper-source]');
+      const sourceLink = root.querySelector('[data-paper-source-link]');
+      const select = root.querySelector('[data-paper-select]');
+      const buttons = [...root.querySelectorAll('[data-paper-id]')];
+      /** @type {Map<string, string>} */
+      const cache = new Map();
+      let activeId = '1';
+      let userPicked = false;
+
+      const paperById = (id) => papers.find((p) => p.id === id);
+
+      const readInitialId = () => {
+        const params = new URLSearchParams(location.search);
+        const fromQuery = params.get('paper');
+        if (fromQuery && paperById(fromQuery)) return fromQuery;
+        const hash = location.hash.match(/^#paper-(\d+)/);
+        if (hash && paperById(hash[1])) return hash[1];
+        return '1';
+      };
+
+      const syncUrl = (id) => {
+        const url = new URL(location.href);
+        url.searchParams.set('paper', id);
+        url.hash = 'paper-' + id;
+        history.replaceState(null, '', url);
+      };
+
+      const setActiveUi = (id) => {
+        activeId = id;
+        buttons.forEach((btn) => {
+          btn.setAttribute('aria-current', btn.dataset.paperId === id ? 'true' : 'false');
+        });
+        if (select) select.value = id;
+        const paper = paperById(id);
+        if (paper && sourceBar && sourceLink) {
+          sourceBar.hidden = false;
+          sourceLink.href = paper.sourceHref;
+          sourceLink.textContent = paper.sourceLabel;
+        }
+        syncUrl(id);
+      };
+
+      const showPane = (html) => {
+        if (loading) loading.remove();
+        host.innerHTML = html;
+        host.querySelectorAll('a[href^="http"]').forEach((a) => {
+          a.setAttribute('rel', 'noopener noreferrer');
+          a.setAttribute('target', '_blank');
+        });
+        if (userPicked) {
+          window.scrollTo({ top: root.getBoundingClientRect().top + window.scrollY - 16, behavior: 'smooth' });
+        }
+      };
+
+      const loadPaper = async (id, fromUser = false) => {
+        if (fromUser) userPicked = true;
+        const paper = paperById(id);
+        if (!paper) return;
+        setActiveUi(id);
+        if (cache.has(id)) {
+          showPane(cache.get(id));
+          return;
+        }
+        host.innerHTML = '<p class="bci-paper-loading">正在加载译文…</p>';
+        try {
+          const res = await fetch(paper.htmlPath);
+          if (!res.ok) throw new Error(String(res.status));
+          const html = await res.text();
+          cache.set(id, html);
+          if (activeId === id) showPane(html);
+        } catch {
+          host.innerHTML = '<p class="bci-paper-loading">加载失败，请刷新页面重试。</p>';
+        }
+      };
+
+      buttons.forEach((btn) => {
+        btn.addEventListener('click', () => loadPaper(btn.dataset.paperId, true));
+      });
+      select?.addEventListener('change', () => loadPaper(select.value, true));
+
+      loadPaper(readInitialId());
+    };
+
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, { once: true });
+    else init();
+  })();
+</script>
