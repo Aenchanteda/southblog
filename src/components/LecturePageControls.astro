@@ -1,0 +1,64 @@
+---
+interface Props {
+  pageCount: number;
+  storageKey: string;
+}
+const { pageCount, storageKey } = Astro.props;
+---
+
+<div class="lecture-controls" data-lecture-controls data-page-count={pageCount} data-storage-key={storageKey}>
+  <label>跳至原讲义第 <select data-lecture-jump aria-label="跳至讲义页码">
+    {Array.from({ length: pageCount }, (_, i) => <option value={i + 1}>{i + 1}</option>)}
+  </select> 页</label>
+  <span data-lecture-current aria-live="polite">共{pageCount}页</span>
+  <a data-lecture-resume hidden href="#lecture-page-1">继续上次阅读</a>
+</div>
+
+<style is:global>
+  .lecture-controls { display:flex; flex-wrap:wrap; align-items:center; gap:12px 20px; padding:12px 0; margin:20px 0; border-block:1px solid var(--line); font-size:14px; }
+  .lecture-controls select { font:inherit; color:inherit; background:var(--bg); border:1px solid var(--line-strong); padding:3px 8px; }
+  .lecture-controls [hidden] { display:none; }
+  .prose .lecture-figure { margin:18px 0; }
+  .prose .lecture-figure img { display:block; width:100%; height:auto; cursor:zoom-in; }
+  .prose .lecture-figure figcaption { margin-top:6px; font-size:13px; color:var(--muted); }
+  [id^="lecture-page-"] { scroll-margin-top:24px; }
+  @media print { .lecture-controls { display:none; } }
+</style>
+
+<script is:inline>
+  (() => {
+    const init = () => {
+      const controls = document.querySelector('[data-lecture-controls]');
+      if (!controls) return;
+      const count = Number(controls.dataset.pageCount);
+      const key = controls.dataset.storageKey;
+      const jump = controls.querySelector('[data-lecture-jump]');
+      const current = controls.querySelector('[data-lecture-current]');
+      const resume = controls.querySelector('[data-lecture-resume]');
+      try {
+        const saved = Number(localStorage.getItem(key));
+        if (saved >= 1 && saved <= count && Number.isInteger(saved)) {
+          resume.hidden = false;
+          resume.href = '#lecture-page-' + saved;
+          resume.textContent = '继续阅读：第 ' + saved + ' 页';
+        }
+      } catch {}
+      jump.addEventListener('change', () => { location.hash = 'lecture-page-' + jump.value; });
+      let interacted = false;
+      window.addEventListener('scroll', () => { interacted = true; }, { passive: true });
+      if (!('IntersectionObserver' in window)) return;
+      const observer = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          const page = entry.target.dataset.lecturePage;
+          jump.value = page;
+          current.textContent = '当前：第 ' + page + ' / ' + count + ' 页';
+          if (interacted) { try { localStorage.setItem(key, page); } catch {} }
+        }
+      }, { rootMargin: '-10% 0px -60% 0px' });
+      document.querySelectorAll('[data-lecture-page]').forEach((figure) => observer.observe(figure));
+    };
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, { once:true });
+    else init();
+  })();
+</script>
