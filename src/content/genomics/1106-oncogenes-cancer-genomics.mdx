@@ -1,0 +1,794 @@
+---
+title: "癌基因和癌基因组学：110页课件图解"
+description: "依据韩为老师 2026年11月6日讲座课件，按页对照原图讲解原癌基因激活、癌症基因组计划与癌症精准医学。"
+pubDate: 2026-11-10
+order: 5
+tags: ["基因组学", "课堂笔记", "癌基因", "癌症基因组", "精准医学"]
+draft: false
+---
+
+import LecturePageControls from "../../components/LecturePageControls.astro";
+
+这是韩为老师《癌基因和癌基因组学》的逐页学习笔记。讲座于2026年11月6日在中国医学科学院基础医学研究所生物化学与分子生物学系讲授。课件共110页，分成原癌基因与原癌基因的激活、癌症基因组计划、癌症精准医学三部分。每页先放讲座幻灯片，再说明这一页要回答的问题、图中的证据和阅读时容易混的地方。
+
+图片由讲座课件导出，宽1200像素、高900像素。文中的队列人数、数据库版本、药物批准年份和生存数字都按课件所引文献的当时口径书写。笔记不能代替听课，也不能代替原文，更不是诊疗建议。
+
+<LecturePageControls pageCount={110} storageKey="southblog:oncogenes-cancer-genomics:page" />
+
+AI辅助整理。补充辨析是学习笔记的一部分。历史数据库条目、测序成本和药品适应证不视为当前通用规格；关键数字能在课件引用里对上的予以保留，未逐条复核所有参考文献。
+
+### 第001页｜课程导读：癌基因和癌基因组学
+
+<div id="lecture-page-1"></div>
+<figure class="lecture-figure" data-lecture-page="1"><img src="/notes/oncogenes-cancer-genomics-2026/page-001.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第1页：课程导读：癌基因和癌基因组学" /><figcaption>原讲义第1页 · 点击图片放大</figcaption></figure>
+
+这是韩为老师2026年11月6日的课程封面。讲者单位是中国医学科学院基础医学研究所生物化学与分子生物学系。后面三部分依次处理正常细胞里的原癌基因怎样被激活、癌症基因组计划找出了哪些改变，以及这些改变怎样进入早期发现和治疗选择。
+
+### 第002页｜三部分提纲
+
+<div id="lecture-page-2"></div>
+<figure class="lecture-figure" data-lecture-page="2"><img src="/notes/oncogenes-cancer-genomics-2026/page-002.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第2页：三部分提纲" /><figcaption>原讲义第2页 · 点击图片放大</figcaption></figure>
+
+课件把全课收成三条线。第一部分讲原癌基因以及启动子、点突变、重排和扩增怎样把它变成癌基因。第二部分讲从提出测序到TCGA、ICGC和各类数据库。第三部分讲精准医学：早期检测、靶向药、免疫治疗和肿瘤里的微生物。阅读时可以随时回到这一页核对自己停在哪一条线。
+
+## 第一部分　原癌基因与原癌基因的激活
+
+### 第003页｜肿瘤存在于人类之前
+
+<div id="lecture-page-3"></div>
+<figure class="lecture-figure" data-lecture-page="3"><img src="/notes/oncogenes-cancer-genomics-2026/page-003.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第3页：肿瘤存在于人类之前" /><figcaption>原讲义第3页 · 点击图片放大</figcaption></figure>
+
+标题直接否定“肿瘤只是现代病”。左侧是人类骨骼上的肿瘤骨与正常骨皮质对照，中间标出主瘤体、进展方向、骨皮质和髓腔，右侧是角龙Centrosaurus apertus腓骨上的骨肉瘤复原，估计约7600万年前。课件引用Ekhtiari等Lancet Oncology 2020和Cancer Discovery的简讯。要点是肿瘤可以发生在远早于人类工业环境的脊椎动物骨骼上，后面讨论的基因机制不是只属于当代人群的现象。
+
+### 第004页｜癌症这个名字从何而来
+
+<div id="lecture-page-4"></div>
+<figure class="lecture-figure" data-lecture-page="4"><img src="/notes/oncogenes-cancer-genomics-2026/page-004.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第4页：癌症这个名字从何而来" /><figcaption>原讲义第4页 · 点击图片放大</figcaption></figure>
+
+画面以希波克拉底（约公元前460–370年）的胸像和希腊文karkinos为中心。这个词的意思是螃蟹，后来进入cancer这个病名，来自浸润性肿块向周围伸出的形态，不是现代组织学分类。课件同时给出Faguet 2015年对癌病史的综述，以及Sabeh等2009年关于细胞侵袭的工作。这一页是命名和历史入口，还没有进入病毒或突变实验。
+
+### 第005页｜Rous肉瘤病毒：滤液也能传瘤
+
+<div id="lecture-page-5"></div>
+<figure class="lecture-figure" data-lecture-page="5"><img src="/notes/oncogenes-cancer-genomics-2026/page-005.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第5页：Rous肉瘤病毒：滤液也能传瘤" /><figcaption>原讲义第5页 · 点击图片放大</figcaption></figure>
+
+时间线从1876年俄国的狗肿瘤、1908年禽白血病，接到Peyton Rous 1909年在洛克菲勒大学的实验。流程是取出鸡胸肌肉瘤、磨碎、用细孔滤器收集滤液、注射给幼鸡，再观察到肉瘤。滤器挡得住完整细胞，滤液仍能致瘤，说明致瘤因子比细胞小。课件注明Rous在1966年获得诺贝尔生理学或医学奖。图出自Weinberg《癌生物学》，是后面“病毒里有癌基因”的实验起点。
+
+### 第006页｜RSV转化宿主细胞
+
+<div id="lecture-page-6"></div>
+<figure class="lecture-figure" data-lecture-page="6"><img src="/notes/oncogenes-cancer-genomics-2026/page-006.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第6页：RSV转化宿主细胞" /><figcaption>原讲义第6页 · 点击图片放大</figcaption></figure>
+
+细胞转化在这里指正常细胞转为肿瘤细胞的表型变化，不是分子克隆里的质粒转化。正常鸡胚成纤维细胞铺成单层；RSV感染后出现灶（focus），细胞失去接触抑制、堆叠生长。右侧电子显微镜标出病毒颗粒。因此“被转化”在本页首先是可在培养皿里看见的形态和生长行为，后面才追问维持这种行为的是病毒哪一段基因。
+
+### 第007页｜温度敏感src：转化表型依赖病毒癌基因
+
+<div id="lecture-page-7"></div>
+<figure class="lecture-figure" data-lecture-page="7"><img src="/notes/oncogenes-cancer-genomics-2026/page-007.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第7页：温度敏感src：转化表型依赖病毒癌基因" /><figcaption>原讲义第7页 · 点击图片放大</figcaption></figure>
+
+问题是子代细胞的转化状态是否依赖RSV里的病毒癌基因。实验用温度敏感的RSV突变体：37°C时细胞呈转化形态，温度升高后回到较正常形态，再降温又可转回。形态随src蛋白是否还能工作而切换，说明持续的转化表型需要有功能的病毒src，而不是感染瞬间留下的不可逆损伤。图仍来自Weinberg《癌生物学》，时间轴标在1970年前后。
+
+### 第008页｜逆转录酶与前病毒
+
+<div id="lecture-page-8"></div>
+<figure class="lecture-figure" data-lecture-page="8"><img src="/notes/oncogenes-cancer-genomics-2026/page-008.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第8页：逆转录酶与前病毒" /><figcaption>原讲义第8页 · 点击图片放大</figcaption></figure>
+
+RSV是RNA病毒，却要把遗传信息留在宿主细胞里。图从病毒进入、脱掉包膜、逆转录酶合成DNA、整合为前病毒，再到转录、翻译和组装新病毒颗粒。1975年Howard Temin、David Baltimore和Renato Dulbecco因逆转录病毒与肿瘤病毒研究获得诺贝尔奖。阅读时把“前病毒”理解成整合进宿主染色体的病毒DNA，它随后可以像细胞基因一样被转录。
+
+### 第009页｜第一个细胞癌基因src
+
+<div id="lecture-page-9"></div>
+<figure class="lecture-figure" data-lecture-page="9"><img src="/notes/oncogenes-cancer-genomics-2026/page-009.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第9页：第一个细胞癌基因src" /><figcaption>原讲义第9页 · 点击图片放大</figcaption></figure>
+
+1974到1976年，Bishop和Varmus用src特异性探针检测DNA。转化缺陷突变体（td mutant）缺失src，其RNA被用来制备只能识别src的探针。探针在从未被这种病毒感染的鸡细胞DNA里也能找到src序列，说明细胞内原本就有细胞src（c-src），病毒src不是凭空出现的。1989年J. Michael Bishop和Harold E. Varmus因此获得诺贝尔生理学或医学奖。
+
+### 第010页｜c-src与v-src：病毒捕获细胞基因
+
+<div id="lecture-page-10"></div>
+<figure class="lecture-figure" data-lecture-page="10"><img src="/notes/oncogenes-cancer-genomics-2026/page-010.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第10页：c-src与v-src：病毒捕获细胞基因" /><figcaption>原讲义第10页 · 点击图片放大</figcaption></figure>
+
+上半比较禽白血病病毒ALV和Rous肉瘤病毒RSV的基因组：两者都有gag、pol、env，RSV多一段src。下半画出ALV感染、逆转录、整合到宿主染色体后，转录可以连上邻近的c-src，再包装成带src的RSV颗粒。因此v-src可以理解成被病毒捕获并改造过的细胞基因。c-src仍是宿主自己的原癌基因，v-src才是病毒基因组里那份致癌版本。
+
+### 第011页｜病毒癌基因与细胞癌基因
+
+<div id="lecture-page-11"></div>
+<figure class="lecture-figure" data-lecture-page="11"><img src="/notes/oncogenes-cancer-genomics-2026/page-011.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第11页：病毒癌基因与细胞癌基因" /><figcaption>原讲义第11页 · 点击图片放大</figcaption></figure>
+
+课件给出两组定义。病毒癌基因v-onc在病毒基因组里，不编码病毒结构成分，对病毒复制也可有可无，但能使受感染细胞癌变，例子是v-src。细胞里的对应序列在胚胎期表达较多，出生后低表达或不表达，平时维持增殖和分化，这时称为原癌基因，例子是c-src；被激活后才可能致癌。关系有三条：序列高度同源，v-onc多半来自原癌基因，v-onc有致癌能力而原癌基因本身没有、突变后才可能有。
+
+### 第012页｜原癌基因的四种激活方式
+
+<div id="lecture-page-12"></div>
+<figure class="lecture-figure" data-lecture-page="12"><img src="/notes/oncogenes-cancer-genomics-2026/page-012.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第12页：原癌基因的四种激活方式" /><figcaption>原讲义第12页 · 点击图片放大</figcaption></figure>
+
+遗传、物理、化学和感染性因素都可以作用在原癌基因上。课件把激活收成四类，后果并不相同。获得强启动子或增强子，使癌基因高效表达。点突变显著提高蛋白质活性。基因融合或染色体重排让基因接到一起，提高表达或改变蛋白。基因扩增不改变蛋白质本身，但把总量提高。后面几页分别用myc、ras、BCR-ABL和HER2作例子，阅读时先分清“表达变多”和“蛋白功能变了”。
+
+### 第013页｜获得强启动子：myc失去控制
+
+<div id="lecture-page-13"></div>
+<figure class="lecture-figure" data-lecture-page="13"><img src="/notes/oncogenes-cancer-genomics-2026/page-013.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第13页：获得强启动子：myc失去控制" /><figcaption>原讲义第13页 · 点击图片放大</figcaption></figure>
+
+这是第12页第一种激活的图示。病毒或重排带来的强启动子/增强子插到myc附近后，转录出大量myc mRNA，翻译后细胞进入不受控增殖，从而获得生长优势。图中基因K、L、M和myc的相对位置用来说明：变的是调控，不一定是myc编码序列本身。来源仍是Weinberg《癌生物学》。把这一页和第16页的ras点突变对照：一个主要是产量，一个主要是蛋白活性。
+
+### 第014页｜点突变的捕获：从人肿瘤DNA到小鼠细胞
+
+<div id="lecture-page-14"></div>
+<figure class="lecture-figure" data-lecture-page="14"><img src="/notes/oncogenes-cancer-genomics-2026/page-014.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第14页：点突变的捕获：从人肿瘤DNA到小鼠细胞" /><figcaption>原讲义第14页 · 点击图片放大</figcaption></figure>
+
+人膀胱癌DNA转进小鼠NIH3T3细胞可以形成转化灶，这是初次转染。转化细胞的基因组里混有人DNA。把这些DNA再转进新的小鼠细胞，人源片段被稀释，只留下仍能转化的那一段，这是二次转染。人Alu重复序列用来标记哪些片段来自人。实验要回答的是：人肿瘤DNA里哪一小段就足以让小鼠成纤维细胞转化。下一页把这段DNA克隆并测序。
+
+### 第015页｜克隆并测序致癌的那一段
+
+<div id="lecture-page-15"></div>
+<figure class="lecture-figure" data-lecture-page="15"><img src="/notes/oncogenes-cancer-genomics-2026/page-015.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第15页：克隆并测序致癌的那一段" /><figcaption>原讲义第15页 · 点击图片放大</figcaption></figure>
+
+流程图从克隆的原癌基因和癌基因转染开始，看哪一个能形成灶。能转化的癌基因被切成片段，约350 bp的片段被送去测序，以确定负责活性的突变。对照是同一基因的未突变版本转染后不形成同样的灶。图引自Tabin等Nature 1982。要点是致癌能力可以被缩到一个很小的序列差异，而不是需要整段肿瘤基因组一直留在受体细胞里。
+
+### 第016页｜H-ras的单碱基突变
+
+<div id="lecture-page-16"></div>
+<figure class="lecture-figure" data-lecture-page="16"><img src="/notes/oncogenes-cancer-genomics-2026/page-016.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第16页：H-ras的单碱基突变" /><figcaption>原讲义第16页 · 点击图片放大</figcaption></figure>
+
+测序结果把差异定在一个密码子：原癌基因是GGC，对应甘氨酸；癌基因是GTC，对应缬氨酸。课件用红字标出G到T、甘氨酸到缬氨酸。周围密码子和剪接位点一起画出，是为了把突变放回转录本，而不是只给一个字母。文献是Tabin等Nature 1982。这是第12页“点突变提高蛋白质活性”的具体例子：H-ras编码的氨基酸变了，调控区不一定先变。
+
+### 第017页｜费城染色体与慢性粒细胞白血病
+
+<div id="lecture-page-17"></div>
+<figure class="lecture-figure" data-lecture-page="17"><img src="/notes/oncogenes-cancer-genomics-2026/page-017.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第17页：费城染色体与慢性粒细胞白血病" /><figcaption>原讲义第17页 · 点击图片放大</figcaption></figure>
+
+1960年在慢性粒细胞白血病（CML）细胞里看到一条异常的小染色体，后来称为费城染色体（Ph）。核型图把9号和22号染色体的易位画出来：22q-就是Ph，另一侧是9q+。课件引用Alberts《细胞的分子生物学》的模式图，以及Thomas Ried和Nicole McNeil的染色体涂染照片。这一页先建立“CML有特征性染色体易位”的观察，融合基因的分子细节在下一页。
+
+### 第018页｜BCR-ABL融合
+
+<div id="lecture-page-18"></div>
+<figure class="lecture-figure" data-lecture-page="18"><img src="/notes/oncogenes-cancer-genomics-2026/page-018.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第18页：BCR-ABL融合" /><figcaption>原讲义第18页 · 点击图片放大</figcaption></figure>
+
+易位写成t(9;22)(q34;q11)：9号长臂q34的ABL接到22号长臂q11的BCR。融合转录本翻译成带有ABL激酶结构域的BCR-ABL蛋白。图中标出SH3、SH2、SH1等结构域，说明断裂点不同可以产生长度不同的融合蛋白。文献包括Advani与Pendergast，Leukemia Research 2002。这是第12页第三种激活：基因融合既改变调控，也改变蛋白组成。
+
+### 第019页｜Ph染色体的临床意义
+
+<div id="lecture-page-19"></div>
+<figure class="lecture-figure" data-lecture-page="19"><img src="/notes/oncogenes-cancer-genomics-2026/page-019.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第19页：Ph染色体的临床意义" /><figcaption>原讲义第19页 · 点击图片放大</figcaption></figure>
+
+课件把Ph染色体的用途收成三条：它相对特异于慢性粒细胞白血病，因而有早期诊断价值，也可用来判断疗效。示意图仍是9号、22号和Ph。文献是Mughal等European Journal of Cancer 2001。阅读时注意“特异”是相对教学表述：Ph和BCR-ABL也见于部分急性白血病，不能把核型阳性直接写成唯一诊断标准。它的位置是把细胞遗传学和后面的靶向药连起来。
+
+### 第020页｜BCR-ABL酪氨酸激酶活性增强
+
+<div id="lecture-page-20"></div>
+<figure class="lecture-figure" data-lecture-page="20"><img src="/notes/oncogenes-cancer-genomics-2026/page-020.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第20页：BCR-ABL酪氨酸激酶活性增强" /><figcaption>原讲义第20页 · 点击图片放大</figcaption></figure>
+
+图把BCR-ABL放进生长因子受体下游的信号网：融合蛋白的酪氨酸激酶活性升高后，可以推动MAPK等途径，影响增殖、生存和分化。线粒体画在一侧，表示代谢和生存信号也被卷进来，但这一页的主线仍是激酶活性，不是线粒体突变。文献有Weisberg等Nature Reviews Cancer 2007和El-Tanani等2024年的综述。下一页才是针对这个激酶口袋的小分子药。
+
+### 第021页｜伊马替尼：针对BCR-ABL的激酶抑制剂
+
+<div id="lecture-page-21"></div>
+<figure class="lecture-figure" data-lecture-page="21"><img src="/notes/oncogenes-cancer-genomics-2026/page-021.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第21页：伊马替尼：针对BCR-ABL的激酶抑制剂" /><figcaption>原讲义第21页 · 点击图片放大</figcaption></figure>
+
+甲磺酸伊马替尼（imatinib mesylate），研发代号STI-571，商品名格列卫（Gleevec/Glivec）。它是小分子酪氨酸激酶抑制剂，占据ABL的ATP结合位点，从而压低BCR-ABL的激酶活性。课件写明2001年FDA批准用于CML。结构图引自Hantschel等Nature Reviews Molecular Cell Biology 2004和Soverini等2008年综述。这是从第18–20页的融合蛋白走到药物的一页，适应证以当时批准范围为准，不是用药说明。
+
+### 第022页｜基因扩增：HER2/neu/ERBB2
+
+<div id="lecture-page-22"></div>
+<figure class="lecture-figure" data-lecture-page="22"><img src="/notes/oncogenes-cancer-genomics-2026/page-022.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第22页：基因扩增：HER2/neu/ERBB2" /><figcaption>原讲义第22页 · 点击图片放大</figcaption></figure>
+
+第四种激活用乳腺癌里的HER2/neu/ERBB2说明。正常细胞里一对等位基因若不断复制，拷贝数可以大量增加，称为基因扩增。左图是扩增的染色体区段，右图用Southern印迹和免疫组化区分360例原发性乳腺癌里表达接近正常和表达升高的肿瘤。蛋白质序列不必改变，细胞表面的受体总量升高。文献指向Slamon的工作，图亦见于Weinberg《癌生物学》。
+
+### 第023页｜HER2拷贝数与复发、生存
+
+<div id="lecture-page-23"></div>
+<figure class="lecture-figure" data-lecture-page="23"><img src="/notes/oncogenes-cancer-genomics-2026/page-023.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第23页：HER2拷贝数与复发、生存" /><figcaption>原讲义第23页 · 点击图片放大</figcaption></figure>
+
+Slamon等Science 1987比较HER2/neu扩增与乳腺癌复发、生存的关系。课件概括：携带超过5个拷贝的患者更容易在确诊后18个月内复发。生存曲线的横轴是确诊后的月数。页末定义：HER2又名ERBB2、neu，属于表皮生长因子受体家族，位于17q21，是细胞表面的跨膜酪氨酸激酶受体，也是原癌基因。拷贝数阈值是这篇论文和课件的分析口径，不能当成所有检测试剂盒的统一判读线。
+
+### 第024页｜人源化抗体怎样做成赫赛汀
+
+<div id="lecture-page-24"></div>
+<figure class="lecture-figure" data-lecture-page="24"><img src="/notes/oncogenes-cancer-genomics-2026/page-024.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第24页：人源化抗体怎样做成赫赛汀" /><figcaption>原讲义第24页 · 点击图片放大</figcaption></figure>
+
+鼠单克隆抗体的可变区负责识别抗原，但鼠源恒定区在人体内容易被当成异物。图从鼠单抗到嵌合抗体，再到人源化抗体：把识别HER2的可变区留在人抗体骨架上。课件把1990到1998年标为Herceptin（赫赛汀）的诞生过程。图出自Weinberg《癌生物学》。这一页解释的是药物形式，不是新的激活机制；它接在HER2扩增之后，说明扩增的受体可以成为抗体药的靶。
+
+### 第025页｜均质染色区与N-myc拷贝数
+
+<div id="lecture-page-25"></div>
+<figure class="lecture-figure" data-lecture-page="25"><img src="/notes/oncogenes-cancer-genomics-2026/page-025.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第25页：均质染色区与N-myc拷贝数" /><figcaption>原讲义第25页 · 点击图片放大</figcaption></figure>
+
+均质染色区（homogeneously staining region，HSR）是染色体上一段着色均匀的扩增区段，细胞遗传学上看得见，对应DNA拷贝数增加。右侧生存曲线比较N-myc拷贝数低于10和高于10的患者，后者诊断后生存更差。文献包括Biedler等1976年对HSR的描述、Nature 1998的相关工作，以及Schmidt等Journal of Clinical Oncology 2000。阅读时把HSR当成扩增的染色体形态，把N-myc拷贝数当成同一现象的分子计数。
+
+### 第026页｜染色体外DNA与双微体
+
+<div id="lecture-page-26"></div>
+<figure class="lecture-figure" data-lecture-page="26"><img src="/notes/oncogenes-cancer-genomics-2026/page-026.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第26页：染色体外DNA与双微体" /><figcaption>原讲义第26页 · 点击图片放大</figcaption></figure>
+
+扩增的DNA也可以离开染色体，称为染色体外DNA（extrachromosomal DNA，ecDNA）。历史照片显示未经治疗的神经母细胞瘤中期细胞里有十余个双微体（double minutes）。Hotta等1965年PNAS和Cox等1965年Lancet是早期形态观察。这一页只建立“扩增DNA可以不在染色体上”的事实，环的结构、开放染色质和随机分配在后面几页。
+
+### 第027页｜双微体怎样带着增强子扩增癌基因
+
+<div id="lecture-page-27"></div>
+<figure class="lecture-figure" data-lecture-page="27"><img src="/notes/oncogenes-cancer-genomics-2026/page-027.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第27页：双微体怎样带着增强子扩增癌基因" /><figcaption>原讲义第27页 · 点击图片放大</figcaption></figure>
+
+双微体作为ecDNA，带有自己的复制起点，因此可以不跟着染色体独立复制。课件强调它常常不但有完整基因，还有上游调控元件。示意图把癌基因、增强子和mRNA画在一起，并比较双微体与染色体DNA之间可能形成的新增强子–基因组合。HSR则是拷贝数更受染色体限制的另一种扩增形态。文献是Ilić等Chromosoma 2022。要点是ecDNA改变的不只是拷贝数，还有调控元件和基因的搭配。
+
+### 第028页｜ecDNA是环状的
+
+<div id="lecture-page-28"></div>
+<figure class="lecture-figure" data-lecture-page="28"><img src="/notes/oncogenes-cancer-genomics-2026/page-028.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第28页：ecDNA是环状的" /><figcaption>原讲义第28页 · 点击图片放大</figcaption></figure>
+
+ecDNA从基因组上脱落或环出之后常常呈环，因此也叫染色体外环状DNA（extrachromosomal circular DNA，eccDNA）。电镜标尺从10微米到更小的尺度，用来看环的大小不一。文献是Wu等Nature 2019。命名上，ecDNA和eccDNA在不同文章里重叠但不完全等同；本页课件用环状形态把两者连在一起。环没有游离端，也解释了后面为什么它不按染色体那套分离规则平均分给子细胞。
+
+### 第029页｜ecDNA的来源没有单一热点
+
+<div id="lecture-page-29"></div>
+<figure class="lecture-figure" data-lecture-page="29"><img src="/notes/oncogenes-cancer-genomics-2026/page-029.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第29页：ecDNA的来源没有单一热点" /><figcaption>原讲义第29页 · 点击图片放大</figcaption></figure>
+
+第二点特征是：ecDNA随机来自染色体DNA，没有明显的固定位置或序列特异性。图统计大量eccDNA的染色体来源和长度分布，各条染色体都有贡献，长度从较短片段到数十kb。文献是Wang等Nature 2021。因此不能把ecDNA理解成只从某一个癌基因座位切下来的同一种环；不同肿瘤、不同环可以携带不同片段。
+
+### 第030页｜ecDNA上的癌基因表达更高
+
+<div id="lecture-page-30"></div>
+<figure class="lecture-figure" data-lecture-page="30"><img src="/notes/oncogenes-cancer-genomics-2026/page-030.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第30页：ecDNA上的癌基因表达更高" /><figcaption>原讲义第30页 · 点击图片放大</figcaption></figure>
+
+第三点用Turner等Nature 2017的定量比较：MYC、EGFR、ERBB2、CCND1、CCND3等在ecDNA扩增（EC Amp）时的表达，高于没有扩增（NoAmp）和染色体扩增（Chrom. Amp）。纵轴是表达量。结论不是“凡扩增都一样”，而是同样增加拷贝时，放在ecDNA上往往伴随更高的癌基因表达。这和下一页的开放染色质连在一起看。
+
+### 第031页｜ecDNA的染色质高度开放
+
+<div id="lecture-page-31"></div>
+<figure class="lecture-figure" data-lecture-page="31"><img src="/notes/oncogenes-cancer-genomics-2026/page-031.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第31页：ecDNA的染色质高度开放" /><figcaption>原讲义第31页 · 点击图片放大</figcaption></figure>
+
+第四点：ecDNA的染色质高度开放。ATAC-seq读段在ecDNA上富集，叠加图把开放信号叠回环。开放染色质更容易被转录机器接近，因此同样的癌基因拷贝可以比包在染色体异染色质里时转录更多。文献仍是Wu等Nature 2019。读图时ATAC信号表示可及性，不等于已经证明每一个开放位点都是有功能的增强子。
+
+### 第032页｜ecDNA在肿瘤中常见、在正常细胞中少见
+
+<div id="lecture-page-32"></div>
+<figure class="lecture-figure" data-lecture-page="32"><img src="/notes/oncogenes-cancer-genomics-2026/page-032.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第32页：ecDNA在肿瘤中常见、在正常细胞中少见" /><figcaption>原讲义第32页 · 点击图片放大</figcaption></figure>
+
+Turner等2017年比较正常细胞、永生细胞系、肿瘤和PDX。ecDNA阳性比例在肿瘤细胞和肿瘤模型里明显升高，正常细胞接近于无。下方按肿瘤类型分开，说明不是某一种癌独有。因此ecDNA是肿瘤基因组里反复出现的扩增形式，但“普遍”指多种肿瘤里都能找到，不是每一个肿瘤细胞都带着同样的环。
+
+### 第033页｜ecDNA推动肿瘤快速演化
+
+<div id="lecture-page-33"></div>
+<figure class="lecture-figure" data-lecture-page="33"><img src="/notes/oncogenes-cancer-genomics-2026/page-033.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第33页：ecDNA推动肿瘤快速演化" /><figcaption>原讲义第33页 · 点击图片放大</figcaption></figure>
+
+Yi等Cancer Discovery 2022用示意图说明两件同时发生的事。ecDNA不按着丝粒那套机制平均分离，子细胞随机分到不同拷贝数，群体因此很快变得多样。与此同时，带有复制起点的环可以在较少分裂次数里积累很高拷贝。染色体改变仍画在左侧，作为对照：染色体上的扩增分给子细胞时更受有丝分裂约束。多样性加快高拷贝，是这一页要记住的演化后果。
+
+### 第034页｜重复扩增也可以是癌症相关变异
+
+<div id="lecture-page-34"></div>
+<figure class="lecture-figure" data-lecture-page="34"><img src="/notes/oncogenes-cancer-genomics-2026/page-034.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第34页：重复扩增也可以是癌症相关变异" /><figcaption>原讲义第34页 · 点击图片放大</figcaption></figure>
+
+串联重复（tandem repeat，TR）是短单元首尾相接。课件指出TR多在非编码区、不稳定，超过约100 bp的扩增常与严重疾病有关。Erwin等Nature 2023在2509名患者、29种癌症里比较肿瘤与正常样本的TR长度，经局部读段深度过滤后，从285363个捕获的TR中编目出160个复发性重复扩增（rRE）。癌症基因组计划如果只看点突变和拷贝数，会漏掉这一类。
+
+### 第035页｜GAAA重复扩增与癌细胞增殖
+
+<div id="lecture-page-35"></div>
+<figure class="lecture-figure" data-lecture-page="35"><img src="/notes/oncogenes-cancer-genomics-2026/page-035.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第35页：GAAA重复扩增与癌细胞增殖" /><figcaption>原讲义第35页 · 点击图片放大</figcaption></figure>
+
+在肾细胞癌里，23个rRE出现在约34%的肿瘤，其中UGT2B7附近的GAAA重复落在调控元件区。右侧把重复扩增与靶基因表达、细胞增殖实验接在一起，786-O等细胞用来看拿掉或改变这段重复之后的增殖。文献仍是Erwin等Nature 2023。结论是重复扩增可以像增强子变异一样改变表达，而不是只有编码区点突变才算驱动事件。图中的相关和细胞实验支持“可以影响增殖”，不宜写成所有GAAA重复都致癌。
+
+### 第036页｜细胞越多，并不按比例得更多癌
+
+<div id="lecture-page-36"></div>
+<figure class="lecture-figure" data-lecture-page="36"><img src="/notes/oncogenes-cancer-genomics-2026/page-036.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第36页：细胞越多，并不按比例得更多癌" /><figcaption>原讲义第36页 · 点击图片放大</figcaption></figure>
+
+左图把70岁时结肠癌的模型概率对结肠干细胞数的对数作图：如果突变只随细胞数累积，大象和鲸应远高于人，曲线却在大体型动物处弯下来。这就是Peto悖论要问的问题。右图比较海牛、蹄兔、大象和猛犸等的TP53/TP53RTG拷贝数，课件写明大象体内TP53拷贝高达20个。文献是Caulin等eLife 2016的模型，以及Sulak等eLife 2016的拷贝数测定。额外的TP53是一种可能的保护，不是体型大就不得癌的唯一原因。
+
+### 第037页｜大象的LIF6与p53
+
+<div id="lecture-page-37"></div>
+<figure class="lecture-figure" data-lecture-page="37"><img src="/notes/oncogenes-cancer-genomics-2026/page-037.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第37页：大象的LIF6与p53" /><figcaption>原讲义第37页 · 点击图片放大</figcaption></figure>
+
+大象基因组里有LIF基因的重复。LIF6是其中一份不完整重复，能被p53上调，再通过BAK/BAX和线粒体释放细胞色素c推动凋亡。课件把它放在“适应”一侧：更多的p53监视加上LIF6，可能帮助大体型、长寿命动物限制肿瘤，同时图也提到感染和寿命。文献是Vazquez等Cell Reports 2018，以及Voskarides等Cells 2023。LIF6常被称作重新启用的“僵尸”基因，意思是旧拷贝获得了新的、受p53控制的功能。
+
+### 第038页｜Hayflick极限与端粒缩短
+
+<div id="lecture-page-38"></div>
+<figure class="lecture-figure" data-lecture-page="38"><img src="/notes/oncogenes-cancer-genomics-2026/page-038.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第38页：Hayflick极限与端粒缩短" /><figcaption>原讲义第38页 · 点击图片放大</figcaption></figure>
+
+培养的细胞不能无限分裂。曲线分三期，第III期进入衰老，对应Hayflick极限。下方把染色体画成中间的DNA加上两端端粒，每经过一次代，端粒变短。图出自Weinberg《癌生物学》。这一页把“正常体细胞增殖有上限”建立起来，后面才解释上限的分子原因是末端复制问题，以及肿瘤细胞怎样用端粒酶或ALT绕过它。
+
+### 第039页｜端粒保护染色体末端
+
+<div id="lecture-page-39"></div>
+<figure class="lecture-figure" data-lecture-page="39"><img src="/notes/oncogenes-cancer-genomics-2026/page-039.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第39页：端粒保护染色体末端" /><figcaption>原讲义第39页 · 点击图片放大</figcaption></figure>
+
+端粒是染色体末端的一小段DNA–蛋白质复合物。课件说明：末端端粒若丢失，染色体容易断裂、互相融合，形成桥。融合–桥–断裂会继续制造重排。因此端粒首先关系结构完整性，不只是分裂次数的计数器。荧光原位杂交图引自Karlseder以及Celli与de Lange，Nature Cell Biology 2005。和第38页合在一起：缩短到失去保护，才会出现末端融合。
+
+### 第040页｜端粒酶的组成
+
+<div id="lecture-page-40"></div>
+<figure class="lecture-figure" data-lecture-page="40"><img src="/notes/oncogenes-cancer-genomics-2026/page-040.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第40页：端粒酶的组成" /><figcaption>原讲义第40页 · 点击图片放大</figcaption></figure>
+
+端粒酶全酶在课件里分成三部分：有逆转录活性的催化亚基TERT（telomerase reverse transcriptase）、RNA模板，以及端粒相关蛋白。Shelterin（TRF2、POT1等）包在TTAGGG重复上，端粒酶延伸的是这条链。课件强调分工：RNA模板和许多端粒蛋白在没有端粒酶活性的正常组织里也有，TERT则主要在端粒酶阳性的肿瘤细胞和永生化细胞里表达。文献是Heidenreich等Mutation Research 2017。
+
+### 第041页｜末端复制问题
+
+<div id="lecture-page-41"></div>
+<figure class="lecture-figure" data-lecture-page="41"><img src="/notes/oncogenes-cancer-genomics-2026/page-041.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第41页：末端复制问题" /><figcaption>原讲义第41页 · 点击图片放大</figcaption></figure>
+
+线性染色体复制时，前导链可以一直合成到末端附近，滞后链却依赖RNA引物。最末端那一段引物去掉之后，常规DNA聚合酶无法把空隙补上，于是每复制一次就短一截。图只画复制叉、前导链和滞后链，用来解释第38页的缩短从何而来。解决办法不是改写中心法则，而是端粒酶用RNA模板把重复加回去，或者走下一页开始的替代途径。
+
+### 第042页｜TERT怎样加回端粒重复
+
+<div id="lecture-page-42"></div>
+<figure class="lecture-figure" data-lecture-page="42"><img src="/notes/oncogenes-cancer-genomics-2026/page-042.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第42页：TERT怎样加回端粒重复" /><figcaption>原讲义第42页 · 点击图片放大</figcaption></figure>
+
+人TERT以hTR这份RNA为模板，把TTAGGG一类重复一段段加到染色体末端，从而维持端粒长度。左图是配对、延伸、再移位的步骤。右侧生存曲线把端粒酶活性阴性、低活性和高活性分开，用来说明活性差异和临床病程可以相关，但曲线本身是课件引用的队列结果，不是诊断界值。图的机制部分来自Weinberg《癌生物学》。
+
+### 第043页｜端粒延长替代（ALT）
+
+<div id="lecture-page-43"></div>
+<figure class="lecture-figure" data-lecture-page="43"><img src="/notes/oncogenes-cancer-genomics-2026/page-043.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第43页：端粒延长替代（ALT）" /><figcaption>原讲义第43页 · 点击图片放大</figcaption></figure>
+
+不依赖端粒酶、仍能维持端粒的途径在课件中称为端粒延长替代（ALT）。英文标题写成Alternative Lengthening of Telomerase；阅读时按“替代端粒酶的端粒延长”理解，标准英文是alternative lengthening of telomeres。荧光图比较早代细胞和约40次群体倍增之后：箭头所指的端粒信号仍然存在，说明这些细胞没有因为末端复制问题把端粒耗尽。机制图在下一页。
+
+### 第044页｜ALT的染色体间拷贝选择
+
+<div id="lecture-page-44"></div>
+<figure class="lecture-figure" data-lecture-page="44"><img src="/notes/oncogenes-cancer-genomics-2026/page-044.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第44页：ALT的染色体间拷贝选择" /><figcaption>原讲义第44页 · 点击图片放大</figcaption></figure>
+
+ALT常用同源重组而不是逆转录。图中一条染色体的端粒DNA侵入另一条染色体的端粒，以其为模板延伸，再把新合成的链拉回来。这叫染色体间的拷贝选择。结果是端粒变长，但没有TERT以RNA为模板合成重复。因此测到端粒没缩短，不能直接推断端粒酶一定呈阳性，还要区分TERT途径和ALT。图出自Weinberg《癌生物学》。
+
+### 第045页｜TERT启动子突变的癌种分布
+
+<div id="lecture-page-45"></div>
+<figure class="lecture-figure" data-lecture-page="45"><img src="/notes/oncogenes-cancer-genomics-2026/page-045.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第45页：TERT启动子突变的癌种分布" /><figcaption>原讲义第45页 · 点击图片放大</figcaption></figure>
+
+Huang等Science 2013在黑色素瘤里标出启动子上的C228T和C250T。这些突变常为ETS转录因子提供新的结合位点，从而提高TERT表达。右侧表来自Heidenreich等2017年综述，按癌种列出启动子突变频率：皮肤黑色素瘤、基底细胞癌、原发胶质母细胞瘤、尿路上皮癌等较高，肢端和黏膜黑色素瘤、葡萄膜黑色素瘤以及部分鳞癌则低得多。频率是各研究口径下的范围，不能把表中某一格写成所有癌症的统一比例。
+
+## 第二部分　癌症基因组计划
+
+### 第046页｜癌症研究的转折点
+
+<div id="lecture-page-46"></div>
+<figure class="lecture-figure" data-lecture-page="46"><img src="/notes/oncogenes-cancer-genomics-2026/page-046.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第46页：癌症研究的转折点" /><figcaption>原讲义第46页 · 点击图片放大</figcaption></figure>
+
+1986年3月7日，Renato Dulbecco在Science发表短文《癌症研究的转折点——人类基因组测序》。他提出两条路：要么零敲碎打地寻找与恶性相关的基因，要么测定一种选定动物的全基因组。课件认为这篇文章代表医学界对人类基因组计划的期待。Baltimore 2012年的悼文提醒他同时也是把病毒、突变和癌症连在一起的病毒学家。第一部分的单个癌基因，从这里转向“把基因组全部读出来”。
+
+### 第047页｜癌基因组学成为基因组研究的主线之一
+
+<div id="lecture-page-47"></div>
+<figure class="lecture-figure" data-lecture-page="47"><img src="/notes/oncogenes-cancer-genomics-2026/page-047.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第47页：癌基因组学成为基因组研究的主线之一" /><figcaption>原讲义第47页 · 点击图片放大</figcaption></figure>
+
+2004年4月3日至7日，国际人类基因组大会在柏林召开。方福德在《癌症进展》2004年第2卷第4期概括的变化包括：从结构基因组学转向功能基因组学，从单一学科转向整合分析，基因组研究与重大疾病绑在一起，新技术体系仍是重点，以及癌基因组学本身成为方向。杨焕明《基因组学》（2016）被课件用来支撑这一判断。这一页是会议共识，还不是某一个测序项目的样本表。
+
+### 第048页｜TCGA与国际癌症基因组计划
+
+<div id="lecture-page-48"></div>
+<figure class="lecture-figure" data-lecture-page="48"><img src="/notes/oncogenes-cancer-genomics-2026/page-048.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第48页：TCGA与国际癌症基因组计划" /><figcaption>原讲义第48页 · 点击图片放大</figcaption></figure>
+
+2005年12月13日，NIH组织NCI和NHGRI启动癌症基因组图谱（The Cancer Genome Atlas，TCGA），用大规模测序描绘主要癌症类型的基因组改变。课件写明先选治疗和预后较差的多形性胶质母细胞瘤、肺鳞状细胞癌和卵巢浆液性囊腺癌。2008年4月，美、英、加、中等国科学家在多伦多组成国际癌症基因组协作组（ICGC），并启动国际癌症基因组计划。日期和首批癌种是项目设计，不是后来全部癌种的名单。
+
+### 第049页｜各国承担的癌种
+
+<div id="lecture-page-49"></div>
+<figure class="lecture-figure" data-lecture-page="49"><img src="/notes/oncogenes-cancer-genomics-2026/page-049.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第49页：各国承担的癌种" /><figcaption>原讲义第49页 · 点击图片放大</figcaption></figure>
+
+Ledford在Nature 2010年报道ICGC的分工。图上加拿大、英国、德国、中国、法国、印度、日本等各自列出癌种，例如胶质母细胞瘤、乳腺癌亚型、肝细胞癌、胰腺癌等。中国被指定的首个肿瘤类型是胃癌。图注估计每种癌症的测序费用将近2000万美元，这是当时新闻稿口径的成本数量级，不是今日测序报价。阅读时用它理解“国际分工”，不用它记忆现行价格。
+
+### 第050页｜ICGC成员与中国承担的癌种
+
+<div id="lecture-page-50"></div>
+<figure class="lecture-figure" data-lecture-page="50"><img src="/notes/oncogenes-cancer-genomics-2026/page-050.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第50页：ICGC成员与中国承担的癌种" /><figcaption>原讲义第50页 · 点击图片放大</figcaption></figure>
+
+2015年课件列出的参与方包括美国、加拿大、墨西哥、法国、英国、西班牙、意大利、德国，以及中国、印度、日本、沙特阿拉伯、新加坡、韩国、巴西、澳大利亚。中国参与研究的癌症写成：胃癌、结直肠癌、食管癌、肝癌、鼻咽癌、乳腺癌、甲状腺癌、卵巢癌、肾癌、脑癌、胰腺癌、前列腺癌、白血病、肺癌和膀胱癌。这是联盟分工的一张名单，样本是否最终都按此完成，要回到各项目论文，不能把名单本身当成测序已完成。
+
+### 第051页｜癌症基因组计划进入年度科技新闻
+
+<div id="lecture-page-51"></div>
+<figure class="lecture-figure" data-lecture-page="51"><img src="/notes/oncogenes-cancer-genomics-2026/page-051.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第51页：癌症基因组计划进入年度科技新闻" /><figcaption>原讲义第51页 · 点击图片放大</figcaption></figure>
+
+这一页是一张新闻拼贴，标题为2015年世界十大科技进展。其中一条是癌症基因组图谱计划：试点阶段之后，TCGA被写成已经提供可查询的癌症基因组数据库。拼贴里还有埃博拉疫苗、太阳能飞机、火星液态水等并列新闻。它的作用是说明癌基因组学在那一年已经进入公共科学新闻，而不是再介绍一套新的实验方法。具体排名和表述以报纸当年的评选口径为准。
+
+### 第052页｜癌症基因组计划要列出哪些变异
+
+<div id="lecture-page-52"></div>
+<figure class="lecture-figure" data-lecture-page="52"><img src="/notes/oncogenes-cancer-genomics-2026/page-052.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第52页：癌症基因组计划要列出哪些变异" /><figcaption>原讲义第52页 · 点击图片放大</figcaption></figure>
+
+杨焕明《基因组学》（2016）用一张环形染色体图定义这项计划：列出所有与癌症相关的基因变异。图上同时标出点突变、染色体内重排、染色体间重排和拷贝数变异。因此“癌症基因组”不是只做外显子上的单核苷酸替换。前面第一部分的ras点突变、BCR-ABL易位和HER2扩增，在这张图里分别落进点突变、重排和拷贝数。
+
+### 第053页｜TCGA样本数是一张历史快照
+
+<div id="lecture-page-53"></div>
+<figure class="lecture-figure" data-lecture-page="53"><img src="/notes/oncogenes-cancer-genomics-2026/page-053.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第53页：TCGA样本数是一张历史快照" /><figcaption>原讲义第53页 · 点击图片放大</figcaption></figure>
+
+表按癌症类型列出样本数，注脚写明截至2016年1月14日，来源是沈柳等《中华医学图书情报杂志》2016年。浸润性乳腺癌约1097例，卵巢浆液性囊腺癌、子宫内膜癌、肾透明细胞癌、胶质母细胞瘤等依次排列，胆管癌、弥漫大B细胞淋巴瘤等队列小得多。这些数字是数据门户当时的收录，后来仍有追加和质控剔除。引用时要连日期一起说，不能当成今天GDC里的病例数。
+
+### 第054页｜驱动基因与乘客基因
+
+<div id="lecture-page-54"></div>
+<figure class="lecture-figure" data-lecture-page="54"><img src="/notes/oncogenes-cancer-genomics-2026/page-054.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第54页：驱动基因与乘客基因" /><figcaption>原讲义第54页 · 点击图片放大</figcaption></figure>
+
+2007年，Sanger研究所的Greenman等在Nature提出驱动基因和乘客基因。驱动突变使细胞获得选择性生长优势，乘客突变搭在同一克隆里、本身不提供这种优势。图还问：到底多少突变才会形成癌症，以及不同癌症类型需要的驱动突变数目并不相同。Martincorena等Cell 2017被用来表示驱动数目可以很少。丢失的突变提醒：测到的是残留在肿瘤里的结果，不是细胞一生中发生过的全部突变。
+
+### 第055页｜癌症基因组的山峰与丘陵
+
+<div id="lecture-page-55"></div>
+<figure class="lecture-figure" data-lecture-page="55"><img src="/notes/oncogenes-cancer-genomics-2026/page-055.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第55页：癌症基因组的山峰与丘陵" /><figcaption>原讲义第55页 · 点击图片放大</figcaption></figure>
+
+Vogelstein等Science 2013综述了当时的全景。多数癌种是少数在很高比例肿瘤里改变的“山峰”，加上大量很少见的“丘陵”。编码区突变水平大约140个基因可以驱动肿瘤发生；一个典型肿瘤含有其中2到8个驱动突变，其余是乘客。这些驱动基因被归进12条信号通路，对应细胞命运、细胞生存和基因组维持三件核心的事。课件把这篇综述当作“突变名单已经多到可以指导防癌和治疗思路”的节点。140和2到8都是这篇综述的概括，不是每一个肿瘤的定额。
+
+### 第056页｜299个驱动基因与3437个驱动突变
+
+<div id="lecture-page-56"></div>
+<figure class="lecture-figure" data-lecture-page="56"><img src="/notes/oncogenes-cancer-genomics-2026/page-056.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第56页：299个驱动基因与3437个驱动突变" /><figcaption>原讲义第56页 · 点击图片放大</figcaption></figure>
+
+Bailey等Cell 2018在TCGA泛癌分析里把驱动事件再数了一遍。图的标题数字是299个驱动基因、3437个驱动突变。饼图说明计算预测经过实验验证的比例：在抽测的一部分里，大多数预测得到支持，但不是每一个算法命中都已验证。另一侧把其中可采取治疗行动的突变单独标出。阅读时区分三层：统计上的驱动、实验验证过的驱动、以及当时已有药物能对上的驱动。
+
+### 第057页｜截至2020年8月的568个驱动基因
+
+<div id="lecture-page-57"></div>
+<figure class="lecture-figure" data-lecture-page="57"><img src="/notes/oncogenes-cancer-genomics-2026/page-057.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第57页：截至2020年8月的568个驱动基因" /><figcaption>原讲义第57页 · 点击图片放大</figcaption></figure>
+
+Martínez-Jiménez等Nature Reviews Cancer 2020汇总66种癌症、约28000份肿瘤。文氏图把“在其他肿瘤类型里已被注释为驱动”和“尚未被注释为驱动”分开，汇总到568个癌症驱动基因。柱状图按癌种比较已知驱动的覆盖。数字比2013年的约140个和2018年的299个更大，主要因为样本、癌种和非编码以外的注释范围都增加了。比较不同论文的基因数时，必须同时比较它们的纳入标准。
+
+### 第058页｜非编码区也有驱动突变
+
+<div id="lecture-page-58"></div>
+<figure class="lecture-figure" data-lecture-page="58"><img src="/notes/oncogenes-cancer-genomics-2026/page-058.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第58页：非编码区也有驱动突变" /><figcaption>原讲义第58页 · 点击图片放大</figcaption></figure>
+
+Elliott与Larsson，Nature Reviews Cancer 2021把突变画在增强子、启动子、5′UTR、3′UTR、剪接位点、内含子和CTCF/cohesin结合处。右侧统计里，TERT启动子是非编码驱动里最突出的一格，另外还有miRNA和少量其他基因。编码区的KRAS等仍占大量突变，所以这一页不是说非编码突变已经超过编码突变，而是说只测外显子会漏掉TERT启动子这类已经反复验证的事件。
+
+### 第059页｜PCAWG：从外显子走到全基因组
+
+<div id="lecture-page-59"></div>
+<figure class="lecture-figure" data-lecture-page="59"><img src="/notes/oncogenes-cancer-genomics-2026/page-059.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第59页：PCAWG：从外显子走到全基因组" /><figcaption>原讲义第59页 · 点击图片放大</figcaption></figure>
+
+全基因组泛癌分析（Pan-Cancer Analysis of Whole Genomes，PCAWG）由四大洲的协作组完成，分析2658个全基因组、38种肿瘤。和以往侧重蛋白编码区不同，这次读的是癌症全基因组。Nature 2020年2月的介绍把成果分成驱动因子、非编码改变、突变特征、结构变异、癌症演化和RNA改变，并借助云计算。样本数是这一协作的分析集，不是全世界肿瘤的随机抽样。
+
+### 第060页｜COSMIC：按基因查询体细胞突变
+
+<div id="lecture-page-60"></div>
+<figure class="lecture-figure" data-lecture-page="60"><img src="/notes/oncogenes-cancer-genomics-2026/page-060.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第60页：COSMIC：按基因查询体细胞突变" /><figcaption>原讲义第60页 · 点击图片放大</figcaption></figure>
+
+COSMIC（Catalogue of Somatic Mutations in Cancer）用来回答：一个基因在癌症里有没有体细胞突变、出现在哪些肿瘤。课件给出的网址是Sanger的COSMIC，并引用Tate等Nucleic Acids Research 2019年对2018年8月v86的统计，例如当时约139万肿瘤样本、约598万编码突变。页眉还出现2024年5月的v100。这些都是数据库版本的快照。查询时要记录版本号，因为每年的样本和注释都会变。
+
+### 第061页｜COSMIC论文与三维浏览
+
+<div id="lecture-page-61"></div>
+<figure class="lecture-figure" data-lecture-page="61"><img src="/notes/oncogenes-cancer-genomics-2026/page-061.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第61页：COSMIC论文与三维浏览" /><figcaption>原讲义第61页 · 点击图片放大</figcaption></figure>
+
+这一页是Tate等2019年那篇Nucleic Acids Research论文的首页，以及COSMIC-3D一类基因组浏览界面。用它确认数据库的维护单位是Wellcome Sanger Institute，以及后来和药物、结构结合的浏览方式。界面上的基因轨道会随版本更新。学习时不必记住截图里的坐标，只要知道：COSMIC除了突变表，还可以把突变放到转录本和结构上查看。
+
+### 第062页｜TCGA数据从GDC门户进入
+
+<div id="lecture-page-62"></div>
+<figure class="lecture-figure" data-lecture-page="62"><img src="/notes/oncogenes-cancer-genomics-2026/page-062.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第62页：TCGA数据从GDC门户进入" /><figcaption>原讲义第62页 · 点击图片放大</figcaption></figure>
+
+基因组数据共享门户（Genomic Data Commons，https://portal.gdc.cancer.gov/）是取TCGA等协调后癌症数据的入口。课件只展示门户首页和“协调后的癌症数据集”。协调的意思是不同中心的数据经过统一流程再放上来，因此和论文原始补充表的数字可能有小的差别。下一页才是过滤器里具体有哪些项目和检测类型。
+
+### 第063页｜GDC里能筛项目、部位和检测类型
+
+<div id="lecture-page-63"></div>
+<figure class="lecture-figure" data-lecture-page="63"><img src="/notes/oncogenes-cancer-genomics-2026/page-063.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第63页：GDC里能筛项目、部位和检测类型" /><figcaption>原讲义第63页 · 点击图片放大</figcaption></figure>
+
+筛选项分成解剖部位、项目和肿瘤类型。项目里TCGA占最大一块，旁边还有TARGET、MMRF、CPTAC等。数据类别包括临床、生物标本、简单核苷酸变异、拷贝数、DNA甲基化、转录组、ATAC-seq、蛋白组等。版本号写着v43.0（2025年5月7日）和v42.0（2025年1月30日）。百分比是当时门户中项目或类型的构成，会随数据发布改变。使用时记下门户版本，并分清原始测序读段和已经调用好的突变。
+
+### 第064页｜cBioPortal：面向单个研究的查询
+
+<div id="lecture-page-64"></div>
+<figure class="lecture-figure" data-lecture-page="64"><img src="/notes/oncogenes-cancer-genomics-2026/page-064.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第64页：cBioPortal：面向单个研究的查询" /><figcaption>原讲义第64页 · 点击图片放大</figcaption></figure>
+
+cBioPortal（https://www.cbioportal.org/）把已发表队列的突变、拷贝数和临床数据做成可查询的界面。课件用它做单个基因的突变与预后，以及一份队列里突变的整体分布。首页例子包括髓母细胞瘤和泛癌研究。它和GDC的差别是：GDC更靠近测序数据和受控访问，cBioPortal更靠近“这篇论文的队列里，这个基因改变了多少、和生存有没有关系”。
+
+### 第065页｜cBioPortal的突变瀑布图
+
+<div id="lecture-page-65"></div>
+<figure class="lecture-figure" data-lecture-page="65"><img src="/notes/oncogenes-cancer-genomics-2026/page-065.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第65页：cBioPortal的突变瀑布图" /><figcaption>原讲义第65页 · 点击图片放大</figcaption></figure>
+
+这是一份队列的OncoPrint。每一列大致是一个样本，行是TP53、EGFR、IDH1等基因。颜色区分截断突变、错义突变、剪接突变、结构变异、扩增和深度缺失，并试图标出推定驱动和意义不明。上方可以叠诊断年龄、性别和总生存。图注写明约70%的样本至少有一个所示基因改变，这个比例只属于当前这份队列和当前这组基因，换队列就会变。
+
+### 第066页｜GEPIA：用TCGA做表达和生存
+
+<div id="lecture-page-66"></div>
+<figure class="lecture-figure" data-lecture-page="66"><img src="/notes/oncogenes-cancer-genomics-2026/page-066.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第66页：GEPIA：用TCGA做表达和生存" /><figcaption>原讲义第66页 · 点击图片放大</figcaption></figure>
+
+GEPIA（Gene Expression Profiling Interactive Analysis，http://gepia.cancer-pku.cn/）升级到2.0后，可以对TCGA样本做基因表达差异和预后分析。首页就是输入基因名。它适合快速看一个基因在肿瘤和正常组织之间的表达、以及高低表达组的生存曲线。快速图不是独立队列的验证；数据来自TCGA的处理版本，阈值和分组方式会改变p值和风险比。
+
+### 第067页｜GEPIA的箱线图和Kaplan–Meier曲线
+
+<div id="lecture-page-67"></div>
+<figure class="lecture-figure" data-lecture-page="67"><img src="/notes/oncogenes-cancer-genomics-2026/page-067.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第67页：GEPIA的箱线图和Kaplan–Meier曲线" /><figcaption>原讲义第67页 · 点击图片放大</figcaption></figure>
+
+示例基因是HILPDA。左上按分期比较表达，右上是总生存：高、低表达组的log-rank p值写成7.9e-09，高表达组风险比约2.8。下方无病生存的log-rank p值为0.015，风险比约1.5。文献是Tang等Nucleic Acids Research 2017。这些数字是GEPIA对TCGA里这个基因、这种分组的输出。换中位切分或换癌种，数值就会变，不能把一次网页查询写成该基因的普遍效应。
+
+### 第068页｜UALCAN：按亚组看TCGA和其他组学
+
+<div id="lecture-page-68"></div>
+<figure class="lecture-figure" data-lecture-page="68"><img src="/notes/oncogenes-cancer-genomics-2026/page-068.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第68页：UALCAN：按亚组看TCGA和其他组学" /><figcaption>原讲义第68页 · 点击图片放大</figcaption></figure>
+
+UALCAN（http://ualcan.path.uab.edu/）由阿拉巴马大学伯明翰分校维护，用来按肿瘤亚组查看表达、生存和甲基化，并链接到GeneCards、PubMed、TargetScan和Human Protein Atlas。数据来源写明包括TCGA、MET500、CPTAC和儿童脑瘤。引用是Chandrashekar等Neoplasia 2017和2022年的更新。和第66页的GEPIA相比，它更强调按分期、种族、分子亚型等临床分组下钻。
+
+### 第069页｜UALCAN里按生存挑基因
+
+<div id="lecture-page-69"></div>
+<figure class="lecture-figure" data-lecture-page="69"><img src="/notes/oncogenes-cancer-genomics-2026/page-069.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第69页：UALCAN里按生存挑基因" /><figcaption>原讲义第69页 · 点击图片放大</figcaption></figure>
+
+界面先选TCGA数据集和基因类型，例子是乳腺浸润癌的蛋白编码基因。下方按Kaplan–Meier把高表达、低表达与生存联系起来，并给出其他癌种的入口，例如膀胱尿路上皮癌和低级别胶质瘤。列表适合生成假设：哪些基因的表达分组和生存分离最明显。它还不是生物标志物的认证，因为没有锁死切分点，也没有独立队列。
+
+### 第070页｜Lnc2Cancer：实验支持的lncRNA与癌症
+
+<div id="lecture-page-70"></div>
+<figure class="lecture-figure" data-lecture-page="70"><img src="/notes/oncogenes-cancer-genomics-2026/page-070.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第70页：Lnc2Cancer：实验支持的lncRNA与癌症" /><figcaption>原讲义第70页 · 点击图片放大</figcaption></figure>
+
+Lnc2Cancer 3.0（http://bio-bigdata.hrbmu.edu.cn/lnc2cancer）专门收实验支持的lncRNA、环状RNA和人类癌症的关联。课件写明当前版本有10303条记录，涉及2659个人类lncRNA，机制包括microRNA、转录因子、变异、甲基化和增强子，功能包括增殖、凋亡、自噬、上皮间质转化和免疫，临床注释包括转移、复发、耐药和预后。站内还有按统一流程处理的RNA-seq和单细胞表达。数字是该版本的收录量。
+
+### 第071页｜在Lnc2Cancer里查一条lncRNA
+
+<div id="lecture-page-71"></div>
+<figure class="lecture-figure" data-lecture-page="71"><img src="/notes/oncogenes-cancer-genomics-2026/page-071.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第71页：在Lnc2Cancer里查一条lncRNA" /><figcaption>原讲义第71页 · 点击图片放大</figcaption></figure>
+
+浏览页以MALAT1为例，可以按癌种、表达高低、实验方法和PubMed编号往下点。一条记录会给出表达方向、功能描述和外部链接（GeneCards、Ensembl、GENCODE等）。文献是Gao等Nucleic Acids Research 2021。使用方式和COSMIC相反：COSMIC从突变出发，这里从一条lncRNA的实验文献出发。数据库收录的是已发表关联，不是自动证明因果关系。
+
+### 第072页｜2018年TCGA泛癌图谱登上Cell
+
+<div id="lecture-page-72"></div>
+<figure class="lecture-figure" data-lecture-page="72"><img src="/notes/oncogenes-cancer-genomics-2026/page-072.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第72页：2018年TCGA泛癌图谱登上Cell" /><figcaption>原讲义第72页 · 点击图片放大</figcaption></figure>
+
+这一页是Cell 2018年4月5日的封面，对应TCGA泛癌图谱那一组论文。Hutter和Zenklusen的评论刊在同期Cell第173卷第283–285页。封面本身没有新的统计，它标记第二部分后半的阅读单元：接下来三页把临床、突变、拷贝数、甲基化、RNA和蛋白接到同一次泛癌整合里。
+
+### 第073页｜一万例肿瘤里的分子亚型
+
+<div id="lecture-page-73"></div>
+<figure class="lecture-figure" data-lecture-page="73"><img src="/notes/oncogenes-cancer-genomics-2026/page-073.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第73页：一万例肿瘤里的分子亚型" /><figcaption>原讲义第73页 · 点击图片放大</figcaption></figure>
+
+Hoadley等Cell 2018分析约10000个TCGA标本、33种癌症。层次从临床数据到DNA甲基化、mRNA、microRNA和RPPA蛋白，聚类得到28个iCluster。有的簇按器官聚在一起，有的鳞癌或妇科肿瘤跨器官聚到一起。TumorMap把这种跨器官的相似性画出来。28种分子亚型是这次聚类的结果，换特征和算法，簇的数目会变。
+
+### 第074页｜突变、转录和微环境要一起看
+
+<div id="lecture-page-74"></div>
+<figure class="lecture-figure" data-lecture-page="74"><img src="/notes/oncogenes-cancer-genomics-2026/page-074.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第74页：突变、转录和微环境要一起看" /><figcaption>原讲义第74页 · 点击图片放大</figcaption></figure>
+
+Ding等Cell 2018用泛癌图谱讨论肿瘤怎样发展。课件列出三层问题：体细胞突变和生殖系变异各自起什么作用；肿瘤基因组和表观基因组怎样影响转录组和蛋白质组；肿瘤细胞和微环境怎样互相作用。图中央仍是33种癌症、约11000例的全景。这一页是分析框架，不是新的驱动基因名单。
+
+### 第075页｜十条通路与可靶向的改变
+
+<div id="lecture-page-75"></div>
+<figure class="lecture-figure" data-lecture-page="75"><img src="/notes/oncogenes-cancer-genomics-2026/page-075.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第75页：十条通路与可靶向的改变" /><figcaption>原讲义第75页 · 点击图片放大</figcaption></figure>
+
+Sanchez-Vega等Cell 2018在33种癌症、9125个肿瘤样本里看10条通路：RTK–RAS、PI3K/Akt、MYC、NOTCH、p53、细胞周期、TGFβ、WNT、Hippo和NRF2。改变可以是突变、拷贝数、甲基化、表达或融合。课件概括两条结论：这些通路如何被体细胞改变击中；57%的肿瘤至少有一条潜在可靶向的通路发生改变。图下用厄洛替尼和维莫非尼举例EGFR、KRAS、BRAF到MAPK。57%是这篇论文的口径，而且“可靶向”不等于患者已经有获批药物。
+
+### 第076页｜蛋白质基因组学
+
+<div id="lecture-page-76"></div>
+<figure class="lecture-figure" data-lecture-page="76"><img src="/notes/oncogenes-cancer-genomics-2026/page-076.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第76页：蛋白质基因组学" /><figcaption>原讲义第76页 · 点击图片放大</figcaption></figure>
+
+从基因组到蛋白质组要经过转录、RNA加工和编辑、翻译以及翻译后修饰，每一步都有调控，所以mRNA水平不能直接代替蛋白水平。时间线从Jaffe等2004年提出proteogenomics，到Alfaro等2014年的方法综述。泛癌蛋白质基因组学把转录组、蛋白质组和磷酸化蛋白质组放在一起，用来把驱动因素连到功能状态。文献包括Petralia等Cell 2020和Li等Cell 2023，中文综述见黄雨柔等《生物工程学报》2022。
+
+### 第077页｜用条形码慢病毒同时引入多种基因事件
+
+<div id="lecture-page-77"></div>
+<figure class="lecture-figure" data-lecture-page="77"><img src="/notes/oncogenes-cancer-genomics-2026/page-077.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第77页：用条形码慢病毒同时引入多种基因事件" /><figcaption>原讲义第77页 · 点击图片放大</figcaption></figure>
+
+Li等Nature Genetics 2024的组合遗传策略，用来模拟癌症里复杂的基因型–表型关系。带条形码的慢病毒库含有多种癌症相关基因事件，随机感染原代上皮细胞，使不同细胞带上不同组合，再在类器官里培养，并做成皮下移植的多克隆肿瘤。单细胞DNA测序读取条形码，从而知道哪个克隆带着哪一组事件。课件强调它用于快速建立与临床相关的膀胱癌和前列腺癌模型。这是功能实验，用来检验基因组分析提出的基因组合。
+
+### 第078页｜人类肿瘤图谱网络
+
+<div id="lecture-page-78"></div>
+<figure class="lecture-figure" data-lecture-page="78"><img src="/notes/oncogenes-cancer-genomics-2026/page-078.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第78页：人类肿瘤图谱网络" /><figcaption>原讲义第78页 · 点击图片放大</figcaption></figure>
+
+人类肿瘤图谱网络（Human Tumor Atlas Network，HTAN）计划在癌前、原发和转移等阶段，用单细胞或单核RNA测序，加上空间位置、外显子组、蛋白质组、表观基因组、代谢组和微生物组，从时间和空间上以单细胞分辨率描述肿瘤怎样进展。示意图把同一病变的时间轴和空间轴分开。文献是Rozenblatt-Rosen等Cell 2020。它和TCGA的差别是：TCGA多数是批量组学，HTAN强调动态和空间。
+
+### 第079页｜用单细胞图谱加速癌症生物学
+
+<div id="lecture-page-79"></div>
+<figure class="lecture-figure" data-lecture-page="79"><img src="/notes/oncogenes-cancer-genomics-2026/page-079.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第79页：用单细胞图谱加速癌症生物学" /><figcaption>原讲义第79页 · 点击图片放大</figcaption></figure>
+
+Wang、Liu和Zhang在Cell 2023年的这篇前瞻，把测序方法、头颈、乳腺、胰腺、结直肠、肝细胞癌等单细胞图谱，接到诊断和新的治疗策略。中间一层是国际协作和计算。课件用它过渡：基因组学已经不只要一份肿瘤的平均突变，还要知道突变和状态分布在哪些细胞。具体癌种名单是示意图里的例子，不是HTAN的完整项目清单。
+
+### 第080页｜从靶基因到靶细胞
+
+<div id="lecture-page-80"></div>
+<figure class="lecture-figure" data-lecture-page="80"><img src="/notes/oncogenes-cancer-genomics-2026/page-080.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第80页：从靶基因到靶细胞" /><figcaption>原讲义第80页 · 点击图片放大</figcaption></figure>
+
+上排是传统癌症基因组学：找到癌细胞内部的靶基因或肿瘤抗原，用小分子、抗体或CAR-T直接杀死癌细胞或抑制其生长。下排是单细胞癌症基因组学：先识别微环境里的靶细胞，再调节这些细胞的功能，重塑细胞间的调控网络。课件的表述是，干预癌细胞与其他细胞的通讯，改变促肿瘤微环境，最终仍是为了消除癌症。两条路可以同时存在。文献仍是Wang等Cell 2023。
+
+### 第081页｜人类癌症模型计划
+
+<div id="lecture-page-81"></div>
+<figure class="lecture-figure" data-lecture-page="81"><img src="/notes/oncogenes-cancer-genomics-2026/page-081.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第81页：人类癌症模型计划" /><figcaption>原讲义第81页 · 点击图片放大</figcaption></figure>
+
+人类癌症模型计划（Human Cancer Models Initiative，HCMI）于2016年7月启动，目标是建立更接近患者肿瘤的模型，供药物和新疗法使用。流程从组织采集、模型生成、基因组表征到数据分析，结果放在HCMI Explorer（课件给出的入口是NCI的应用页面）。文献是ElHarouni等Nature 2026。模型比细胞系更接近组织，仍然不是患者体内的肿瘤本身。
+
+## 第三部分　癌症精准医学
+
+### 第082页｜从染色体异常到癌症基因组进入临床
+
+<div id="lecture-page-82"></div>
+<figure class="lecture-figure" data-lecture-page="82"><img src="/notes/oncogenes-cancer-genomics-2026/page-082.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第82页：从染色体异常到癌症基因组进入临床" /><figcaption>原讲义第82页 · 点击图片放大</figcaption></figure>
+
+Stratton在Science 2011年画了一条时间轴：确认DNA是遗传物质，发现癌细胞遗传物质异常并提出癌症是体细胞变化产生的克隆，识别复发性染色体异常和第一个体细胞驱动突变，再到第二代测序和第一份完整的癌症基因组。右侧指向约400个已知癌症基因，并设想基因组测序进入常规临床。这是第三部分的总图。400是2011年综述的数量级，后面2018和2020年的驱动基因统计用的是另一套标准。
+
+### 第083页｜精准医学计划
+
+<div id="lecture-page-83"></div>
+<figure class="lecture-figure" data-lecture-page="83"><img src="/notes/oncogenes-cancer-genomics-2026/page-083.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第83页：精准医学计划" /><figcaption>原讲义第83页 · 点击图片放大</figcaption></figure>
+
+2015年1月20日，奥巴马在国情咨文里提出精准医学计划，希望更接近治愈癌症和糖尿病这类疾病，并让人获得保持自身和家庭健康所需的个体化信息。Collins和Varmus随后在New England Journal of Medicine 2015年2月26日解释这项计划。课件把它作为“癌症基因组要进入个体”的政策起点。计划本身包括肿瘤和更广泛的队列，不只有肿瘤测序。
+
+### 第084页｜一万个肿瘤基因组里的用药机会
+
+<div id="lecture-page-84"></div>
+<figure class="lecture-figure" data-lecture-page="84"><img src="/notes/oncogenes-cancer-genomics-2026/page-084.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第84页：一万个肿瘤基因组里的用药机会" /><figcaption>原讲义第84页 · 点击图片放大</figcaption></figure>
+
+Kinnersley等Nature Genetics 2024对10470名患者的10478对肿瘤–正常全基因组进行统一WGS，覆盖35种癌症。结果是770个独特的肿瘤–驱动基因对，对应330个候选驱动基因，其中74对是新的；85个基因在两种以上癌症中作为驱动，TP53、PIK3CA、ARID1A和PTEN分别出现在29、18、16和14种肿瘤类型。约15%（1560/10470）的患者对得上当时已批准的精准肿瘤药物。左侧流程还写出最初测了14129对，经过质控才进入分析集。15%是“对得上已批准药物”的比例，不是治疗有效的比例。
+
+### 第085页｜从基因组、转录组到精准肿瘤学
+
+<div id="lecture-page-85"></div>
+<figure class="lecture-figure" data-lecture-page="85"><img src="/notes/oncogenes-cancer-genomics-2026/page-085.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第85页：从基因组、转录组到精准肿瘤学" /><figcaption>原讲义第85页 · 点击图片放大</figcaption></figure>
+
+Roychowdhury和Chinnaiyan，CA: A Cancer Journal for Clinicians 2016，把路径画成：口腔拭子或血液提供生殖系序列，肿瘤测序提供体细胞改变，两者一起进入诊断、篮子试验、例外应答者和获得性耐药研究。精准肿瘤学在这张图里是一条循环，不是测序一次就结束。生殖系和体细胞必须分开解释：前者关系遗传风险和药物代谢，后者才是肿瘤特有的驱动突变。
+
+### 第086页｜精准医学在本课里的两个用途
+
+<div id="lecture-page-86"></div>
+<figure class="lecture-figure" data-lecture-page="86"><img src="/notes/oncogenes-cancer-genomics-2026/page-086.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第86页：精准医学在本课里的两个用途" /><figcaption>原讲义第86页 · 点击图片放大</figcaption></figure>
+
+过渡页只列两项。第一是肿瘤的早期筛查和诊断，后面用游离DNA和多组学液体活检展开。第二是肿瘤精准治疗，后面用小分子、抗体和免疫检查点展开。两项都依赖前面的基因组发现，但证据标准不同：筛查要看灵敏度和特异度，治疗要看靶点和临床试验。
+
+### 第087页｜cfDNA片段组学
+
+<div id="lecture-page-87"></div>
+<figure class="lecture-figure" data-lecture-page="87"><img src="/notes/oncogenes-cancer-genomics-2026/page-087.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第87页：cfDNA片段组学" /><figcaption>原讲义第87页 · 点击图片放大</figcaption></figure>
+
+细胞游离DNA（cell-free DNA，cfDNA）是释放到血液等体液里的DNA碎片。片段组学（fragmentomics）不只要序列，还要长度、末端基序、核小体占据和偏好性末端。这些特征和CpG甲基化、组蛋白修饰、染色质可及性、转录活性有关，也受核酸酶水平和cfDNA浓度影响。图中还分出超短cfDNA等不同群体。文献是Tsui等Cancer Cell 2025。片段特征是关联，单独一项还不是癌症诊断。
+
+### 第088页｜HCCscreen：乙肝表面抗原阳性者的肝癌液体活检
+
+<div id="lecture-page-88"></div>
+<figure class="lecture-figure" data-lecture-page="88"><img src="/notes/oncogenes-cancer-genomics-2026/page-088.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第88页：HCCscreen：乙肝表面抗原阳性者的肝癌液体活检" /><figcaption>原讲义第88页 · 点击图片放大</figcaption></figure>
+
+Qu等PNAS 2019在无症状的HBsAg阳性人群里，用cfDNA突变（TP53、TERT、CTNNB1、AXIN1）、HBV整合、cfDNA浓度以及AFP、DCP等蛋白，放进一个惩罚逻辑回归，检测早期肝细胞癌。课件补充：2020年9月该路径获得美国FDA“突破性医疗器械”认定，并被《原发性肝癌诊疗指南（2022年版）》引用。突破性认定是监管通道，不等于已经完成上市许可。模型系数是这篇论文里的权重。
+
+### 第089页｜HCCscreen验证集的灵敏度和特异度
+
+<div id="lecture-page-89"></div>
+<figure class="lecture-figure" data-lecture-page="89"><img src="/notes/oncogenes-cancer-genomics-2026/page-089.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第89页：HCCscreen验证集的灵敏度和特异度" /><figcaption>原讲义第89页 · 点击图片放大</figcaption></figure>
+
+在课件给出的验证集里，4例预测为肝癌者后来被证实，20例预测阳性但当时未证实；预测为非肝癌的307例中没有漏掉已证实的肝癌。据此写出灵敏度100%、特异度94%。随访6到8个月时，在AFP和超声都阴性的人里发现4例小于3 cm的肝癌，307例检测阴性者在同一时段没有发现肝癌。对照数字是AFP诊断各期肝癌的灵敏度大约58.6%–77.5%，特异度80%–97.4%，诊断早期肝癌的灵敏度大约45.3%–62%。这些是该队列和综述引用的范围，换人群会变。
+
+### 第090页｜结直肠癌的多组学早期检测
+
+<div id="lecture-page-90"></div>
+<figure class="lecture-figure" data-lecture-page="90"><img src="/notes/oncogenes-cancer-genomics-2026/page-090.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第90页：结直肠癌的多组学早期检测" /><figcaption>原讲义第90页 · 点击图片放大</figcaption></figure>
+
+Gao等Molecular Cancer 2024把突变、甲基化和末端基序等cfDNA特征合成一个分数。在89例结直肠癌的队列里，灵敏度92.1%（95%置信区间84.5%–96.8%），特异度94.7%（88.1%–98.3%）。分阶段看，I期灵敏度89.2%，II期和IV期在课件中达到100%。特征筛选写明突变要按变异等位频率和突变类型过滤，甲基化区域和末端基序用随机森林挑选。区间说明样本量有限，100%是这个小队列的观察，不是筛查项目的保证。
+
+### 第091页｜手术、放化疗与分子靶向药
+
+<div id="lecture-page-91"></div>
+<figure class="lecture-figure" data-lecture-page="91"><img src="/notes/oncogenes-cancer-genomics-2026/page-091.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第91页：手术、放化疗与分子靶向药" /><figcaption>原讲义第91页 · 点击图片放大</figcaption></figure>
+
+左侧用Halsted代表肿瘤根治手术，用伦琴和居里夫人代表放疗，用二战期间的氮芥代表化疗。右侧两张表来自郭晓强等《科学》2015年第5期。小分子例子包括格列卫（Abl，CML）、易瑞沙和特罗凯（表皮生长因子受体，非小细胞肺癌）、托瑞塞尔（mTOR，肾癌）。抗体例子包括赫赛汀（HER2，转移性乳腺癌）、阿瓦斯汀（血管内皮生长因子，非小细胞肺癌）、爱必妥（结直肠癌）和美罗华（CD20，淋巴瘤）。页末写1997年FDA批准利妥昔单抗（美罗华），用于其他治疗无效的B细胞非霍奇金淋巴瘤。表是2015年的教学举例，批准范围此后有增有减。
+
+### 第092页｜免疫检查点治疗
+
+<div id="lecture-page-92"></div>
+<figure class="lecture-figure" data-lecture-page="92"><img src="/notes/oncogenes-cancer-genomics-2026/page-092.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第92页：免疫检查点治疗" /><figcaption>原讲义第92页 · 点击图片放大</figcaption></figure>
+
+2018年诺贝尔生理学或医学奖授予James P. Allison和Tasuku Honjo，理由是发现通过抑制负向免疫调节来治疗癌症。左图是CTLA-4：它和CD28争夺B7，抗体阻断CTLA-4后，T细胞更容易被树突状细胞激活。右图是PD-1：肿瘤细胞用PD-L1结合T细胞上的PD-1，阻断这条轴可以恢复杀伤。Wolchok在Cell 2018年的评论强调，这两条通路已经进入晚期癌症的常规用药，并成为继续寻找免疫调节靶点的基础。
+
+### 第093页｜什么是免疫检查点抑制剂
+
+<div id="lecture-page-93"></div>
+<figure class="lecture-figure" data-lecture-page="93"><img src="/notes/oncogenes-cancer-genomics-2026/page-093.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第93页：什么是免疫检查点抑制剂" /><figcaption>原讲义第93页 · 点击图片放大</figcaption></figure>
+
+免疫检查点是效应T细胞等细胞上的激活性或抑制性受体开关。免疫检查点抑制剂通过松开抑制、让患者自己的T细胞去清除肿瘤细胞。课件指出已有多种阻断PD-1通路的单克隆抗体在国内获批。图引自Chen和Mellman，Immunity 2013，核心是癌症–免疫循环：抗原释放、呈递、T细胞启动、进入肿瘤、识别并杀伤。抑制剂作用在这个循环的刹车点，不是直接毒杀肿瘤细胞。
+
+### 第094页｜哪些因素影响检查点抑制剂的疗效
+
+<div id="lecture-page-94"></div>
+<figure class="lecture-figure" data-lecture-page="94"><img src="/notes/oncogenes-cancer-genomics-2026/page-094.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第94页：哪些因素影响检查点抑制剂的疗效" /><figcaption>原讲义第94页 · 点击图片放大</figcaption></figure>
+
+课件列出三类主要因素，后面几页只展开其中两类。第一是肿瘤微环境里PD-L1的多少，以及肿瘤浸润淋巴细胞的数量。第二是新抗原数量，接着用错配修复、微卫星不稳定和突变负荷说明。第三是微生态，最后几页用肿瘤内和肠道细菌说明。三类都是关联因素，没有一个能单独决定某位患者是否有效。
+
+### 第095页｜新抗原从突变来
+
+<div id="lecture-page-95"></div>
+<figure class="lecture-figure" data-lecture-page="95"><img src="/notes/oncogenes-cancer-genomics-2026/page-095.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第95页：新抗原从突变来" /><figcaption>原讲义第95页 · 点击图片放大</figcaption></figure>
+
+环境因素（紫外线、吸烟、烷化剂、放疗）和遗传或生理因素都会改变突变数量。dMMR使复制错误得不到纠正，基因组不稳定或出现微卫星不稳定，突变负荷升高，其中一些突变肽成为T细胞能识别的新抗原。图把新抗原肽、MHC、T细胞、PD-1和PD-L1放在同一个肿瘤细胞旁。高TMB的例子写成TP53、APOBEC、LRP1B等背景，低TMB的例子包括EGFR、STK11、JAK1/2。文献是Li等Biochimica et Biophysica Acta Reviews on Cancer 2020。新抗原数量是潜力，还要能被加工和呈递。
+
+### 第096页｜微卫星是短串联重复
+
+<div id="lecture-page-96"></div>
+<figure class="lecture-figure" data-lecture-page="96"><img src="/notes/oncogenes-cancer-genomics-2026/page-096.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第96页：微卫星是短串联重复" /><figcaption>原讲义第96页 · 点击图片放大</figcaption></figure>
+
+微卫星是基因组里的简单重复序列，单元通常1到6个核苷酸，重复次数一般不超过约60次，例如多聚A或CA重复。它们可以位于基因间隔区、内含子或编码区。课件用单核苷酸和二核苷酸两种写法示意。微卫星本身不是突变；下两页说明，如果错配修复失效，这些重复的长度会在肿瘤里变得不稳定。
+
+### 第097页｜错配修复决定微卫星是否稳定
+
+<div id="lecture-page-97"></div>
+<figure class="lecture-figure" data-lecture-page="97"><img src="/notes/oncogenes-cancer-genomics-2026/page-097.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第97页：错配修复决定微卫星是否稳定" /><figcaption>原讲义第97页 · 点击图片放大</figcaption></figure>
+
+错配修复（MMR）识别并修复复制或重组时的碱基错配，以及小段插入和缺失。相关蛋白包括MLH1、PMS2、MSH2和MSH6。功能缺陷记为dMMR，功能完整记为pMMR。启动子高甲基化或编码区突变都可以造成dMMR。缺陷之后，微卫星里自发的长度改变来不及修回，于是出现微卫星不稳定（MSI）。文献是Wu等Journal of Hematology and Oncology 2021。顺序是：MMR失效，然后MSI，而不是反过来。
+
+### 第098页｜MSI-H、MSI-L和MSS
+
+<div id="lecture-page-98"></div>
+<figure class="lecture-figure" data-lecture-page="98"><img src="/notes/oncogenes-cancer-genomics-2026/page-098.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第98页：MSI-H、MSI-L和MSS" /><figcaption>原讲义第98页 · 点击图片放大</figcaption></figure>
+
+1997年美国国立癌症研究所把MSI定义为：与自身正常组织相比，肿瘤里微卫星重复单元插入或缺失造成的长度改变。课件分成高度不稳定（MSI-H）、低度不稳定（MSI-L）和稳定（MSS）。图比较正常与肿瘤的重复长度。分类依赖于检测哪些位点、几个位点算阳性，所以不同panel的MSI-H不能直接当成同一个百分比。
+
+### 第099页｜PCR与免疫组化检测dMMR/MSI
+
+<div id="lecture-page-99"></div>
+<figure class="lecture-figure" data-lecture-page="99"><img src="/notes/oncogenes-cancer-genomics-2026/page-099.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第99页：PCR与免疫组化检测dMMR/MSI" /><figcaption>原讲义第99页 · 点击图片放大</figcaption></figure>
+
+PCR用一组微卫星位点看长度是否改变。图比较Bethesda panel、Promega panel等，位点数目和单核苷酸、二核苷酸组成不同。免疫组化则看MLH1、PMS2、MSH2、MSH6蛋白是否缺失，从而判断dMMR。课件写明两种方法一致性较高，但不是每次都相同：IHC看的是蛋白在不在，PCR看的是重复长度。判读标准来自Rüschoff等Pathologe 2021这类病理综述。
+
+### 第100页｜dMMR/MSI-H为何对免疫治疗更敏感
+
+<div id="lecture-page-100"></div>
+<figure class="lecture-figure" data-lecture-page="100"><img src="/notes/oncogenes-cancer-genomics-2026/page-100.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第100页：dMMR/MSI-H为何对免疫治疗更敏感" /><figcaption>原讲义第100页 · 点击图片放大</figcaption></figure>
+
+课件写明2017年pembrolizumab和nivolumab先后获批，用于携带dMMR/MSI-H的晚期或转移性癌症。机制图分三步：编码区微卫星的插入造成移码，移码肽被翻译出来，再被加工并呈递到细胞表面，成为T细胞的靶。MMR完整时这条移码肽来源大为减少。文献是Baretti和Le，Pharmacology and Therapeutics 2018。获批针对的是dMMR/MSI-H这个状态，不是某一个癌种专属，具体适应证以当时说明书为准。
+
+### 第101页｜肿瘤突变负荷
+
+<div id="lecture-page-101"></div>
+<figure class="lecture-figure" data-lecture-page="101"><img src="/notes/oncogenes-cancer-genomics-2026/page-101.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第101页：肿瘤突变负荷" /><figcaption>原讲义第101页 · 点击图片放大</figcaption></figure>
+
+肿瘤突变负荷（tumor mutational burden，TMB）在课件中定义为：每百万碱基里检测到的体细胞编码错误、碱基替换、插入或缺失的总数。高TMB可以产生更多新抗原，因此和MSI-H、dMMR一起被放进免疫治疗生物标志物。但两者只是部分重叠：许多MSI-H/dMMR肿瘤TMB高，也有相当比例的高TMB肿瘤并没有MMR缺陷。文献是Ritterhouse，Cancer Cytopathology 2019。比较TMB时要看测的是全外显子还是panel，以及是否去掉了生殖系变异。
+
+### 第102页｜TMB的中国专家共识口径
+
+<div id="lecture-page-102"></div>
+<figure class="lecture-figure" data-lecture-page="102"><img src="/notes/oncogenes-cancer-genomics-2026/page-102.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第102页：TMB的中国专家共识口径" /><figcaption>原讲义第102页 · 点击图片放大</figcaption></figure>
+
+《肿瘤突变负荷检测及临床应用中国专家共识（2020年版）》把定义收成：特定区域内体细胞非同义突变的个数，通常写成每兆碱基多少个突变。组织TMB被当作免疫检查点抑制剂疗效的新兴预测标志物；非小细胞肺癌里血液TMB与组织TMB相关，但血液检测当时没有统一标准。方法主要是肿瘤及其配对正常样本的全外显子或靶向panel，用拟合算法去掉生殖系变异。共识建议与PD-L1、MSI联合，而不是单独决策。
+
+### 第103页｜肠道微生物被称为人体的第二基因组
+
+<div id="lecture-page-103"></div>
+<figure class="lecture-figure" data-lecture-page="103"><img src="/notes/oncogenes-cancer-genomics-2026/page-103.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第103页：肠道微生物被称为人体的第二基因组" /><figcaption>原讲义第103页 · 点击图片放大</figcaption></figure>
+
+过渡页把1000多种细菌、300多万个基因构成的肠道微生态称为人的第二基因组，意思是它的基因数量远大于人体自身编码基因，并直接影响健康和疾病。出处是《大自然探索》2019年第2期的科普表述。数字是数量级，不是一次测序的基因目录。它为后面的粪菌移植和肿瘤内细菌做铺垫。
+
+### 第104页｜粪菌移植重新建立肠道菌群
+
+<div id="lecture-page-104"></div>
+<figure class="lecture-figure" data-lecture-page="104"><img src="/notes/oncogenes-cancer-genomics-2026/page-104.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第104页：粪菌移植重新建立肠道菌群" /><figcaption>原讲义第104页 · 点击图片放大</figcaption></figure>
+
+粪菌移植（fecal microbiota transplantation，FMT）把供体的功能菌群移植到患者胃肠道，重建菌群，以治疗肠道和部分肠外疾病。图把适应证画得很广：艰难梭菌等感染、炎症和自身免疫、肿瘤、肝病、肥胖和代谢、心血管，以及自闭症谱系、帕金森等。文献是Biazzo和Fassetta，Journal of Clinical Medicine 2022。这张图是领域地图，不是每一种疾病都已有同样级别的证据。课件用它引出微生物可以改变免疫和肿瘤。
+
+### 第105页｜每种肿瘤里都有自己的细菌组成
+
+<div id="lecture-page-105"></div>
+<figure class="lecture-figure" data-lecture-page="105"><img src="/notes/oncogenes-cancer-genomics-2026/page-105.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第105页：每种肿瘤里都有自己的细菌组成" /><figcaption>原讲义第105页 · 点击图片放大</figcaption></figure>
+
+Nejman等Science 2020检测了七类肿瘤：乳腺癌、肺、卵巢、胰腺、黑色素瘤、骨和脑。每一类都能找到微生物，组成互不相同。乳腺癌的细菌多样性最高，黑色素瘤里细菌DNA阳性的比例最低。图中的百分比是各类肿瘤细菌DNA阳性的比例，细菌名称是举例。结果说明肿瘤不是无菌组织，但细菌存在不等于细菌导致了这块肿瘤。
+
+### 第106页｜胰腺癌里的细菌多样性与生存
+
+<div id="lecture-page-106"></div>
+<figure class="lecture-figure" data-lecture-page="106"><img src="/notes/oncogenes-cancer-genomics-2026/page-106.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第106页：胰腺癌里的细菌多样性与生存" /><figcaption>原讲义第106页 · 点击图片放大</figcaption></figure>
+
+Riquelme等Cell 2019比较胰腺导管腺癌。少数长期生存者的瘤内微生物明显更多样。课件概括：多样性较高和较低的患者，中位生存期相差约8年；图上一个比较是1.6年对10.14年。特定菌群在长生存患者的肿瘤里富集，例如假黄单胞菌等。这是队列观察加上后面的小鼠实验，还不能把某一种细菌写成胰腺癌的治疗方案。
+
+### 第107页｜改变肠道菌群可以改变肿瘤免疫
+
+<div id="lecture-page-107"></div>
+<figure class="lecture-figure" data-lecture-page="107"><img src="/notes/oncogenes-cancer-genomics-2026/page-107.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第107页：改变肠道菌群可以改变肿瘤免疫" /><figcaption>原讲义第107页 · 点击图片放大</figcaption></figure>
+
+同一篇Cell 2019把短生存和长生存患者的菌群差别放进小鼠。短生存相关的瘤内微生物多样性低，免疫偏向抑制；长生存相关的多样性高，免疫被激活。通过改变肠道微生物，可以影响肿瘤免疫、激活T细胞，并在模型里控制肿瘤生长。实验说明菌群能够调节抗肿瘤免疫，效应大小来自这个小鼠体系，不能直接换算成患者的生存月数。
+
+### 第108页｜肺里的细菌也可以帮助肿瘤
+
+<div id="lecture-page-108"></div>
+<figure class="lecture-figure" data-lecture-page="108"><img src="/notes/oncogenes-cancer-genomics-2026/page-108.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第108页：肺里的细菌也可以帮助肿瘤" /><figcaption>原讲义第108页 · 点击图片放大</figcaption></figure>
+
+Jin等Cell 2019给出另一面。肿瘤细胞能够改变肺内细菌群落，细菌刺激局部免疫产生炎症，图中通过γδ T细胞和IL-17，炎症环境反过来帮助肿瘤细胞生长。和上一页的方向相反：微生物不总是增强抗肿瘤免疫，也可以维持有利于肿瘤的炎症。阅读时把“激活T细胞”拆开，问激活的是杀伤肿瘤的细胞，还是促进炎症的细胞。
+
+### 第109页｜colibactin可以直接在肠道类器官里留下突变
+
+<div id="lecture-page-109"></div>
+<figure class="lecture-figure" data-lecture-page="109"><img src="/notes/oncogenes-cancer-genomics-2026/page-109.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第109页：colibactin可以直接在肠道类器官里留下突变" /><figcaption>原讲义第109页 · 点击图片放大</figcaption></figure>
+
+携带pks毒力岛的大肠杆菌产生基因毒素colibactin。Pleguezuelos-Manzano等Nature 2020把产毒菌株和敲除对照与人肠道类器官共培养，看到pks阳性菌株引起DNA损伤：γH2AX标记双链断裂，突变谱里出现特征性的单碱基替换和插入缺失。这些突变特征后来可以在部分结直肠癌基因组里被认出来。因此微生物不只是调节免疫，其代谢产物也可以直接造成突变。MMC在图中是诱导双链断裂的对照。
+
+### 第110页｜课的结尾：癌症传
+
+<div id="lecture-page-110"></div>
+<figure class="lecture-figure" data-lecture-page="110"><img src="/notes/oncogenes-cancer-genomics-2026/page-110.webp" width="1200" height="900" loading="lazy" decoding="async" alt="第110页：课的结尾：癌症传" /><figcaption>原讲义第110页 · 点击图片放大</figcaption></figure>
+
+最后一页不是新的数据，而是Siddhartha Mukherjee《癌症传》（The Emperor of All Maladies）的封面，副题是癌症的传记。它把这110页放回更长的历史：从Halsted的手术、放化疗、Rous病毒，到基因组和精准医学，都是这部历史的章节。复习时用它收束，具体机制仍回到前面各页的图和所引论文。
