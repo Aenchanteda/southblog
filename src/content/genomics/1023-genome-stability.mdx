@@ -1,241 +1,344 @@
 ---
 title: "基因组稳定性：109页中文标注与逐页讲解"
-description: "王晓月老师基因组稳定性课程笔记：从DNA损伤修复、突变特征和基因编辑，到端粒、着丝粒与结构变异。"
+description: "王晓月老师基因组稳定性课程笔记：按页对照原图讲解DNA损伤修复、突变特征、基因编辑、端粒、着丝粒与结构变异。"
 pubDate: 2026-10-30
 order: 3
 tags: ["基因组学", "课堂笔记", "DNA修复", "突变特征", "端粒"]
 draft: false
 ---
 
-import GenomeLectureControls from "../../components/GenomeLectureControls.astro";
+import LecturePageControls from "../../components/LecturePageControls.astro";
 
-本笔记依据王晓月《基因组的稳定性》课堂讲义（2026年10月23日），按原PDF第1—109页顺序整理。原页英文和图示保留，淡蓝框中的中文译注位于原图内部，编号对应附近英文或图示；图下是辅助讲解，不是另列的翻译栏。密集图表以关键标签译注为主，未把每个嵌入图片的小字逐词翻译。补充辨析与深入理解由本笔记补充，不能当作讲义原文。
+本笔记依据王晓月《基因组的稳定性》课堂讲义（2026年10月23日），按原PDF第1—109页顺序整理。原页英文和图示保留，淡蓝框中的中文译注位于原图内部；派生图裁去了原页外部留白。图下讲解按课件上的结构、箭头和数据来写，不是英文的逐句翻译，也不能代替听课或阅读原始论文。
 
-<GenomeLectureControls />
+<LecturePageControls pageCount={109} storageKey="southblog:genome-stability:page" />
 
-数字和研究结论按讲义所引用研究的时间背景阅读，不视作截至2026年的数据库总量或当前临床指南。部分图是机制模型或文献截图，不把难辨的图中数值重新转录为精确结果。AI辅助整理、翻译和版面制作；关键疑点查阅了下列来源，但未对109页全部文献进行逐条系统核验。原页末尾联系方式已在派生图片中遮去，源PDF未改动。
-
+数字和研究结论按讲义所引用研究的时间背景阅读，不视作截至2026年的数据库总量或当前临床指南。部分图是机制模型或文献截图，看不清的小字不重新转录成精确结果。AI辅助整理、翻译和版面制作；关键疑点查阅了文末来源，但未对109页全部文献进行逐条系统核验。原页末尾联系方式已在派生图片中遮去，源PDF未改动。
 
 ## 导读与DNA损伤
-
 
 ### 第001页｜课程封面：基因组的稳定性
 
 <div id="lecture-page-1"></div>
-<figure class="genome-figure" data-lecture-page="1"><img src="/notes/genome-stability-2026/page-001.webp" width="1508" height="1238" loading="lazy" decoding="async" alt="第1页：课程封面：基因组的稳定性，原图内中文标注" /><figcaption>原讲义第1页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="1"><img src="/notes/genome-stability-2026/page-001.webp" width="1508" height="1238" loading="lazy" decoding="async" alt="第1页：课程封面：基因组的稳定性，原图内中文标注" /><figcaption>原讲义第1页 · 点击图片放大</figcaption></figure>
 
-这门课把“DNA上的字有没有写错”和“整条染色体有没有保存、分配好”放在同一框架中。前半部分讨论损伤、修复与突变，后半部分讨论端粒、着丝粒和结构变异。学习时始终追问三个问题：损伤从哪里来，细胞怎样处理，处理后的痕迹怎样被测序观察到。
+这一讲的封面标题是「基因组的稳定性」，讲者是北京协和医院生物信息中心的王晓月，日期写着 2026年10月23日。左上角是中国医学科学院、北京协和医学院的院徽。淡蓝译注把这一页标成课程导读。
+
+听课可以带着三个问题：损伤从哪里来，细胞怎样处理，处理后留下的痕迹怎样被测序看见。稳定性在这门课里有两个尺度。一个是 DNA 上的字母有没有写错，对应损伤、修复和突变；另一个是整条染色体有没有被保存、有没有分到子细胞里，对应端粒、着丝粒和结构变异。封面本身只给出题目和讲者，这两条线在后面的路线图里展开。
 
 
 ### 第002页｜基因组稳定性：保存与改变的平衡
 
 <div id="lecture-page-2"></div>
-<figure class="genome-figure" data-lecture-page="2"><img src="/notes/genome-stability-2026/page-002.webp" width="1910" height="1026" loading="lazy" decoding="async" alt="第2页：基因组稳定性：保存与改变的平衡，原图内中文标注" /><figcaption>原讲义第2页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="2"><img src="/notes/genome-stability-2026/page-002.webp" width="1910" height="1026" loading="lazy" decoding="async" alt="第2页：基因组稳定性：保存与改变的平衡，原图内中文标注" /><figcaption>原讲义第2页 · 点击图片放大</figcaption></figure>
 
-图中的天平表达遗传信息需要可靠保存，同时遗传变异又为群体适应提供材料。这里的“适应”不能理解成细胞按需要精准制造有利突变：损伤和变异的产生、自然选择对变异的筛选是不同过程。稳定性也不是完全没有突变，而是损伤、修复和细胞命运调控共同维持可接受的错误水平。
+基因组稳定性在这一页被画成一架天平：遗传物质要能代代保存，环境压力之下又要给适应性改变留出位置。
+
+页题是 Genome stability。下面那句英文把 **preservation**（遗传物质的代际保存）说成从一代传到下一代，并且 in response to their environment。天平支点上方的灰框是 **environmental stress**（环境压力）。左盘是黄框 Ensuring the integrity of genome，译注把 **integrity** 写成完整性；右盘是绿框 allow for adaptive changes，译注写成适应性改变。蓝色三角是支点，横梁在画面上大致保持水平。这是一张概念示意，没有测量任何突变率。
+
+右盘的 allow for 是给改变留出位置。损伤和变异怎样产生，自然选择怎样在群体里筛选它们，是两件分开的过程。细胞里没有一条按当前需要去制造有利突变的通路。稳定性指的是把错误维持在可接受的水平：损伤、修复和细胞命运一起起作用，这个水平里仍然包含突变。
 
 
 ### 第003页｜从癌症观察基因组不稳定
 
 <div id="lecture-page-3"></div>
-<figure class="genome-figure" data-lecture-page="3"><img src="/notes/genome-stability-2026/page-003.webp" width="1814" height="1307" loading="lazy" decoding="async" alt="第3页：从癌症观察基因组不稳定，原图内中文标注" /><figcaption>原讲义第3页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="3"><img src="/notes/genome-stability-2026/page-003.webp" width="1814" height="1307" loading="lazy" decoding="async" alt="第3页：从癌症观察基因组不稳定，原图内中文标注" /><figcaption>原讲义第3页 · 点击图片放大</figcaption></figure>
 
-先看不同颜色的染色体片段：颜色混合或片段位置异常提示重排，而染色体数目改变是另一个层面的异常。癌症可以通过修复缺陷、复制压力或分离错误积累这些改变。突变数量多是最终观察结果，不等于单凭一张核型图就测出了突变发生速率；速率需要时间或细胞代数的信息。
+癌症基因组被这一页用来当反面样本：先看见不稳定长成什么样，再回头追问稳定性本来靠什么维持。
+
+左侧五张图来自页底所引的 Cancer Res. 1999;59(1):141-150。A、B 是深色背景上的彩色中期染色体，每条染色体一种主色，B 里已经标出 M 开头的记号。C 是同一类材料的黑白 G 显带散图。D 把彩色染色体按 1–22 和 X 排开，正常编号旁边排着大量以 M 开头的标记染色体；有的一条染色体里拼着两种颜色，4 号附近还能看到同时标着 15 和 4 的染色体。E 是对应的 G 显带核型，M 编号与 D 行对照，4 号上方印着一个箭头。颜色在一条染色体内部切换，或片段跑到别的编号旁边，读作 **染色体重排**（chromosome rearrangement，染色体片段的连接关系变了）。多出来的 M 染色体，以及数目上对不齐，是另一个层面的异常。缩略图里的 M 编号很多，细小的号码以原图为准。箭头标在 E 行 4 号上方，幻灯片没有在箭头旁写明它指哪一种畸变。
+
+右侧第一条写：癌症基因组有较高突变率，并且有多重染色体重排。第二条写：要从这些不稳定的癌症基因组理解基因组稳定的机制。译注把后一句收成「从异常癌症基因组反推稳定性机制」。核型图支持的是结构重排、标记染色体和染色体数目这些看得见的异常。突变率是单位时间或每一代细胞里新突变有多少；这一页没有给出时间或细胞代数，一张核型给出的是已经积累的图像。修复缺陷、复制压力或染色体分离错误，是课程后面会接上的积累途径，这五张图本身没有把原因分开。
 
 
 ### 第004页｜全课路线图：两个尺度的稳定性
 
 <div id="lecture-page-4"></div>
-<figure class="genome-figure" data-lecture-page="4"><img src="/notes/genome-stability-2026/page-004.webp" width="1982" height="1287" loading="lazy" decoding="async" alt="第4页：全课路线图：两个尺度的稳定性，原图内中文标注" /><figcaption>原讲义第4页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="4"><img src="/notes/genome-stability-2026/page-004.webp" width="1982" height="1287" loading="lazy" decoding="async" alt="第4页：全课路线图：两个尺度的稳定性，原图内中文标注" /><figcaption>原讲义第4页 · 点击图片放大</figcaption></figure>
 
-上半部分是序列尺度，例如一个C变成T；下半部分是染色体尺度，例如一段DNA被扩增、倒置或接到另一条染色体上。两个尺度会交汇：双链断裂修复连接错了，就会形成重排；端粒失去保护，也会被当作断裂处理。它们不是互不相干的两套知识。
+全课分成两个还没勾选的方框，对应稳定性的两个尺度：DNA 里的信息，和染色体这条物理结构。
+
+上框 Maintaining stable information in DNAs 下面三条是：内源与外源 DNA 损伤、DNA 损伤修复通路、**突变特征分析**（mutational signature analysis，从最终留下的突变花样反推它们可能来自哪一类损伤或缺陷）。下框 Maintaining integrity of chromosomes 下面三条是：**端粒**（telomere，保护染色体末端的结构）、**着丝粒**（centromere，保证染色体正确分离的结构），以及基因组结构变异的检测。两个方框都是空的，这是路线图，还不是已经完成的清单。
+
+上框是序列尺度，例如一个 C 后来变成 T。下框是染色体尺度，例如一段 DNA 被扩增、倒位，或接到另一条染色体上。两套内容会在同一事件里相遇。双链断裂如果接错了位置，序列上的断裂就变成染色体上的重排；端粒一旦失去保护，染色体末端也会被细胞当成断裂来处理。
 
 
 ### 第005页｜DNA每天都面临损伤
 
 <div id="lecture-page-5"></div>
-<figure class="genome-figure" data-lecture-page="5"><img src="/notes/genome-stability-2026/page-005.webp" width="1431" height="1192" loading="lazy" decoding="async" alt="第5页：DNA每天都面临损伤，原图内中文标注" /><figcaption>原讲义第5页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="5"><img src="/notes/genome-stability-2026/page-005.webp" width="1431" height="1192" loading="lazy" decoding="async" alt="第5页：DNA每天都面临损伤，原图内中文标注" /><figcaption>原讲义第5页 · 点击图片放大</figcaption></figure>
 
-内源指损伤来源于细胞自身过程，外源指来自环境。复制错误属于信息复制失误，脱氨和氧化属于化学结构改变，这些事件都可能威胁信息保存。此时还不能统称为永久突变：如果修复及时，序列可以恢复；如果错误被复制并保留下来，才形成稳定的序列改变。
+DNA 每天都在受伤。这一页把伤的来源分成细胞自己产生的，和从环境进来的。
+
+左边是一条蓝色双螺旋，上下各有一颗黄星，星内写着 Damage。黑箭头从右边两个灰框指向这两颗星。上框红字标题是 **内源因素**（endogenous factors，来自细胞自身的过程）：DNA 复制、碱基脱氨、脱嘌呤/脱嘧啶、氧化应激。下框蓝字标题是 **外源因素**（exogenous factors，来自环境）：电离辐射、紫外线、化学物质、毒素。译注把 Damage 写成损伤。
+
+复制错误是信息在抄写时配错；脱氨和氧化是碱基或骨架的化学结构变了。它们都威胁信息保存，此刻停在损伤这一步。修复如果赶在下一轮复制之前完成，序列可以回到原来的样子。错误被复制进去并且留下来，才成为稳定的序列改变。这一页的箭头停在「损伤」上，没有画修复，也没有画突变。
 
 
 ### 第006页｜复制保真性与校对
 
 <div id="lecture-page-6"></div>
-<figure class="genome-figure" data-lecture-page="6"><img src="/notes/genome-stability-2026/page-006.webp" width="1932" height="1248" loading="lazy" decoding="async" alt="第6页：复制保真性与校对，原图内中文标注" /><figcaption>原讲义第6页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="6"><img src="/notes/genome-stability-2026/page-006.webp" width="1932" height="1248" loading="lazy" decoding="async" alt="第6页：复制保真性与校对，原图内中文标注" /><figcaption>原讲义第6页 · 点击图片放大</figcaption></figure>
 
-聚合酶沿5′→3′方向延长新链，若末端配错，具有校对功能的聚合酶可把新链末端送入外切酶位点，退掉错碱基再继续合成。不要把合成方向和校对方向混淆。讲义的错误率属于特定保真层级和测量条件，不能直接当作整个细胞最终每代突变率；后续MMR还会进一步降低错误。
+高保真复制靠两层：聚合酶尽量配对正确，配错了再由校对把末端剪掉。页上的错误率属于这一层，还不是细胞最终的每代突变率。
+
+第一条写：高保真 DNA 聚合酶 δ 和 ε 的错误率，讲义列为 10⁻⁵～10⁻⁷。第二条写：DNA 聚合酶的 **3′→5′ 外切核酸酶**会切掉错误接上的核苷酸，括号里称为 **proof-reading**（校对）。新链的合成方向是 5′→3′。校对从新链的 3′ 端往回切，切掉错碱基之后，合成再沿 5′→3′ 继续。两个方向相反，要分成两步记。这条错误率和校对，按前面点名的 δ 和 ε 来读。
+
+下面的图题是 Replication complex (Eukaryotes)，页底给出 KEGG 通路 ko03030 的链接。它是真核复制体的示意，不是错误率的测量图。中间一条灰箭头指向右侧的复制叉。叉端绿色的 MCM2-7 标成解旋酶，解开的单链上覆盖着黄色的 RPA。下方前导链由蓝色的 DNA polymerase ε 复合体延伸，旁边是 PCNA 环和橙色的 RFC，延伸方向与灰箭头一致。上方后随链由 DNA polymerase δ 复合体合成冈崎片段，片段从靠近叉的一侧向左延伸；绿色的 DNA polymerase α-primase 和红点 α-Prim 画在叉附近，负责先放引物。左端已经合成的后随链片段旁边，是 RNase H 或 Dna2、FEN1、Lig I 和 DNA 连接酶 I，用来处理引物并封口。双链左端标着 5′ 和 3′。α 引物酶画在图上，错误率那一条没有把它算进去。
+
+10⁻⁵～10⁻⁷ 是 δ 和 ε 在相应测量条件下的错误水平。细胞最终传到下一代的突变还要再经过错配修复，错误会进一步减少。错配修复没有画在这张复制体上。
 
 
 ### 第007页｜自发脱氨：C与5mC的不同结局
 
 <div id="lecture-page-7"></div>
-<figure class="genome-figure" data-lecture-page="7"><img src="/notes/genome-stability-2026/page-007.webp" width="1783" height="1286" loading="lazy" decoding="async" alt="第7页：自发脱氨：C与5mC的不同结局，原图内中文标注" /><figcaption>原讲义第7页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="7"><img src="/notes/genome-stability-2026/page-007.webp" width="1783" height="1286" loading="lazy" decoding="async" alt="第7页：自发脱氨：C与5mC的不同结局，原图内中文标注" /><figcaption>原讲义第7页 · 点击图片放大</figcaption></figure>
 
-脱氨是失去氨基。普通C脱氨得到U，DNA中的U较容易被识别为异常；5mC脱氨却得到本来就存在于DNA中的T，因此会出现T:G错配。若未修复，后续复制可能把原来的C:G固定成T:A。图中损伤中间体和固定后的碱基对替换要分开读，C脱氨并不直接产生U:A配对。
+自发脱氨是碱基丢掉一个氨基。这一页要分开看两件事：化学反应当时生成什么，以及这个损伤后来会不会被固定成碱基替换。
 
-#### 深入理解：损伤怎样被固定成突变
+第一条写，自发脱氨在单链 DNA 上更常发生。氨基不再被双链里的配对和堆积挡住时，反应更容易进行。下面五列结构里，四列带有向下的箭头。腺嘌呤 C6 上的氨基变成次黄嘌呤上那个橙色羰基；鸟嘌呤 C2 上的氨基变成黄嘌呤上那个橙色羰基。胞嘧啶的箭头指向尿嘧啶，5-甲基胞嘧啶的箭头指向胸腺嘧啶。正中间的胸腺嘧啶画在上排，下面没有箭头，用来对照：它本来就是 DNA 里的正常碱基，外形和 5-甲基胞嘧啶脱氨的产物一样。页底只在尿嘧啶下写着 C:G-&gt;U:A，在产物胸腺嘧啶下写着 C:G&gt;T:A。腺嘌呤和鸟嘌呤那两列没有写配对结局。
 
-先画出原始C:G。C脱氨后成为U:G，这时只是损伤中间体；如果糖基化酶去掉U，细胞还可以利用G恢复C。如果带着U进入复制，一条子链按U写入A，另一条按G写入C。继续复制后，原位就可能出现T:A。5mC脱氨则从T:G开始，T在DNA中本身合法，识别更依赖配对背景。可见“发生化学反应”和“产生稳定遗传改变”之间存在可被修复打断的步骤。
+普通 C 脱氨，直接得到的是 U 对着原来的 G，配对是 U:G。这是损伤中间体。糖基化酶若把 U 切掉，细胞还可以对着剩下的 G 把 C 补回去。若带着 U 进入复制，以 U 为模板的那条子链会写入 A，以 G 为模板的另一条子链仍写入 C。再经过一轮复制，原来的位置上可以出现 T:A。页底的 C:G-&gt;U:A 把复制之后的配对和脱氨当时的产物写进了同一步。
+
+5-甲基胞嘧啶脱氨从 T:G 开始。T 是 DNA 里合法的碱基，细胞不能靠「这里出现了陌生字母」来识别它，识别依赖的是 T 和 G 配错了这个背景。这一步若没被修掉，随后的复制可以把原来的 C:G 固定成 T:A。课件因此把 5mC 脱氨写成人类点突变的重要来源。普通 C 和 5mC 最后都可以走到 C:G 到 T:A，中间体分别是 U:G 和 T:G，识别的难易就差在这里。脱氨已经发生，和产生能遗传下去的序列改变，中间还隔着可以被修复打断的复制。
 
 
 ### 第008页｜酶促脱氨：AID与APOBEC
 
 <div id="lecture-page-8"></div>
-<figure class="genome-figure" data-lecture-page="8"><img src="/notes/genome-stability-2026/page-008.webp" width="1943" height="1197" loading="lazy" decoding="async" alt="第8页：酶促脱氨：AID与APOBEC，原图内中文标注" /><figcaption>原讲义第8页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="8"><img src="/notes/genome-stability-2026/page-008.webp" width="1943" height="1197" loading="lazy" decoding="async" alt="第8页：酶促脱氨：AID与APOBEC，原图内中文标注" /><figcaption>原讲义第8页 · 点击图片放大</figcaption></figure>
 
-同一种化学反应在不同位置有不同意义。AID在受控的免疫球蛋白区域参与体细胞高频突变和类别转换；若脱靶作用到其他基因，则可能增加肿瘤相关损伤。抗体成熟由抗原刺激等过程驱动，不局限于“病毒感染后”；也不能把所有APOBEC成员都当成具有相同底物和生理功能的酶。
+同一种 C 变成 U 的反应，发生在受控的位置上是抗体多样化，落到别的基因上就可能变成损伤。
+
+第一条写 **AID**（activation-induced deaminase，活化诱导胞苷脱氨酶）：它在单链 DNA 上把 C 变成 U。课件接着说，这会在病毒感染后的 B 细胞里造成超突变，用于抗体发育。译注收成「参与 B 细胞抗体多样化」。抗体成熟由抗原刺激推动，病毒感染只是其中一种情形；课件把场景写成 after virus infection，范围写窄了。在免疫球蛋白基因座里，AID 既参与体细胞高频突变，也参与类别转换。类别转换要走到 DNA 断裂和重排，不只有点突变。同样的脱氨若落到其他基因上，就可能增加与肿瘤相关的损伤。
+
+第二条写 **APOBEC** 家族里既有 DNA 脱氨酶，也有 RNA 脱氨酶。这里建立到家族这一层：各成员的底物和生理功能要分别记。第三条用 may 把胞嘧啶脱氨说成基因组多样性的一个来源，对进化有意义。这是课件给出的可能性，接的是前面那架天平的右盘：变异可以成为群体后续筛选的材料。它说的是群体水平上留下的变异，没有给出细胞为了进化而定向突变的通路。
 
 
 ### 第009页｜脱嘌呤与脱嘧啶
 
 <div id="lecture-page-9"></div>
-<figure class="genome-figure" data-lecture-page="9"><img src="/notes/genome-stability-2026/page-009.webp" width="1887" height="900" loading="lazy" decoding="async" alt="第9页：脱嘌呤与脱嘧啶，原图内中文标注" /><figcaption>原讲义第9页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="9"><img src="/notes/genome-stability-2026/page-009.webp" width="1887" height="900" loading="lazy" decoding="async" alt="第9页：脱嘌呤与脱嘧啶，原图内中文标注" /><figcaption>原讲义第9页 · 点击图片放大</figcaption></figure>
 
-把DNA想成糖磷酸骨架上挂着碱基字母：无碱基位点是字母掉了，骨架暂时还在，所以它不是已经发生的整条链断裂。复制时模板信息缺失，可能引发停顿或错误跨越。BER也会主动制造AP位点作为中间步骤，因此某种损伤样结构既可能来自伤害，也可能来自正在进行的修复。
+脱嘌呤和脱嘧啶切的是碱基与糖之间的糖苷键，产物是无碱基位点。字母掉了，骨架还在。
+
+上排两条定义写着：嘌呤或嘧啶与 DNA 骨架之间的 glycosylic bond 断裂，形成一个 **abasic site**，也叫 **AP 位点**（无碱基位点）。译注把这条键写成糖苷键，并注明可以自发发生，也可以由酶催化。下方示意从左到右。左链上排是蓝点、红色 C、蓝色 T、蓝点，下排是蓝点、绿色 G、黄色 A、蓝点，红 C 对着绿 G，蓝 T 对着黄 A。箭头上的英文是 Spontaneously or by cleaved by an enzyme。右链上排的 C 和 T 还在，下排绿色 G 消失，只剩一根短竖线连在蓝色骨架上，黄色 A 仍在。这张图具体画的是一次脱嘌呤：G 掉了，对面的 C 还在，磷酸–糖骨架的横线仍然连续。
+
+链断裂要等骨架本身断开，这一页还没有画到那一步。复制走到无碱基位点时，模板上缺了这个字母，聚合酶可能停住，也可能跨过去并放进错误的碱基。碱基切除修复里的糖基化酶也会主动切断糖苷键，把 AP 位点当作自己的中间步骤。同一种缺碱基的结构，可以来自自发掉落的损伤，也可以来自正在进行的修复。
 
 
 ### 第010页｜氧化损伤：8-oxoG与错配
 
 <div id="lecture-page-10"></div>
-<figure class="genome-figure" data-lecture-page="10"><img src="/notes/genome-stability-2026/page-010.webp" width="1936" height="1162" loading="lazy" decoding="async" alt="第10页：氧化损伤：8-oxoG与错配，原图内中文标注" /><figcaption>原讲义第10页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="10"><img src="/notes/genome-stability-2026/page-010.webp" width="1936" height="1162" loading="lazy" decoding="async" alt="第10页：氧化损伤：8-oxoG与错配，原图内中文标注" /><figcaption>原讲义第10页 · 点击图片放大</figcaption></figure>
 
-8-oxoG是G被氧化后的损伤形式，它可能错误地与A配对，经过复制产生G:C到T:A的颠换。应按“化学损伤—错误配对—复制固定”三步理解。过氧化氢并非自由基，但仍属于ROS；OH⁻是氢氧根离子，与具有未配对电子、反应活性很强的羟自由基不是同一个东西。
+氧化损伤这一页沿三步来读：鸟嘌呤先被氧化成 8-oxoG，然后才谈得上错配，再往后才可能被复制固定成 G:C 到 T:A。
+
+开篇把 **ROS**（reactive oxygen species，活性氧）定义成来自分子氧的一组活泼分子和自由基，举例是超氧阴离子 O₂⁻、过氧化氢 H₂O₂，以及 hydroxyl ion (OH⁻)。译注把第三项写成羟自由基。图中反应箭头写的是 •OH。羟自由基带一个未配对电子，记号是 •OH。课件例句里的 OH⁻ 是氢氧根离子，电子已经配成对，电荷和反应性都与 •OH 不同；译注写明羟自由基应记成 •OH。过氧化氢没有未配对电子，不算自由基，课件仍把它列在这组 ROS 里。画进反应式的是 •OH。
+
+上排：鸟嘌呤先写 +•OH，再写 −e⁻、−H⁺，得到页上所写的 7,8 dihydro-8-oxoguanine，括号里是 **8-oxo-G**（8-氧代鸟嘌呤）。新出现的 C8 羰基用橙色标出。右侧印着 G:C&gt;T:A。8-oxoG 是 G 的氧化形式，它当时仍占着原来的位置，可以继续与 C 配对，也可能错配成 A。错配被复制过去之后，原来的 G:C 才可能变成 T:A。这是嘌呤换成嘧啶的颠换。译注把 G:C→T:A 称为一种可能的固定替换。氧化箭头完成时，手上是 8-oxoG 这个损伤碱基；碱基对的替换要等错配和复制。
+
+下排从 5-甲基胞嘧啶出发，先 +•OH，再标一步 deamination，产物写成 **thymine glycol**（胸腺嘧啶乙二醇）。环不再是平面芳香环，原来的氨基位置变成羰基，相邻两个碳上各有一个红色羟基，其中一个碳还留着甲基。右侧同样印着 G:C&gt;T:A。图上没有画这个乙二醇和哪个碱基配对。这个替换仍然只是译注所说的一种可能的固定结果。结构式给出的是损伤本身，配对结局还没有画出来。
 
 
 ### 第011页｜ROS也能破坏DNA骨架
 
 <div id="lecture-page-11"></div>
-<figure class="genome-figure" data-lecture-page="11"><img src="/notes/genome-stability-2026/page-011.webp" width="1805" height="1211" loading="lazy" decoding="async" alt="第11页：ROS也能破坏DNA骨架，原图内中文标注" /><figcaption>原讲义第11页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="11"><img src="/notes/genome-stability-2026/page-011.webp" width="1805" height="1211" loading="lazy" decoding="async" alt="第11页：ROS也能破坏DNA骨架，原图内中文标注" /><figcaption>原讲义第11页 · 点击图片放大</figcaption></figure>
 
-上一页强调碱基字母被改变，这一页把注意力移到骨架。ROS可以攻击脱氧核糖，经过化学反应使一条链断开。单链断裂若及时修复未必形成双链断裂，但复制叉遇到尚未修好的缺口可能发生崩溃。读化学结构图时，先找受攻击的位置和最终断开的键，不必先背下每个中间体。
+上一页改的是碱基字母，这一页改的是糖和磷酸骨架。ROS 攻击脱氧核糖，可以把一条链打开。
+
+标题仍是 Oxidative DNA damage。bullet 写：ROS 攻击碱基形成 lesions（损伤），并诱导 **single-strand breaks**（单链断裂）。下面的化学式只画骨架。左边是两个仍然连着的核苷酸：碱基画成标着 Base 的六边形，经 N 连到糖上；糖之间是磷酸，写成 O=P—O⁻，上下两端还各有一个带圈的 P。右边由标着 HO• 的箭头引进。HO• 就是上一页的羟自由基，这里把氢写在原子团的前面。上方那个糖的左侧出现一个黑点，表示糖上的自由基；一条弯箭头画在 5′ 一侧 (P)—O—CH₂ 的连接上，另一条弯箭头画在糖与下方磷酸之间的氧上。下方那个核苷酸仍然完整，碱基也都还连在糖上。
+
+右边画的是反应中间状态。糖上出现自由基之后，电子再沿这些弯箭头走，磷酸二酯键可以被打开。画面还停在弯箭头上，没有画成两截已经分开的链，也没有画第二条链同时断开。单链断裂若及时补上，可以停留在一条链的缺口。复制叉若撞上还没修好的缺口，这个缺口就可能让复制叉崩溃。复制叉没有出现在这张结构式里，这是读完骨架断裂之后要接上的后果。中间体的每一个原子不必先背下来。先确认被攻击的是糖，以及弯箭头指向的是连接磷酸的那根键。
 
 
 ### 第012页｜电离辐射的直接与间接作用
 
 <div id="lecture-page-12"></div>
-<figure class="genome-figure" data-lecture-page="12"><img src="/notes/genome-stability-2026/page-012.webp" width="1894" height="1199" loading="lazy" decoding="async" alt="第12页：电离辐射的直接与间接作用，原图内中文标注" /><figcaption>原讲义第12页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="12"><img src="/notes/genome-stability-2026/page-012.webp" width="1894" height="1199" loading="lazy" decoding="async" alt="第12页：电离辐射的直接与间接作用，原图内中文标注" /><figcaption>原讲义第12页 · 点击图片放大</figcaption></figure>
 
-电离辐射能使原子或分子失去电子。直接作用是能量沉积到DNA；间接作用是先使周围水等物质产生反应性物种，再攻击DNA。图中的水分解解释了为什么即使辐射没有直接击中DNA，也可能引起损伤。不同辐射的能量沉积方式不同，不能只按名称简单比较生物效应。
+电离辐射损伤 DNA 有两条路：能量直接落到 DNA 上，或者先把周围的水电离，再由水的产物去攻击 DNA。
+
+左侧列出 **IR**（ionizing radiation，电离辐射）的种类：α、β、γ、中子和 X 射线等。来源写着宇宙辐射、岩石、土壤和医疗设备。第三条概括成直接作用或间接作用。右侧蓝色双螺旋上仍是两颗黄星 Damage。上方 Direct effect：红波击中一个标着 p⁺ 和 e⁻ 的原子示意，虚线从那个电子直接指向上方的 Damage，表示能量沉积到 DNA。下方 Indirect effect：同样的红波和原子，虚线先指向水的电离。式子写成 H₂O⁺ + e⁻ 与 H₂O 之间的相互转化，箭头中间有一道波线；下面再写成 OH⁻ + H₃O⁺ + e⁻_aq，其中 e⁻_aq 是水合电子。这条产物用虚线指回下方的 Damage。螺旋下方的实线箭头指向 DNA repair 和 Cell cycle checkpoint control。页底注明图来自 Moreels 等人《Stress and Radiation Responsiveness》第 20 章。整幅是示意图。
+
+间接作用这条式子说明：辐射没有直接打中 DNA 时，水被电离后的产物仍可能造成损伤。式子里印出的 OH⁻ 是氢氧根离子。上一页攻击碱基和糖的羟自由基记作 •OH，带一个未配对电子。读这组水分解时，按图上印出的符号认物种，OH⁻ 与 •OH 保持各自的写法。式子没有给出各产物的比例。
+
+螺旋下方的箭头停在修复和细胞周期检查点，没有停在突变。α、γ 和 X 射线被列在同一个 IR 标题下，图中却用同样的红波和同样的原子示意来代表它们。不同辐射把能量交给物质的方式不同。这份名单把它们归成一类来源，没有提供按名称比较生物效应所需的沉积方式。
 
 
 ### 第013页｜电离辐射可产生多类损伤
 
 <div id="lecture-page-13"></div>
-<figure class="genome-figure" data-lecture-page="13"><img src="/notes/genome-stability-2026/page-013.webp" width="1954" height="1171" loading="lazy" decoding="async" alt="第13页：电离辐射可产生多类损伤，原图内中文标注" /><figcaption>原讲义第13页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="13"><img src="/notes/genome-stability-2026/page-013.webp" width="1954" height="1171" loading="lazy" decoding="async" alt="第13页：电离辐射可产生多类损伤，原图内中文标注" /><figcaption>原讲义第13页 · 点击图片放大</figcaption></figure>
 
-从细胞、细胞核一路放大到DNA，可以看到辐射效应跨越多个尺度。如果相邻两条链都发生断裂，就可能形成双链断裂；邻近多处损伤会使修复更复杂。这里列出的是可能的损伤类型，并不是每次辐射都按这条顺序把DNA逐级打碎，也不能从示意图读出各类损伤的发生比例。
+这一页要回答的是：电离辐射打进细胞之后，DNA 上可以留下哪些不同的损伤。标题是 IR induced DNA damage，淡蓝题注写成“电离辐射可产生多类损伤”。
+
+左边是一个浅蓝色细胞，核里画着卷曲的 DNA，紫色闪电标着 Radiation，落在这段 DNA 上。一条红色粗箭头从细胞指向右边的分子图。右边用一个大括号把三类产物括在一起。最上是 Base and sugar damage（碱基与糖损伤）：橙、紫两条骨架上立着几处蓝色的受损碱基，同一小段里不止一个位点。中间是 Single strand break（单链断裂），紫色双螺旋有一处断开。最下是 Double strand breaks（双链断裂），绿色双螺旋从中断开，再沿一条弯箭头散成右侧的绿色短片段，标成 Double strand break fragments（双链断裂碎片）。页底出处是 Huang RX 与 Zhou PK，*Signal Transduction and Targeted Therapy*（2020）5:60。
+
+大括号表示这些是可能出现的损伤类型。指向碎片的弯箭头只接在双链断裂那一行后面，并不是每次照射都按“碱基与糖损伤、单链断裂、双链断裂”的顺序把 DNA 逐级打碎。相邻两条链如果都在近处断开，才会成为双链断裂；碱基与糖损伤那一栏里挤在一起的多个位点，也会让修复比处理单个干净切口更复杂。这是示意图，读不出各类损伤各占多少。
 
 
 ### 第014页｜紫外线与嘧啶二聚体
 
 <div id="lecture-page-14"></div>
-<figure class="genome-figure" data-lecture-page="14"><img src="/notes/genome-stability-2026/page-014.webp" width="1894" height="1094" loading="lazy" decoding="async" alt="第14页：紫外线与嘧啶二聚体，原图内中文标注" /><figcaption>原讲义第14页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="14"><img src="/notes/genome-stability-2026/page-014.webp" width="1894" height="1094" loading="lazy" decoding="async" alt="第14页：紫外线与嘧啶二聚体，原图内中文标注" /><figcaption>原讲义第14页 · 点击图片放大</figcaption></figure>
 
-T和C都属于嘧啶，因此不应把UV损伤只记成“两个T粘住”。异常连接改变局部DNA结构，使复制或转录受阻。UV并不需要先切断DNA骨架才造成损伤，NER可以移除包含这类损伤的一小段核苷酸。图中上、下两种结构属于不同的光产物。
+紫外线的典型损伤，是相邻两个嘧啶之间多出来的共价键。题注直接写成“紫外线与嘧啶二聚体”。
+
+页首那句是：UV radiation can cause covalent linkage between two adjacent pyrimidines（相邻两个嘧啶之间可形成异常共价连接）。左边是两种化学结构。A 为 **CPD**（cyclobutane pyrimidine dimer，环丁烷嘧啶二聚体），两个嘧啶环被一个四元环连住，中间有两根新键。B 为 **6-4 光产物**（pyrimidine (6-4) pyrimidone photoproduct），两个环之间主要是一根连接，一侧环改成嘧啶酮的样子。右边用一对 T 做简图：上面是分开的红色 T、T，对面是绿色 A、A；蓝色箭头标着 UV radiation，下面两个 T 被一根红键连成 T—T。糖磷酸骨架在这张简图里没有被画成断开。
+
+T 和 C 都属于嘧啶。右边画成 T—T，是为了把连接看清楚；标题和页首说的是相邻嘧啶，不能只记成“两个 T 粘住”。这种额外的键改变局部形状，复制或转录经过时容易被挡住。紫外线在这里是把相邻碱基连起来，并不先切断骨架。A 和 B 是两种不同的光产物。后面要讲的 **NER**（nucleotide excision repair，核苷酸切除修复）可以切下包含这类损伤的一小段核苷酸；本页还没有画修复蛋白。
 
 
 ### 第015页｜化学致损物的分类
 
 <div id="lecture-page-15"></div>
-<figure class="genome-figure" data-lecture-page="15"><img src="/notes/genome-stability-2026/page-015.webp" width="1921" height="1066" loading="lazy" decoding="async" alt="第15页：化学致损物的分类，原图内中文标注" /><figcaption>原讲义第15页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="15"><img src="/notes/genome-stability-2026/page-015.webp" width="1921" height="1066" loading="lazy" decoding="async" alt="第15页：化学致损物的分类，原图内中文标注" /><figcaption>原讲义第15页 · 点击图片放大</figcaption></figure>
 
-这些分类按化学性质或作用方式组织，不是一种物质只对应一种结果。烷化剂给DNA加上化学基团，交联剂可让两处结构形成异常连接，某些芳香族化合物则经代谢活化形成体积较大的加合物。后面选择修复通路时，要看具体损伤结构，而不是只凭“化学物质”这个大类别。
+化学致损物按化学性质和作用方式分栏，题注是“化学致损物的分类”。分栏是为了后面按损伤结构选修复通路，一种物质并不只对应一种结局。
+
+上方四条列出 **烷化剂**（alkylating agents）、**交联剂**（crosslinking agents）、**芳香胺**（aromatic amines）和 **PAH**（polycyclic aromatic hydrocarbon，多环芳烃）。下方结构图比这四条更宽，分成 A 到 F。A 栏烷化剂画了 methyl methanesulfonate、ethyl methanesulfonate、N-methyl-N'-nitro-N-nitrosoguanidine 和 methylnitrosourea。B 栏交联剂是 cyclophosphamide、cisplatin 和 psoralen。C 栏芳香胺是 2-aminofluorene 和 N-acetyl-2-aminofluorene。D 栏多环芳烃是 benzo[a]pyrene 和 benzo[a,l]pyrene。E 栏另标为 reactive electrophiles，例子是 4-nitroquinoline 1-oxide。F 栏 toxins 画出 aflatoxin B1。
+
+烷化剂的共同动作是往 DNA 上加化学基团。交联剂可以把两处结构异常地连起来。芳香胺和多环芳烃里，不少要先经过代谢活化，才变成体积较大的加合物。同一栏里的结构式并不相同。后面选择 BER、NER 或其他通路时，要看碱基上实际留下的损伤，而不能只凭“化学物质”这个大类。
 
 
 ### 第016页｜烷化剂与O⁶-甲基鸟嘌呤
 
 <div id="lecture-page-16"></div>
-<figure class="genome-figure" data-lecture-page="16"><img src="/notes/genome-stability-2026/page-016.webp" width="1894" height="1029" loading="lazy" decoding="async" alt="第16页：烷化剂与O⁶-甲基鸟嘌呤，原图内中文标注" /><figcaption>原讲义第16页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="16"><img src="/notes/genome-stability-2026/page-016.webp" width="1894" height="1029" loading="lazy" decoding="async" alt="第16页：烷化剂与O⁶-甲基鸟嘌呤，原图内中文标注" /><figcaption>原讲义第16页 · 点击图片放大</figcaption></figure>
 
-O⁶-甲基鸟嘌呤容易与T错误配对，复制后可形成G:C到A:T的转换。讲义把同一碱基对按互补链写成C:G到T:A时，意义等价，但字母必须一致。不同位点的烷基化后果不同；MGMT直接去除O⁶位甲基是本页未展开的补充，说明DNA修复不只限于后文列出的五条通路。
+烷化剂这一页把来源、化学反应和一种具体产物放在一起，焦点是 **O⁶-甲基鸟嘌呤**（O6-methylguanine）。
+
+左边写来源和用途：烷化剂来自部分饮食成分、烟草烟雾和工业产物，实验里也可以用来在动物中诱发突变。机制句是：它们与碱基环上的氮或氧反应，形成 DNA 加合物，结果可以是 **AP 位点**（apurinic/apyrimidinic site，丢掉碱基后留下的无碱基位点）或错配。右边画出鸟嘌呤，6 位氧上接了一个 OCH₃，下面标着 O6-methylguanine，并写 Cause C:G&gt;A:T。
+
+O⁶-甲基鸟嘌呤容易与 T 配对。再复制一次，原来的 G:C 对可以变成 A:T。讲义按互补链写成 C:G&gt;A:T，和 G:C 到 A:T 说的是同一类转换；读的时候两条链的字母要一起换，不能只改其中一个。不同原子上的烷基化后果不一样，有的主要留下 AP 位点，有的主要造成错配，O⁶ 这一位只是其中一种。直接把 O⁶ 位甲基拿掉的 **MGMT**（O⁶-methylguanine-DNA methyltransferase）本页没有展开。这种直接逆转不在后文那五条修复通路的清单里。
 
 
 ### 第017页｜多环芳烃与代谢活化
 
 <div id="lecture-page-17"></div>
-<figure class="genome-figure" data-lecture-page="17"><img src="/notes/genome-stability-2026/page-017.webp" width="1942" height="1328" loading="lazy" decoding="async" alt="第17页：多环芳烃与代谢活化，原图内中文标注" /><figcaption>原讲义第17页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="17"><img src="/notes/genome-stability-2026/page-017.webp" width="1942" height="1328" loading="lazy" decoding="async" alt="第17页：多环芳烃与代谢活化，原图内中文标注" /><figcaption>原讲义第17页 · 点击图片放大</figcaption></figure>
 
-顺着图的箭头看，原始化合物经过酶催化，变成更容易与DNA反应的代谢物，再与碱基共价结合。代谢并不总是解毒，也可能造成活化。这里形成的 bulky adduct 是“体积较大的加合物”，会妨碍DNA正常工作；其突变结果还受修复能力、暴露剂量和序列背景影响。
+多环芳烃要先被代谢成更活泼的中间体，才会有效地接到 DNA 上。顺着本页箭头看，代谢走的是活化，不总是解毒。
+
+页首定义 **PAH**（polycyclic aromatic hydrocarbon，含两个或更多芳香环的碳化合物），并写它们常见于烟草烟雾和汽车尾气。第三条说细胞色素 P450 氧化后产生反应性中间体，再与 DNA 形成加合物。图比这句话更具体，上下两条路线平行。上边从 BaP（苯并[a]芘，benzo[a]pyrene）出发，经过 Cytochrome P-450 和 Epoxide Hydrolase，变成 BPDE，再以 +G 接到鸟嘌呤的 N²，得到 BPDE-N²-G。下边从 DBA 出发，经过同样两种酶，变成 DBADE，再得到 DBADE-N²-G。两条加合物旁边都有一条 NER 箭头，把加合的 G 移除。中间方框列出与这些加合物相联系的序列改变：替换 C&gt;A/G&gt;T，双核苷酸替换 GG&gt;TT/CC&gt;AA，以及在 GG 处丢掉 G、在 CC 处丢掉 C。页底出处是 Kucab JE 等，*Cell*（2019）177(4):821–836.e16。
+
+BPDE-N²-G 和 DBADE-N²-G 这种 **bulky adduct**（体积较大的加合物）会挡住双螺旋的正常读取。方框里的写法是示意图列出的可能结局，还受修复是否及时、暴露剂量和序列背景影响。NER 箭头表示加合的鸟嘌呤可以被切除，每一次接触并不都会走到方框里的那些替换。
 
 
 ### 第018页｜黄曲霉毒素与DNA加合物
 
 <div id="lecture-page-18"></div>
-<figure class="genome-figure" data-lecture-page="18"><img src="/notes/genome-stability-2026/page-018.webp" width="2090" height="1274" loading="lazy" decoding="async" alt="第18页：黄曲霉毒素与DNA加合物，原图内中文标注" /><figcaption>原讲义第18页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="18"><img src="/notes/genome-stability-2026/page-018.webp" width="2090" height="1274" loading="lazy" decoding="async" alt="第18页：黄曲霉毒素与DNA加合物，原图内中文标注" /><figcaption>原讲义第18页 · 点击图片放大</figcaption></figure>
 
-本页展示外源暴露如何转成细胞内化学损伤：毒素进入机体后，经代谢活化形成反应性中间体，攻击DNA。要区分毒素本体、活化产物、DNA加合物和最终突变四个层次。图示的是一种机制链条，不能据此断言一次接触必然导致肝癌；疾病风险还受暴露水平与其他因素影响。
+黄曲霉毒素这一页把外源毒素收成细胞内的化学损伤，题注是“黄曲霉毒素与 DNA 加合物”。要分开毒素本体、活化产物、DNA 加合物，以及更后面才可能出现的突变。
+
+上面先给天然毒素一个定义：微生物产生并加以利用的化合物。接着点名黄曲霉毒素，来自 *Aspergillus flavus*（黄曲霉）和 *Aspergillus parasiticus*（寄生曲霉），课件写它们是很强的肝致癌物。下方才是机制箭头。Aflatoxin B1 经 **P450** 变成 Aflatoxin epoxide（黄曲霉毒素环氧化物）；环氧化物指向 DNA，生成 N7 guanine adduct on DNA（DNA 上的 N7-鸟嘌呤加合物）。从这份加合物再分出两支：向上是 N7 guanine adduct in urine（尿中的 N7-鸟嘌呤加合物），向下是 Depurinated DNA（脱嘌呤的 DNA）。淡蓝译注把这一段收成：P450 活化后形成 DNA 加合物，继而造成脱嘌呤等变化。
+
+本页箭头停在加合物、尿里出现的加合物和脱嘌呤 DNA，没有再画一个突变产物。脱嘌呤的位点如果在修复前被复制，才可能把空位变成错误碱基。课件称黄曲霉毒素为强肝致癌物，说的是这类化合物的致癌性；这张机制链不能推出一次接触就必然导致肝癌，风险还取决于暴露水平和其他因素。这里的 P450 同样是在做活化，代谢并不自动等于解毒。
 
 
 ### 第019页｜损伤数量与突变数量
 
 <div id="lecture-page-19"></div>
-<figure class="genome-figure" data-lecture-page="19"><img src="/notes/genome-stability-2026/page-019.webp" width="1809" height="1444" loading="lazy" decoding="async" alt="第19页：损伤数量与突变数量，原图内中文标注" /><figcaption>原讲义第19页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="19"><img src="/notes/genome-stability-2026/page-019.webp" width="1809" height="1444" loading="lazy" decoding="async" alt="第19页：损伤数量与突变数量，原图内中文标注" /><figcaption>原讲义第19页 · 点击图片放大</figcaption></figure>
 
-这页最值得记住的是计量对象。每天每个细胞的损伤事件数，不等于每次分裂保留下来的突变数；不同类型还可能采用不同时间窗口和估算方式。修复、复制及细胞清除都会改变最终结果。表中数值应连同原文单位和估算条件一起读，不把缩略图里的小字当成精确背诵数据。
+这一页最值得记住的是计量对象。题注写“损伤数量与突变数量”。每天每个细胞里的损伤事件数，不等于每次分裂保留下来的突变数。
+
+标题是 Estimated frequencies of lesions and mutations resulted from endogenous and exogenous DNA damage，也就是内源和外源 DNA 损伤所致损伤与突变的估计频率。表上方有一条 DNA 示意，从左到右对上五列：胞嘧啶下面一个红色的 U，一处缺了碱基、对面还留着 G，一个黄框标出的 G 对着 C，然后是单链断开和双链分开。表身三行是 Damage、Estimated frequency (per cell per day)、Predominant mutation。五列依次为：胞嘧啶脱氨，估计频率 192，主要突变写成 C&gt;T；脱嘌呤/脱嘧啶，12,000/600，主要结果写成 substitutions；8-oxoG，2,800，G&gt;T；SSB，55,000，substitutions 与 DSBs；DSB，25，chromosome rearrangements。出处是 Tubbs A 与 Nussenzweig A，*Cell*（2017）168:644–658。
+
+有数字的那一行是损伤的估计频率，单位是每个细胞每天。突变那一行只给出主要类型的名称，没有给出突变个数，所以不能从“损伤很多”读出“突变也很多”。12,000/600 和列名里的脱嘌呤/脱嘧啶对应，一格里已经并置两个估计；不同损伤所用的时间窗口和估算方式也可以不同。单链断裂的频率远高于双链断裂那一列的 25。修复能不能完成、复制有没有把错误固定下来、细胞会不会被清除，都会改变最后留在基因组里的突变数。这些是估计值，要连同原文单位和估算条件一起读，不宜把缩略图里的频率当成精确背诵数据。
 
 
 ## DNA修复与细胞命运
 
-
 ### 第020页｜五类主要DNA修复通路
 
 <div id="lecture-page-20"></div>
-<figure class="genome-figure" data-lecture-page="20"><img src="/notes/genome-stability-2026/page-020.webp" width="1656" height="927" loading="lazy" decoding="async" alt="第20页：五类主要DNA修复通路，原图内中文标注" /><figcaption>原讲义第20页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="20"><img src="/notes/genome-stability-2026/page-020.webp" width="1656" height="927" loading="lazy" decoding="async" alt="第20页：五类主要DNA修复通路，原图内中文标注" /><figcaption>原讲义第20页 · 点击图片放大</figcaption></figure>
 
-先按处理对象分类：BER主要应对较小的碱基损伤，NER移除一段包含体积较大损伤的DNA，MMR处理复制后残留错配和小型插入缺失环。NHEJ和HR则应对双链断裂。它们不是遇到损伤后依次全部运行的流水线，而是根据损伤类型、细胞周期及可用模板进行协调。
+这一页是修复通路的名单，题注写成“五类主要 DNA 修复通路”，还没有画每条通路的步骤。
 
-#### 深入理解：怎样快速选对修复通路
+五条按课件的顺序是：**BER**（base excision repair，碱基切除修复）、**NER**（nucleotide excision repair，核苷酸切除修复）、**MMR**（DNA mismatch repair，错配修复）、**NHEJ**（nonhomologous end joining，非同源末端连接）和 **HR**（homologous recombination，同源重组）。可以先按处理对象来记。BER 主要应对较小的碱基化学损伤，NER 移除一段包含大体积损伤的 DNA，MMR 处理复制之后留下的错配和小型插入缺失环。NHEJ 和 HR 应对双链断裂。
 
-先判断骨架是否断开。两条链都断，重点考虑NHEJ或HR；骨架尚完整，再看问题是碱基化学异常、复制错配，还是让双螺旋明显受阻的大体积损伤。前者常联系BER，中者联系MMR，后者联系NER。这个方法是学习入口，不能替代完整生物学：链间交联、复制叉损伤等往往需要多通路协同；MGMT等直接逆转机制也不在这五项清单中。
+学习时可以先看骨架。两条链都断了，重点看 NHEJ 或 HR。骨架还连着，再区分是碱基本身化学异常、复制留下的错配，还是把双螺旋明显撑开的大体积损伤，分别更常联系 BER、MMR 和 NER。这只是入口。细胞根据损伤类型、细胞周期和有没有可用模板来协调，不会碰到损伤就按名单从上到下各跑一遍。链间交联、复制叉上的损伤往往要多条通路一起上。直接逆转，例如前面的 *MGMT*，也不在这五项清单里。
 
 
 ### 第021页｜DNA修复研究与诺贝尔奖
 
 <div id="lecture-page-21"></div>
-<figure class="genome-figure" data-lecture-page="21"><img src="/notes/genome-stability-2026/page-021.webp" width="1717" height="1334" loading="lazy" decoding="async" alt="第21页：DNA修复研究与诺贝尔奖，原图内中文标注" /><figcaption>原讲义第21页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="21"><img src="/notes/genome-stability-2026/page-021.webp" width="1717" height="1334" loading="lazy" decoding="async" alt="第21页：DNA修复研究与诺贝尔奖，原图内中文标注" /><figcaption>原讲义第21页 · 点击图片放大</figcaption></figure>
 
-人物与通路的对应可帮助建立知识地图，但每条通路都是很多研究者长期工作的结果。BER、MMR、NER都包含识别、移除、补写和封口等任务；差别在于识别什么异常、切掉多大范围，以及由哪些蛋白协作。接下来读流程图时，优先找这四类功能，而不是先把所有缩写孤立地背下来。
+2015 年诺贝尔化学奖把三个人和三条切除修复通路并排放在一起，用来给后面的流程图建立地图。奖项标题是 The Nobel Prize in Chemistry 2015，淡蓝译注写“DNA 修复研究与诺贝尔奖”，并说明奖给 DNA 修复的机制研究。
+
+三张肖像从左到右是 Tomas Lindahl、Paul Modrich 和 Aziz Sancar，每人 Prize share: 1/3，照片署名都是 Nobel Media AB，Photo: A. Mahmoud。Lindahl 上方标 Base excision repair (BER)，Modrich 上方标 Mismatch repair (MMR)，Sancar 上方标 Nucleotide excision repair (NER)。页底引文写明：该奖联合授予这三人，“for mechanistic studies of DNA repair”。上一页名单里的 NHEJ 和 HR 没有出现在这三栏里。
+
+人物和通路的对应方便记忆。每条通路都是许多研究者长期工作的结果，奖项承认的是机制研究，不能理解成一个人独自做完整条通路。BER、MMR、NER 都要完成识别、移除、按模板补写和封口；差别在于识别的是哪种异常、切掉的范围有多大、由哪些蛋白协作。后面读流程图时，先在图上找这四类动作，再去对缩写。
 
 
 ### 第022页｜BER：先去碱基，再补缺口
 
 <div id="lecture-page-22"></div>
-<figure class="genome-figure" data-lecture-page="22"><img src="/notes/genome-stability-2026/page-022.webp" width="1991" height="1394" loading="lazy" decoding="async" alt="第22页：BER：先去碱基，再补缺口，原图内中文标注" /><figcaption>原讲义第22页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="22"><img src="/notes/genome-stability-2026/page-022.webp" width="1991" height="1394" loading="lazy" decoding="async" alt="第22页：BER：先去碱基，再补缺口，原图内中文标注" /><figcaption>原讲义第22页 · 点击图片放大</figcaption></figure>
 
-糖基化酶先识别异常碱基并切断糖苷键，留下AP位点；随后切开、整理糖磷酸骨架，由聚合酶按另一条完好链补入正确核苷酸，连接酶封口。糖基化酶拿掉的是碱基，不是直接把整段双链DNA挖走。图中dRP是待清除的糖磷酸残基，帮助你区分去字母与修骨架两个步骤。
+BER 的顺序可以记成题注那句：先去掉异常碱基，再把缺口补上。本页用胞嘧啶自发脱氨产生的尿嘧啶做例子，画的是一条协同通路的示意。
+
+页首写 BER 是 DNA glycosylase、nuclease、dRP lyase、polymerase 和 ligase 的协同动作。图从左上角完整的配对出发，上链是 G、红色的 C、A，下链是 C、G、T，两端标着 5' 和 3'。向下的箭头是 Spontaneous deamination，红色的 C 变成红色的 U，对面仍是 G。向右，**尿嘧啶-DNA 糖基化酶**（uracil-DNA glycosylase）把 U 摘掉，骨架还连着，中间变成没有碱基的空位。再向右，endonuclease（内切酶）切开这个位点，断口一侧留下 OH，下游还挂着带磷酸的脱氧核糖，图注称之为 DNA with a deoxyribosephosphate (dRP) group。向上的箭头标着 Phosphodiesterase (dRP lyase)，也就是**脱氧核糖磷酸裂解酶**，把这个 dRP 残基清掉，留下一个单核苷酸缺口。DNA polymerase 按对面仍完好的 G 把红色的 C 补回去，DNA ligase 再把切口封上，回到左上角的完整双链。上排两支箭头都朝左，按“补写、再封口”来读。
+
+糖基化酶切断的是碱基和糖之间的糖苷键，拿掉的是一个字母，不是把一整段双链挖走。dRP 是切开之后还留在骨架上的糖磷酸残基，用来区分“去碱基”和“修骨架”。图上另一条链始终完整，聚合酶才有模板可抄。这是以尿嘧啶为例的示意，BER 的底物也不只这一种。页底标着 *Cell* 2017 的文献。
 
 
 ### 第023页｜5mC脱氨后的BER
 
 <div id="lecture-page-23"></div>
-<figure class="genome-figure" data-lecture-page="23"><img src="/notes/genome-stability-2026/page-023.webp" width="1765" height="1200" loading="lazy" decoding="async" alt="第23页：5mC脱氨后的BER，原图内中文标注" /><figcaption>原讲义第23页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="23"><img src="/notes/genome-stability-2026/page-023.webp" width="1765" height="1200" loading="lazy" decoding="async" alt="第23页：5mC脱氨后的BER，原图内中文标注" /><figcaption>原讲义第23页 · 点击图片放大</figcaption></figure>
 
-T本来是正常DNA碱基，因此识别依赖它与G配对的异常环境。本页展示一种修复路线；并不意味着TDG是所有细胞和序列背景下唯一的识别酶，MBD4等也可参与相关修复。如果T:G错配经过复制，原始甲基化C的信息可能永久丢失，这解释了CpG位点为什么容易积累C到T的变化。
+5-甲基胞嘧啶脱氨之后，BER 要处理的是一个 T:G 错配。T 本身是正常碱基，识别依赖的是它和 G 配在一起这个异常环境。
+
+标题是 BER for repair of 5-mC deamination。上方三句点出三个动作：**TDG**（thymine DNA glycosylase，胸腺嘧啶 DNA 糖基化酶）切掉这个碱基，**APE**（apurinic/apyrimidinic endodeoxyribonuclease，AP 内切核酸酶）处理无碱基位点，**POLβ**（DNA 聚合酶 β）把缺口补上。图顶是两对带星号的甲基化胞嘧啶，写成 C* 对 G、G 对 C*。Deamination 的箭头向下，左边的 C* 变成红色的 T，仍对着 G，右边那对 C* 还在。从这份 T:G 分出两条路。向右是修复：TDG 把 T 移走，留下对着 G 的空位，APE 和 POLβ 的箭头再折回上方，回到原来的 C*:G。向下是 Replication：T 对面配上红色的 A，旁边的 G 对面配上 C，方框写成 CpG&gt;TpG。
+
+修复这条线如果赶在复制之前完成，这个位置可以按对面的 G 重新写成 C，图上用回到 C*:G 来表示原配对被保住。复制这条线一旦先发生，画出的那份子代就变成 T 对 A，原来甲基化 C 的信息留不住，所以 CpG 位点容易积累 C 到 T 的变化。本页展示的是 TDG 这一条路线，并不表示所有细胞、所有序列里只有 TDG 能识别这种 T:G；*MBD4* 等也可以参与相关修复。图上的修复箭头停在 POLβ 补写，没有再标连接酶。
 
 
 ### 第024页｜MMR：复制后的纠错
 
 <div id="lecture-page-24"></div>
-<figure class="genome-figure" data-lecture-page="24"><img src="/notes/genome-stability-2026/page-024.webp" width="1882" height="1236" loading="lazy" decoding="async" alt="第24页：MMR：复制后的纠错，原图内中文标注" /><figcaption>原讲义第24页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="24"><img src="/notes/genome-stability-2026/page-024.webp" width="1882" height="1236" loading="lazy" decoding="async" alt="第24页：MMR：复制后的纠错，原图内中文标注" /><figcaption>原讲义第24页 · 点击图片放大</figcaption></figure>
 
-MMR要解决两个问题：哪里配错，以及哪一条是应该修改的新链。MSH2/MSH6负责许多单碱基错配及小环的识别，后续还需要MLH/PMS等因子与外切酶协作。讲义把多步骤压成“识别并招募外切酶”，学习时要知道这不是完整蛋白清单。某个MMR基因的任意变异并不都等于致病。
+MMR 是复制之后的纠错。它要同时回答两件事：哪里配错了，以及该改的是哪一条新链。
+
+页首写 **MSH2/MSH6** 复合物识别碱基错配，并招募 DNA 外切酶把 DNA 切开。图从一对 C:G 出发，向下的箭头标着 Polymerase error，上链的 C 变成红色的 A，形成 A:G 错配。接着 MSH2 和 MSH6 两个椭圆指向右侧，EXO1 再指向一段被挖开的 DNA：下链还在，上链出现一大段缺口。POLδ 的箭头从缺口折回左上方，把序列补回原来的 C:G。淡蓝译注把这段收成：MSH2/MSH6 识别碱基错配，再协调后续切除和补写。
+
+MSH2/MSH6 负责许多单碱基错配和小的插入缺失环；本图只画了一个 A:G。识别之后还要有 MLH/PMS 等因子和外切酶协作，才能确定从哪一条链、向哪个方向切除。课件把这些步骤压进“识别并招募外切酶”一句，图上出现的是 MSH2、MSH6、EXO1 和 POLδ。这不是完整蛋白清单，新链和旧链怎样区分也没有画出来。
+
+第二条写 MMR 基因的胚系突变可导致 **Lynch 综合征**（Lynch syndrome）。英文说的是 colon 与 ovarian cancers 的风险升高；旁边的中文译注写成“胚系致病变异”，器官写成结直肠癌、子宫内膜癌等。两处点名的器官并不完全相同，译注里的“等”表示名单没有列全，页上也没有风险百分比。某个 MMR 基因上的任意变异并不都等于致病，课件对应到林奇综合征的是胚系致病变异。
 
 
 ### 第025页｜微卫星不稳定：重复次数变了
 
 <div id="lecture-page-25"></div>
-<figure class="genome-figure" data-lecture-page="25"><img src="/notes/genome-stability-2026/page-025.webp" width="1925" height="1333" loading="lazy" decoding="async" alt="第25页：微卫星不稳定：重复次数变了，原图内中文标注" /><figcaption>原讲义第25页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="25"><img src="/notes/genome-stability-2026/page-025.webp" width="1925" height="1333" loading="lazy" decoding="async" alt="第25页：微卫星不稳定：重复次数变了，原图内中文标注" /><figcaption>原讲义第25页 · 点击图片放大</figcaption></figure>
 
-复制重复序列时，新链或模板可能错位，像读一串相同词时多读或漏读一个，形成小环。若修复失败，下次复制就把重复次数改变固定下来。MSI描述重复长度不稳定，不能等同于任意DNA不稳定，也不能仅凭一条重复序列长度不同就作出肿瘤MSI分类，需要规定的检测与判读方法。
+这一页要回答：错配修复出了问题，为什么会表现为微卫星长度的改变。**微卫星（microsatellite）**是基因组中 1–6 bp 的串联重复。标题写成 MMR defect causes microsatellite instability：MMR 缺陷导致微卫星不稳定。三条要点把因果说完整：重复序列容易在复制时出错；MMR 一旦失效，这些区段会因重复单位的插入或缺失而改变长度。
+
+图分左右两个入口，下面汇到同一套完成修复的步骤。左上是 single-base mismatch，单碱基错配：黄色上链鼓出一个 G，紫色下链对应位置是 T。识别它的是橙色 hMSH6 和黄色 hMSH2，再接上红色 hPMS2 与绿色 hMLH1。右上是 repeat mismatch，重复序列错配：黄色链上鼓出一串 GT，紫色链写成 CACACA。这就是复制一串相同单位时新链或模板错位、鼓出小环的样子，淡蓝框称为复制滑移。识别这一类的是灰色 hMSH3 加上 hMSH2，下游仍是 hPMS2 和 hMLH1。两条箭头向下汇合：外切核酸酶切掉含错的一段，DNA 聚合酶补写，DNA 连接酶封口，最下方标成 completion of mismatch repair，两链重新平齐。
+
+单碱基错配和图上的重复错配因此用了不同的识别亚基：前者是 *MSH6*，后者是 *MSH3*，两者都要 *MSH2*，并交给同一套 *PMS2*–*MLH1* 和同一套切除、补写、连接。画面画出的是这套机器还在工作时如何把两种错配都修回去。**微卫星不稳定（microsatellite instability，MSI）**是它失败之后留下的结果：小环没有被拆掉，下一次复制就把重复次数的增减固定下来。
+
+MSI 指的是微卫星重复长度的不稳定。基因组其他位置的序列改变要另外讨论；只看到某一个重复位点长度不同，也不能直接给肿瘤做 MSI 分型，需要按规定的位点和判读标准。
 
 
 ### 第026页｜NER与相关遗传病
 
 <div id="lecture-page-26"></div>
-<figure class="genome-figure" data-lecture-page="26"><img src="/notes/genome-stability-2026/page-026.webp" width="1866" height="1004" loading="lazy" decoding="async" alt="第26页：NER与相关遗传病，原图内中文标注" /><figcaption>原讲义第26页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="26"><img src="/notes/genome-stability-2026/page-026.webp" width="1866" height="1004" loading="lazy" decoding="async" alt="第26页：NER与相关遗传病，原图内中文标注" /><figcaption>原讲义第26页 · 点击图片放大</figcaption></figure>
 
-GG-NER在全基因组寻找异常，TC-NER则从转录机器被阻挡处启动，两者共享后续切除步骤。XP与皮肤癌高风险相关；CS可有光敏感、发育和神经系统异常，但通常没有XP那样的皮肤癌易感性。必须把“对UV敏感”与“癌症风险增加”分开理解，不能用后者是否存在来推断前者。
+**核苷酸切除修复（nucleotide excision repair，NER）**处理的是紫外线等原因造成的大体积 DNA 损伤。这一页先把启动方式分成两种，再把相关遗传病的临床表现写在下面。
+
+两种方式是 **转录偶联 NER（transcription-coupled NER，TC-NER）** 和 **全基因组 NER（global genome NER，GG-NER）**。前者从转录机器被挡住的地方启动，后者在全基因组里寻找异常结构。幻灯片写明两者都由大型蛋白复合物来做，后面的切除步骤是共用的，具体蛋白出现在后两页。
+
+遗传病列在 defects of enzymes involved in NER 之下，也就是 NER 相关酶的缺陷。本页把两种病都放在这一条下面，没有再画成“XP 对应 GG-NER、CS 对应 TC-NER”。**着色性干皮病（xeroderma pigmentosum，XP）**的原文是对紫外线高度敏感，皮肤癌风险升高超过 2000 倍。**Cockayne 综合征（Cockayne syndrome，CS）**的原文写成 not sensitive to UV, but have severe developmental defects。淡蓝框指出 “not sensitive to UV” 不准确：CS 可以有光敏感，同时有严重的发育缺陷；临床上还可以有神经系统受累。CS 通常没有 XP 那种皮肤癌易感。对紫外线的反应和癌症风险要分开看，不能用有没有皮肤癌易感去推断有没有光敏感。这些是遗传病的表现，不是治疗方案。
 
 补充核验：[Cockayne Syndrome · GeneReviews](https://www.ncbi.nlm.nih.gov/books/NBK1342/)。
 
@@ -243,9 +346,13 @@ GG-NER在全基因组寻找异常，TC-NER则从转录机器被阻挡处启动�
 ### 第027页｜GG-NER：切除一小段DNA
 
 <div id="lecture-page-27"></div>
-<figure class="genome-figure" data-lecture-page="27"><img src="/notes/genome-stability-2026/page-027.webp" width="1920" height="1346" loading="lazy" decoding="async" alt="第27页：GG-NER：切除一小段DNA，原图内中文标注" /><figcaption>原讲义第27页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="27"><img src="/notes/genome-stability-2026/page-027.webp" width="1920" height="1346" loading="lazy" decoding="async" alt="第27页：GG-NER：切除一小段DNA，原图内中文标注" /><figcaption>原讲义第27页 · 点击图片放大</figcaption></figure>
 
-先由XPC等参与识别，再由TFIIH打开局部结构，XPA、RPA等帮助验证与定位。ERCC1-XPF和XPG在损伤两侧切割，移除包含损伤的寡核苷酸，随后补写和连接。核心区别是NER移除一段带损伤的链，BER从去掉单个碱基开始；本页正文疑似沿用了前面BER的文字，应按图示和核实资料理解。
+全基因组 NER 在这一页被画成一条连续动作：找到扭曲，切开含损伤的一小段 DNA，再把缺口补上。正文第一句把 DNA glycosylase、核酸酶、dRP lyase、聚合酶和连接酶都写进 NER。淡蓝框已经标明，glycosylase 与 dRP lyase 这组组合描述的是碱基切除修复（base excision repair，BER）。BER 从切掉一个受损碱基开始；GG-NER 切掉的是一段仍连着损伤的寡核苷酸。读机制时以 A 到 G 为准。
+
+A 是 5′ 在左、3′ 在右的双链，粉红三角代表损伤。B 里蓝色 *XPC* 和标成 23B 的亚基结合上去，DNA 被弯折；23B 是与 *XPC* 一起识别损伤的 RAD23B。C 中绿色 TFIIH 带着 *XPB*、*XPD* 打开局部结构，*XPC* 和 23B 仍在。D 加上紫色 *XPA*、粉色 RPA 和红色 *XPG*，用来核对损伤并摆好切割位置。E 标出 5′ incision，剪刀画在 *XPF* 一侧；*XPF* 与 ERCC1 组成这一侧的核酸酶。F 标出 3′ incision，由 *XPG* 在另一侧切开，含损伤的寡核苷酸被揭下，RFC、PCNA 和 Pol δ/ε/κ 开始按未损伤链补写。G 用 LigI 或 LigIII 把新合成的红色片段连上。页脚注明图来自 *Cold Spring Harbor Perspectives in Biology* 2013 年的综述。
+
+这是有顺序的示意图，不是某一次实验的定量结果。*XPC* 负责在全基因组里发现扭曲；解旋、验证、两侧切割和补写会在转录偶联途径里再次出现。
 
 补充核验：[Schärer 2013 · Nucleotide Excision Repair in Eukaryotes](https://cshperspectives.cshlp.org/content/5/10/a012609.full)。
 
@@ -253,9 +360,13 @@ GG-NER在全基因组寻找异常，TC-NER则从转录机器被阻挡处启动�
 ### 第028页｜TC-NER：从转录停滞启动
 
 <div id="lecture-page-28"></div>
-<figure class="genome-figure" data-lecture-page="28"><img src="/notes/genome-stability-2026/page-028.webp" width="1764" height="1404" loading="lazy" decoding="async" alt="第28页：TC-NER：从转录停滞启动，原图内中文标注" /><figcaption>原讲义第28页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="28"><img src="/notes/genome-stability-2026/page-028.webp" width="1764" height="1404" loading="lazy" decoding="async" alt="第28页：TC-NER：从转录停滞启动，原图内中文标注" /><figcaption>原讲义第28页 · 点击图片放大</figcaption></figure>
 
-转录机器沿模板链前进，遇到难以通过的损伤后停下，成为启动修复的信号。CSB、CSA等帮助组织响应，之后接入NER共同的解旋、切除、补写步骤。TC-NER并不是把RNA里的错字修好，而是修复正在转录的DNA模板链；把转录作为报警器就容易理解其“偶联”的含义。
+标题写着 Model of mammalian TC-NER，这是哺乳动物转录偶联 NER 的模型。转录偶联的意思是：RNA 聚合酶 II 沿模板链前进，停在过不去的损伤前面，这个停滞成为启动修复的信号。修的是正在被转录的 DNA 模板链，模型并不去改正 RNA 转录本上的字母。
+
+A 里双链被拉开，损伤用红色星号标出，转录箭头指向损伤所在的一侧。核小体在聚合酶前方滑动、在后方重新组装，组蛋白上的小旗标成 acetylated histones H3–H4。绿色 RNAPII 旁边是 UVSSA 和 USP7，紫色 *CSB* 这一步还带着抑制标记。B 里聚合酶停在星号上，*CSB* 转到聚合酶旁边，抑制标记消失，UVSSA 与 USP7 留在复合物中。C 标出 reverse translocation，聚合酶沿模板往回退。损伤周围接上 TFIIH、*XPA*、RPA、*XPG* 和 *XPF*–ERCC1，也就是与全基因组 NER 共用的打开、核对和两侧切割因子。*CSB* 这一侧连着 *CSA*–DDB1–Cul4，附近还有 p300 和 HMGN1；回退的聚合酶旁标着 TFIIS 和 XAB2。淡蓝框把终点概括为修复后恢复转录；C 画出的是回退和修复因子就位这一步。
+
+*CSA* 和 *CSB* 被放在转录停滞之后，这是本页实际给出的蛋白与 TC-NER 的对应，说明它们怎样参与这条通路的启动。图是通路模型，不是治疗方案。CS 可以有光敏感、发育和神经系统异常，通常又没有 XP 那种皮肤癌易感，这个临床限度仍要保留。页脚另印着 Vermeulen 与 Fousteri 2013 年的综述图。
 
 补充核验：[Schärer 2013 · Nucleotide Excision Repair in Eukaryotes](https://cshperspectives.cshlp.org/content/5/10/a012609.full)。
 
@@ -263,180 +374,277 @@ GG-NER在全基因组寻找异常，TC-NER则从转录机器被阻挡处启动�
 ### 第029页｜双链断裂：NHEJ与HR
 
 <div id="lecture-page-29"></div>
-<figure class="genome-figure" data-lecture-page="29"><img src="/notes/genome-stability-2026/page-029.webp" width="1869" height="1253" loading="lazy" decoding="async" alt="第29页：双链断裂：NHEJ与HR，原图内中文标注" /><figcaption>原讲义第29页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="29"><img src="/notes/genome-stability-2026/page-029.webp" width="1869" height="1253" loading="lazy" decoding="async" alt="第29页：双链断裂：NHEJ与HR，原图内中文标注" /><figcaption>原讲义第29页 · 点击图片放大</figcaption></figure>
 
-NHEJ把断端保护、整理后连接，不要求长段同源模板；兼容断端有时可以准确连接，经过加工时则可能丢失或加入少量序列。HR先形成单链末端，再利用同源序列补写，常在S/G2期使用姐妹染色单体。不要简单背成“NHEJ永远错误、HR永远正确”，模板和连接对象选错也会改变结局。
+双链断裂之后，细胞可以按两条原则不同的路线把断口接上。左侧虚线框是 **非同源末端连接（non-homologous end joining，NHEJ）**，右侧是 **同源重组（homologous recombination，HR）**。上方一道闪电把同一条双链打断，两框共用这个起点。
 
-#### 深入理解：同源模板从哪里来
+NHEJ 不要求长段同源模板。橙色环是 Ku70/80，先套住两个断端；灰色椭圆标成 DNA-PKc，淡蓝框写作 DNA-PKcs，把两端拢到一起；下面蓝色与灰色的复合体标成 XRCC–ligase IV complex，淡蓝框写作 XRCC4／连接酶 IV，由它把末端连上，箭头指向重新连续的双链。图上这条路线画的是直接连接。断端若本来就能对上，可以比较准确地接回；末端若先被修剪或填补，就会少掉或加进少量核苷酸。
 
-DNA复制后，姐妹染色单体提供了与原序列高度相似、位置对应的参考，因此HR在S/G2期更有条件开展。HR中的“同源”描述可配对的序列关系，并不等于任意一条同名染色体都能毫无风险地充当模板。NHEJ无需长同源模板，速度与可用性有优势，但末端加工和错误配对可能改变序列。修复选择取决于细胞周期、末端状态和调控网络，不是一种通路始终优于另一种。
+HR 先由 MRN／CtIP 处理末端，断端变成一串黄色圆点，表示切出单链。随后 *BRCA2*／RAD51 参与寻找同源序列并完成链侵入：黄色单链配进另一条双链，形成图上那段鼓起的结构，再沿模板延伸，最后回到连续双链。图上的模板是一条可供配对的同源双链，没有标注细胞周期。姐妹染色单体是 DNA 复制之后才有的、序列高度对应的参照，所以 HR 更常在 S 期和 G2 期使用它。这里的“同源”指能配对的序列关系；并不是任意一条同名染色体都可以毫无代价地充当模板。
+
+兼容的断端经 NHEJ 可以直接连回，末端加工则会改动少量序列；HR 在模板正确时更容易恢复原序列，模板或侵入对象选错也会改写序列。NHEJ 不需要长同源模板，在整个细胞周期里都更容易用上。选择取决于细胞周期、末端状态和调控网络。
 
 
 ### 第030页｜双链断裂修复与结构变异
 
 <div id="lecture-page-30"></div>
-<figure class="genome-figure" data-lecture-page="30"><img src="/notes/genome-stability-2026/page-030.webp" width="1916" height="1300" loading="lazy" decoding="async" alt="第30页：双链断裂修复与结构变异，原图内中文标注" /><figcaption>原讲义第30页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="30"><img src="/notes/genome-stability-2026/page-030.webp" width="1916" height="1300" loading="lazy" decoding="async" alt="第30页：双链断裂修复与结构变异，原图内中文标注" /><figcaption>原讲义第30页 · 点击图片放大</figcaption></figure>
 
-断裂后不仅要修复化学键，还要把正确的两端配对。若连接到相邻错误断端，可能产生缺失；一段反向接回形成倒位；不同染色体末端相接可形成易位。读图时给断端编号，再跟踪修复后哪些编号连在一起，比背最后形状更容易。结构变异是修复与复制过程可能留下的结果，不意味着细胞有意重排基因组。
+双链断裂要重新接上化学键，还要看哪两个末端被接到一起。这一页用染色质纤维上的粉点和蓝点，表示修复之后可能留下的 **结构变异（structural variation）**。标题是 structural variations resulted from repair of double-strand breaks。整张是示意图，页脚引自 *Cell* 2017。
+
+左栏从断裂的染色质开始。KU70、KU80 和 DNA-PK 通向 NHEJ。右侧上方的括号里，error-free NHEJ 仍是整齐的粉蓝相间；紧接着两行标 small insertion 和 small deletion，插入那一行能看到多出来的红色点。中间经过 BRCA1 与 CtIP 的末端切除（resection），进入 alternative end joining，对应的结局也标着 small deletion。再往下，BRCA2 与 strand invasion 分出两条：abortive HR 的括号里是 large deletions 和 tandem duplications，前者的点列明显缩短，后者拉长并且粉蓝重复出现；最下方一条长箭头指向 error-free HR，点列恢复成与完整染色质相近的排列。
+
+淡蓝框翻译了 small deletion／insertion 和 large deletion，也给出了倒位、易位两个词。图内右侧印出的结局名称是 small insertion、small deletion、large deletions 和 tandem duplications，加上 error-free NHEJ 与 error-free HR。倒位是一段序列反向接回去，易位是不同染色体的末端连到一起；这两个词在本页是译注词条，右侧并没有用它们给某一行点列命名。读图时沿箭头看右侧标签：无错的 NHEJ 或 HR 可以不留下大段重排，小片段增减、大段缺失和串联重复则对应末端加工、替代末端连接，或中途停止的同源重组。
+
+这些是修复和复制过程可能留下的结果，不是细胞有目的地重排基因组。
 
 
 ### 第031页｜按损伤类型选择修复路线
 
 <div id="lecture-page-31"></div>
-<figure class="genome-figure" data-lecture-page="31"><img src="/notes/genome-stability-2026/page-031.webp" width="1765" height="1378" loading="lazy" decoding="async" alt="第31页：按损伤类型选择修复路线，原图内中文标注" /><figcaption>原讲义第31页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="31"><img src="/notes/genome-stability-2026/page-031.webp" width="1765" height="1378" loading="lazy" decoding="async" alt="第31页：按损伤类型选择修复路线，原图内中文标注" /><figcaption>原讲义第31页 · 点击图片放大</figcaption></figure>
 
-这张总图用来把前面分散的通路重新配对。先问DNA哪里异常：碱基化学结构、碱基配对、骨架单链断裂，还是双链都断；再看相应蛋白如何识别和处理。某些复杂损伤会需要多条通路配合，因此一对一连线是教学简化。当前阶段抓住损伤类别和修复原则比逐个背完整蛋白网络更有用。
+这张总图把前面分开讲的损伤和修复重新配上对。上半 a 的一条 DNA 下面分六列，上面是损伤和诱因，下面是修复路线；下半 b 问损伤出现之后细胞往哪边走。页脚是 Roos 等，*Nature Reviews Cancer*，2016。这是综述中的分类示意图。
+
+从左到右看 a。简单碱基修饰的例子包括 8-oxo-G、O6MeG、N7MeG、N3MeG、胸腺嘧啶乙二醇、N3MeC 和 N3MeA，下面接 MGMT、ABH 和碱基切除修复（BER），这一列放在浅色的 Neutral 上。碱基错配来自脱氨、氧化、甲基化和复制错误，通向 MMR，从此铺开一条紫色的 Mutagenic or toxic。大体积加合物和链间交联的例子有 CPD、6-4PP、苯并芘加合物和顺铂加合物，通向 NER。单独的 ICL 一列写的是顺铂、环磷酰胺和氯乙基化剂这类可以造成交联的物质，路线分成 **跨损伤合成（translesion synthesis，TLS）**、NER，以及 HR 和 **范可尼贫血通路（Fanconi anemia pathway，FA）**。蛋白–DNA 交联、单链断裂和双链断裂这一列，诱因写着拓扑异构酶 I、II 抑制剂和甲醛，路线是 PDB repair、TDP、NER、NHEJ 和 HR；TDP 与拓扑异构酶抑制剂写在同一列，指把卡在 DNA 上的拓扑异构酶从断点上解下来的加工，PDB repair 在图上没有再拆步骤。最右列是电离辐射、博来霉素和崩溃的复制叉造成的双链断裂，路线是 NHEJ 和 HR。
+
+Neutral 与 Mutagenic or toxic 是示意图对后果的归类。简单碱基修饰若没有修好，同样可以变成突变；交联和蛋白–DNA 交联在图上已经同时连着好几条通路。一对一的连线用来记住损伤类别和修复原则，复杂损伤常常要几条通路配合。
+
+b 把遗传毒性物质的来源分成内源（endogenous）、环境（environmental）和药物（pharmaceutical），汇到 genotoxins，再作用到 DNA。往后的去向是：修复通向存活；跨损伤合成先写出突变，细胞仍可存活；复制被挡住之后，能修复并重组则存活，复制叉崩溃则通向死亡；转录被挡住，缺少必需的转录本、蛋白质和信号，也通向死亡。这里的存活和死亡是示意图的终点。图上的顺铂、环磷酰胺、拓扑异构酶抑制剂是损伤来源的例子，不是疗效或适应症说明。
 
 
 ### 第032页｜损伤响应决定细胞命运
 
 <div id="lecture-page-32"></div>
-<figure class="genome-figure" data-lecture-page="32"><img src="/notes/genome-stability-2026/page-032.webp" width="1882" height="1220" loading="lazy" decoding="async" alt="第32页：损伤响应决定细胞命运，原图内中文标注" /><figcaption>原讲义第32页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="32"><img src="/notes/genome-stability-2026/page-032.webp" width="1882" height="1220" loading="lazy" decoding="async" alt="第32页：损伤响应决定细胞命运，原图内中文标注" /><figcaption>原讲义第32页 · 点击图片放大</figcaption></figure>
 
-损伤响应不仅是在DNA上修补，还会调节整个细胞。可修复时暂停周期，给修复留时间；损伤持续或过重时可能进入衰老或凋亡。ATM/ATR等是信号调控节点，并不等同于直接把缺口补上的酶。图中促存活与促死亡分支说明结局依赖损伤性质和细胞背景，不能从单个节点激活就断言细胞一定死亡。
+损伤响应不只有在 DNA 上补缺口。标题写明，DNA 损伤通路会同时启动促存活（pro-survival）和促死亡（pro-death）信号，由这两支一起影响细胞命运。图中央 DNA 旁边是 **ATM** 和 **ATR**，它们是发出信号的节点，不是直接填补缺口的聚合酶或连接酶。页脚是 *Nature Reviews Cancer* 的示意图。
+
+促存活一支在左上方。ATM、ATR 经 CHK2、CHK1 作用到 p53，旁边列出 Ser15、Ser20、Ser33。由此向上，*DDB2* 指向 DNA repair，*CDKN1A* 指向 cell cycle checkpoint，也就是把细胞周期停住，给修复留时间。左侧还有 p53 与 MDM2 的 negative feedback loop：p53 促进 MDM2，磷酸化的 MDM2 再回头制约 p53。损伤还可以处理时，这一支在图上的终点是修复和细胞周期阻滞。
+
+促死亡一支用紫色箭头。p53 的 Ser46 连向 PTEN 和 pro-death genes。PTEN 向上指向 AKT，文字框写着 leads to the dephosphorylation of AKT；AKT 伸向右上角 Apoptosis 的那条线以平头结束，表示 AKT 抑制凋亡，去掉这层抑制之后凋亡才容易进行。另一条从 ATM 指向 SIAH1 的 Ser19，经过 HIPK2，给 CtBP 加上磷酸，再分叉到 NOXA 和 BAX，并有箭头进入 degradation。图上画出的促死亡终点是凋亡和降解。持续或过重的损伤也可能使细胞进入衰老，这张图没有单独画出衰老。
+
+同一个 p53 上，Ser15、Ser20、Ser33 画在促存活一侧，Ser46 画在促死亡一侧。看到 ATM、ATR 或 p53 的某一个磷酸化，还不能断定细胞一定死亡。结局取决于损伤的性质、哪些位点被修饰，以及细胞当时的背景。
 
 
 ## 突变特征及实验验证
 
-
 ### 第033页｜损伤、修复与最终突变
 
 <div id="lecture-page-33"></div>
-<figure class="genome-figure" data-lecture-page="33"><img src="/notes/genome-stability-2026/page-033.webp" width="1587" height="1179" loading="lazy" decoding="async" alt="第33页：损伤、修复与最终突变，原图内中文标注" /><figcaption>原讲义第33页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="33"><img src="/notes/genome-stability-2026/page-033.webp" width="1587" height="1179" loading="lazy" decoding="async" alt="第33页：损伤、修复与最终突变，原图内中文标注" /><figcaption>原讲义第33页 · 点击图片放大</figcaption></figure>
 
-损伤是DNA结构或配对异常的事件，突变是序列或结构形成了可保留的改变。准确修复可恢复原状；损伤被错误复制、错误修复，或者未经修复继续复制，都可能形成突变。本页的箭头是结果概括，不表示任何一次修复都必然致突变。后面的突变特征研究正是从这些保留下来的结果反推历史过程。
+突变是 DNA 损伤经过复制或修复之后留下来的结果。标题写的是 DNA mutations are outcomes of DNA damage and repair。**损伤（damage）**是结构或配对已经异常的事件；**突变**是序列或结构形成了可以保留下去的改变。
+
+左边一条蓝色双螺旋，上下各有一颗黄色星，都标着 Damage。中间黑色箭头从 DNA repair 指向右边三行：base substitution（碱基替换）、indel（插入／缺失）和 structural variations（结构变异）。箭头的画法容易读成“修复产生突变”。这一页要建立的关系是：损伤若被准确修复，序列可以回到原样；损伤被错误复制、被错误修复，或者还没修好就进入下一轮复制，改变才会被固定成这三类结果之一。箭头概括的是可能保留下来的结果，不表示每一次修复都必然留下突变。
+
+后面的突变特征，就是从已经留下来的碱基替换、插入缺失和结构变异反推它们可能经过的损伤与修复。本页没有给出哪一种损伤对应哪一个字母。
 
 
 ### 第034页｜同一个脱氨损伤可以产生不同结果
 
 <div id="lecture-page-34"></div>
-<figure class="genome-figure" data-lecture-page="34"><img src="/notes/genome-stability-2026/page-034.webp" width="2076" height="1281" loading="lazy" decoding="async" alt="第34页：同一个脱氨损伤可以产生不同结果，原图内中文标注" /><figcaption>原讲义第34页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="34"><img src="/notes/genome-stability-2026/page-034.webp" width="2076" height="1281" loading="lazy" decoding="async" alt="第34页：同一个脱氨损伤可以产生不同结果，原图内中文标注" /><figcaption>原讲义第34页 · 点击图片放大</figcaption></figure>
 
-APOBEC先把C变成U，但最终突变不只取决于这一步。直接按U复制容易产生C到T；若U被移除、形成AP位点，再经跨损伤合成等处理，可能出现其他替换。图强调“损伤来源”和“最终突变字母”之间隔着修复与复制选择，因此不能看到某个C到T就认定一定来自APOBEC。
+同一次 APOBEC 脱氨，可以留下不同的突变字母。标题写成 APOBEC deamination cause C&gt;T or C&gt;G mutations。起点是复制压力（replication stress）下打开的 DNA，序列写成 5′-TGTCATG-3′／3′-ACAGTAC-5′，被标出来的是 TpC 里的那个 C。序列旁有一截 “1,2-DMH)” 的源图残留，本页没有解释它；往下看的是复制压力之后的两条分支。
+
+**APOBEC** 作用在单链 DNA 上暴露的胞嘧啶，把 5′-TGTCATG-3′ 中的 C 变成 U，得到 5′-TGTUATG-3′。这一步还只是损伤，图上标成 DNA damage。左侧 Uncorrected：U 对面配上 A，下一步该位置变成 T 对 A，结局标成 C&gt;T transition at TpC，即 TpC 位点的 C&gt;T 转换。右侧先由 *UNG* 把 U 切除，留下无碱基位点，写成 5′-TGT□ATG-3′。从这里又有两条处理：标着 A rule 的箭头折回左侧，同样落到 C&gt;T；*REV1* 在无碱基位点对面放入 C，完成的配对写成 5′-TGTGATG-3′／3′-ACACTAC-5′，结局标成 C&gt;G transversion at TpC，即 TpC 位点的 C&gt;G 颠换。
+
+C&gt;T 在这张图上有两条来路：U 没有被去掉、按 U 复制；或者 U 被切除后，按 A 规则跨过无碱基位点。C&gt;G 来自 REV1 对无碱基位点的处理。损伤来源和最终写下的字母之间，隔着修复与复制时的选择。看到一个 C&gt;T，不能据此认定它一定来自 APOBEC。
 
 
 ### 第035页｜SBS突变特征为什么有96格
 
 <div id="lecture-page-35"></div>
-<figure class="genome-figure" data-lecture-page="35"><img src="/notes/genome-stability-2026/page-035.webp" width="1904" height="1294" loading="lazy" decoding="async" alt="第35页：SBS突变特征为什么有96格，原图内中文标注" /><figcaption>原讲义第35页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="35"><img src="/notes/genome-stability-2026/page-035.webp" width="1904" height="1294" loading="lazy" decoding="async" alt="第35页：SBS突变特征为什么有96格，原图内中文标注" /><figcaption>原讲义第35页 · 点击图片放大</figcaption></figure>
 
-先把互补链等价的替换统一为以C或T为中心的六类：C>A、C>G、C>T、T>A、T>C、T>G。中心位点左右各有四种碱基，因此每类有4×4=16种三核苷酸背景，合计6×16=96。图上每根柱是一个类别的比例或数量，整组柱形才是模式，不是一根高柱就代表一个病因。
+**突变特征（mutational signature）**是突变的模式。幻灯片写 possibly reflecting source of mutations，只说它可能反映突变过程的来源。单碱基替换（single base substitution，SBS）在这里分成 96 个通道。整组柱形才是一种模式，一根高柱本身不等于一种病因。
 
-#### 深入理解：亲手算出96类
+右上角 b 是 collapsed representation，把替换收成 6 类，纵轴是 Frequency（%）。红色 C&gt;T 一根柱接近顶端，其余五类贴在基线附近。大图用 SBS1 把这 6 类再拆开：顶上色条从左到右是 C&gt;A、C&gt;G、C&gt;T、T&gt;A、T&gt;C、T&gt;G，纵轴同样是 Frequency（%），刻度标到 47.5。高出基线的柱子集中在红色 C&gt;T 区，其他颜色几乎贴地。横轴上每个三核苷酸的字母缩得很小，具体是哪一个侧翼碱基，要按原文图的坐标读。
 
-以C>T为例，中心的C固定；左侧可能是A、C、G、T，右侧也有四种，总共16个三核苷酸背景。例如A[C>T]G是一类，T[C>T]A是另一类。其余五种替换同样各16类，因此总数是96。G>A与互补链C>T归到同一代表类型，A>G与T>C等价，所以不是12×16=192。归并方向后仍要保持左右背景与反向互补规则一致。
+96 可以按图上的六类亲手算出。互补链上的替换先收成以 C 或 T 为中心的六类：C&gt;A、C&gt;G、C&gt;T、T&gt;A、T&gt;C、T&gt;G。G&gt;A 与互补链上的 C&gt;T 记成同一类，A&gt;G 与 T&gt;C 记成同一类，因此是六类。每一类的中心碱基左右各有 A、C、G、T 四种可能，4×4＝16 种三核苷酸背景，六类乘十六等于 96。以 C&gt;T 为例，A[C&gt;T]G 是一类，T[C&gt;T]A 是另一类。归并互补链时，左右两侧的背景也要按反向互补一起记。页脚是 Koh 等，*Nature Review Cancer*，2021；图上的百分比用的是该文的频率坐标。
 
 
 ### 第036页｜APOBEC相关突变特征
 
 <div id="lecture-page-36"></div>
-<figure class="genome-figure" data-lecture-page="36"><img src="/notes/genome-stability-2026/page-036.webp" width="1838" height="1294" loading="lazy" decoding="async" alt="第36页：APOBEC相关突变特征，原图内中文标注" /><figcaption>原讲义第36页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="36"><img src="/notes/genome-stability-2026/page-036.webp" width="1838" height="1294" loading="lazy" decoding="async" alt="第36页：APOBEC相关突变特征，原图内中文标注" /><figcaption>原讲义第36页 · 点击图片放大</figcaption></figure>
 
-读图先看高峰属于哪种替换，再看该峰所在的邻近碱基背景。APOBEC相关模式常在特定TC序列环境富集，SBS2以C到T为主，SBS13以C到G为主。讲义的“多数样本中贡献显著”应放回原研究样本理解；不同癌种、样本和分析方法中比例差异很大，不能直接推广为每个肿瘤的主要来源。
+APOBEC 相关的突变特征，要先看高峰落在六类替换的哪一类，再看这一类里面哪些邻近背景升高。淡蓝框写明：APOBEC 过程可以产生特定的 SBS 模式，SBS2 与 SBS13 常与 APOBEC 活性相关。图上实际画出的是一张标成 Signature 2 的 96 类柱形，页脚是 Alexandrov 等，*Nature*，2013。
+
+色条从左到右仍是 C&gt;A、C&gt;G、C&gt;T、T&gt;A、T&gt;C、T&gt;G。青色 C&gt;A 以及右侧 T&gt;C、T&gt;G 只有贴地的小柱。黑色 C&gt;G 区有两根明显抬起的柱。红色 C&gt;T 区有一根被星号标出的最高柱，旁边还有几根较矮的红柱。星号落在这张 Signature 2 要人注意的 C&gt;T 位置。通常把 SBS2 记成以 C&gt;T 为主、把 SBS13 记成以 C&gt;G 为主；本页没有再单独画出 SBS13，黑色 C&gt;G 上的高峰要按这张柱形自己看，不要只背“SBS2 只有 C&gt;T”。横轴三核苷酸字母同样看不清。上一页把 APOBEC 的结局写在 TpC，那种序列背景要对照原图的坐标，不能从缩略图读出每一根柱的精确百分比。
+
+幻灯片写着这些特征 contribute significantly to most samples。这句话要放回 Alexandrov 等 2013 年那组样本里理解。不同癌种、不同样本和不同分析方法中，APOBEC 相关特征所占的比例差别很大，不能直接推广成每个肿瘤的主要突变来源。
 
 
 ### 第037页｜从混合模式反推突变过程
 
 <div id="lecture-page-37"></div>
-<figure class="genome-figure" data-lecture-page="37"><img src="/notes/genome-stability-2026/page-037.webp" width="1908" height="992" loading="lazy" decoding="async" alt="第37页：从混合模式反推突变过程，原图内中文标注" /><figcaption>原讲义第37页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="37"><img src="/notes/genome-stability-2026/page-037.webp" width="1908" height="992" loading="lazy" decoding="async" alt="第37页：从混合模式反推突变过程，原图内中文标注" /><figcaption>原讲义第37页 · 点击图片放大</figcaption></figure>
 
-一个肿瘤通常经历不止一种突变过程，最终观测到的是多个模式叠加。左边可理解为若干成分的柱形模板，中间是混合权重，右边是合成后的样本突变谱。这与辨认混合颜料相似，但真实分析受到测序噪声、突变数量和模式相似性的限制，不一定存在唯一可靠的拆分答案。
+一个肿瘤里通常叠着不止一种突变过程，测序看到的是它们混在一起之后的谱。这一页把“从混合谱反推各过程”画成一道式子：左侧三种过程的特征，乘上各自贡献的突变数，再加上一小段没有归进这些特征的残差，得到右侧一个癌基因组的突变目录。
+
+左侧 A 框是三张简化柱图，纵轴都是 0% 到 50%，横轴只有六类单碱基替换：C&gt;A、C&gt;G、C&gt;T、T&gt;A、T&gt;C、T&gt;G，颜色依次为蓝、黑、红、灰、绿、粉。Signature 1 的红柱和黑柱最高，Signature 2 的蓝柱和黑柱最高，Signature 3 的绿柱最高、粉柱次之。译注把 signature 读成过程的特征模式。这三套柱子是示意图里的示例成分，编号只在本页使用；后面目录页的 SBS1、SBS2、SBS3 是另一套正式名字，要到那一页再认。
+
+中间的饼图写出各过程贡献的突变数：Signature 1 为 1,000，Signature 2 为 1,500，Signature 3 为 750。译注把这种份额叫做 exposure，即各过程的贡献。饼旁的灰色波形标着 65 mutations (2%)，作为没有归进这三种特征的残差。右侧目录的横轴是突变个数，图例仍是那六种替换。按中间的数量把左边的形状加权，再留下这约 2% 的残差，就合成右边的观测谱。译注里的 observed spectrum，指的就是已经混在一起的观测突变谱。
+
+这张图把残差画得很干净。真实分析还要面对测序噪声、突变数量和特征之间的相似性：残差不一定分得这么整齐，同一条谱也可以对应不止一组还算说得通的权重。示例成分能把目录凑回来，说明这组数字在算术上成立；每个成分是否对应一种独立的生物学过程，还要另有证据。
 
 
 ### 第038页｜多个肿瘤共享特征、贡献不同
 
 <div id="lecture-page-38"></div>
-<figure class="genome-figure" data-lecture-page="38"><img src="/notes/genome-stability-2026/page-038.webp" width="1930" height="1142" loading="lazy" decoding="async" alt="第38页：多个肿瘤共享特征、贡献不同，原图内中文标注" /><figcaption>原讲义第38页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="38"><img src="/notes/genome-stability-2026/page-038.webp" width="1930" height="1142" loading="lazy" decoding="async" alt="第38页：多个肿瘤共享特征、贡献不同，原图内中文标注" /><figcaption>原讲义第38页 · 点击图片放大</figcaption></figure>
 
-多个样本帮助我们寻找可复用的模式：同一过程在不同肿瘤中可能都有贡献，但比例不同。不要把每个样本的饼图理解成细胞亚群比例；在这种模型里，它通常是对突变归属的贡献估计。权重还依赖特征是否归一化，以及输出是突变数还是比例，读图时应检查定义。
+多个肿瘤可以共用同一组特征，每个肿瘤的用量不同。这一页把分解扩成一组样本：左边是各基因组的突变目录，右边用同一排特征、各自的饼图和一条重建误差，去解释这些目录。
+
+左边纵轴仍是六类替换，横轴是突变个数，刻度到 1,500。Genome #1 以红色 C&gt;T 最高，Genome #2 以绿色 T&gt;C 最高，省略号之后的 Genome #G 则是灰色 T&gt;A 和绿色 T&gt;C 一起升高。大括号和等号表示这些目录可以由共享特征乘上每个样本自己的贡献来合成。淡蓝译注写的就是这件事：共享的特征模式乘样本各自的贡献，等于每个样本的混合突变谱。
+
+右侧上方是可复用的特征柱，从 Signature 1、Signature 2 排到 Signature N，纵轴仍是百分比。下方每个基因组一块饼，饼下写着突变总数：Genome #1 为 3,705，#2 为 2,362，#3 为 3,936，#4 为 11,179，#G 为 5,511。饼的面积跟着总数走，所以 #4 的饼明显更大；扇区才是各特征的份额，例如 #1 里 Signature 2 占大块，#2 里 Signature 5 占大块，#4 几乎被 Signature 3 铺满。译注说明饼图表示成分权重。在这套模型里，扇区是突变被归到各特征的贡献估计。把它读成肿瘤内部细胞亚群的比例，就和本页的定义错开了。权重还取决于特征有没有归一化、输出的是突变数还是比例，换一张图时要先看图例怎么定义。
+
+每块饼下面还有一条重建误差的波形，分别标成 9%、7%、11%、5% 和 4%。误差随样本变化，同一组特征去重建，贴合程度并不整齐。这些数字是示意图上写出的例子，用来显示特征可以共享、贡献可以差很多。
 
 
 ### 第039页｜非负矩阵分解：M≈P×E
 
 <div id="lecture-page-39"></div>
-<figure class="genome-figure" data-lecture-page="39"><img src="/notes/genome-stability-2026/page-039.webp" width="1872" height="1289" loading="lazy" decoding="async" alt="第39页：非负矩阵分解：M≈P×E，原图内中文标注" /><figcaption>原讲义第39页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="39"><img src="/notes/genome-stability-2026/page-039.webp" width="1872" height="1289" loading="lazy" decoding="async" alt="第39页：非负矩阵分解：M≈P×E，原图内中文标注" /><figcaption>原讲义第39页 · 点击图片放大</figcaption></figure>
 
-若有n个样本、k个特征，M可为96×n，P为96×k，E为k×n；乘积恢复样本谱。非负意味着不允许用负的突变数量相互抵消。真实数据一般是近似分解，所以写M≈PE更合适。特征数k、初始化和正则化会影响结果；拟合得好不等于每个成分都已被证明对应一种独立生物机制。
+这一页把前两页的图写成矩阵：观测到的突变目录，大约等于特征形状乘每个样本的用量。页顶公式是 \(M \approx P \times E\)。译注称这一步为**非负矩阵分解**，英文是 nonnegative matrix factorization，缩写 NMF：在所有元素都不得为负的条件下，把一个矩阵拆成两个矩阵的乘积。
 
-#### 深入理解：提取特征与拟合特征是不同任务
+三个矩阵的下标把角色定死了。M 的每一列是一个基因组的突变目录，每一行是一类突变，所以它有 K 行、G 列；幻灯片称它为癌症样本的突变目录。P 的每一列是一种突变过程的特征，有 K 行、N 列。E 的每一列是一个基因组里这 N 个过程的权重，有 N 行、G 列。行、列对得上，P 才能右乘 E 去逼近 M。若讨论的是单碱基替换，并且按三核苷酸上下文分成 96 类，M 就可以是 96 行、样本列，P 是 96 行、k 个特征列，E 是 k 行、样本列；图上的 K、N、G 是同一乘法关系的字母。公式用的是近似号：真实数据一般写成 \(M \approx PE\)，残差仍然留着。
 
-从头提取时，P和E都未知，算法需要同时寻找成分形状与每个样本的贡献；给定已知特征拟合时，P已固定，重点是估计E。二者都可能受相似特征、低突变数和技术噪声影响。先知道有几种颜色，再估计每种用量，通常比连颜色种类都未知更受约束。因此引用分析结论时应说明是在提取新模式，还是把样本拟合到已有目录；好看的重建曲线本身不证明新机制。
+非负的意思是不允许用负的突变数互相抵消。一个特征只能往目录里加突变，不能靠减掉另一个特征来凑形状。页脚把这个问题称作 blind source identification，译注作盲源识别：手里只有混合之后的 M，特征 P 和权重 E 都要由算法去找。
+
+从头提取和按已知目录去拟合，是两件不同的任务。提取时 P 和 E 都未知，算法同时寻找特征的形状和每个样本的用量；特征个数 k、初始值和正则化都会改变结果。拟合时 P 已经固定，主要估计的是 E。先知道有哪几种形状、再估计用量，约束比连有几种形状都不知道更紧。两种做法都会受到相似特征、低突变数和技术噪声的影响。
+
+重建结果贴合原始谱，说明这组 P 和 E 在数值上说得通。每个成分是否对应一种独立的生物学机制，还要另有化学、暴露或实验方面的证据。引用结论时要写明：这项分析是在提取新模式，还是把样本投到已经发表的目录上。
 
 
 ### 第040页｜特征目录是特定研究的结果
 
 <div id="lecture-page-40"></div>
-<figure class="genome-figure" data-lecture-page="40"><img src="/notes/genome-stability-2026/page-040.webp" width="1942" height="1458" loading="lazy" decoding="async" alt="第40页：特征目录是特定研究的结果，原图内中文标注" /><figcaption>原讲义第40页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="40"><img src="/notes/genome-stability-2026/page-040.webp" width="1942" height="1458" loading="lazy" decoding="async" alt="第40页：特征目录是特定研究的结果，原图内中文标注" /><figcaption>原讲义第40页 · 点击图片放大</figcaption></figure>
 
-这页密集的小柱图展示不同形状的特征，不要求一次背完。更重要的是知道这些模式来自大量样本的统计提取，并依赖该研究的数据和分类版本。本页“49个”属于所引用研究的具体表述，不能当作目前所有突变特征的固定总数；数据库更新、细分命名及不同类别纳入范围都会改变计数。
+这一页的**特征目录**来自一项具体研究。标题 Catalogue of mutational signatures，译注把 catalogue 读成特征目录，并标明目录是该研究的结果。正文写明：从 4,645 个全基因组和 19,184 个外显子组、共计 84,729,690 个体细胞突变中，鉴定出 49 个 **SBS** 特征；这些序列覆盖大多数癌症类型。页脚是 Alexandrov et al., *Nature* 578:94-101 (2020)。SBS 即 single base substitution，单碱基替换特征。
+
+下面是密集的小柱图。名字从 SBS1 排起，中间有 SBS7a–d、SBS10a–b、SBS17a–b 这种带字母的细分，后面又能看到 SBS44、SBS84 和 SBS85。编号不是从 SBS1 连续排到 SBS49，有的整数没有出现在这张表上。小柱沿用六类替换的配色，峰落在不同颜色上，所以形状可以一眼分开：有的几乎只剩一根红峰，有的绿峰成片，有的在多个颜色上都有起伏。缩略图里的具体峰高应按原图坐标阅读。同一数字底下的 a、b、c、d，柱形并不相同，说明这一版目录还会把一个编号再拆开。
+
+“49 个”是这篇 2020 年论文在它自己的数据、分类和命名下的 SBS 计数。全基因组和外显子组看见的突变范围不同，目录依赖当时放进分析的样本。数据库更新、特征再拆分，或者把双碱基替换、插入缺失和重排另计，总数都会变。这一页要把握的是：这些形状从大量样本里统计提取而来，并且属于哪一版目录。
 
 
 ### 第041页｜不同癌种的特征贡献
 
 <div id="lecture-page-41"></div>
-<figure class="genome-figure" data-lecture-page="41"><img src="/notes/genome-stability-2026/page-041.webp" width="2096" height="1503" loading="lazy" decoding="async" alt="第41页：不同癌种的特征贡献，原图内中文标注" /><figcaption>原讲义第41页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="41"><img src="/notes/genome-stability-2026/page-041.webp" width="2096" height="1503" loading="lazy" decoding="async" alt="第41页：不同癌种的特征贡献，原图内中文标注" /><figcaption>原讲义第41页 · 点击图片放大</figcaption></figure>
 
-先选一个癌种沿对应方向阅读，比较有哪些特征出现；再选一个特征，观察它跨哪些癌种分布。一个癌种可以有多个来源，同一个来源也可以跨癌种。热图或气泡图显示的是群体中模式的分布，不是个体诊断规则；没有在图中突出显示也不等于某个病例绝对不可能出现该过程。
+同一套 SBS 特征，在不同癌种里的出现率和突变负担并不一样。这一页用一张点阵同时编码这两件事，右侧另有一列该研究给出的拟定病因。
+
+每一行是一个 SBS，每一列是一种癌症，列顶的 n 是该癌种的样本数。图例把圆点大小定义为 Proportion of tumours with the signature，从 0 到 1，也就是带有该特征的肿瘤所占比例。颜色定义为 Median mutations per Mb due to signature (among tumours with the signature)：在已经带有该特征的肿瘤里，该特征贡献的突变中位数，单位是每兆碱基；色标从接近 0 的浅色到 25 的深蓝。大而浅的点和小而深的点回答两个不同的问题，前者是多少肿瘤里能看到它，后者是看得到的那些肿瘤里它贡献了多少突变。译注也提醒，圆点和颜色要对照原图图例读取。
+
+可以先沿一个癌种的列往下看它有哪些特征，再沿一个特征的行看它跨哪些癌种。SBS1 几乎每一列都有较大的橙色点，右侧写的是 5-甲基胞嘧啶脱氨；SBS5 同样横跨很多列。SBS7a 在 Skin-Melanoma 一列是很大的深蓝色点，SBS7b–d 也集中在这里，拟定病因写紫外线。SBS4 突出在肺癌相关的列，对应烟草。SBS10a 和 SBS10b 标着 *POLE* 突变，结直肠癌一列较显眼。SBS2 与 SBS13 都标着 APOBEC。SBS3 的点比较稀疏，右侧写同源重组修复缺陷以及 *BRCA1*/*BRCA2* 突变。治疗相关的标签也在这列里，例如 SBS11 的替莫唑胺，SBS31 和 SBS35 的铂类。缩略图中各列的精确样本量和每个点的精确颜色，按原图读取。
+
+右侧标题是 Proposed aetiology，即**拟定病因**，是这项研究附上的解释，和点阵本身的统计分布分列两边。一个癌种可以对应多个来源，同一个来源也可以跨癌种。点阵给出的是队列中的分布。某一格没有被画成突出的点，说明的是这批样本的汇总里该组合不显眼；个别病例仍可能出现该过程。
 
 
 ### 第042页｜从特征追溯来源：注意证据强度
 
 <div id="lecture-page-42"></div>
-<figure class="genome-figure" data-lecture-page="42"><img src="/notes/genome-stability-2026/page-042.webp" width="1882" height="998" loading="lazy" decoding="async" alt="第42页：从特征追溯来源：注意证据强度，原图内中文标注" /><figcaption>原讲义第42页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="42"><img src="/notes/genome-stability-2026/page-042.webp" width="1882" height="998" loading="lazy" decoding="async" alt="第42页：从特征追溯来源：注意证据强度，原图内中文标注" /><figcaption>原讲义第42页 · 点击图片放大</figcaption></figure>
 
-来源判断依赖化学机制、暴露资料、癌种分布和实验重现等多种证据。SBS1的年龄关联不意味着它就是能精确读年龄的时钟。本页“只存在于肝癌”等绝对说法应限制在引用数据背景内；统计富集不等于排他性，也不能用一个特征单独证明某个患者一定经历过某种暴露。
+特征可以往回追溯可能的来源，这一页把证据强度直接写进了题注。来源判断要靠化学机制、暴露资料、癌种里的分布，以及实验能否重现，多类证据放在一起。幻灯片中间那句 Comparing prevalence of signatures in cancers reveals aetiology information，说的是比较各癌种的流行程度可以提供病因信息；比较是线索，归因还要看其余证据是否一起成立。
+
+SBS1 的条目写明：它既出现在正常细胞，也出现在肿瘤细胞，与年龄相关，并且 likely to be initiated by deamination of 5mC，即很可能由 5-甲基胞嘧啶脱氨启动。译注概括为与年龄和 5mC 脱氨相关。与年龄相关，说的是突变负担沿着年龄积累；把它当成可以精确读出一个人年龄的时钟，超出了这句话的措辞。
+
+SBS7 写的是 predominantly present in skin-melanoma，主要见于皮肤黑色素瘤，译注补上与紫外线相关。SBS4 和 SBS24 在本页都被写成 C&gt;A，后面的限定不同。SBS4 是 predominantly present in lung cancers，译注写与烟草暴露相关、肺癌中常见。SBS24 写成 only present in liver cancer (aflatoxin-related)，译注写与黄曲霉毒素相关。只看 C&gt;A 这三个字母，分不开烟草和黄曲霉毒素；本页用来区分它们的，是癌种分布和括号里的暴露名称。完整特征还依赖更细的序列上下文，这一页没有把上下文柱图画出来。
+
+SBS24 的 only present 是绝对措辞，应限制在所引用数据的范围内。统计上的富集留有例外。一个特征也不能单独证明某一位患者一定经历过幻灯片上写的那种暴露。
 
 
 ### 第043页｜DBS：两个相邻碱基一起改变
 
 <div id="lecture-page-43"></div>
-<figure class="genome-figure" data-lecture-page="43"><img src="/notes/genome-stability-2026/page-043.webp" width="2009" height="1150" loading="lazy" decoding="async" alt="第43页：DBS：两个相邻碱基一起改变，原图内中文标注" /><figcaption>原讲义第43页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="43"><img src="/notes/genome-stability-2026/page-043.webp" width="2009" height="1150" loading="lazy" decoding="async" alt="第43页：DBS：两个相邻碱基一起改变，原图内中文标注" /><figcaption>原讲义第43页 · 点击图片放大</figcaption></figure>
 
-CC同时变成TT可保留两个相邻碱基共同受损的信息，如果拆成两个独立SBS就可能丢掉这层线索。78类来自相邻双碱基均替换时的类别计数与反向互补归并，而不是96类直接乘二。分析还需可靠判定两个改变属于同一相邻事件，不能把相邻位置所有变异都自动归为同一来源。
+相邻两个碱基一起被替换，记成 **DBS**，double base substitution，双碱基替换。这样可以留下“两个碱基在同一次事件里改变”的信息。若把它们拆成两个互不相干的单碱基替换，这层相邻关系就从分类里掉出去了。
+
+正文第一条写成 double base substitutions (SBS) in 78 channel format。括号里的 SBS 是笔误，页内译注已经标明应按双碱基替换来读。78 类的计法是：相邻两个碱基都发生替换，再把互为反向互补的事件并进同一类。单碱基谱的 96 通道用的是三核苷酸上下文，两套分类各有各的算法。图底部的色带把参照二核苷酸收成十组：AC、AT、CC、CG、CT、GC、TA、TC、TG、TT，每组再按替换结果展开。纵轴是双碱基替换所占的百分比。
+
+第二条写 DBS1 is a signature of UV radiation CC&gt;TT。下方 DBS1 的谱里，高柱落在绿色的 CC&gt;NN 区段，和 CC&gt;TT 的说法相合；具体百分比按原图坐标读。右侧是一条示意图：紫外箭头指向一对 CC，图上标着 XPG、XPF 和 POLδ；Replication 1 之后出现 A，Replication 2 之后成为 TT，方框写着 C&gt;T at CC dinucleotides。示意图用“CC 上的 C&gt;T”来画过程，两轮复制后的产物写成 TT，DBS1 则用双碱基通道把结果记成 CC&gt;TT。这是帮助记忆的示意路线，图上还印着 Wellcome Sanger Institute 的来源标记。
+
+要把两个相邻变异叫成一个 DBS，先得确认它们属于同一次相邻事件。相邻位置上的变异，不会自动来自同一个过程。
 
 
 ### 第044页｜癌症中的DBS特征
 
 <div id="lecture-page-44"></div>
-<figure class="genome-figure" data-lecture-page="44"><img src="/notes/genome-stability-2026/page-044.webp" width="2096" height="1319" loading="lazy" decoding="async" alt="第44页：癌症中的DBS特征，原图内中文标注" /><figcaption>原讲义第44页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="44"><img src="/notes/genome-stability-2026/page-044.webp" width="2096" height="1319" loading="lazy" decoding="async" alt="第44页：癌症中的DBS特征，原图内中文标注" /><figcaption>原讲义第44页 · 点击图片放大</figcaption></figure>
 
-与SBS页面相同，先看模式，再看癌种分布。DBS事件通常比SBS少，因此在样本突变数较低时，统计估计容易不稳定。“11种”属于本页引用版本，不能视作永久不变的全集。UV的证据来自多个相互支持的模式，例如特定SBS与CC到TT的DBS，而不是只根据肿瘤发生部位判断。
+癌症里的 DBS 同样先看形状，再看它在哪些癌种里出现。正文写 11 overrepresented DBSs in cancer，即该分析里明显偏多的 11 个 DBS。这个“11”属于这一版目录；分类一更新，个数会变。DBS 事件通常比单碱基替换少，样本里的 DBS 计数一低，比例和负担的估计就容易不稳。
+
+上方放大的柱图标的是 DBS2，纵轴是突变比例，最高的一簇在绿色 CC&gt;NN，其余颜色也有较矮的柱。它和正文第二条对的不是同一张图。第二条说 DBS1 is the most prevalent signature for skin-melanoma，在皮肤黑色素瘤中最为突出。小图里的 DBS1 才是绿色 CC 区的一根尖峰。读的时候先看角上的 DBS 编号，再看柱子。其余小图的峰位各不相同，例如 DBS4 的尖峰在红色 GC 区，DBS5 在粉色 CT 区。
+
+下方点阵的行是 DBS1 到 DBS11，列是各癌种。颜色表示带有该特征的肿瘤中、该特征贡献的突变中位数，单位仍是每兆碱基，色标上端是 0.5，比 SBS 那页高达 25 的色标低得多，和 DBS 更稀少相一致。DBS1 在皮肤黑色素瘤一列是突出的深色点，右侧病因写紫外线。DBS2 写烟草和其他因素，点分布在肺、膀胱、头颈等列。DBS3 标 *POLE* 突变，DBS4 标铂类治疗，DBS6、DBS7 和 DBS10 标错配修复缺陷，DBS11 写着 Possibly APOBEC activity，措辞本身留着“可能”。缩略图里每个点的精确深浅按原图读。
+
+紫外线这条病因靠的是几条互相支撑的模式：SBS7 系列在黑色素瘤中集中，这一页 DBS1 又把形状指到 CC&gt;TT，并且同样集中在皮肤黑色素瘤。肿瘤长在皮肤上这一件事，本身还不是紫外线暴露的证据。
 
 
 ### 第045页｜插入缺失也有特征模式
 
 <div id="lecture-page-45"></div>
-<figure class="genome-figure" data-lecture-page="45"><img src="/notes/genome-stability-2026/page-045.webp" width="1970" height="1203" loading="lazy" decoding="async" alt="第45页：插入缺失也有特征模式，原图内中文标注" /><figcaption>原讲义第45页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="45"><img src="/notes/genome-stability-2026/page-045.webp" width="1970" height="1203" loading="lazy" decoding="async" alt="第45页：插入缺失也有特征模式，原图内中文标注" /><figcaption>原讲义第45页 · 点击图片放大</figcaption></figure>
 
-ID谱不再仅按字母替换分类，还要考虑插入或缺失、长度、是否位于重复序列，以及断端是否有短同源序列。重复区的小型indel可能提示复制滑移和MMR问题；某些微同源相关缺失可为修复方式提供线索。这些是模式关联，不是一种indel就能唯一对应一条修复通路。
+插入和缺失也按模式归类，分类标准不再是“换成哪个字母”。**ID** 即 insertion/deletion，插入缺失，也称 indel。分类要同时看四件事：是插入还是缺失、有多长、是否落在重复序列里、断端有没有短的同源序列。
+
+左边是一张 6 通道的粗分类，标题为 Small insertion/deletion signature，纵轴是频率百分比。横轴把单碱基缺失、单碱基插入、更长的缺失和插入、微同源相关缺失以及复杂事件分开；最右侧一档远高于其余五档。那一档的具体名称以坐标轴上的小字为准。右边把分类细到 83 通道，用 ID6 做例子。横轴分成几段：重复序列上的 1 bp 缺失和 1 bp 插入，按 C 或 T 以及同聚物长度（homopolymer length）分；更长的缺失和插入，按 2、3、4、5+ 的长度以及重复单元数分；最右侧是微同源缺失，按缺失长度和**微同源**长度（microhomology length）分。微同源就是断端能互相配对的那几个碱基。ID6 的高柱集中在右侧深蓝的微同源区，尤其是较长的微同源，纵轴频率刻到 30 以上。
+
+下方列出 ID1 到 ID17 的小谱。颜色区段和右边那张 83 通道图一致，可以看出谁的峰在最左侧的单碱基重复，谁的峰在最右侧的微同源。ID6 的小图就对应那簇蓝色微同源峰。这张表是一份目录里的 ID 特征，编号和个数随分类版本改变。
+
+同聚物长度轴上的峰，常被联系到复制时的滑移，以及错配修复没有把滑移留下的环去掉。微同源区的缺失，则为断裂可能靠短同源来连接提供线索。这些都是模式和机制之间的关联。单独一个 indel，对不上唯一一条修复通路。
 
 
 ### 第046页｜重排特征与HR缺陷
 
 <div id="lecture-page-46"></div>
-<figure class="genome-figure" data-lecture-page="46"><img src="/notes/genome-stability-2026/page-046.webp" width="2039" height="976" loading="lazy" decoding="async" alt="第46页：重排特征与HR缺陷，原图内中文标注" /><figcaption>原讲义第46页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="46"><img src="/notes/genome-stability-2026/page-046.webp" width="2039" height="976" loading="lazy" decoding="async" alt="第46页：重排特征与HR缺陷，原图内中文标注" /><figcaption>原讲义第46页 · 点击图片放大</figcaption></figure>
 
-结构变异按片段类型、长度和是否聚集等特征分类，也能形成“谱”。HR能力下降后，细胞可能更依赖其他断裂处理方式，留下特定缺失或重排组合。RS与SBS提供的是不同尺度的信息，可以互补；但结构变异检测更受测序技术和分析流程影响，比较不同队列前需确认分类和检测条件一致。
+更大尺度的结构改变也可以做成谱。**RS** 即 rearrangement signature，重排特征。本页先按类型分成大的类别：large deletion 是大片段缺失，duplication 在左图里写成 TD，即串联重复（tandem duplication），inversion 是倒位，translocation 是易位。
+
+左边 4 通道的纵轴是频率，刻度到 100%。青色的 TD 柱远高于红色缺失、倒位和灰色易位。右边把事件细分成 32 通道，例子标成 Breast RS3。横轴先分成 Clustered rearrangements 和 Non-clustered rearrangements，也就是重排是否成簇；每一边再按缺失、TD、倒位、易位以及片段长度分栏，长度从 1–10 kb、10–100 kb、100 kb–1 Mb、1–10 Mb 直到 &gt;10 Mb。Breast RS3 的主要峰在非成簇的 TD 里，位于 1–10 kb 和 10–100 kb 两档；成簇一侧几乎是平的，最右侧非成簇易位还有一根较矮的柱。32 通道里每一类占几个长度档，按原图小字读。
+
+上方第二条写：RSs are associated with homologous recombination deficiencies in tumors。同源重组（homologous recombination）用同源模板处理双链断裂；这条能力下降，就是同源重组缺陷。译注把这句话收成“部分重排模式与肿瘤同源重组缺陷有关”。页面实际展示的是 Breast RS3 这种以非成簇串联重复为主的谱，以及这种关联。“部分”限定了范围：HR 下降后，细胞会更多依赖其他处理断裂的方式，从而留下特定的缺失或重排组合。这里建立的是模式与修复状态之间的联系。
+
+RS 和 SBS 看的是不同尺度，可以互相补充。结构变异的检出更受测序技术和分析流程影响。比较不同队列之前，先确认分类定义和检测条件一致。
 
 
 ### 第047页｜BRCA1缺陷会留下多维痕迹
 
 <div id="lecture-page-47"></div>
-<figure class="genome-figure" data-lecture-page="47"><img src="/notes/genome-stability-2026/page-047.webp" width="1735" height="1222" loading="lazy" decoding="async" alt="第47页：BRCA1缺陷会留下多维痕迹，原图内中文标注" /><figcaption>原讲义第47页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="47"><img src="/notes/genome-stability-2026/page-047.webp" width="1735" height="1222" loading="lazy" decoding="async" alt="第47页：BRCA1缺陷会留下多维痕迹，原图内中文标注" /><figcaption>原讲义第47页 · 点击图片放大</figcaption></figure>
 
-BRCA1参与HR及相关修复调控，其功能失常可能同时影响多个变异类别。因此判断HR缺陷可整合多个指标，而不只看BRCA1基因有没有一个变异。这里的“六种特征”不宜误读成BRCA1只会造成六种具体突变；它指该框架中若干统计模式或预测特征，且BRCA1与BRCA2缺陷也不是完全同义。
+标题写 Deficiency in *BRCA1* leads to six different mutational signatures：*BRCA1* 功能缺陷会留下六种不同的突变特征。译注把它说成多维痕迹。图本身是一张带问号的机制示意，分图字母是 b。最上端 *BRCA1* 被画成受到抑制，向下造成**复制应激**（replication stress），再分出四类可能的 DNA 损伤。
+
+四条支路平行向下，每一条都是：可能的损伤，到图中提议的复制或修复活动，再到突变结局。第一条的损伤写着 ssDNA gap or unknown?，单链缺口，或者尚不清楚；活动是压住缺口并走易错复制，DNA 上标着 *REV1*，文字写易错的跨损伤合成和未被纠正的晚期复制错误，结局是碱基替换 SBS3 和 SBS8。缩略图里另一个候选聚合酶的名字不够清楚，按原图小字阅读。第二条从双链断裂出发，经过末端切除和微同源，写到微同源介导的末端连接，例如 TMEJ；更长的切除可能暴露正向重复，形成更大的缺失，或经单链退火造成染色体易位，括号里注明 not shown。结局是大于 3 bp 的小插入缺失，以微同源介导的缺失为主，对应 ID6；两侧带重复或微同源的更大缺失，可能表现为 RS5 的缺失表型。第三条从崩溃的复制叉出发，经模板转换和切回，写 MMBIR，即断裂诱导复制，图中注明没有末端连接；结局是 RS3 重复，以及与 HRD 相关的 LOH，杂合性丢失。第四条从复制叉障碍出发，画了异常的复制重启、左右复制叉和姐妹染色单体上的串联重复，末端连接旁边标着 *POLQ*?，结局是 RS3 的串联重复。
+
+标题里的“六种”，可以对上底部这些统计特征的名字：SBS3、SBS8、ID6、RS5，以及两条支路分别写到的 RS3 重复和 RS3 串联重复。LOH 写在 RS3 重复那一格里，是伴随列出的表型。这个数字指的是该框架使用的若干统计模式。理解成“*BRCA1* 只能造成六种具体突变”，或者理解成“每一个 *BRCA1* 缺陷肿瘤都会把这六种全部显示出来”，都超过了图的内容。*BRCA1* 与 *BRCA2* 的缺陷也不宜当成同一套痕迹。
+
+图中多处留着不确定：第一类损伤带问号，单链退火标成未画出，*POLQ* 带问号，活动那一行的标题是 Proposed。因此这是一份提议的因果地图。*BRCA1* 受阻，复制应激出现，不同损伤改走其他处理方式，替换、插入缺失和重排几类痕迹可以同时出现。它是模型，不是这一页上的一项实验结果。
+
+*BRCA1* 参与同源重组和相关的修复调控，功能失常时可以同时碰到好几类变异。判断同源重组缺陷，可以把这些统计特征合在一起看。只检查 *BRCA1* 里有没有一个变异，覆盖不到图上这些痕迹所要回答的问题。
 
 
 ### 第048页｜HRD预测与临床用途的边界
 
 <div id="lecture-page-48"></div>
-<figure class="genome-figure" data-lecture-page="48"><img src="/notes/genome-stability-2026/page-048.webp" width="1943" height="1307" loading="lazy" decoding="async" alt="第48页：HRD预测与临床用途的边界，原图内中文标注" /><figcaption>原讲义第48页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="48"><img src="/notes/genome-stability-2026/page-048.webp" width="1943" height="1307" loading="lazy" decoding="async" alt="第48页：HRD预测与临床用途的边界，原图内中文标注" /><figcaption>原讲义第48页 · 点击图片放大</figcaption></figure>
 
-基因检测、基因组瘢痕和多特征预测模型衡量不同对象。肿瘤可因多种原因产生HR缺陷，历史瘢痕也不保证治疗当下仍有同样修复状态。HRDetect原研究的性能属于特定队列与任务，不能当成所有癌种的临床表现。药物适应证和伴随诊断要求需按具体癌种、治疗线次和当前监管文件判断，本笔记不据讲义概述给出治疗选择。
+这一页的标题是 HRD 特征的临床应用，译注立刻把边界写上：HRD 预测与临床用途的边界。**HRD** 即 homologous recombination deficiency，同源重组缺陷。幻灯片列了四条应用，每一条衡量的对象都不相同。
 
-#### 深入理解：灵敏度、特异度与临床效用
+第一条把抑制剂写成 **PAPR1**。图内译注指出这是拼写错误，所指的是 **PARP1**（poly(ADP-ribose) polymerase 1，参与单链断裂等修复的一种酶）。课件说这类抑制剂已获批用于治疗若干 *BRCA1*/*BRCA2* 缺陷肿瘤。这里需要的背景是**合成致死**（synthetic lethality）：两个打击单独存在时细胞仍能存活，同时发生时细胞走向死亡。*BRCA1*/*BRCA2* 缺陷使同源重组变弱，再抑制 PARP1 参与的另一条修复，是这一策略的经典搭配。第三条把抑制剂写成 PARP，译注同样要求按 PARP1 来读。“已获批用于若干肿瘤”是适应证层面的概述。具体癌种、治疗线次和伴随诊断，要按现行说明书和监管文件判断；本笔记不根据讲义概述给出治疗选择。
 
-灵敏度是在真正有目标缺陷的样本中，模型检出的比例；特异度是在没有目标缺陷的样本中，模型判阴性的比例。两者不能交换，阈值改变也会改变表现。原始研究的98.7%灵敏度回答的是其定义和队列中的识别能力，不直接回答某位患者是否会从药物中获益。机制标志物、分类准确性和治疗获益预测是三层不同问题，后者需要对应临床证据。
+第二条写 *BRCA1*/*BRCA2* 缺陷也可能来自不容易检测的突变。第三条把 HRD 状态检测写成 PARP 抑制剂的伴随诊断，并点名 Myriad Genetics 的 myChoice HRD 检测。第四条才是 **HRDetect**：用 HRD 特征预测 *BRCA1*/*BRCA2* 缺陷，幻灯片写特异度 98.5%，并称已做过临床使用方面的测试，文献是 Davies 等，*Nature Medicine* 2017，23 卷 517–525 页。译注指出 myChoice 和 HRDetect 是不同的检测或模型。基因检测看的是基因变异，基因组瘢痕看的是历史上留下的结构改变，多特征模型看的是若干突变特征的组合。肿瘤可以因为不止一种原因出现 HR 缺陷；瘢痕记录的是过去积累的痕迹，不能保证治疗当下的修复状态仍和产生瘢痕时相同。
+
+页内译注对第四条的数字作了更正：HRDetect 原文报告的是 98.7% 的灵敏度，幻灯片写成了 98.5% 的特异度。灵敏度是在真正具有目标缺陷的样本中，模型检出的比例；特异度是在没有该缺陷的样本中，模型判为阴性的比例。两个比例回答的问题不同，阈值一变，两者都会跟着变。按原文记住 98.7% 的灵敏度，它回答的仍是该定义、该队列里的识别能力。HRDetect 原研究的性能属于那一项特定任务，不宜直接当成所有癌种里的临床表现。机制上的标志物、分类是否准确、患者会不会从药物获益，是三层问题。预测出 HRD，或在研究队列里把 *BRCA1*/*BRCA2* 缺陷样本认出来，都还没有证明这位患者已经获益；治疗获益需要对应的临床证据。
 
 补充核验：[Davies et al. 2017 · HRDetect](https://pubmed.ncbi.nlm.nih.gov/28288110/)。
 
@@ -444,9 +652,15 @@ BRCA1参与HR及相关修复调控，其功能失常可能同时影响多个变�
 ### 第049页｜合成致死：两个缺陷共同致命
 
 <div id="lecture-page-49"></div>
-<figure class="genome-figure" data-lecture-page="49"><img src="/notes/genome-stability-2026/page-049.webp" width="1661" height="1418" loading="lazy" decoding="async" alt="第49页：合成致死：两个缺陷共同致命，原图内中文标注" /><figcaption>原讲义第49页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="49"><img src="/notes/genome-stability-2026/page-049.webp" width="1661" height="1418" loading="lazy" decoding="async" alt="第49页：合成致死：两个缺陷共同致命，原图内中文标注" /><figcaption>原讲义第49页 · 点击图片放大</figcaption></figure>
 
-“合成致死”指单独失去A或B时细胞可能仍能生存，两者同时失常却难以存活。PARP抑制会影响DNA损伤处理和复制过程，并可产生PARP trapping等效应；HR缺陷细胞对此可能更脆弱。常见“单链缺口变双链断裂”的讲法有助入门，但并不覆盖全部机制，更不能推出所有BRCA变异都会敏感、或一定不会耐药。
+这一页要建立的概念是**合成致死**（synthetic lethality）：细胞只失去其中一条通路时往往还能活，两条一起失常就很难存活。题目把这个概念用在 PARP1 抑制上，写成 PARP1 inhibition as “synthetic lethality” therapy；淡蓝题注是“两个缺陷共同致命”。侧边译注依次标出 PARP1 抑制、合成致死、HR 功能正常和 HR 功能缺陷。**HR** 是 homologous recombination，同源重组，用同源序列把双链断裂重新接上。
+
+主图从上方的双链断裂画起。分图 a 里，DNA 损伤引出损伤应答，PARP1 与 MRE11 位于断口附近，并标出 PAR 和 ATM。箭头向下分成三列，反复出现的橙色椭圆是 PARP1。b 是 HR：能看到 BARD1、BRCA1、RPA 和 RAP80，步骤包括末端切除（DNA-end resection）、链侵入（strand invasion）和拆分（resolution）；这一列里还写着 HR suppression，PARP1 出现在切除、抑制和侵入几个位置上，最下方的产物链画成红色。c 是 **cNHEJ**（classical non-homologous end joining，经典非同源末端连接）：KU 先结合，图上写着对 DNA-PKcs 的刺激，经过染色质重塑，再由 XRCC4 和 LIG4 完成连接。d 从 “cNHEJ absent” 接到 **aNHEJ**（alternative end joining，替代性末端连接）：断口用红色短线标出微同源（microhomology），连接步骤写着 Pol θ 和 LIG3。c 列灰框列出类别转换重组、V(D)J 重组，以及缺少 shelterin 时的端粒融合；d 列灰框列出染色体易位，以及 cNHEJ 和 shelterin 都不在时的端粒融合。**shelterin** 是保护端粒、使它不被当成断口的蛋白复合物。页下能看到 Nature Reviews 的刊名，并印有 Roos 等 2016 年的引用。
+
+题目里的两个缺陷，是 PARP1 被抑制，再加上 HR 功能缺陷。三列说明 PARP1 会出现在哪些修复路线上，其中 HR 一列画有 BRCA1。灰框列出的是这些连接路线参与的生物学过程。图上没有生存曲线、药物浓度或病人分组，页下的文献行也只说明这是综述里的通路示意。
+
+课堂上常把 PARP 抑制理解成：单链缺口没补上，复制之后变成双链断裂。本图的起点已经是双链断裂，PARP1 被画进末端切除、链侵入、经典连接和微同源连接。抑制 PARP 时，蛋白还可能留在 DNA 上不再及时离开，这种效应称为 **PARP trapping**。HR 有缺陷的细胞对这种压力可能更脆弱。报告里的某一个 *BRCA1* 变异，还要再判断细胞是否真的失去同源重组；突变特征可以用来辅助这层判断。这张示意图给不出“所有 BRCA 变异都敏感”，也给不出“用药之后不会耐药”。
 
 补充核验：[Davies et al. 2017 · HRDetect](https://pubmed.ncbi.nlm.nih.gov/28288110/)。
 
@@ -454,17 +668,29 @@ BRCA1参与HR及相关修复调控，其功能失常可能同时影响多个变�
 ### 第050页｜病因与特征需要多类证据连接
 
 <div id="lecture-page-50"></div>
-<figure class="genome-figure" data-lecture-page="50"><img src="/notes/genome-stability-2026/page-050.webp" width="1812" height="1189" loading="lazy" decoding="async" alt="第50页：病因与特征需要多类证据连接，原图内中文标注" /><figcaption>原讲义第50页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="50"><img src="/notes/genome-stability-2026/page-050.webp" width="1812" height="1189" loading="lazy" decoding="async" alt="第50页：病因与特征需要多类证据连接，原图内中文标注" /><figcaption>原讲义第50页 · 点击图片放大</figcaption></figure>
 
-把某种暴露与肿瘤谱联系起来，可以先在患者中寻找相关，再用控制条件下的实验测试能否产生相似模式。两类证据互补：人群数据接近真实疾病，但暴露可能混杂；实验可控制变量，却未必重现人体长期过程。相似度高支持候选联系，不能自动证明该暴露解释了某个肿瘤的全部突变。
+这一页要回答的是：癌症病因和突变特征怎样连起来。标题是 Associating cancer aetiology and mutational signatures，题注写“病因与特征需要多类证据连接”。画面分成左右两块。左边黄底是 In vitro、Experimentally generated signatures，即体外实验产生的特征；右边灰底是 In vivo、Cancer-derived signatures，即从肿瘤中得到的特征。每一小图都按六类碱基替换分色：C&gt;A、C&gt;G、C&gt;T、T&gt;A、T&gt;C、T&gt;G。右侧编号属于 **SBS**（single-base substitution，单碱基替换）特征。
+
+四行是四组对照。读图时按行比较左右两张小图，每张图的柱高只表示本侧各类替换的相对高低。上面两行归在 Exogenous or environmental exposure（外源或环境暴露）下：顺铂（cisplatin）对着 SBS31，两侧都以红色的 C&gt;T 柱最突出；pks⁺ 大肠杆菌对着 SBS88。pks⁺ 是这株细菌携带的基因岛标记，图用它代表一种细菌相关的实验暴露。下面两行归在 Intrinsic DNA repair defect（内在的 DNA 修复缺陷）下：*MSH2*、*MSH6* 或 *MLH1* 敲除对着 SBS44，多类替换一起升高；*PMS2* 敲除对着 SBS26，青绿色的 T&gt;C 更突出。这四个斜体名字都是错配修复基因。中间圆环上是一对循环箭头：Validation（验证）和 Hypothesis generation（提出假说）。
+
+圆环表示两条路可以来回走：从肿瘤谱提出“也许是某种暴露或某种修复缺陷”，再用实验谱去对；也可以从实验谱出发，到肿瘤谱里寻找长得像的特征。底部两条箭头分别指向 Understanding mutational mechanisms（理解突变机制）和 Clinical decision support tools（临床决策支持工具）。
+
+同一行左右相似，支持把实验处理和这个肿瘤特征放进同一条候选联系。顺铂是药物暴露，被放在“外源或环境暴露”这一档，对面才是肿瘤来源的 SBS31。人群中的肿瘤谱更接近真实疾病，暴露史却可能混在一起；体外实验能控制处理，却未必重现人体里多年的过程。相似度高，说明这种实验条件可以产生相近的模式，还不能推出该暴露解释了某例肿瘤的全部突变。底部的“临床决策支持工具”是图上标出的用途方向，这一页没有展示任何一个具体治疗决定是怎样做出的。
 
 
 ### 第051页｜环境诱变物特征图谱研究
 
 <div id="lecture-page-51"></div>
-<figure class="genome-figure" data-lecture-page="51"><img src="/notes/genome-stability-2026/page-051.webp" width="1937" height="1488" loading="lazy" decoding="async" alt="第51页：环境诱变物特征图谱研究，原图内中文标注" /><figcaption>原讲义第51页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="51"><img src="/notes/genome-stability-2026/page-051.webp" width="1937" height="1488" loading="lazy" decoding="async" alt="第51页：环境诱变物特征图谱研究，原图内中文标注" /><figcaption>原讲义第51页 · 点击图片放大</figcaption></figure>
 
-本页是Kucab等2019年研究的论文截图，用作下一组实验页的来源入口。阅读图形摘要时按实验顺序理解：选择细胞、施加处理、建立克隆、测序，再提取模式。这里的细胞实验模拟不是对健康人主动进行致癌暴露，也不能把体外细胞承受的处理条件直接换算成人体日常暴露风险。
+这一页是一篇 *Cell* 论文的页面截图，给后面几页的实验提供出处。大标题是 A Compendium of Mutational Signatures of Environmental Agents，题注为“环境诱变物特征图谱研究”。左侧 Graphical abstract（图形摘要）要按从上到下的实验顺序读。
+
+摘要最上是 79 environmental agents，即 79 种环境因素。色块标出的类别包括醛类、烷化剂、药物治疗、DDR 抑制剂、多环芳烃、辐射、杂环胺、亚硝胺，以及芳香胺、硝基多环芳烃、ROS/NOS、金属盐和 Others。**DDR** 是 DNA damage response，DNA 损伤应答。中间一层是 Treatment of human iPSC：处理人类 **iPSC**（induced pluripotent stem cell，诱导多能干细胞），箭头指向一个细胞，再进入 Subclone expansion（亚克隆扩增）。再下一层是测序仪和计算机：WGS of 324 human iPSC subclones，加上 Computational analysis。**WGS** 是 whole-genome sequencing，全基因组测序。
+
+最底一排是四类产出，各自配了一小条示意谱：41 个与诱变剂相关的替换特征、6 个双替换特征、8 个插入缺失特征，以及沿基因组地形的突变不对称。四个数字按类别分开计，同一因素可以同时贡献不止一类。右侧 In Brief 把这项工作说成一份资源：呈现多种环境诱变剂会诱发哪些突变，以及细胞怎样修复它们。作者栏能看到 Kucab 等人。
+
+图形摘要里的数字来自这套细胞实验。处理对象是培养的 iPSC，条件是受控暴露。它回答的是“给细胞某种处理后，基因组里出现什么模式”。这里没有对健康人做致癌暴露，也不能把培养皿里的浓度直接换算成日常生活中的接触风险。
 
 补充核验：[Kucab et al. 2019 · Environmental mutational signatures](https://pubmed.ncbi.nlm.nih.gov/30982602/)。
 
@@ -472,9 +698,15 @@ BRCA1参与HR及相关修复调控，其功能失常可能同时影响多个变�
 ### 第052页｜如何实验验证环境特征
 
 <div id="lecture-page-52"></div>
-<figure class="genome-figure" data-lecture-page="52"><img src="/notes/genome-stability-2026/page-052.webp" width="2033" height="1333" loading="lazy" decoding="async" alt="第52页：如何实验验证环境特征，原图内中文标注" /><figcaption>原讲义第52页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="52"><img src="/notes/genome-stability-2026/page-052.webp" width="2033" height="1333" loading="lazy" decoding="async" alt="第52页：如何实验验证环境特征，原图内中文标注" /><figcaption>原讲义第52页 · 点击图片放大</figcaption></figure>
 
-克隆扩增的意义是让一个细胞中形成的改变在后代中可检测，再通过测序统计。但扩增本身也会增加背景突变，因此需要匹配对照和重复。讲义的“7天”是流程简化，不应理解为所有试剂都具有同一固定暴露方案；精确处理时间、剂量和代谢活化条件应回原论文方法查阅，不能据此直接复制实验。
+这一页把上一页的图形摘要拆成验证流程。标题是 Validation of mutational signatures of environmental agents，题注是“如何实验验证环境特征”。讲义用三条概括：79 种因素加进 iPSC；提取亚克隆并扩增，做全基因组测序；再把突变特征与对照细胞比较。
+
+分图 B 把剂量和克隆画得更细。细胞从上方一个群体出发，分成左右两臂。左臂选用使存活率落在 40%–60% 的浓度，右臂约 20%，处理时间都标成 2–24 小时。两臂接着都写着 Recover and expand（7 days），即恢复并扩增 7 天，然后衍生亚克隆、再扩增，并对其中 2–4 个亚克隆做全基因组测序。克隆扩增的作用，是让最初一个细胞里形成的改变在后代中多到能够被测序统计。
+
+分图 C 说明怎样把“诱变剂造成的部分”分出来。对照只有 Mutational process A，标注为 Background mutagenesis（背景突变），柱子较矮。处理组同时有过程 A 和过程 B，过程 B 才标成与环境诱变剂相关，总轮廓更高。图下的式子是：处理组的突变谱 = 背景突变 + 诱变剂诱发的突变。要读的是扣掉背景之后多出来的那一部分。
+
+讲义第一条把“加入 iPSC”写成 7 天。分图 B 里，7 天标在恢复扩增上，处理本身是 2–24 小时，并且按存活率选了两档浓度。扩增自己也会积累背景突变，所以图上保留了对照和多个亚克隆。精确的处理时间、剂量和是否需要代谢活化，要回到 Kucab 等 2019 年论文的方法。这页适合用来理解设计，不适合当成可以直接照做的实验单。
 
 补充核验：[Kucab et al. 2019 · Environmental mutational signatures](https://pubmed.ncbi.nlm.nih.gov/30982602/)。
 
@@ -482,9 +714,15 @@ BRCA1参与HR及相关修复调控，其功能失常可能同时影响多个变�
 ### 第053页｜哪些实验处理产生可辨认模式
 
 <div id="lecture-page-53"></div>
-<figure class="genome-figure" data-lecture-page="53"><img src="/notes/genome-stability-2026/page-053.webp" width="2149" height="1438" loading="lazy" decoding="async" alt="第53页：哪些实验处理产生可辨认模式，原图内中文标注" /><figcaption>原讲义第53页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="53"><img src="/notes/genome-stability-2026/page-053.webp" width="2149" height="1438" loading="lazy" decoding="async" alt="第53页：哪些实验处理产生可辨认模式，原图内中文标注" /><figcaption>原讲义第53页 · 点击图片放大</figcaption></figure>
 
-这些计数对应不同变异类别，同一种处理可能同时产生多种类型，不能直接相加为互不重复的试剂数量。未检出特征也不等于该物质绝对安全，可能涉及剂量、细胞代谢、存活筛选和统计能力。实验重现加强了机制证据，但仍应区分受控细胞体系中的结果与人体真实暴露造成的疾病风险。
+这一页问的是：哪些实验处理产生了能够辨认的模式。标题仍是环境因素突变特征的验证，题注写“哪些实验处理产生可辨认模式”。讲义给出两组计数：41 种因素产生了单碱基替换特征；6 种产生 DBS，8 种产生 indel 特征。**DBS** 是 double-base substitution，相邻两个碱基一起被替换。**indel** 是 insertion or deletion，插入或缺失。
+
+下方是一张相似度热图。每一行是一种处理，行名旁印着浓度或剂量，最上有 Control，往下能看到 SSR、多种多环芳烃和烷化剂、顺铂、AAI、DMH 等。每一列是按组织标注的肿瘤样本，标签里有乳腺、中枢神经、结直肠、食管、头颈、肾、肝、肺、淋巴、胰腺、皮肤、胃、骨、卵巢、子宫和髓系等。格子里印着相似度，橙色块较高，大片浅色表示较低。缩略图中的具体数值应按原图阅读。右侧文字举出两个和已知特征对得上的例子：SSR（simulated solar radiation，模拟太阳辐射）与皮肤癌中和紫外相关的模式相符；AAI（aristolochic acid I，马兜铃酸 I）与和马兜铃酸暴露相关的尿路上皮癌模式相符。
+
+41、6 和 8 分别数的是“产生了某一类变异特征”的因素。同一种处理可以同时留下替换和插入缺失，这三个数不能相加，当成互不重叠的试剂总数。某一行几乎没有橙色，只说明在这套剂量、这种细胞和当前统计条件下没有提出可辨认特征。剂量、细胞能否把该物质代谢成活性形式、处理后哪些细胞还活着，以及样本够不够，都会影响特征是否被看见。未检出因此还不能理解成该物质在任何条件下都安全。
+
+SSR 和 AAI 两处被点名的橙色块，支持实验谱和某些已知暴露相关的肿瘤谱比较像。这是受控细胞体系里重现出来的模式，加强了这两类处理与相应肿瘤特征之间的候选联系。热图上的其余试剂，不能据此写成人体在任意接触水平下都会致癌。
 
 补充核验：[Kucab et al. 2019 · Environmental mutational signatures](https://pubmed.ncbi.nlm.nih.gov/30982602/)。
 
@@ -492,9 +730,15 @@ BRCA1参与HR及相关修复调控，其功能失常可能同时影响多个变�
 ### 第054页｜1,2-DMH：序列背景影响突变
 
 <div id="lecture-page-54"></div>
-<figure class="genome-figure" data-lecture-page="54"><img src="/notes/genome-stability-2026/page-054.webp" width="1713" height="1296" loading="lazy" decoding="async" alt="第54页：1,2-DMH：序列背景影响突变，原图内中文标注" /><figcaption>原讲义第54页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="54"><img src="/notes/genome-stability-2026/page-054.webp" width="1713" height="1296" loading="lazy" decoding="async" alt="第54页：1,2-DMH：序列背景影响突变，原图内中文标注" /><figcaption>原讲义第54页 · 点击图片放大</figcaption></figure>
 
-同一烷基化过程可以留下替换和缺失两类结果。图中把以G为中心的反应转换到互补链后，就变成邻接poly-T的C改变；这仍是同一化学事件的两种写法。不要把“poly-A末端的G”和“poly-T旁的C”当成两个互不相关的靶点。具体缺失机制还涉及损伤后处理，不能仅由柱形图直接证实。
+这一页看一种烷化剂自己的序列偏好：**1,2-DMH**（1,2-dimethylhydrazine，1,2-二甲基肼）。标题写它有独特特征，题注是“序列背景影响突变”。右侧要点写明，特征包括 C&gt;T 替换，以及旁边带着 poly-T 的 1 个碱基 C 缺失。**poly-T** 是一串连续的 T；**poly-A** 是一串连续的 A。
+
+左边分图 D 用两种纵轴展示同一背景。上图是替换所占的百分比，红色柱标成 C&gt;T/G&gt;A，并在 CpT 处作了标记。下图是 C/G 缺失的计数，蓝色高柱也落在 CpT。右边两张图把旁侧 T 的个数 nT 拉开。上图是 [C&gt;T]Tn 的优势（odds），柱子随 T 的个数升高，到 ≥6 仍然高。下图是 [-C]Tn 的发生次数，中等长度的 poly-T（大约 3 到 4 个 T）更高，更长时回落。四张图的纵轴分别是百分比、计数、优势和发生次数，柱高不能跨图直接比较。
+
+下方序列图是这页给出的机制模型。起点写成 5′-AAAAAGN-3′，烷基化加在 poly-A 末端那个 G 的 O6 位，变成 O6-meG。一条叉是复制：O6-meG 与 T 配对，再经复制得到框里的 C&gt;T/G&gt;A。另一条叉写着 Slippage+Replication（滑动加复制）：损伤碱基被环出，复制后留下一个 C/G 缺失。译注说明，O6-烷基化的 G 可以与 T 错误配对。poly-A 末端的 G，换到互补链上写，就是贴着 poly-T 的 C。右边用 C&gt;T 和 C 缺失来画，左边用 G&gt;A 和 G/C 缺失来画，对应的是同一次化学修饰的两种序列写法。
+
+柱形图支持的是：C&gt;T 和单碱基 C 缺失都偏向 poly-T 旁侧，而且两种突变随 T 的长度变化的方式不同。滑动成环是图上画出的解释；缺失的具体路径还经过损伤之后的处理。柱形图统计的是最终序列，没有直接显示那个环。1,2-DMH 在这里是实验中的烷化剂，这张特征是该处理条件下的模式。
 
 补充核验：[Kucab et al. 2019 · Environmental mutational signatures](https://pubmed.ncbi.nlm.nih.gov/30982602/)。
 
@@ -502,52 +746,83 @@ BRCA1参与HR及相关修复调控，其功能失常可能同时影响多个变�
 ### 第055页｜人与环境：把诗意和证据分开
 
 <div id="lecture-page-55"></div>
-<figure class="genome-figure" data-lecture-page="55"><img src="/notes/genome-stability-2026/page-055.webp" width="2016" height="1277" loading="lazy" decoding="async" alt="第55页：人与环境：把诗意和证据分开，原图内中文标注" /><figcaption>原讲义第55页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="55"><img src="/notes/genome-stability-2026/page-055.webp" width="2016" height="1277" loading="lazy" decoding="async" alt="第55页：人与环境：把诗意和证据分开，原图内中文标注" /><figcaption>原讲义第55页 · 点击图片放大</figcaption></figure>
 
-这是一页过渡与思考，不是实验结果。它提醒我们环境经历可能通过化学暴露等途径影响生物体，但诗句本身不能证明任何特定环境因素会写入基因组。联系前后内容时，应把文学表达、分子机制和可检验的研究证据分别放在各自的位置，既保留课程的意境，也避免把隐喻当成生物学定律。
+这一页是过渡和思考。标题是 Human and environment，题注写“人与环境：把诗意和证据分开”。浅灰底上，左侧是蓝色斜体英文，诗题为 There Was a Child Went Forth Every Day，作者 Walt Whitman；右侧是褐色中文。底部译注说明，诗表达的是人与所接触之物之间的联系，原文已经附有中文。
+
+诗页上没有实验分组，也没有突变谱。它的意象是：孩子每天向外走，他遇见的东西会变成他的一部分；这段影响可以停在一天中的某一段，也可以停很多年。课件把它放在环境诱变实验之后，用这个意象把话题从试剂和热图收回来。
+
+诗句负责这个意境。前面几页的 iPSC 处理、对照相减和相似度热图，负责检验某一种实验暴露会不会留下可辨认的突变模式。化学损伤怎样被修复固定成突变，要回到分子步骤。文学表达、损伤与修复的机制、可以对照的实验证据，各留在自己的位置上。诗句本身证明不了某一种环境因素已经写进基因组。
 
 
 ### 第056页｜最终突变谱由损伤与修复共同塑造
 
 <div id="lecture-page-56"></div>
-<figure class="genome-figure" data-lecture-page="56"><img src="/notes/genome-stability-2026/page-056.webp" width="1904" height="1323" loading="lazy" decoding="async" alt="第56页：最终突变谱由损伤与修复共同塑造，原图内中文标注" /><figcaption>原讲义第56页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="56"><img src="/notes/genome-stability-2026/page-056.webp" width="1904" height="1323" loading="lazy" decoding="async" alt="第56页：最终突变谱由损伤与修复共同塑造，原图内中文标注" /><figcaption>原讲义第56页 · 点击图片放大</figcaption></figure>
 
-相同外源暴露在不同细胞中，可能因为代谢、复制和修复状态不同而留下不同模式；同样的最终谱也可能包含多种来源。因此突变特征更像损伤与处理过程的共同指纹。读图时将输入损伤、细胞处理、输出突变依次连接，避免把外源因素一出现就与某个最终特征一对一绑定。
+最终留下来的突变谱，是损伤和修复一起塑造的。标题写 Mutagenesis from both endogenous and exogenous damage，题注是“最终突变谱由损伤与修复共同塑造”。**Mutagenesis** 指突变发生的过程。四个分图用同一套符号：粉色向下箭头是内源 DNA 损伤，青色向下箭头是外源 DNA 损伤；黄色方框是 DNA repair capacity，即修复能力；底部柱是净突变负担，粉色柱来自内源损伤，青色柱来自外源损伤。
+
+a 是正常、健康的细胞，黄框较高，底部粉柱和青柱都短。b 是外源损伤过多的细胞，例子写成皮肤（e.g. skin），青色输入和青色净突变柱明显加高，粉柱仍短。c 是修复能力受损的细胞，黄框被画薄，底部两根柱都高于 a，粉柱比较醒目。d 把生理状态异常单列出来，仍然使用同样的箭头、黄框和净突变柱，底部柱画得接近 a 的短柱。这些柱高是模型里的示意比例，表示相对高低。
+
+因果链按竖向读：上方的损伤进入中间的修复或复制能力，下方才是最终保留的突变。外源输入变粗时，如 b，青色输出可以单独升高。修复方框变薄时，如 c，原本能被处理掉的内源损伤也会更多地留下来。同一种外源暴露，遇到不同的代谢、复制和修复状态，可以留下不同的净突变；看起来相似的最终谱，也可以同时含有粉色和青色两种来源。
+
+幻灯片把这张模型归到 Koh 等，*Nature Reviews Cancer* 2021，卷 21，619–637 页。它支持的读法是：突变特征更像损伤与细胞处理过程的共同指纹。外源因素的名称还不能和某一个最终特征一对一绑死。b 里的皮肤是“外源损伤可以很多”的例子；这张示意没有测量一个人的实际接触量，也没有把这种接触写成必然癌变。
 
 
 ## 检查点与基因编辑
 
-
 ### 第057页｜细胞周期检查点
 
 <div id="lecture-page-57"></div>
-<figure class="genome-figure" data-lecture-page="57"><img src="/notes/genome-stability-2026/page-057.webp" width="1668" height="1263" loading="lazy" decoding="async" alt="第57页：细胞周期检查点，原图内中文标注" /><figcaption>原讲义第57页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="57"><img src="/notes/genome-stability-2026/page-057.webp" width="1668" height="1263" loading="lazy" decoding="async" alt="第57页：细胞周期检查点，原图内中文标注" /><figcaption>原讲义第57页 · 点击图片放大</figcaption></figure>
 
-G1期准备复制，S期合成DNA，G2期为分裂做准备，M期分配染色体。检查点像有条件放行的调控系统：发现未完成复制、损伤或连接异常时延迟后续步骤。它们不是在某个时间点逐字扫描全部基因组，也不能保证没有漏检。理解这张图有助解释为什么HR依赖细胞周期，以及修复失败为何导致异常分裂。
+这一页把细胞周期画成一圈，用来看检查点卡在哪些台阶上。标题是 Cell cycle checkpoints，题注即“细胞周期检查点”。**检查点**（checkpoint）是一套有条件的放行：前面的步骤没完成，或染色体还没准备好，后面的步骤就先等一等。
+
+轮图外圈的灰色弧是 Interphase（间期），标注为细胞内容物的复制；其中一段是 S phase (DNA replication)，即 **S 期**，DNA 在这里合成。这一段旁边的细胞图写出中心粒复制、正在复制的 DNA、细胞核和微管。进入 S 期之前有一个 Decision window（决策窗），并标着 S phase entry commitment point，即进入 S 期的承诺点。另一侧、进入有丝分裂之前，又有一个决策窗和 Mitotic entry commitment point。蓝色弧是 **M 期**，细胞内容物在这里分离，依次画出前期（prophase，已复制的染色体）、中期（metaphase，染色体在纺锤体上排列）、后期（anaphase，染色单体分开）和胞质分裂（cytokinesis，细胞分开）。后期之后还有 Mitotic exit commitment point。左侧另有 cell cycle entry 与 cell cycle exit 两个细胞。
+
+左侧译注把四个名字接到这圈上。G1/S 是复制前关口，对得上进入 S 期之前的决策窗；**G1** 就是 S 期之前的那段间期。intra-S 是复制过程中的检查，对得上标着 DNA replication 的那一段弧，图上没有把它印成单独的扇区名称。G2/M 是进入有丝分裂前的关口，对得上有丝分裂前的那个决策窗；**G2** 是 DNA 复制结束到分裂开始之前的时段，轮图上没有印出 G2 这几个字母。纺锤体检查点对得上中期那一格：chromosome alignment 和 mitotic spindle 画的是染色体是否在纺锤体上排好，后面才是染色单体分开。
+
+这些窗口表示放行要看条件。未完成的复制、还在的损伤，或中期附着异常，都可以让后续步骤推迟。检查点不会在某一个时刻把基因组逐字读完，也不能保证没有漏检。同源重组更常用已经复制出来的姐妹染色单体，因此它和通过 S 期之后的时机连在一起。修复失败若带着错误的染色体连接进入后期，分离那一格就不再是图上这种整齐的分开。这两句是接回本课修复内容时用的背景。本页画的是正常周期的台阶和决策窗，没有画出损伤传感器，也没有给出漏检的比例。
 
 
 ### 第058页｜基因编辑借用细胞修复系统
 
 <div id="lecture-page-58"></div>
-<figure class="genome-figure" data-lecture-page="58"><img src="/notes/genome-stability-2026/page-058.webp" width="1931" height="789" loading="lazy" decoding="async" alt="第58页：基因编辑借用细胞修复系统，原图内中文标注" /><figcaption>原讲义第58页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="58"><img src="/notes/genome-stability-2026/page-058.webp" width="1931" height="789" loading="lazy" decoding="async" alt="第58页：基因编辑借用细胞修复系统，原图内中文标注" /><figcaption>原讲义第58页 · 点击图片放大</figcaption></figure>
 
-编辑器负责定位并制造特定底物，最终结果仍取决于细胞如何处理它。Cas9切出断口后，NHEJ可能形成indel，HDR可在提供模板时实现预期修改；碱基编辑制造化学改变并调整修复偏好；引导编辑写入新序列后还需解决新旧链结构。识别、写入、修复固定是不同环节，工具定位准确也不保证产物完全一致。
+基因编辑在这一页被放回 DNA 修复。工具负责定位，并制造一种特定的 DNA 底物；最后写成什么样，仍取决于细胞怎样处理这个底物。标题是 DNA damage repair pathway in CRISPR applications，题注是“基因编辑借用细胞修复系统”。页面上只有三行。
+
+第一行是 CRISPR-Cas9：NHEJ 与 HDR。**CRISPR-Cas9** 用向导 RNA 把 Cas9 核酸酶带到目标序列并切开 DNA。切开之后，**NHEJ**（non-homologous end joining，非同源末端连接）常在断口留下小的插入或缺失；**HDR**（homology-directed repair，同源定向修复）在细胞使用给定模板时，可以把预定序列写进去。第二行是碱基编辑：抑制 BER 中的特定步骤。**BER**（base excision repair，碱基切除修复）会把异常碱基切除并补上；碱基编辑先造成一个化学改变，再让修复不要把这个改变完全恢复成原来的碱基。第三行是引导编辑，受多种修复过程影响。**引导编辑**（prime editing）先按模板写入一段新序列，写入之后新旧链怎样被保留，还要再经过修复。
+
+三行把识别、写入和修复固定分成前后的环节。向导找对了位置，产物仍然可以不完全一样。这页是一份策略目录，说明这些做法借用的是细胞自己的修复。页面上没有适应症，也没有疗效数据，不能把它读成已经批准的治疗方案。后面两页分别打开切割后的两条路线，以及碱基编辑的第一步。
 
 
 ### 第059页｜CRISPR切割后的两条主要路线
 
 <div id="lecture-page-59"></div>
-<figure class="genome-figure" data-lecture-page="59"><img src="/notes/genome-stability-2026/page-059.webp" width="1945" height="1283" loading="lazy" decoding="async" alt="第59页：CRISPR切割后的两条主要路线，原图内中文标注" /><figcaption>原讲义第59页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="59"><img src="/notes/genome-stability-2026/page-059.webp" width="1945" height="1283" loading="lazy" decoding="async" alt="第59页：CRISPR切割后的两条主要路线，原图内中文标注" /><figcaption>原讲义第59页 · 点击图片放大</figcaption></figure>
 
-向导RNA负责序列识别，Cas9在合适PAM邻近切割。若主要由末端连接处理，断点周围可能形成小型插入缺失，常用来破坏基因；若细胞利用给定模板，可引入预设序列。基因敲除不是每个indel都能实现，还要考虑是否移码、影响关键结构域以及不同等位基因是否均被编辑。
+Cas9 切开 DNA 之后，这一页画出两条主要修复路线。标题是 How does CRISPR editing work，题注是“CRISPR 切割后的两条主要路线”。
+
+上方是 Cas9 的卡通。蛋白分成 REC 和 NUC 两叶。绿色的 **sgRNA**（single guide RNA，单向导 RNA）与目标链配对，负责认出序列。两个剪刀图标标在 HNH 和 RuvC 上，这是切开两条链的核酸酶结构域。靶序列旁边写着 PAM，字母是 NGG。**PAM**（protospacer adjacent motif，原间隔序列邻近基序）是 Cas9 停靠时要在靶序列旁看到的短基序。
+
+黑色箭头从切断的双链分向两边，中间写着 Repair dsDNA。左边是 NHEJ：断口用红色小三角标出，向下收成一条带红色 indel 的双链。**indel** 是 insertion or deletion，插入或缺失。右边是 HDR：断口旁有一段粉色的 Donor DNA，也就是供体模板，向下收成标着 New DNA 的双链，新序列用粉色标出。左边这条路线常被用来打乱基因的阅读；右边这条路线在细胞使用模板时，用来放入预先设计的序列。
+
+这是一张机制示意。一个 indel 要起到敲除作用，还要看它有没有造成移码、有没有碰到关键结构域，以及两条等位基因是否都被编辑到。卡通把每条路线的产物各画成一种干净结果；细胞里两条路线可以同时发生，实际产物常常是混合物。页脚是一条科普网页的地址。图上能读到的是定位、切割和两条修复去向。批准状态和临床疗效都不在这张图里；基因编辑在这里仍是借用细胞修复的研究工具。
 
 
 ### 第060页｜碱基编辑第一步：定位并暴露单链
 
 <div id="lecture-page-60"></div>
-<figure class="genome-figure" data-lecture-page="60"><img src="/notes/genome-stability-2026/page-060.webp" width="1620" height="729" loading="lazy" decoding="async" alt="第60页：碱基编辑第一步：定位并暴露单链，原图内中文标注" /><figcaption>原讲义第60页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="60"><img src="/notes/genome-stability-2026/page-060.webp" width="1620" height="729" loading="lazy" decoding="async" alt="第60页：碱基编辑第一步：定位并暴露单链，原图内中文标注" /><figcaption>原讲义第60页 · 点击图片放大</figcaption></figure>
 
-这页先搭出平台：dCas9能按向导定位，但失去经典双链切割活性。结合后形成R-loop，使一段DNA以单链状态暴露，为脱氨酶提供底物。仅有dCas9不会自动把C改成T，后续还需要催化模块。PAM决定可接近的靶位，编辑窗口决定哪些碱基更可能被改变，两者不是同一个限制。
+碱基编辑的第一步，是把蛋白停到目标附近，并让一段 DNA 以单链形式露出来。标题是 Single base editing using CRISPR-Cas9 system，副标题写成 Single base editing: C→T。题注是“碱基编辑第一步：定位并暴露单链”。**单碱基编辑**（base editing）想改的是一个碱基；这一页写出的目标转换是 C 变成 T。
+
+画面左侧是一个蓝色椭圆，标着 **dCas9**。译注把 dCas9 写成失活 Cas9：这里的失活指经典的双链切割活性被去掉，蛋白仍能按向导停在靶序列上。椭圆下方，一段绿线贴在双链的局部区域上；其中一个碱基对被标红，是 C 与 G。上下链都标了 5′ 和 3′，方向相反，译注说明这两个符号表示 DNA 的方向。链的下方写着 PAM。向右的箭头把同一个位置画成 A 与 T，新的碱基同样标红。
+
+绿线标出结合所覆盖的范围。题注把这一步理解成：结合之后露出一段单链，后面的脱氨酶才有底物。脱氨酶没有画在这个蓝色椭圆上。只有 dCas9 时，图上的 C 不会自动变成 T。C 先要被催化成 U，再由复制或修复固定成 T，互补位置的 G 才变成 A。尿嘧啶本来可以被碱基切除修复拆掉，所以碱基编辑还要调整修复偏好；那是上一页第二条已经列出的策略。这一页的箭头把中间的化学步骤省掉了。
+
+PAM 决定复合物能够在哪些位点旁边停靠。停靠之后，暴露区段里哪几个胞嘧啶更常被改掉，由编辑窗口决定。本页只标了 PAM，没有把窗口画成带编号的碱基，两个限制要分开记。箭头右侧的 A:T 是工具希望留下的结果，它仍然交给细胞后续处理。这张图是编辑工具的入门示意，没有呈现已经批准的治疗方案。
 
 补充核验：[Komor et al. 2016 · Programmable editing of a target base](https://www.nature.com/articles/nature17946)。
 
@@ -555,9 +830,15 @@ G1期准备复制，S期合成DNA，G2期为分裂做准备，M期分配染色�
 ### 第061页｜CBE：C先变U，再被固定为T
 
 <div id="lecture-page-61"></div>
-<figure class="genome-figure" data-lecture-page="61"><img src="/notes/genome-stability-2026/page-061.webp" width="1830" height="806" loading="lazy" decoding="async" alt="第61页：CBE：C先变U，再被固定为T，原图内中文标注" /><figcaption>原讲义第61页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="61"><img src="/notes/genome-stability-2026/page-061.webp" width="1830" height="806" loading="lazy" decoding="async" alt="第61页：CBE：C先变U，再被固定为T，原图内中文标注" /><figcaption>原讲义第61页 · 点击图片放大</figcaption></figure>
 
-脱氨酶先把暴露的C变成U；UGI抑制UNG识别并移除U，使U有机会被按T样模板读取，最终固定成T:A。这里不是某个酶一步把U化学变成T，而是经复制或修复解决中间体。图用dCas9展示早期原理，常用后续编辑器也可使用切口型Cas9，不能把所有CBE都等同于这一种构型。
+**CBE**（cytosine base editor，胞嘧啶碱基编辑器）先把靶点上的 C 变成 U，U 再经复制或修复被固定成 T。淡蓝题注写的就是这条顺序：C 先变 U，再被固定为 T。
+
+中央是停在 DNA 上的编辑复合物。蓝色大椭圆是 **dCas9**（dead Cas9，失活的 Cas9），两条链都不切，只负责停在靶位。黄色椭圆是 deaminase，译注为脱氨酶，罩住下链那个红色的 C；对面的上链碱基是 G。一条绿线从 dCas9 连到上链，表示引导序列把复合物留在这段靶点上。双链右端有一排橙色短线，右端还标着 5′ 和 3′。灰色圆是 **UGI**（uracil DNA glycosylase inhibitor，尿嘧啶 DNA 糖基化酶抑制蛋白），贴在脱氨酶旁边。箭头右侧的双链已经改完：下链红色位置变成 T，上链互补位置变成 A。红字把过程写成 C→U、U→T。
+
+脱氨酶完成的是前一步化学变化：胞嘧啶脱掉氨基，成为尿嘧啶。UGI 拦住细胞的尿嘧啶 DNA 糖基化酶，使这个 U 不被当成损伤立刻切掉，才有机会在复制或修复中按 T 的方式配对，互补链再写成 A。译注写明 C→U→T 是结果示意。箭头跨过了细胞处理，右侧的 T:A 是中间体被解决之后的碱基对。
+
+这张图用 dCas9 展示早期“只定位、只脱氨”的构型。后来常用的 CBE 会换成切口型 Cas9，在非编辑链上切一刀，用来偏向修复方向。读这一页时按图上的 dCas9 理解，不要把所有 CBE 都当成同一种蛋白拼接。文献印成 Komer et al., *Nature*, 2016，译注指出作者应为 Komor。这里是研究工具的作用方式，右侧碱基对是预期结果，不是临床疗效。
 
 补充核验：[Komor et al. 2016 · Programmable editing of a target base](https://www.nature.com/articles/nature17946)。
 
@@ -565,13 +846,15 @@ G1期准备复制，S期合成DNA，G2期为分裂做准备，M期分配染色�
 ### 第062页｜ABE：A到I，再按G读取
 
 <div id="lecture-page-62"></div>
-<figure class="genome-figure" data-lecture-page="62"><img src="/notes/genome-stability-2026/page-062.webp" width="1607" height="1280" loading="lazy" decoding="async" alt="第62页：ABE：A到I，再按G读取，原图内中文标注" /><figcaption>原讲义第62页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="62"><img src="/notes/genome-stability-2026/page-062.webp" width="1607" height="1280" loading="lazy" decoding="async" alt="第62页：ABE：A到I，再按G读取，原图内中文标注" /><figcaption>原讲义第62页 · 点击图片放大</figcaption></figure>
 
-ABE使用工程化腺嘌呤脱氨酶，把DNA中的A变为I，细胞处理时倾向把I当成G。UGI针对U相关处理，并不是ABE普遍必需的核心。两类编辑器都可能改变窗口内多个可作用碱基，产生旁观者编辑。它们分别擅长特定转换，不能笼统说任意单碱基都能用同一个碱基编辑器互换。
+同一套 CRISPR 构图在这一页分成上下两种单碱基编辑。上图仍是 C→T，下图换成 A→G。题注把下图的化学路线写成：A 先到 I，再按 G 读取。
 
-#### 深入理解：编辑底物与最终碱基对
+上图与上一页相同：蓝色 dCas9、黄色脱氨酶和灰色 UGI 作用在下链红色 C 上，对面是 G；红字为 C→U、U→T，产物是上链 A、下链红色 T。译注把碱基对结果写成 C:G→T:A。文献仍印成 Komer et al., *Nature*, 2016，检索时用 Komor。下图没有 UGI，只留 dCas9 和脱氨酶。靶碱基是下链红色 A，对面是 T；红字写成 A→I、I→G，产物是上链 C、下链红色 G。译注说明 **I** 是肌苷（inosine），由腺嘌呤脱氨形成，读取时按 G 对待，并把整对结果写成 A:T→G:C。下图引用印的是 Gaudelli et al., *Nature*, 2017，译注说明这是 **ABE**（adenine base editor，腺嘌呤碱基编辑器）的原始研究。
 
-CBE先制造U:G，ABE先制造I:T，图中箭头最后的T或G表示经过细胞处理保留的结果。对互补链命名时，CBE也可被写成G到A，ABE也可写成T到C，它们不是新增的独立化学反应。阅读编辑结果时要同时检查目标位点、窗口内旁观者改变和indel等副产物，不能只报告目标替换百分比便称为完全精准。
+两条路线的直接产物不同。CBE 先制造 U:G，ABE 用工程化的腺嘌呤脱氨酶先制造 I:T。图右侧的 T 或 G，是细胞处理之后保留下来的碱基，箭头本身没有画出全部中间步骤。从互补链命名时，C:G→T:A 也可以读成 G→A，A:T→G:C 也可以读成 T→C；那是同一对碱基的另一种叫法。UGI 只出现在上图，它针对的是尿嘧啶，下图的 A→I 路线没有把它画成核心部件。
+
+这一页给出的是这两类转换。窗口里若还有别的可被脱氨的 C 或 A，也可能一起被改掉，形成旁观者编辑。阅读结果时要同时看目标位点、窗口内其他改变和 indel。目标位置的替换比例只说明那一个位点，窗口内的旁观者和插入缺失需要另外报告。上下两图都是研究工具的机制示意。
 
 补充核验：[Komor et al. 2016 · Programmable editing of a target base](https://www.nature.com/articles/nature17946)。
 
@@ -579,9 +862,17 @@ CBE先制造U:G，ABE先制造I:T，图中箭头最后的T或G表示经过细胞
 ### 第063页｜抑制BER的特定步骤以保留编辑
 
 <div id="lecture-page-63"></div>
-<figure class="genome-figure" data-lecture-page="63"><img src="/notes/genome-stability-2026/page-063.webp" width="1880" height="1238" loading="lazy" decoding="async" alt="第63页：抑制BER的特定步骤以保留编辑，原图内中文标注" /><figcaption>原讲义第63页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="63"><img src="/notes/genome-stability-2026/page-063.webp" width="1880" height="1238" loading="lazy" decoding="async" alt="第63页：抑制BER的特定步骤以保留编辑，原图内中文标注" /><figcaption>原讲义第63页 · 点击图片放大</figcaption></figure>
 
-如果细胞把编辑产生的U视为损伤并切除，预期转换可能被撤销，或者经过AP位点产生副产物。因此CBE通过UGI把处理偏向目标结果。准确表述是抑制特定底物处理步骤，不能理解为把整个细胞所有BER功能都关闭。图中的不同分支表示同一个U:G中间体可能走向不同结局。
+C 变成 U 之后，编辑还没有完成。细胞若把这个 U 当成损伤切掉，预期的 C→T 会被撤销，或者在无碱基位点之后产生副产物。标题 Inhibiting BER for efficient base conversion 讨论的就是怎样抑制 **BER**（base excision repair，碱基切除修复）里的相关步骤，把编辑留下来。译注把“抑制 BER”限定成相关步骤，图上被挡住的是识别这个 U 的糖基化酶，以及下游通向 indel 的连接；细胞其他位点的碱基切除修复并不在这张图里被整体关闭。
+
+左侧起点是红色 C 与 G，箭头指向 U 与 G。上方虚线是 Cellular uracil DNA glycosylase，即细胞的尿嘧啶 DNA 糖基化酶，译注中的 **UNG**。它若切掉 U，会留下对面仍是 G 的空位，也就是 AP 位点，再由 cellular base-excision repair 补回 C:G，结局标成 Unchanged。UGI in BE2-4 的抑制符号打在这个酶上。译注写：UGI 抑制 UNG，有助于 C 到 T 的转换。
+
+向下的实线标着 BE3 nicks the non-edited strand：BE3 在未编辑链上切一个切口，中间体仍是 U:G。Cellular mismatch repair 把它收成 U:A。蓝色字写 BE3/4 favor repair of the nicked non-edited strand，切口使修复更倾向替换被切开的那条链，于是 G 被写成 A，U 暂时留在编辑链上。再经 DNA replication or repair，U:A 成为 T:A，绿色字标为 Permanent outcome of base editing。从同一分叉还有虚线回到 C:G，这个中间体仍可能被改回原来的碱基对。
+
+下半部画出切除之后的另一条分支。糖基化酶仍可能切下 U；AP lyase 沿虚线打开位点，再进入 **NHEJ**（non-homologous end joining，非同源末端连接），产物上用红线标出 Indel。Mu-GAM 的抑制符号打在 NHEJ 上。UGI 减少的是进入“把 U 切掉”的入口，Mu-GAM 减少的是切掉之后滑向插入缺失的那一截。
+
+同一个 U:G 因此有几种结局：回到未改变的 C:G，经切口偏向的修复变成 T:A，或在 AP 位点之后留下 indel。标题里的 efficient 是这些抑制想造成的偏向。这张图是通路示意，没有给出编辑百分比，绿色的 permanent outcome 也不是临床疗效。
 
 补充核验：[Komor et al. 2016 · Programmable editing of a target base](https://www.nature.com/articles/nature17946)。
 
@@ -589,9 +880,15 @@ CBE先制造U:G，ABE先制造I:T，图中箭头最后的T或G表示经过细胞
 ### 第064页｜引导编辑：把模板带到靶位
 
 <div id="lecture-page-64"></div>
-<figure class="genome-figure" data-lecture-page="64"><img src="/notes/genome-stability-2026/page-064.webp" width="1872" height="1210" loading="lazy" decoding="async" alt="第64页：引导编辑：把模板带到靶位，原图内中文标注" /><figcaption>原讲义第64页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="64"><img src="/notes/genome-stability-2026/page-064.webp" width="1872" height="1210" loading="lazy" decoding="async" alt="第64页：引导编辑：把模板带到靶位，原图内中文标注" /><figcaption>原讲义第64页 · 点击图片放大</figcaption></figure>
 
-切口暴露的DNA末端与pegRNA的引物结合区配对，逆转录酶按RNA模板延长DNA，写入预设改变。它无需设计性的双链断裂和独立供体DNA，但不意味着绝对不会出现断裂或indel副产物。理论编辑范围与某个靶位实际效率不同，还受模板设计、序列和细胞修复背景影响。
+引导编辑换了一套写法：定位信息和修复模板放在同一条向导 RNA 上，由融合的逆转录酶在切口处写成 DNA。题注是“把模板带到靶位”。
+
+分图 C 标着 Prime editors。灰色蛋白是 Cas9 nickase（HNH mutant），下方文字写明是 **Cas9 nickase（H840A）**，译注为切口型 Cas9。H840A 落在 HNH 结构域，这一侧不再切开；图上仍用小点标出 RuvC，由它制造单链切口。橙色云是 reverse transcriptase，译注为逆转录酶，融合在 Cas 上方。绿色核酸是工程化的 **pegRNA**（prime editing guide RNA，引导编辑向导 RNA）。译注写明它同时携带定位信息和修复模板；图上它的 3′ 端延伸在复合物外，作为逆转录要读取的 RNA。复合物周围标着 5′ 和 3′。向右的箭头写着 Reverse transcription，指向三条各带一小段红色编辑的双链。旁边的文字把这些局部改写写成 precise nucleotide changes, insertions, deletions, and combinations。
+
+下面两句是设计声明。第一句：H840A 与逆转录酶融合，由自带修复模板的 pegRNA 引导。切口露出的 DNA 3′ 端与 pegRNA 的引物结合区配对，逆转录酶按 RNA 模板把预设改变写入新 DNA。第二句：由此覆盖全部 12 类点突变，以及小片段插入、缺失和它们的组合，并且不使用双链断裂。12 类指四种碱基各自换成其余三种。前面的 CBE、ABE 各覆盖其中一类转换；这一页把设计范围写成全部 12 类，再加上小的插入缺失。译注把这句话收成“可实现 12 类替换及部分小型插入缺失”。
+
+设计范围和某个靶点的实际产物是两件事。模板怎样写、靶序列本身、细胞修复背景，都会改变能不能做成。设计不安排双链断裂，也不另送一段供体 DNA；切口仍是机制的一部分，RuvC 会切开一条链。测序里是否出现 indel 或其他断裂，不能从 without double-strand breaks 这句直接得出。右侧三条双链是编辑类型的示意。Precise 是设计目标；这一页没有疗效数据。
 
 补充核验：[Anzalone et al. 2019 · Search-and-replace genome editing](https://pubmed.ncbi.nlm.nih.gov/31634902/)。
 
@@ -599,9 +896,17 @@ CBE先制造U:G，ABE先制造I:T，图中箭头最后的T或G表示经过细胞
 ### 第065页｜引导编辑中的新旧DNA链竞争
 
 <div id="lecture-page-65"></div>
-<figure class="genome-figure" data-lecture-page="65"><img src="/notes/genome-stability-2026/page-065.webp" width="1936" height="1176" loading="lazy" decoding="async" alt="第65页：引导编辑中的新旧DNA链竞争，原图内中文标注" /><figcaption>原讲义第65页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="65"><img src="/notes/genome-stability-2026/page-065.webp" width="1936" height="1176" loading="lazy" decoding="async" alt="第65页：引导编辑中的新旧DNA链竞争，原图内中文标注" /><figcaption>原讲义第65页 · 点击图片放大</figcaption></figure>
 
-逆转录产生带目标改动的新3′末端后，它需要与原有序列竞争并整合；旧5′片段的移除、末端连接和双链配对处理都会影响产物。按图先追踪哪个末端来自原DNA、哪个来自新合成链，再看修复如何选择。编辑失败可能是新链没被接受，并不必然说明Cas9没有找到靶点。
+逆转录把目标改动写进新的 3′ 端之后，这段新 DNA 还要和原来的序列竞争，修复决定哪一条留下。题注是“引导编辑中的新旧 DNA 链竞争”。页标题里的 efficient 印成了 effient，要表达的是 Harnessing DNA repair，译注为利用 DNA 修复。
+
+上排从左到右是同一套机器。最左是零件：灰色 SpCas9 H840A nickase 融合橙色逆转录酶，注明野生型 MMLV RT 对应 PE1，工程化 MMLV RT 对应 PE2 和 PE3。MMLV RT 是莫洛尼鼠白血病病毒逆转录酶。绿色 pegRNA 的括号里写着 PE1、PE2、PE3，表示这三种版本都用它；另一条蓝色 nicking sgRNA 只标在 PE3。下一步 Binding and nicking of DNA target site，切口酶结合并切开靶点。再下一步 Hybridization of nicked DNA and pegRNA：切开的 DNA 与 pegRNA 杂交，3′ 延伸被分成 **PBS**（primer-binding site，引物结合位点）和 **RT template**（逆转录模板）。最后一步 Reverse transcription of pegRNA template，新合成的 DNA 用红色标出，旁注 Newly-synthesized DNA contains the edit。
+
+下排才是新旧链的竞争。新写出的、带红色编辑的那一段是 3′ **flap**（瓣，没有配上对的单链末端）；原来的序列被顶成 5′ flap。译注分别写成 3′ 瓣状结构和 5′ 瓣状结构。Flap equilibration 用双向箭头表示两种瓣可以来回置换。若 5′ flap excision 把旧的 5′ 瓣切掉，再经 Ligation 连接切口，随后的 DNA repair or replication 才可能把红色编辑留在双链上。
+
+PE3 在这条路径下方另画一刀。PE3 nicks the non-edited strand，黑三角标在未编辑链上，然后 PE3 biases replacement of the non-edited strand，终点写成 Permanent incorporation of the precise DNA edit，两条链都带上红色。第二切口的作用，是让修复更倾向按新链去替换另一条链。
+
+读图时先分清末端从哪来：红色 3′ 瓣是逆转录新写的，5′ 瓣是原来的 DNA。编辑没有留下，可能是新瓣在平衡里没被接受、旧瓣没被切掉，或连接和后续修复走了另一边。这不等于 Cas9 没有找到靶点。图上的 permanent、precise，以及标题想说的 efficient，都是这条模型的预期终点。实际比例随模板、序列和修复背景变化。这些标签不是临床疗效。
 
 补充核验：[Anzalone et al. 2019 · Search-and-replace genome editing](https://pubmed.ncbi.nlm.nih.gov/31634902/)。
 
@@ -609,182 +914,293 @@ CBE先制造U:G，ABE先制造I:T，图中箭头最后的T或G表示经过细胞
 ### 第066页｜MMR等修复因素影响引导编辑
 
 <div id="lecture-page-66"></div>
-<figure class="genome-figure" data-lecture-page="66"><img src="/notes/genome-stability-2026/page-066.webp" width="1955" height="1027" loading="lazy" decoding="async" alt="第66页：MMR等修复因素影响引导编辑，原图内中文标注" /><figcaption>原讲义第66页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="66"><img src="/notes/genome-stability-2026/page-066.webp" width="1955" height="1027" loading="lazy" decoding="async" alt="第66页：MMR等修复因素影响引导编辑，原图内中文标注" /><figcaption>原讲义第66页 · 点击图片放大</figcaption></figure>
 
-新链带有目标序列，旧链仍是原序列，二者不一致时需要被细胞解决。若修复系统按旧链恢复，新编辑就丢失；若按新链补写另一条链，改变才被固定。部分策略借助第二切口或暂时调节MMR来提高结果，但对效率、indel及其他副产物的影响依条件而变，不能泛化为所有靶点都提高。
+新链带有目标序列、旧链仍是原序列时，细胞要解决的是一条可能含错配的异源双链。**MMR**（mismatch repair，错配修复）若按旧链改回，新编辑就丢失；若按新链把另一条链补上，改变才被固定。题注写的是：MMR 等修复因素影响引导编辑。标题同样把 efficient 印成了 effient。
 
-#### 深入理解：引导编辑为什么受修复影响
+左半接上一页的瓣竞争，分图 b 题为 Enhanced incorporation of the edited DNA flap。带红色编辑的 3′ 瓣和原来的 5′ 瓣以双向箭头处于 Flap equilibration，5′ flap excision 切掉旧瓣之后，双链上只剩一条链带着红色改变。译注把这时的 heteroduplex 写成异源双链，其中可以有错配。
 
-pegRNA不仅提供地址，还携带引物结合序列与逆转录模板。新DNA写出后，会与原序列竞争配对，形成需要切除、连接或错配处理的结构。MMR可能把目标改变当作错误去掉，因此不同细胞修复背景会改变编辑效率。对另一条链切口可偏向某种修复，但也会改变副产物风险。理解这一层后，“编辑器已经完成逆转录”和“最终两个DNA链都携带目标改变”就不会被混为一谈。
+右上是这一中间体的两种收场。DNA ligation and replication 指向标成 Edit 的双链。旁边 Mismatch repair 指向 No edit，也就是按旧序列改回去。PE4（MLH1dn）、MMR siRNA 和 MMR evasion with silent edits 用抑制符号挡在这条“错配修复 → 无编辑”的路上。MLH1dn 是削弱错配修复的显性负性 *MLH1*；MMR siRNA 用来压低错配修复；沉默编辑是在目标改变附近再放入沉默改变，让这段错配不容易被 MMR 整段认回去。
+
+下方进入 PE3。蓝色字是 PE3 (pegRNA complementary-strand nick)，在互补的未编辑链上再切一刀，黑三角标出切口。此后分成 Ligation of the non-edited strand 和 Ligation of the edited strand。编辑链被连上之后，再经错配修复，可以到达 Edit。从未编辑链被连接的那一支，旧序列仍和红色新序列待在同一条异源双链里，去向要跟着后面的错配修复箭头读。从带切口的中间体出发，错配修复还分出三支：一支在 PE4、MMR siRNA 和沉默编辑的箭头下朝向 Edit，一支是 Undesired insertions and deletions，一支是 No edit。译注把切口和这些修复调节放在一起：对另一条链制造切口或调节修复，可改变编辑保留倾向。
+
+pegRNA 在前两页已经同时提供地址、引物结合序列和逆转录模板。写完逆转录，只说明新序列出现在一条链上；两条链都带上目标改变，要等瓣的切除、连接和错配修复做完选择。第二切口或暂时调节 MMR，在图上是为了少走按旧链恢复的 No edit。同一张图也把不想要的插入缺失画在错配修复下游，所以这些做法对编辑保留、indel 和其他副产物的影响随靶点和细胞背景改变。Edit 与 No edit 是模型里的结局标签，不是临床疗效。
 
 补充核验：[Anzalone et al. 2019 · Search-and-replace genome editing](https://pubmed.ncbi.nlm.nih.gov/31634902/)。
 
 
 ## 端粒与端粒维持
 
-
 ### 第067页｜回到路线图：从序列走向染色体
 
 <div id="lecture-page-67"></div>
-<figure class="genome-figure" data-lecture-page="67"><img src="/notes/genome-stability-2026/page-067.webp" width="1982" height="1287" loading="lazy" decoding="async" alt="第67页：回到路线图：从序列走向染色体，原图内中文标注" /><figcaption>原讲义第67页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="67"><img src="/notes/genome-stability-2026/page-067.webp" width="1982" height="1287" loading="lazy" decoding="async" alt="第67页：回到路线图：从序列走向染色体，原图内中文标注" /><figcaption>原讲义第67页 · 点击图片放大</figcaption></figure>
 
-这是课程的转折页。前面已经知道一处损伤怎样转成突变，接下来要把视野放大：一条完整染色体如何避免末端被误接、如何保证分给两个子细胞，以及这些过程失常后会产生什么结构。把本页当作检查清单，能解释每条主线的因果关系，比记住术语清单更接近真正理解。
+这一页把课程拉回总路线图。前半处理 DNA 序列里的信息怎样保持稳定，后半转到整条染色体怎样保持完整。题注写：从序列走向染色体。
+
+上方空心方框是 Maintaining stable information in DNAs。三条是内源与外源 DNA 损伤、DNA 损伤修复通路、突变特征分析。译注把这一组收成前半：DNA 损伤、修复通路、突变特征。这是已经走过的尺度，一处损伤怎样被修复，或怎样留下可被读出的突变。
+
+下方方框改用蓝字：Maintaining integrity of chromosomes，标出讲义正在进入的部分。三条是端粒保护染色体末端、着丝粒保证染色体正确分离、检测基因组中的结构变异。译注与这三条对应。后面要能讲清的因果关系是：天然末端怎样避免被当成断裂接起来，着丝粒怎样帮助染色体分到两个子细胞，这些过程失常后又怎样表现为结构变异。本页是检查这些问题的清单，两个方框都还空着，本身没有新的实验数据。
 
 
 ### 第068页｜维持染色体稳定的结构
 
 <div id="lecture-page-68"></div>
-<figure class="genome-figure" data-lecture-page="68"><img src="/notes/genome-stability-2026/page-068.webp" width="1882" height="900" loading="lazy" decoding="async" alt="第68页：维持染色体稳定的结构，原图内中文标注" /><figcaption>原讲义第68页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="68"><img src="/notes/genome-stability-2026/page-068.webp" width="1882" height="900" loading="lazy" decoding="async" alt="第68页：维持染色体稳定的结构，原图内中文标注" /><figcaption>原讲义第68页 · 点击图片放大</figcaption></figure>
 
-端粒像末端的保护装置，着丝粒则是组装分离机器的平台，位置和作用不同。非编码并不等于无功能，但本页关于抵御病毒整合的概括不宜推广到全部非编码DNA；具体功能需要具体序列和机制证据。此处先牢牢记住两个核心结构：保护末端看端粒，牵引与分离看着丝粒。
+维持染色体稳定，这一页先点出两个结构，再加一条更宽的非编码 DNA。题注是“维持染色体稳定的结构”。
+
+第一条 Telomeres for ensuring the integrity of chromosomes。**端粒**（telomere）在染色体两端，功能句是保证染色体完整、保护末端，使天然末端不被降解，也不被当成断口。第二条 Centromeres for proper segregating of chromosomes。**着丝粒**（centromere）是分离装置组装的平台，负责牵引和正确分开，使染色体进入两个子细胞。译注分别写成：端粒保护染色体末端；着丝粒保证正确分离。二者位置不同，一个看末端，一个看分离。
+
+第三条是 Other non-coding DNAs for genome structure，括号里再加上 defense against virus integration。译注把它说成其他非编码 DNA，参与结构与调控等功能。非编码指不直接作为蛋白质编码序列，这类 DNA 仍然可以承担结构功能。括号里的“抵御病毒整合”是这一条的概括，覆盖面很大：某一段非编码 DNA 是否挡住病毒整合，要有这段序列和相应机制的证据。这一页要记住的两个核心结构，仍是保护末端的端粒，以及负责牵引与分离的着丝粒。
 
 
 ### 第069页｜线性染色体的两个末端问题
 
 <div id="lecture-page-69"></div>
-<figure class="genome-figure" data-lecture-page="69"><img src="/notes/genome-stability-2026/page-069.webp" width="2016" height="1205" loading="lazy" decoding="async" alt="第69页：线性染色体的两个末端问题，原图内中文标注" /><figcaption>原讲义第69页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="69"><img src="/notes/genome-stability-2026/page-069.webp" width="2016" height="1205" loading="lazy" decoding="async" alt="第69页：线性染色体的两个末端问题，原图内中文标注" /><figcaption>原讲义第69页 · 点击图片放大</figcaption></figure>
 
-第一是保护问题：天然末端不能被当作双链断裂；第二是复制问题：常规DNA聚合酶需要引物，后随链最末端RNA引物移除后缺少合适上游3′端来补写。端粒酶帮助解决延长问题，端粒结构与蛋白帮助解决识别问题。两者相关，但不能简单说“只要端粒长就一定不被误修复”。
+线性染色体有两个末端问题，标题和题注都这样并列。第一条：末端需要被保护，以免降解和异常反应。译注把 The end problem 写成染色体末端问题，并把异常反应收成需要防止降解与异常反应。在这条课的语境里，最需要防的异常反应，是修复系统把天然末端当成双链断裂。第二条：每一轮 DNA 复制后，染色体末端都有一段 DNA 未能复制。括号注明这个复制问题由 James Watson 在 1972 年提出。译注写：每轮复制后，特定末端难以完全补齐。
+
+上图先是一条线性双链，洋红色上链从左 5′ 到右 3′，青色下链方向相反。蓝色箭头向下，进入从中央 Ori 向两侧打开的复制泡。左下蓝色三行规定读图规则：DNA replication is bidirectional，Polymerases move 5′ to 3′，Requires a labile primer。复制双向进行；聚合酶只能沿 5′→3′ 合成；引物是临时的，用完会被去掉。图中后随链上的红色短段就是这些引物。译注把图中的 leading / lagging 写成前导链与后随链：前导链连续合成，后随链分段、依赖多段引物。
+
+末端补不齐，是这些限制叠在线性末端上的结果。后随链最靠近末端的 RNA 引物被移除之后，聚合酶找不到更靠上游的 3′ 端去填那一段。右侧红字写：Each round of DNA replication leaves 50–200 bp DNA unreplicated at the 3′ end，并在相应的 3′ 末端画了圈。50–200 bp 是这张教学示意图给出的空缺尺度。图下方有 SlideServe 标记，说明这是引用的示意图，不是本课新测的实验数值。
+
+两件事后面由不同的装置来回答。复制后变短，要靠端粒酶把末端补长；末端被当成断裂去降解或连接，要靠端粒 DNA 的结构和结合蛋白来避免被识别。本页只画出复制叉和末端空缺，没有画端粒酶。端粒较长，说明还有重复序列可以丢失；末端会不会被误修复，要看它有没有被保护成天然末端。长度本身不代替这层保护。
 
 
 ### 第070页｜端粒与端粒酶的诺贝尔奖
 
 <div id="lecture-page-70"></div>
-<figure class="genome-figure" data-lecture-page="70"><img src="/notes/genome-stability-2026/page-070.webp" width="1725" height="1468" loading="lazy" decoding="async" alt="第70页：端粒与端粒酶的诺贝尔奖，原图内中文标注" /><figcaption>原讲义第70页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="70"><img src="/notes/genome-stability-2026/page-070.webp" width="1725" height="1468" loading="lazy" decoding="async" alt="第70页：端粒与端粒酶的诺贝尔奖，原图内中文标注" /><figcaption>原讲义第70页 · 点击图片放大</figcaption></figure>
 
-本页提供发现史的坐标，后面将依次介绍末端保护、端粒序列和端粒酶活性。理解发现过程时要区分观察对象与证据类型：看到异常染色体提示存在保护功能，跨物种实验检验序列能否提供保护，体外延长反应则支持存在相应酶活性。每种实验回答的问题不同，不能互相替代。
+这一页给出发现史的一个坐标：2009 年诺贝尔生理学或医学奖。金色标题是 The Nobel Prize in Physiology or Medicine 2009。下面三张黑白肖像从左到右是 Elizabeth H. Blackburn、Carol W. Greider 和 Jack W. Szostak，每人注明 Prize share: 1/3。照片版权都是 The Nobel Foundation，拍摄者 U. Montan。译注列出年份、三个人名，以及主题：染色体如何受到端粒和端粒酶保护。
+
+页下授奖词写明，奖项共同授予三人，理由是 “for the discovery of how chromosomes are protected by telomeres and the enzyme telomerase”。**端粒酶**（telomerase）是能延长端粒 DNA 的酶。这句话把端粒和端粒酶放在同一条理由里。画面上三个人各占三分之一，没有把实验再分到每个人名下。
+
+后面会依次讲末端保护、端粒序列和端粒酶活性。读这段历史时，证据类型要分开。看到异常染色体或末端容易融合，提示天然末端存在保护功能。把一段末端序列放到另一个物种的染色体上看它能否提供保护，检验的是序列本身。体外把端粒 DNA 延长，支持的是存在相应的酶活性。每种实验回答一个问题。本页的肖像和授奖词只提供奖项和这句共同理由，没有展示那些实验。
 
 
 ### 第071页｜端粒概念：天然末端不同于断口
 
 <div id="lecture-page-71"></div>
-<figure class="genome-figure" data-lecture-page="71"><img src="/notes/genome-stability-2026/page-071.webp" width="1783" height="1130" loading="lazy" decoding="async" alt="第71页：端粒概念：天然末端不同于断口，原图内中文标注" /><figcaption>原讲义第71页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="71"><img src="/notes/genome-stability-2026/page-071.webp" width="1783" height="1130" loading="lazy" decoding="async" alt="第71页：端粒概念：天然末端不同于断口，原图内中文标注" /><figcaption>原讲义第71页 · 点击图片放大</figcaption></figure>
 
-染色体受损断开的末端容易融合，而天然末端通常受到保护，这个差别提示存在特殊的末端结构。端粒不只是某几个碱基字母，而是重复DNA、结合蛋白和特定空间构型共同组成的功能系统。发现史帮助理解：科学家先从染色体行为提出问题，再逐渐找到分子层面的解释。
+端粒这个概念要抓住的差别是：染色体的天然末端不同于意外断开的断口。题注用的就是这句话。
+
+上方两行给出命名。Telomere 被拆成希腊语 telos（末端）和 meros（部分），由 Hermann Muller 在 1938 年定义。下一行写 Barbara McClintock 在 1941 年的结论：telomeres are natural ends。左下小标题是 The Telomere – Function and Synthesis。方框标题是 The mysterious telomere，里面的问题是：端粒似乎保护染色体免受损伤，但是怎样保护？方框下再次用希腊语解释 “end” 和 “part”。译注分别对应词源、1938 年的术语和 1941 年对天然末端的研究。这些句子先从染色体的行为提出问题。促使概念出现的观察是：断裂产生的末端容易彼此融合，天然末端通常保持稳定。本页没有放 Muller 或 McClintock 的原始染色体图，只给出年份和结论句。
+
+右侧插图把概念画成结构。细胞中拉出一条蓝色染色体，两端橙色帽都标为 Telomere。说明文字写：端粒在染色体末端形成帽，含有重复多次的一段特殊 DNA 序列。右下序列框画出这种短串联重复，并注明物种之间略有差别，框中这一条来自四膜虫 *Tetrahymena*。染色体下端还有一条黄色带状结构从橙色帽伸出，表示末端是有形状的帽，画面上不是一截齐平的断口。译注说这张图示意端粒的结构与功能。
+
+因此端粒不只是某几个碱基字母。图上同时有重复 DNA 和末端的帽；作为功能系统，它还要加上结合蛋白和特定的空间构象，才把天然末端和断口区分开。方框里的 But how 仍然开着。这一页给出概念和示意，没有给出保护的分子步骤。序列框里的具体重复，以下一页论文摘要为准。
 
 
 ### 第072页｜端粒序列的发现
 
 <div id="lecture-page-72"></div>
-<figure class="genome-figure" data-lecture-page="72"><img src="/notes/genome-stability-2026/page-072.webp" width="1947" height="1002" loading="lazy" decoding="async" alt="第72页：端粒序列的发现，原图内中文标注" /><figcaption>原讲义第72页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="72"><img src="/notes/genome-stability-2026/page-072.webp" width="1947" height="1002" loading="lazy" decoding="async" alt="第72页：端粒序列的发现，原图内中文标注" /><figcaption>原讲义第72页 · 点击图片放大</figcaption></figure>
 
-四膜虫提供了易研究的端粒材料，重复序列的鉴定把“特殊末端”从细胞学概念推进到可操作的分子对象。这里不是1978年才第一次认识端粒，也不是首先测出了人类端粒；应把概念提出、序列鉴定、功能验证和端粒酶发现分开记。论文截图用于说明实验来源，不要求逐字背摘要。
+端粒从细胞学上的“特殊末端”，到可以读取的分子序列，这一步落在 1978 年的四膜虫材料上。题注是“端粒序列的发现”。上方项目符号写：Elizabeth Blackburn identified the first telomere sequence in 1978。画面主体是论文截图，译注写明本页为原始论文截图，用来说明实验来源，不需要逐句背摘要。
+
+左侧是 *Journal of Molecular Biology* 的页面：1978 年 3 月 25 日，第 120 卷第 1 期，第 33–53 页。标题是 A tandemly repeated sequence at the termini of the extrachromosomal ribosomal RNA genes in *Tetrahymena*，即四膜虫染色体外核糖体 RNA 基因末端的串联重复。作者是 Elizabeth H. Blackburn 和 Joseph G. Gall，单位是耶鲁大学生物系。收稿日期是 1977 年 8 月 19 日。页面上的 Available online 9 March 2005 是后来上网的日期。DOI 印在页面下方：https://doi.org/10.1016/0022-2836(78)90294-2。
+
+右侧摘要能读出的核心结果是：嗜热四膜虫 *Tetrahymena thermophila* 的染色体外 rDNA 为线性分子，末端有串联重复的六碱基 5′-(C-C-C-C-A-A)n-3′，n 在 20 到 70 之间，凝胶电泳上长度不均一。摘要还引用更早的工作，说明这种线性 rDNA 已被证明是回文结构。后面几句是论文自己的结构论证：以 rDNA 为模板时，大肠杆菌 DNA 聚合酶 I 会优先合成这段重复；C-C-C-C-A-A 链上每隔几个重复存在单链不连续，推测为单核苷酸缺口；G-G-G-G-T-T 链上至少有一处不连续。用 T4 DNA 聚合酶做的实验提示，这种 rDNA 末端没有噬菌体 λ 那种游离黏端。摘要最后说，他们据此提出了末端模型。截图里更小的实验细节，按原文单位阅读即可。
+
+时间顺序要分开记。上一页的 1938 与 1941 年，已经从染色体行为提出天然末端；这一页的 1978 年论文，鉴定的是四膜虫染色体外 rDNA 末端的重复序列。标题里的 first telomere sequence 指的是这一次分子鉴定，作者栏里同时有 Blackburn 和 Gall。人类端粒序列、末端序列能否在异种细胞里提供保护，以及端粒酶的延长活性，都不在这张摘要里。四膜虫被选用，是因为大量染色体外 rDNA 提供了许多可操作的末端，特殊末端因此变成可以测序的分子对象。
 
 
 ### 第073页｜跨物种实验：端粒序列能否保护末端
 
 <div id="lecture-page-73"></div>
-<figure class="genome-figure" data-lecture-page="73"><img src="/notes/genome-stability-2026/page-073.webp" width="2008" height="1302" loading="lazy" decoding="async" alt="第73页：跨物种实验：端粒序列能否保护末端，原图内中文标注" /><figcaption>原讲义第73页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="73"><img src="/notes/genome-stability-2026/page-073.webp" width="2008" height="1302" loading="lazy" decoding="async" alt="第73页：跨物种实验：端粒序列能否保护末端，原图内中文标注" /><figcaption>原讲义第73页 · 点击图片放大</figcaption></figure>
 
-实验把来自四膜虫的端粒DNA接到酵母可维持的人工DNA末端，检验其是否有助线性染色体稳定存在。这比仅仅发现重复序列更进一步，直接测试了功能。跨物种有效提示末端维持系统具有一定保守性，但不表示所有物种的端粒序列、蛋白组成和长度控制完全一致。
+这一页要回答的问题写在题注里：端粒序列能不能保护末端。标题下的结论是，四膜虫的端粒 DNA 可以保护酵母中的人工微型染色体。
+
+画面是 2009 年诺贝尔生理学或医学奖材料里的示意图，插画署名为 Annika Röhl。右上角绿色的四膜虫标成生活在水中的单细胞，它的染色体末端带着黄色端粒。黄色圆点被标为 Telomere DNA，接到蓝色短棒状的人工微型染色体上。左右两个酵母细胞分成两路。左边一路没有黄色端粒，微型染色体进入酵母后，圆圈里是断开的蓝色碎片，图注写明它们没有受到保护、并且受损。右边一路先把四膜虫的端粒 DNA 接到微型染色体上再送入酵母，圆圈里的染色体保持完整，两端仍有黄色端粒，图注写明它们抗降解、保持完好。中间的文字框把这一结果概括为：端粒的功能被发现，端粒 DNA 保护染色体。译注把未加端粒的材料称为线性化 DNA，把右边的结果称为受到保护的末端。
+
+端粒是染色体的天然末端。左边那些线性化 DNA 没有这层末端序列，进入细胞后就会受损、被降解。左右比较的是同一类人工微型染色体，差别在于有没有接上四膜虫的端粒 DNA，所以这一步直接测试末端保护的功能。
+
+四膜虫的序列能在酵母里起作用，说明酵母可以识别这种外来的末端 DNA，末端维持有一定保守性。图上没有比较不同物种的端粒长度、结合蛋白或长度调控，序列、蛋白组成和长度控制仍然可以不一样。这是说明实验逻辑的示意图，不是原始电泳或杂交结果。
 
 
 ### 第074页｜人类端粒：TTAGGG串联重复
 
 <div id="lecture-page-74"></div>
-<figure class="genome-figure" data-lecture-page="74"><img src="/notes/genome-stability-2026/page-074.webp" width="2027" height="1271" loading="lazy" decoding="async" alt="第74页：人类端粒：TTAGGG串联重复，原图内中文标注" /><figcaption>原讲义第74页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="74"><img src="/notes/genome-stability-2026/page-074.webp" width="2027" height="1271" loading="lazy" decoding="async" alt="第74页：人类端粒：TTAGGG串联重复，原图内中文标注" /><figcaption>原讲义第74页 · 点击图片放大</figcaption></figure>
 
-TTAGGG由六个碱基组成，一端的链富含G，其互补链为CCCTAA。讲义“GC-rich”的说法容易使人误解成GC比例特别高，而这里关键是重复单元和链偏向的富G特征。许多哺乳动物共享这一重复序列，但重复长度、结构调控和端粒酶活性不同；其他生物也存在不同的端粒维持方式。
+人类端粒的重复单元是 **5′-TTAGGG-3′**，一条链接着一条链串起来。右侧三条总结写着：端粒序列在物种之间相似，它是一段 GC-rich 的六碱基，而且这段人类序列在全部哺乳动物中保守。
+
+左侧是 *Cell* 1985 年 12 月的论文页面，作者 Carol W. Greider 和 Elizabeth H. Blackburn，题目是四膜虫提取物中一种特异的端粒末端转移酶活性，卷期为 Volume 43, Issue 2, Part 1, Pages 405–413。摘要里出现的重复是 TTGGGG，那是四膜虫的端粒单元。右侧第三条写的人类单元是 TTAGGG。两个都是六碱基，差在第三个碱基：四膜虫是 G，人类是 A。同一页上先看见论文里的 TTGGGG，再看见人类的 TTAGGG，两个序列要分开记。
+
+幻灯片用了 GC-rich hexanucleotide。译注改成一句更准确的说法：这是富 G，不宜笼统记成 GC-rich。5′-TTAGGG-3′ 六个碱基里有三个 G，G 集中在这一条链上；互补链从 5′ 到 3′ 读是 CCCTAA，富的是 C。双链合起来，G-C 碱基对占一半。要记住的是重复单元，以及哪一条链富 G。
+
+“在全部哺乳动物中保守”指的是 TTAGGG 这个重复单元。端粒有多长、结构怎样调控、端粒酶在哪些细胞里有活性，这一条里都没有说成一样。别的生物可以用别的重复维持末端，左边论文里的 TTGGGG 就是印在同一页上的例子。
 
 
 ### 第075页｜T-loop与shelterin保护末端
 
 <div id="lecture-page-75"></div>
-<figure class="genome-figure" data-lecture-page="75"><img src="/notes/genome-stability-2026/page-075.webp" width="2007" height="1425" loading="lazy" decoding="async" alt="第75页：T-loop与shelterin保护末端，原图内中文标注" /><figcaption>原讲义第75页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="75"><img src="/notes/genome-stability-2026/page-075.webp" width="2007" height="1425" loading="lazy" decoding="async" alt="第75页：T-loop与shelterin保护末端，原图内中文标注" /><figcaption>原讲义第75页 · 点击图片放大</figcaption></figure>
 
-富G的3′单链末端可与内部双链端粒序列相互作用形成T-loop，配合shelterin降低末端被当作断裂的风险。图中的保护不是把DNA完全封死，而是在需要复制、加工和延长时动态调节。TRF1/TRF2偏向结合双链重复区，POT1等参与单链区域管理；先理解结合位置与功能再记蛋白名。
+端粒靠一个套索状结构保住天然末端。富 G 的 3′ 单链突出端折回去，与内部的双链 TTAGGG 重复配对，形成 **T-loop**（端粒环）；**shelterin**（端粒保护蛋白复合物）守在这个环上，使它少被 DNA 损伤修复处理。
+
+双链写在图的下方：上链是 5′-(TTAGGG)n-3′，下链写成 (AATCCC)n。3′ 端伸出单链，蓝色弯箭头表示这段突出端侵入内部双链，环的右侧标着 T-loop。蛋白按结合位置分开：TRF1 和 TRF2 画在双链重复上，RAP1 贴着 TRF2，TIN2 与 ACD 搭在中间，POT1 坐在单链上。图上的 ACD 在文献里也常叫 TPP1。环外侧还有绿、橙、紫、粉的蛋白形色块，没有逐个署名。出处是 Shay 与 Wright，*Nature Reviews Genetics* 20:299–309（2019）。
+
+端粒是染色体的天然末端，和细胞里需要被接上的双链断裂是两种末端。突出端收进内部双链、再被 shelterin 盖住之后，修复机器较少把这个天然末端当成断裂去连接。第二条文字和译注说的都是这件事：shelterin 保护 T-loop，突出端侵入双链重复区，天然末端从而受到保护。
+
+这张图定格的是保护状态。复制、末端加工和端粒酶延长时，环还要打开，蛋白结合是动态的；打开的那一步没有画出来。先按“双链上是 TRF1/TRF2，单链上是 POT1”来记位置，再背整组蛋白的名字。
 
 
 ### 第076页｜端粒酶怎样延长末端
 
 <div id="lecture-page-76"></div>
-<figure class="genome-figure" data-lecture-page="76"><img src="/notes/genome-stability-2026/page-076.webp" width="1899" height="1228" loading="lazy" decoding="async" alt="第76页：端粒酶怎样延长末端，原图内中文标注" /><figcaption>原讲义第76页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="76"><img src="/notes/genome-stability-2026/page-076.webp" width="1899" height="1228" loading="lazy" decoding="async" alt="第76页：端粒酶怎样延长末端，原图内中文标注" /><figcaption>原讲义第76页 · 点击图片放大</figcaption></figure>
 
-端粒酶先让DNA的3′末端与自身RNA模板配对，再沿模板添加DNA，随后移位，重复这一过程。延长的是富G链，另一条链还需要常规复制及加工机制配合。它不是把整条染色体从头复制一遍，也不是直接补上一段现成RNA；其核心化学反应是以RNA为模板合成DNA。
+端粒酶延长末端时，站在染色体尽头，用自己携带的 RNA 做模板，把 DNA 一个碱基一个碱基地加上去。
+
+右上的放大图里，酶是一个浅色椭圆，分开标了 Protein 和 RNA。RNA 模板写成 CCCCAA，贴着正在延长的 DNA 末端；新加上的碱基标出 T 和 G，旁注是 Telomere DNA is built base by base。这一串模板对应四膜虫的 TTGGGG，和前后页发现史用的体系一致。人类端粒是 TTAGGG，模板字母要另记。图下文字写明：端粒酶在染色体末端工作，由蛋白质和一段 RNA 组成，RNA 是合成端粒 DNA 的模板。译注把下一步称为移位：按模板加上一段重复之后，酶重新定位，再进行下一轮。画面本身停在“对着模板加碱基”这一刻。
+
+加上去的是新合成的 DNA，而且是富 G 的那条链。RNA 留在酶里当模板。另一条链还要靠细胞普通的 DNA 合成和末端加工补齐。下方英文里的 copy the entire chromosome to its very end，说的是末端被补上以后，染色体才能每次都复制到头；染色体其余部分的复制仍由细胞自己的复制机器完成。
+
+下方左右两栏比较有没有端粒酶，仍是示意图。左边没有端粒酶：每次细胞分裂染色体都变短，红箭头向下，最后端粒 DNA 被磨掉，染色体受损。右边有端粒酶：末端得以维持。中间一叠由大到小的灰色圆点没有标数值，只配合“越分越短”的意思。版权仍是诺贝尔委员会 2009，插画 Annika Röhl。
 
 
 ### 第077页｜端粒酶活性的发现
 
 <div id="lecture-page-77"></div>
-<figure class="genome-figure" data-lecture-page="77"><img src="/notes/genome-stability-2026/page-077.webp" width="1875" height="1347" loading="lazy" decoding="async" alt="第77页：端粒酶活性的发现，原图内中文标注" /><figcaption>原讲义第77页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="77"><img src="/notes/genome-stability-2026/page-077.webp" width="1875" height="1347" loading="lazy" decoding="async" alt="第77页：端粒酶活性的发现，原图内中文标注" /><figcaption>原讲义第77页 · 点击图片放大</figcaption></figure>
 
-体外体系中使用已知引物，观察加入提取物后是否出现逐段延长的产物，支持存在能添加端粒重复的酶活性。TTGGGG是这里的四膜虫重复，不能与人类TTAGGG混写。与前面末端保护实验相比，本页把问题推进到反应机制：不是只问DNA能否被保留，而是问末端序列怎样被合成。
+这一页要回答的是末端序列怎样被合成出来。标题是端粒酶的发现。右侧能直接读清的句子是：四膜虫无细胞提取物把串联的 TTGGGG 重复加到合成的端粒引物上。标题下还留着前面那句“四膜虫端粒 DNA 保护酵母微型染色体”，本页新的信息在这篇论文和右侧这句话。
+
+左侧是 Greider 和 Blackburn 1985 年发表在 *Cell* 的论文，题目就是四膜虫提取物中特异的端粒末端转移酶活性。摘要印在下半页，缩略图里的小字条件应按原文阅读。摘要给出的设计可以这样理解：提取物对着合成引物添加 TTGGGG；端粒序列引物能被延长，(CCCCAA)4 和非端粒序列的寡核苷酸不能；高效合成依赖引物、dGTP 和 dTTP，加热或蛋白酶 K 处理后活性消失，而且不依赖提取物里原有的四膜虫 DNA，也不依赖细胞内源的 α 型 DNA 聚合酶。这些对照指向一种蛋白质性质的酶活性，它在引物末端重复添加端粒 DNA。这一页没有贴出阶梯状产物的胶图，结论写在右侧大字和论文摘要里。
+
+TTGGGG 是四膜虫的重复。人类端粒是 TTAGGG，两个六碱基不要并成同一个。前面的酵母实验问的是末端 DNA 能不能被保住；这一页问的是末端重复怎样被加上去。蛋白质和 RNA 模板还没有在这里拆开。
 
 
 ### 第078页｜发现史中的人物与证据
 
 <div id="lecture-page-78"></div>
-<figure class="genome-figure" data-lecture-page="78"><img src="/notes/genome-stability-2026/page-078.webp" width="1849" height="1237" loading="lazy" decoding="async" alt="第78页：发现史中的人物与证据，原图内中文标注" /><figcaption>原讲义第78页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="78"><img src="/notes/genome-stability-2026/page-078.webp" width="1849" height="1237" loading="lazy" decoding="async" alt="第78页：发现史中的人物与证据，原图内中文标注" /><figcaption>原讲义第78页 · 点击图片放大</figcaption></figure>
 
-这页没有新的反应通路，不需要为了“逐页讲解”硬加一个独立机制。它在课程中的作用是把上一页的实验和科学发现者联系起来。复习时可以回忆Greider与Blackburn关于端粒酶活性的研究，再用一句话说清实验依据：细胞提取物能在特定引物上重复添加端粒DNA。
+这一页没有新的反应通路。它把上一页的实验接到人身上：照片里是 Carol Greider，标题仍是 The discovery of telomerase。译注写明，这是与她相关的人物照片，用来承接端粒酶活性被发现的历史。
+
+Greider 站在灯箱前，举起一张胶片。胶片上有多条竖着的泳道，泳道里是深色条带。这种对光看的放射自显影，就是当年用来观察“引物上多出来的端粒 DNA”的证据形式。每一条带对应几个重复，缩略图里读不清，要回到原始胶图才能数。页底链接是霍普金斯医学院的诺贝尔介绍页：https://www.hopkinsmedicine.org/research/about-faculty/awards/nobel/carol-grieder/ 。
+
+上一页论文的另一位作者是 Elizabeth Blackburn，这张照片里只有 Greider。复习时把人和证据收成一句即可：细胞提取物能在特定的端粒引物上重复添加端粒 DNA。
 
 
 ### 第079页｜TERT与TERC：蛋白加RNA
 
 <div id="lecture-page-79"></div>
-<figure class="genome-figure" data-lecture-page="79"><img src="/notes/genome-stability-2026/page-079.webp" width="1981" height="1383" loading="lazy" decoding="async" alt="第79页：TERT与TERC：蛋白加RNA，原图内中文标注" /><figcaption>原讲义第79页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="79"><img src="/notes/genome-stability-2026/page-079.webp" width="1981" height="1383" loading="lazy" decoding="async" alt="第79页：TERT与TERC：蛋白加RNA，原图内中文标注" /><figcaption>原讲义第79页 · 点击图片放大</figcaption></figure>
 
-TERT负责催化，TERC提供模板并参与复合物结构，二者不能互换。这里的RNA不是等待翻译成端粒酶蛋白的普通mRNA：它作为功能性非编码RNA留在酶复合物里。图中其他辅助组分说明一个可工作的端粒酶需要装配与成熟；检测到TERT表达不一定就等于测到了足够的端粒延长活性。
+端粒酶是一个专门的 **核糖核蛋白复合物**（ribonucleoprotein，蛋白质加上一条有功能的 RNA）。催化的蛋白质和当模板的 RNA 各有角色。
 
-#### 深入理解：RNA不一定拿来翻译蛋白
+图中央浅蓝色的大椭圆是 **TERT**。*TERT* 是基因，它编码的是逆转录酶蛋白：蛋白读取 RNA 模板，合成 DNA。黑色折线是 **TERC**，标出 5′ 和 3′，中间红色小段写着 Template，正对着 TERT。*TERC* 的产物就是端粒酶 RNA。这条 RNA 留在复合物里提供模板，并参与复合物的结构，不再翻译成一种叫 TERC 的蛋白质。幻灯片写 TERC encodes a telomerase RNA，这里 encode 出来的是 RNA 本身。
 
-TERT是编码催化蛋白的基因，TERC的产物本身就是有功能的RNA。端粒酶在其RNA模板上读取信息并合成DNA，属于逆转录；复制其他染色体部分的常规DNA聚合酶则以DNA为模板。这个例子把中心法则中的信息流与实际分子功能连接起来：RNA既可携带翻译信息，也可承担模板、结构或调控角色。
+RNA 上还叠着 TCAB1、DKC1、NOP10 和 NHP2。译注把这些蛋白收成一句：帮助 RNA 稳定、装配和定位。一个能工作的端粒酶，除了 TERT 和模板 RNA，还要完成装配与成熟。只检测到 *TERT* 表达，还不等于已经测到足够的端粒延长活性。图出自 Shay 与 Wright，*Nature Reviews Genetics* 20:299–309（2019），是结构示意。
+
+复制染色体其他部分时，DNA 聚合酶用的模板是 DNA。端粒酶这一步用的模板是 TERC 上的 RNA，信息从 RNA 写到 DNA，属于逆转录。RNA 既可以携带等待翻译的信息，也可以自己当模板、做结构或参与调控。
 
 
 ### 第080页｜端粒缩短与细胞分裂限制
 
 <div id="lecture-page-80"></div>
-<figure class="genome-figure" data-lecture-page="80"><img src="/notes/genome-stability-2026/page-080.webp" width="2038" height="1179" loading="lazy" decoding="async" alt="第80页：端粒缩短与细胞分裂限制，原图内中文标注" /><figcaption>原讲义第80页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="80"><img src="/notes/genome-stability-2026/page-080.webp" width="2038" height="1179" loading="lazy" decoding="async" alt="第80页：端粒缩短与细胞分裂限制，原图内中文标注" /><figcaption>原讲义第80页 · 点击图片放大</figcaption></figure>
 
-端粒缩短到影响保护功能时，可激活损伤响应并限制继续增殖。不同组织、细胞状态和氧化压力会影响变化速度，因此不是所有细胞每分裂一次都缩短同样长度，也不能用单次端粒长度准确推算年龄。干细胞有端粒酶并不意味着它们永不衰老；“分裂限制”是多种稳态机制共同作用的结果。
+端粒酶在干细胞里有活性，在分化细胞里被压低；正常体细胞随着分裂，端粒逐步变短。短到影响保护时，末端会出现损伤信号，继续增殖受到限制。
+
+译注把酶的分布说得更窄：部分干细胞里有活性，许多分化细胞里活性较低。图 a 只画了体细胞这一支，标题是正常细胞随细胞分裂出现端粒逐步缩短。纵轴 Cell divisions 的箭头向下，越往下分裂次数越多。每一档是一对蓝色横条，上面一根标 5′，下面一根标 3′，下面那根更短；再往下，两根都更短，长短差还在。轴上没有刻度，也没有碱基数目。蓝条的长度是示意，每一代短多少要从原文的测量单位去读，这张图没有给出那个数。较短的那一根留下的是没有被补满的末端，图上没有再标 TTAGGG。
+
+右侧是同一条染色体的早、晚传代。Earlier passage normal 两端是较长的红色端粒帽。箭头向下指向 Late passage normal：红色帽明显变短，末端外侧画出一圈波纹。波纹表示这个天然末端已经不再安静，损伤响应可以被激活。这仍是示意图，不是某个细胞株测出来的长度。
+
+图上每一档缩短画得比较整齐。实际快慢还受组织、细胞状态和氧化压力影响，不同细胞每一代丢掉的长度可以不同。拿一次端粒长度去推算年龄，超出了这张图能支持的范围。干细胞里有端粒酶，说明它们具备补末端的能力；有这套酶，细胞仍会衰老。幻灯片说的分裂限制，是末端保护、损伤信号和增殖控制一起作用的结果。
 
 
 ### 第081页｜肿瘤怎样重新激活端粒酶
 
 <div id="lecture-page-81"></div>
-<figure class="genome-figure" data-lecture-page="81"><img src="/notes/genome-stability-2026/page-081.webp" width="2070" height="1222" loading="lazy" decoding="async" alt="第81页：肿瘤怎样重新激活端粒酶，原图内中文标注" /><figcaption>原讲义第81页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="81"><img src="/notes/genome-stability-2026/page-081.webp" width="2070" height="1222" loading="lazy" decoding="async" alt="第81页：肿瘤怎样重新激活端粒酶，原图内中文标注" /><figcaption>原讲义第81页 · 点击图片放大</figcaption></figure>
 
-肿瘤需要绕过持续增殖面临的端粒限制。一种方式是重新提高TERT表达，启动子点突变可改变转录因子结合环境；其他重排或整合也可能激活表达。讲义列出的癌种突变率是不同研究范围，不能当作每个队列固定值。端粒酶激活是维持增殖的重要条件之一，并不意味着单独激活TERT就足以让正常细胞变成癌细胞。
+肿瘤细胞要一直分裂，就得重新处理会变短的端粒。这一页给出的机制是重新激活端粒酶。开篇写着：约 85%–90% 的肿瘤细胞里端粒酶被激活。译注把它说成约 85%～90% 的肿瘤采用端粒酶相关的末端维持。
+
+激活途径列了三条，序列图只展开第一条。一是 *TERT* 启动子点突变，热点写成 -124C&gt;T 和 -146C&gt;T。启动子草图上同时标着 C250T、C228T，以及 1,295,313、1,295,250、1,295,228、1,295,104 这几个位置。C228T 就是 -124C&gt;T，C250T 就是 -146C&gt;T，是同一对位点的两种编号。二是结构变异，把一个活跃启动子接到 *TERT* 编码区。三是插入病毒序列，从而形成一个活跃启动子。后两条只有文字，没有第二条序列图。
+
+点突变可以顺着箭头读。野生型序列和突变型序列上下对照，变化后的片段被收成 TCCGG 和 TTCCGG，再指向 ETS/TCF 结合基序。右侧写明：-124C&gt;T 制造出 ETS/TCF 结合位点，hTERT 转录因此增加。下方色条画的是启动子周围的调控环境：ETS、c-MYC、SP1、NF-κB 标成上调转录因子，箭头指向转录上升；WT1 和 MZF2 标成下调转录因子，箭头指向转录下降。色条是调控示意，没有给出每种因子在每种肿瘤里实际占据启动子的数据。
+
+右侧另一组百分比是这两个点突变的出现范围：黑色素瘤 67%–85%，肝细胞癌 24%–59%，膀胱癌 47%–85%，胶质母细胞瘤 28%–84%。两组百分比各有所指。85%–90% 是端粒酶被激活的比例；这一组是特定启动子突变在不同癌种、不同研究里的频率范围。区间来自不同研究，换一个队列，数字可以落在区间内的另一处。
+
+端粒酶重新激活，说明的是肿瘤怎样把末端维持住，从而继续增殖。单独让 *TERT* 转录升高，还不足以把一个正常细胞变成癌细胞。这一页只讲机制，没有药物，也没有疗效数据。
 
 
 ### 第082页｜ALT：不用端粒酶也能延长
 
 <div id="lecture-page-82"></div>
-<figure class="genome-figure" data-lecture-page="82"><img src="/notes/genome-stability-2026/page-082.webp" width="1738" height="1225" loading="lazy" decoding="async" alt="第82页：ALT：不用端粒酶也能延长，原图内中文标注" /><figcaption>原讲义第82页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="82"><img src="/notes/genome-stability-2026/page-082.webp" width="1738" height="1225" loading="lazy" decoding="async" alt="第82页：ALT：不用端粒酶也能延长，原图内中文标注" /><figcaption>原讲义第82页 · 点击图片放大</figcaption></figure>
 
-ALT借用同源序列作为延长信息来源，绕开端粒酶途径。它常伴随端粒长度高度不均、端粒相关损伤信号和染色体外端粒DNA。图中的标志并非各自单独都能完成诊断，需要结合检测体系判断；不同癌种ALT比例差异很大，因此10%～15%只能作为讲义层面的总体概括。
+讲义把大约 10%–15% 的肿瘤放在另一条路上：**ALT**（alternative lengthening of telomeres，端粒替代性延长）。这些肿瘤用同源序列当延长的信息来源，走依赖同源重组的 DNA 复制来拉长端粒。10%–15% 在页首和页脚各出现一次，译注标明这是讲义的估计。不同癌种的 ALT 比例差得很大，这个区间只适合当作总体概括。
+
+左侧是两条模型，中间用 or 隔开，都没有测量数据。上面一条：紫色和红色的端粒双链发生交叉，红色链被拉长，标注 Similar to break-induced replication，也就是与断裂诱导复制相似。断裂诱导复制是以同源 DNA 为模板、从交换处继续复制下去的一种方式；图上写的是“与之相似”。下面一条：一个环状模板对着线性末端做滚环复制，产物同样是加长的红色端粒。译注把两条都收成：通过重组相关的 DNA 复制维持端粒。
+
+右侧三条是 ALT 里常被一起看的现象。双链断裂修复途径参与 ALT。ALT 端粒上有 DNA 损伤信号，可结合 **53BP1** 或 **γH2AX**：前者是聚集到损伤位点附近的蛋白，后者是组蛋白 H2AX 的磷酸化形式，译注合称为损伤响应标志。染色体外的端粒重复称为 **C-circle**（端粒 C 环），可以在 ALT 细胞里检测到。滚环那幅图上的圆，和检测里说的 C-circle，图本身没有做成一一对应的实验。端粒本来是天然末端；这一页画的是 ALT 状态下，端粒 DNA 借同源序列被复制加长，并且末端带上损伤标志。这些标志要放进同一套检测里一起判断，单独一项完成不了诊断。
+
+ALT 还常伴随端粒长度高度不均。本页没有长度分布图，这一点是这一机制的伴随特征，不是从示意图上量出来的。
 
 
 ### 第083页｜ATRX／DAXX与ALT的关联
 
 <div id="lecture-page-83"></div>
-<figure class="genome-figure" data-lecture-page="83"><img src="/notes/genome-stability-2026/page-083.webp" width="1885" height="1208" loading="lazy" decoding="async" alt="第83页：ATRX／DAXX与ALT的关联，原图内中文标注" /><figcaption>原讲义第83页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="83"><img src="/notes/genome-stability-2026/page-083.webp" width="1885" height="1208" loading="lazy" decoding="async" alt="第83页：ATRX／DAXX与ALT的关联，原图内中文标注" /><figcaption>原讲义第83页 · 点击图片放大</figcaption></figure>
 
-端粒不仅是重复DNA，也有特定染色质环境。ATRX/DAXX异常可改变相关染色质维护，并与ALT状态相联系。注意“相关”不能直接改写为“缺失必然导致ALT”，更不能只看ATRX阴性就认定存在ALT。显微图中的信号共定位或缺失需要对照、定量和其他标志支持，本页首先展示的是机制候选与观察关联。
+端粒除了重复 DNA，还有特定的染色质环境。标题写的是：ATRX/DAXX 的失活与多种癌症中的 ALT 相关。用词是 associated with。**ATRX** 和 **DAXX** 在图中是参与染色质调控、负责投放组蛋白 H3.3 的蛋白。
+
+左侧是模型。ATRX 和 DAXX 画成蓝色椭圆，箭头把 H3.3 放到核小体上，旁边另有 H3.1/2。核小体旁标着 H3K4me0 和 H3K9me3，用来表示这里维持的是异染色质。染色体横条从左到右是 Telomere、常染色质、间质异染色质、近着丝粒异染色质，右端再一个 Telomere。正文说这两个蛋白维持端粒处的异染色质状态。它们也被画在端粒以外的异染色质旁边，模型没有把它们限制成只存在于端粒的蛋白。
+
+右侧是荧光显微图，图例为 Telomere 红色、ATRX 绿色、DAPI 蓝色。许多细胞核是蓝色，黄箭头指向其中一个小亮点。红与绿叠在一起时会接近黄色，箭头标出的是端粒信号和 ATRX 信号看起来重合的一个位置。出处是 Heaphy, Wilde and Jiao et al. *Science* 2011。缩略图没有可读的比例尺，也没有对照和定量。一个箭头说明不了这颗细胞是否处在 ALT，也代替不了“ATRX 是否缺失”的判断。
+
+ATRX 或 DAXX 异常可以改变端粒染色质的维护，并与 ALT 状态一起出现。相关仍然是相关。只看到 ATRX 阴性，还要拿 C-circle、端粒长度或其他 ALT 标志核对，才能判断这条途径是否在运作。显微图里的共定位或信号缺失，都需要对照、定量和其他标志一起支持。
 
 
 ### 第084页｜针对端粒酶的抗肿瘤策略
 
 <div id="lecture-page-84"></div>
-<figure class="genome-figure" data-lecture-page="84"><img src="/notes/genome-stability-2026/page-084.webp" width="1772" height="1326" loading="lazy" decoding="async" alt="第84页：针对端粒酶的抗肿瘤策略，原图内中文标注" /><figcaption>原讲义第84页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="84"><img src="/notes/genome-stability-2026/page-084.webp" width="1772" height="1326" loading="lazy" decoding="async" alt="第84页：针对端粒酶的抗肿瘤策略，原图内中文标注" /><figcaption>原讲义第84页 · 点击图片放大</figcaption></figure>
 
-这些策略分别瞄准RNA、催化、表达、免疫识别或端粒结构，不是同一种药的不同名字。某些方式需要经过多轮分裂才暴露端粒维持缺陷，作用时间也可能不同。本页是2022年综述中的策略地图，不是当前所有疗法均已获批或对所有肿瘤有效的清单；实际开发与临床状态需逐项查证。
+这一页是一张抗肿瘤研究的策略地图：针对端粒酶，可以作用在不同的分子步骤上。出处印在页脚，Gao J and Pickett HA, *Nature Review Cancer* 22:516–532（2022）。它汇总的是 2022 年这篇综述里的策略。某一条目是否已经获批、适用于哪些肿瘤，图上没有给出，需要逐项查证。重新激活端粒酶是肿瘤细胞维持末端的机制；这张地图也没有显示这些做法已经治愈癌症。
+
+左侧把端粒酶画在染色体末端。复合物上标着 hTERT、hTR、Dyskerin、NOP10、NHP2、GAR1、TCAB1，旁边还有 H2A 和 H2B，DNA 上画着 shelterin。hTR 是人端粒酶 RNA，也就是前面的 TERC。箭头分别指向不同打法。核苷类似物列出 AZT、5-MeCITP 和无环核苷磷酸，标注是阻断延长。针对 hTR 的寡核苷酸列出 Imetelstat 和反义寡核苷酸，标注是干扰 hTR 结合。BIBR1532 的标注是结合 hTERT 并抑制移位。末端突出端画成 **G4**（G-quadruplex，G 四链体），稳定配体列出 telomestatin、TMPyP4、RHPS4 和 pyridostatin。细胞膜上方是免疫策略：hTERT 肽段由 MHCI 呈递，旁边有 CD8+ 和 CD4+ T 细胞，疫苗名字是 GV1001、INVAC1 和 Vx-001，膜上还标了 FAS 和 TRAIL-R。
+
+右侧清单与这些标注对应：抗 hTR 的寡核苷酸、核苷类似物、hTERT 小分子抑制剂、抑制 hTERT 转录、针对 hTERT 的免疫治疗、G4 稳定配体。抑制转录主要写在右侧清单里；左侧大图集中画的是酶、末端结构和免疫识别。六条的靶点各不相同，分别落在 RNA、催化延长、移位、转录、免疫识别和末端的 G 四链体上。
+
+有些做法要等细胞再分裂若干轮，已经存在的端粒缩短之后，末端维持的缺陷才暴露出来，作用时间因此不一样。图上的化合物和疫苗名字是综述地图里的例子。名字和临床疗效之间，这一页没有给出对应关系。
 
 
 ### 第085页｜ALT与复制压力响应
 
 <div id="lecture-page-85"></div>
-<figure class="genome-figure" data-lecture-page="85"><img src="/notes/genome-stability-2026/page-085.webp" width="2079" height="1380" loading="lazy" decoding="async" alt="第85页：ALT与复制压力响应，原图内中文标注" /><figcaption>原讲义第85页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="85"><img src="/notes/genome-stability-2026/page-085.webp" width="2079" height="1380" loading="lazy" decoding="async" alt="第85页：ALT与复制压力响应，原图内中文标注" /><figcaption>原讲义第85页 · 点击图片放大</figcaption></figure>
 
-重复序列等因素会让端粒复制更困难，ALT细胞可能依赖特定复制压力调控来维持生存。由此可提出治疗脆弱性假说：如果阻断依赖的保护路径，是否更容易杀伤这类细胞？这是需要实验检验的条件性推论，不能直接从“压力高”推出任何ATR抑制剂在所有ALT肿瘤中都有效。
+这一页把 **ALT**（alternative lengthening of telomeres，端粒替代性延长）细胞里偏高的复制压力，收成一条可能的治疗线索。标题是 Strategies to target ALT for cancer treatment，淡蓝题注写“ALT 与复制压力响应”。页脚引自 Gao 与 Pickett 2022 年的综述。左侧 a 到 e 是通路示意，右侧文字是据此提出的策略，还不是杀伤实验的结果。
+
+左侧沿端粒上的同源重组往下读。a 中 BLM、EXO1 和 DNA2 聚在复制叉旁，标注 End resection，即把末端切出单链。b 里 RPA 覆盖这条单链。c 由 RAD52 和 RAD51 做 Homology search and strand invasion，寻找同源序列并完成链侵入。旁边的 d 画出 **ATR** 指向 CHK1，一旁的小环标为 ECTRs，也就是染色体外的端粒重复片段。最下方 e 是一个 APB（ALT-associated PML body，ALT 相关的 PML 小体）；其中的 BTR 复合物标出 BLM、TOP3A 和 RMI1/2，并与 Polδ、RFC、PCNA 一起进行 Homology-directed repair，同源导向的修复。
+
+右侧把治疗设想写成一条因果链。第一条和译注都写：ALT 阳性细胞常有较高的复制压力。接下来 ATR，全称 ATM and Rad3-related，通过 CHK1（checkpoint kinase 1，检查点激酶 1）稳定并重启复制叉，同时把细胞周期先停住，直到损伤处理完。译注专门把名字拆开：ATR 的名称里带有 ATM，它仍是另一条激酶通路。最后一条写，抑制的是这条复制压力响应，结果可能是细胞凋亡。压力已经偏高；课件要拿掉的，是细胞用来稳住复制叉、拖延周期的那层保护。
+
+这张综述图给出的是依赖关系的模型。重复序列让端粒复制更困难，ALT 细胞可能要靠 ATR–CHK1 才能继续活下去；阻断这条保护是否更能杀伤，取决于化合物、细胞背景和实验读数。不能从“压力高”直接推出任何 ATR 抑制剂在所有 ALT 肿瘤里都有效。箭头归纳的是通路，本页没有测量杀伤率。
 
 
 ### 第086页｜2015年ATR抑制研究：读懂实验问题
 
 <div id="lecture-page-86"></div>
-<figure class="genome-figure" data-lecture-page="86"><img src="/notes/genome-stability-2026/page-086.webp" width="1981" height="1299" loading="lazy" decoding="async" alt="第86页：2015年ATR抑制研究：读懂实验问题，原图内中文标注" /><figcaption>原讲义第86页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="86"><img src="/notes/genome-stability-2026/page-086.webp" width="1981" height="1299" loading="lazy" decoding="async" alt="第86页：2015年ATR抑制研究：读懂实验问题，原图内中文标注" /><figcaption>原讲义第86页 · 点击图片放大</figcaption></figure>
 
-本页引用2015年Science研究，问题是特定实验体系中ALT状态是否关联ATR抑制敏感性。看数据先确认比较哪些细胞、用了什么处理、纵轴测什么，再看效应大小与重复。论文标题总结的是研究结果，不能脱离所用细胞与条件直接变成临床适应证；这里展示的是机制与治疗研究线索。
+这一页把上一页的设想放进 2015 年 *Science* 的细胞实验里问：ALT 状态是否和 ATR 抑制剂敏感连在一起。论文标题 Alternative lengthening of telomeres renders cancer cells hypersensitive to ATR inhibitors 是作者对结果的概括，淡蓝译注要求先读清实验在比较什么。作者栏以 Rachel Litman Flynn 为首，页脚为 *Science* 2015;347(6219):273-7。
+
+分图 D 的纵轴是 **IC50**，单位 μM，刻度标到 15。IC50 是使检测读数降到一半时的化合物浓度，在这里表示细胞有多敏感，位置越低越敏感。横轴是两种化合物 VE-821 和 KU55933，每种下面再分 ALT+ 和 Tel+。ALT+ 是替代性延长阳性，Tel+ 是这张图里靠端粒酶维持端粒的细胞。每个符号是一个细胞系，图例列出 SJSA1、MG63、SW39、CALU6、U2OS、SAOS2、CAL72、SKLU1、NOS1、SW26 和 HUO9。
+
+先看整组落在纵轴的哪一段。VE-821 下方，ALT+ 的点挤在底部，Tel+ 的点整体高出一截，组间括号标着 P&lt;0.0001。KU55933 下方，两组上下交错，括号标着 P=0.376。这篇论文里 VE-821 用作 ATR 抑制剂，KU55933 用作 ATM 抑制剂；缩略图的横轴印的是化合物名称，靶点身份与原文一致，可由页末链接核对。因此 D 同时给出两组比较：对 VE-821，ALT+ 与 Tel+ 分开；对 KU55933，同样的细胞分组没有分开。
+
+标题里的 hypersensitive 总结的是这些细胞系、这两种化合物和这套 IC50 测定。各点的具体微摩尔数应以原文坐标为准，这里不把缩略图改写成新的精确均值。培养细胞里的敏感性差异可以当作机制和治疗研究的线索，不能直接写成临床适应证或人体疗效。
 
 补充核验：[Flynn et al. 2015 · ALT and ATR inhibitors](https://pubmed.ncbi.nlm.nih.gov/25593184/)。
 
@@ -792,9 +1208,15 @@ ALT借用同源序列作为延长信息来源，绕开端粒酶途径。它常�
 ### 第087页｜干预与对照如何加强机制解释
 
 <div id="lecture-page-87"></div>
-<figure class="genome-figure" data-lecture-page="87"><img src="/notes/genome-stability-2026/page-087.webp" width="1930" height="1225" loading="lazy" decoding="async" alt="第87页：干预与对照如何加强机制解释，原图内中文标注" /><figcaption>原讲义第87页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="87"><img src="/notes/genome-stability-2026/page-087.webp" width="1930" height="1225" loading="lazy" decoding="async" alt="第87页：干预与对照如何加强机制解释，原图内中文标注" /><figcaption>原讲义第87页 · 点击图片放大</figcaption></figure>
 
-这页增加干预实验和曲线比较，目的是帮助判断观察差异是否与特定分子过程有关。不要只看星号或P值：还要看起始状态、对照、效应大小和不确定性。讲义缩略图并不足以支持重新计算具体结果；本笔记保留原图并解释阅读框架，不把难辨的小字数值转写成未经核对的精确结论。
+这一页仍承接 Flynn 等人 2015 年的 ATR 抑制研究，用来看干预和对照怎样把“ALT 细胞更敏感”说具体。上半部左边仍是分图 D，右边新增分图 F；下方再次印出论文那句标题式结论。淡蓝题注写的是：干预与对照如何加强机制解释。
+
+分图 D 的坐标与上一页相同。纵轴 IC50（μM），VE-821 下 ALT+ 位于低处、Tel+ 位于高处，括号为 P&lt;0.0001；KU55933 下两组重叠，括号为 P=0.376。图例仍是一个符号对应一个细胞系。P 值标记的是组间比较的统计结果，两组点隔开多远、各自散成什么样，要在图上另读。
+
+分图 F 把同一种化合物收成剂量–存活曲线。纵轴是 % Viability，即生长或存活的百分读数；横轴是 VE-821 浓度，从 0 标到 20 μM，中间依次印有 0.3125、0.625、1.25、2.5、5 和 10。红线是 MGG4，上标 TEL；蓝线是 MGG119，上标 ALT。零剂量附近两条线都从约 100% 出发。浓度升高后，蓝线下降更早、位置更低，红线在中段剂量仍留在较高处，到高浓度才明显下落。两条线都画有误差线。译注写明，每条曲线的具体处理条件应按原图图例辨认。
+
+D 比较的是一批细胞系的半数抑制浓度，F 比较的是两个端粒维持状态不同的细胞系随剂量变化的存活。起始都在零剂量附近对齐，误差线把每个剂量上的不确定程度画了出来，所以阅读不能停在一个 P 值上。缩略图不够用来重算每个点的原始数值。这些读数来自体外培养细胞，说明的是该实验体系中的敏感性差异，没有提供人体疗效。
 
 补充核验：[Flynn et al. 2015 · ALT and ATR inhibitors](https://pubmed.ncbi.nlm.nih.gov/25593184/)。
 
@@ -802,195 +1224,300 @@ ALT借用同源序列作为延长信息来源，绕开端粒酶途径。它常�
 ### 第088页｜端粒：保护、限制增殖与肿瘤维持
 
 <div id="lecture-page-88"></div>
-<figure class="genome-figure" data-lecture-page="88"><img src="/notes/genome-stability-2026/page-088.webp" width="1915" height="1062" loading="lazy" decoding="async" alt="第88页：端粒：保护、限制增殖与肿瘤维持，原图内中文标注" /><figcaption>原讲义第88页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="88"><img src="/notes/genome-stability-2026/page-088.webp" width="1915" height="1062" loading="lazy" decoding="async" alt="第88页：端粒：保护、限制增殖与肿瘤维持，原图内中文标注" /><figcaption>原讲义第88页 · 点击图片放大</figcaption></figure>
 
-“防止被当作断裂”比“防止任何断裂”更准确。端粒缩短能触发增殖限制，若检查点已失效，失保护的端粒反而可能引发融合和重排。因此端粒与癌症的关系具有阶段性：限制增殖可起屏障作用，危机后若细胞获得维持机制又可能继续扩增。不能简单把更长端粒等同于更健康。
+端粒在基因组稳定里同时承担三件事，标题写成 Telomeres in genome stability，题注是“保护、限制增殖与肿瘤维持”。三条要点依次对应：天然末端不被误认、复制中逐步变短从而限制分裂、肿瘤细胞靠特殊维持机制继续增殖。
 
-#### 深入理解：端粒缩短既可抑癌，也可增加不稳定
+第一条写，端粒防止染色体末端被当成 DNA 双链断裂。译注用的词是“误认”：端粒标记的是末端的身份，使修复系统不把天然末端读成断裂。染色体臂上仍然可以发生真正的双链断裂；这条保护针对的是末端被误认。
 
-在损伤检查点正常时，端粒失保护会阻止继续分裂，形成增殖屏障；如果相关检查点被破坏，细胞可能带着失保护末端继续进入分裂，发生融合、桥和断裂。极少数能越过危机并建立端粒维持的克隆才有机会持续扩增。因此时间阶段与细胞背景至关重要，不能把端粒长度单独当作健康或癌变的充分指标。
+第二条把复制过程中的逐渐缩短和分裂次数连在一起，写成用来限制复制错误和不稳定基因组的积累。缩短在这里有两个方向，取决于检查点是否还在。损伤检查点完整时，端粒短到失保护会阻止继续分裂，缩短构成一道增殖屏障。相关检查点若已经失效，细胞可以带着失保护的末端再进入分裂，末端发生融合、拉成桥并再次断裂，染色体不稳定随之增加。只有极少数越过这场危机、并且建立起端粒维持的克隆，才有机会持续扩增。端粒长度因此不能单独充当“更健康”或“已经癌变”的充分指标；阶段和细胞背景决定缩短带来的是停住，还是更多重排。
+
+第三条写，癌细胞经由独特的端粒维持机制获得持续复制的能力，这些机制可以被选为治疗靶点。译注点明常见的两条：端粒酶或 ALT。这是课件给出的策略方向，本页没有某种药物的疗效数据。
 
 
 ## 着丝粒与复杂重排
 
-
 ### 第089页｜着丝粒：染色体分离的平台
 
 <div id="lecture-page-89"></div>
-<figure class="genome-figure" data-lecture-page="89"><img src="/notes/genome-stability-2026/page-089.webp" width="1901" height="888" loading="lazy" decoding="async" alt="第89页：着丝粒：染色体分离的平台，原图内中文标注" /><figcaption>原讲义第89页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="89"><img src="/notes/genome-stability-2026/page-089.webp" width="1901" height="888" loading="lazy" decoding="async" alt="第89页：着丝粒：染色体分离的平台，原图内中文标注" /><figcaption>原讲义第89页 · 点击图片放大</figcaption></figure>
 
-着丝粒所在区域组装动粒，动粒连接纺锤体微管，使姐妹染色单体被分向两极。序列复制正确仍不够，如果整条染色体分配错了，子细胞也会缺少或多出遗传物质。错误分离、桥状结构和断裂可相互关联，但并非每次错误分离都必然造成着丝粒断裂，读本页因果链时应保留这种条件性。
+从这一页起，维持基因组稳定的结构换成 **着丝粒**。标题 Centromeres for genome stability 下面，第一条把 centromere 定义成控制细胞分裂时正确分离的染色体位点，题注称为染色体分离的平台。序列复制正确，只说明遗传信息有了拷贝；整条染色体若分错子细胞，子代仍会少一段或多一段。
+
+后面两条把课件的因果链接完。Mis-segregation，错误分离，页上写成会导致着丝粒断裂；着丝粒断裂再导致染色体水平的多种结构变异。译注把中间环节写得宽一些：异常连接、分离或断裂，都可能通向结构异常。蓝色圆圈上的数字对应的是译注编号，阅读时按这三条文字的顺序，而不按圆圈数字的位置。
+
+第二条的 leads to 写成了直接后果。错误分离、染色体桥和着丝粒断裂可以彼此衔接，一次错误分离并不必然把着丝粒拉断。本页只有这三句判断，断裂之后长成什么样，要到后面的形态图里再看。
 
 
 ### 第090页｜从中期到后期：怎样正确分开
 
 <div id="lecture-page-90"></div>
-<figure class="genome-figure" data-lecture-page="90"><img src="/notes/genome-stability-2026/page-090.webp" width="2062" height="1468" loading="lazy" decoding="async" alt="第90页：从中期到后期：怎样正确分开，原图内中文标注" /><figcaption>原讲义第90页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="90"><img src="/notes/genome-stability-2026/page-090.webp" width="2062" height="1468" loading="lazy" decoding="async" alt="第90页：从中期到后期：怎样正确分开，原图内中文标注" /><figcaption>原讲义第90页 · 点击图片放大</figcaption></figure>
 
-观察图中染色体排列、向两极移动和重新形成细胞核的变化。正确双向连接意味着一对姐妹动粒分别联系不同纺锤体极，而不是同一个动粒同时乱接多个方向。着丝粒是染色质区域，动粒是组装在该区域上的蛋白机器，两者相关但不等同；明确这一点后就能读懂后面CENP-A与动粒组装的联系。
+着丝粒要保证染色体在分裂中正确分开，看的是晚前中期到末期这一段的几何关系。标题为 Centromeres ensure proper segregation of chromosomes in cell division。三列分别是 late prometaphase–metaphase、Anaphase 和 Telophase，出处是 McKinley 与 Cheeseman 2015 年的综述。
+
+每一列上下两层对照。上层是线条示意：中期染色体排在赤道板，纺锤丝伸向两侧；后期染色单体分成两簇移向两极；末期两团染色质重新进入两个细胞核。下层是荧光图，左侧图例固定为 DNA 蓝色、Microtubules 微管绿色、CENP-A 红色。中期蓝色染色体聚成板状，绿色微管从两侧伸来，红色 CENP-A 落在板区；虚线框放大后是一对靠得很近的红点。后期这三色分成相向离开的两群。末期两个蓝色核已经成形，绿色微管仍连在中间，红点分别留在两侧。
+
+底部一条拉直的染色质纤维改用另一套图例：CENP-A 红色，H3K4me2 绿色，DNA 蓝色。H3K4me2 是组蛋白 H3 第 4 位赖氨酸的二甲基化。红点和绿点沿蓝链呈离散焦点，用来标出着丝粒染色质所在的位置。着丝粒是这段染色质区域；**动粒**（kinetochore）是组装在该区域上、用来抓住微管的蛋白质机器。正确的双向连接，是一对姐妹动粒分别连向两个纺锤体极。中期那一列里，微管从两侧汇到赤道板上的染色体，画的就是这种关系。同一个动粒若同时接向两个方向，后期就无法干净地拉开。
+
+上层线条图是阶段示意，下层荧光图显示 CENP-A 和微管在对应阶段的定位。两者说明着丝粒怎样充当分离的平台。本页画出的是正确分开的过程，没有统计某一种错误连接的频率。
 
 
 ### 第091页｜着丝粒身份具有表观遗传性
 
 <div id="lecture-page-91"></div>
-<figure class="genome-figure" data-lecture-page="91"><img src="/notes/genome-stability-2026/page-091.webp" width="2062" height="1358" loading="lazy" decoding="async" alt="第91页：着丝粒身份具有表观遗传性，原图内中文标注" /><figcaption>原讲义第91页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="91"><img src="/notes/genome-stability-2026/page-091.webp" width="2062" height="1358" loading="lazy" decoding="async" alt="第91页：着丝粒身份具有表观遗传性，原图内中文标注" /><figcaption>原讲义第91页 · 点击图片放大</figcaption></figure>
 
-同一DNA序列并不总保证同样的着丝粒活性，说明还需要特定染色质状态和蛋白标记。CENP-A核小体等参与维持这种“这里是着丝粒”的细胞记忆。这里的表观遗传不只是DNA甲基化；它包括能够传递的染色质组织状态。序列背景仍有作用，“表观遗传决定”不等于DNA序列完全无关。
+着丝粒的身份由 **表观遗传**状态维持：着丝粒 DNA 的序列可以不同，序列不改变时着丝粒也可以失活。标题 Centromeres are specified epigenetically 把这两句放在左侧，右侧用一张路径图说明身份怎样关闭或转移到新位置。图仍出自 McKinley 与 Cheeseman 2015。
+
+右侧以一条染色体为起点，红色标 CENP-A，绿色标着丝粒 DNA。三条箭头分出三种命运。向上，Chromosome fusion 产生带两个红色着丝粒的 Dicentric chromosome，再经 Inactivation 变成 Inactivated dicentric chromosome：其中一个着丝粒不再标红色 CENP-A，只留下绿色的 DNA 标记。向右，新位置出现着丝粒，原来的着丝粒同时失活，标注为 De novo neocentromere formation and ancestral centromere inactivation。向下，Chromosome break 把染色体打断，失去着丝粒的片段经 Rescue of acentric fragment 得到一个新的红色着丝粒。
+
+CENP-A 核小体是图上用来表示“这里是活动着丝粒”的蛋白标记。这里的表观遗传，指可以传到子细胞的染色质组织状态，核心是 CENP-A 这一类标记；讨论的范围不限于 DNA 甲基化。序列没有改写，红点却可以在原处消失，或在新位置出现，这就是“不改变 DNA 序列也能改变着丝粒活性”的画法。
+
+绿色的着丝粒 DNA 仍画在原来的位置上，只是失去了红色 CENP-A，所以序列背景并没有被拿掉。下一页专门讲人类着丝粒常见的序列环境。本页是综述里的路径示意：融合、断裂和新着丝粒形成用来说明身份可以转移，并不是每一次融合或断裂都会走出图上的某一条箭头。
 
 
 ### 第092页｜α卫星与高阶重复
 
 <div id="lecture-page-92"></div>
-<figure class="genome-figure" data-lecture-page="92"><img src="/notes/genome-stability-2026/page-092.webp" width="1890" height="1307" loading="lazy" decoding="async" alt="第92页：α卫星与高阶重复，原图内中文标注" /><figcaption>原讲义第92页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="92"><img src="/notes/genome-stability-2026/page-092.webp" width="1890" height="1307" loading="lazy" decoding="async" alt="第92页：α卫星与高阶重复，原图内中文标注" /><figcaption>原讲义第92页 · 点击图片放大</figcaption></figure>
 
-把171 bp单体看作小积木，若一组不同单体按固定顺序重复，就形成高阶重复。周围区域通常更异质，组织方式与核心不同。但这不是所有物种的通则，人类也有新着丝粒等例外。上一页强调功能身份，本页强调典型序列组织，两者并不矛盾：序列提供环境，染色质机制维持活动状态。
+标题仍是 Centromeres are specified epigenetically，这一页转而讲序列怎样搭成典型的着丝粒，题注是“α 卫星与高阶重复”。上一页的活动身份靠染色质标记，这里画的是这些标记通常落脚的序列环境。图同样来自 McKinley 与 Cheeseman 2015。
+
+分图 a 把真核着丝粒分成两类。Holocentric 的红色信号铺在整条染色体上，Monocentric 只有一处主缢痕。单着丝粒再向下分成 Point centromere 和 Regional centromere。分图 b 左边的点着丝粒画在一段短的特异序列上，标出 CDEI、CDEII、CDEIII，其中一颗核小体是红色 CENP-A，其余是 H3 核小体。右边的区域着丝粒是一串串联重复，上面间隔分布着多颗 CENP-A 核小体，举例 α-satellite DNA。
+
+右侧文字和底部彩图把人类的区域着丝粒拆开。核心由约 171 bp 的单体组成，这种单体称为 **α-satellite** DNA，即 α 卫星 DNA。单体头尾相接、按一定顺序重复，构成 higher-order repeat，高阶重复，缩写 **HOR**。底部彩箭里，重复出现的那一组被括号标成 Higher-order repeat，其中还标了 CENP-B box，旁边另有 Divergent α-satellite monomers。核心两侧的 Pericentromere，着丝粒周围区域，是方向和颜色都更杂的箭头，图注为 LINEs、SINEs or other satellites，文字说明这些单体缺乏高阶重复。分图 c 用猕猴 4 号染色体和人类 6 号染色体对照，两者都画成中间一块红色核心、两端绿色。
+
+171 bp 和高阶重复描述的是人类典型着丝粒的核心。点着丝粒那一栏已经是另一种组织：很短的特异序列，而不是 α 卫星高阶重复。人类自身也有例外，上一页的新着丝粒可以出现在缺少这种核心的序列上。本页讲常见的序列架构，序列提供环境，CENP-A 一类染色质机制维持这段区域处于活动状态。
 
 
 ### 第093页｜CENP-A装载需要严格时序
 
 <div id="lecture-page-93"></div>
-<figure class="genome-figure" data-lecture-page="93"><img src="/notes/genome-stability-2026/page-093.webp" width="1914" height="1349" loading="lazy" decoding="async" alt="第93页：CENP-A装载需要严格时序，原图内中文标注" /><figcaption>原讲义第93页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="93"><img src="/notes/genome-stability-2026/page-093.webp" width="1914" height="1349" loading="lazy" decoding="async" alt="第93页：CENP-A装载需要严格时序，原图内中文标注" /><figcaption>原讲义第93页 · 点击图片放大</figcaption></figure>
 
-DNA复制加倍后，原有CENP-A并不会立即同步翻倍，平均分配使每条新染色单体上的密度暂时降低；之后在特定窗口补充。HJURP等装配因素与细胞周期调控共同帮助正确定位。不要把“半量”误解为蛋白被切成一半，也不要把CENP-A沉积时序当作所有生物完全一致的规则。
+CENP-A 何时装上着丝粒，被限制在细胞周期的特定窗口。标题 CENP-A deposition is tightly regulated through cell cycle 要说明的是：DNA 复制后，旧的 CENP-A 分到两条姐妹染色单体上，新的 CENP-A 并不当场补齐，所以有丝分裂时的占有量暂时处于半满。图仍来自 McKinley 与 Cheeseman 2015。
+
+分图 a 比较 CENP-A 与组蛋白 H3.1 的一级序列。绿色是与 H3.1 相同的区段，黄色是不同的区段，红色是 H3.1 里没有的插入。蛋白从左到右分成 N-terminal tail 和 Histone fold domain，折叠域中标出 α1、L1、α2、L2、α3。上方注明 HJURP 结合，以及 CENP-N、CENP-C 的招募；中间一段称为 CENP-A-targeting domain（CATD）；右端附近是 CENP-C binding。CENP-A 是着丝粒特异的 H3 变体，和普通 H3 的差别集中在决定它去向何处、由谁装载的区段。
+
+分图 b 沿 G1、S、G2、M 转一圈。S 期复制之后，原有的红色 CENP-A 核小体分到两条新染色单体上，空出的位置由 H3.3–H4 暂时占据，每条单体上的 CENP-A 密度下降。M 期标注 Mitotic kinetochore assembly，并写明 Half-maximal CENP-A occupancy：动粒在这种半满的 CENP-A 染色质上组装。退出有丝分裂、进入 G1 后，HJURP、RSF1、MgcRacGAP 出现在装载步骤，新的 CENP-A–H4 放回着丝粒；图旁还有装载机器此后可能解体的问号。淡蓝译注写明人类细胞中的时间：新的 CENP-A 通常在有丝分裂退出到 G1 这一段装载。
+
+分图 c 把 G1 装载收成一组协作：CDK、Mis18 复合物中的 M18BP1 与 Mis18α/β、CENP-C、HJURP，以及 CENP-A–H4，共同形成 CENP-A 核小体。右侧第三条也写，G1 的沉积需要多种装配因子一起工作。“半满”指复制后每条染色单体上 CENP-A 核小体的占有水平暂时约为复制前的一半，蛋白分子本身没有被从中切断。这套 G1 装载是图中人类细胞的模型，不能直接当成所有生物共同的时刻表。
 
 
 ### 第094页｜着丝粒断裂与异常染色体
 
 <div id="lecture-page-94"></div>
-<figure class="genome-figure" data-lecture-page="94"><img src="/notes/genome-stability-2026/page-094.webp" width="2062" height="1349" loading="lazy" decoding="async" alt="第94页：着丝粒断裂与异常染色体，原图内中文标注" /><figcaption>原讲义第94页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="94"><img src="/notes/genome-stability-2026/page-094.webp" width="2062" height="1349" loading="lazy" decoding="async" alt="第94页：着丝粒断裂与异常染色体，原图内中文标注" /><figcaption>原讲义第94页 · 点击图片放大</figcaption></figure>
 
-一条染色体如果没有有效着丝粒，分裂时可能难以被正常牵引；如果有两个活跃着丝粒且受到相反拉力，则可能形成桥并发生断裂。细胞有时可通过使一个着丝粒失活而稳定某些双着丝粒染色体，说明结构和功能状态都重要。读图时数有效着丝粒，再跟踪分离方向，比只看外观更有解释力。
+着丝粒处的断裂可以走出多种染色体形态。标题 Centromere breakage leads to various chromosome abnormalities 把产物分成两组：横线左侧是 Aneuploidy，非整倍体；右侧是 Centromere alterations，着丝粒本身的改变。图来自 McKinley 与 Cheeseman 2015，是一张分类示意。
+
+上方的起点是一条在着丝粒处断裂的染色体。p arm 画成灰色，q arm 画成绿色，蓝色圆点是着丝粒，红色星号标在断裂处，旁边注明 High DNA sequence similarity。粗箭头向下，表示高相似序列附近的这次断裂进入下面的重排。
+
+下排按蓝色着丝粒的数目、以及灰臂和绿臂的搭配来读。Balanced translocation 在 Non-allelic HR（非等位同源重组）之后，两条染色体各有一个着丝粒，灰段和绿段发生了交换。Un-balanced translocation 是一条较长的染色体配上一条带着丝粒的灰色小片段。Whole-arm chromosome aneuploidy 画成一条绿色染色体和一条较短的灰色染色体，两者都带蓝色着丝粒，对应整臂水平的增减。Isodicentric chromosome 是一条带两个蓝色着丝粒、两端都是绿色 q 臂的染色体，旁边另有灰色小片段。Ring chromosome 是带一个着丝粒的绿色环，同时丢失一段线性片段。右侧改看 centromere 本身：Dicentric chromosome 在一条染色体上画了两个蓝色着丝粒；Neocentromere chromosome 在一段灰色片段上新标出 De novo centromere，旁边还有一条带蓝色着丝粒的绿色染色体。
+
+有效着丝粒的数目，比染色体的外形更能解释后续分离。没有有效着丝粒的片段，纺锤体很难把它正常拉走。一条染色体上两个着丝粒若都保持活动、又被拉向相反的两极，就可能拉成桥并再次断裂。双着丝粒有时会靠关闭其中一个着丝粒而稳定下来，所以蓝点表示结构上有几处着丝粒标记，是否仍在工作还要看功能状态。本页把可能的产物并排列出，没有给出每种产物在肿瘤里的频率。
 
 
 ### 第095页｜BFB：断裂—融合—桥循环
 
 <div id="lecture-page-95"></div>
-<figure class="genome-figure" data-lecture-page="95"><img src="/notes/genome-stability-2026/page-095.webp" width="1825" height="1398" loading="lazy" decoding="async" alt="第95页：BFB：断裂—融合—桥循环，原图内中文标注" /><figcaption>原讲义第95页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="95"><img src="/notes/genome-stability-2026/page-095.webp" width="1825" height="1398" loading="lazy" decoding="async" alt="第95页：BFB：断裂—融合—桥循环，原图内中文标注" /><figcaption>原讲义第95页 · 点击图片放大</figcaption></figure>
 
-失去端粒保护的末端可能融合，形成分裂时被两极牵拉的桥；桥断裂后留下新的无保护末端，再进入下一轮。由此可逐步产生扩增、倒置重复和不对称结构。讲义标题写Breakage-fusion-Breakage，标准缩写中的第三词是bridge，应注意纠正。理解“循环”比死记每一步的最终片段排列更重要。
+**BFB** 循环用一轮又一轮的融合、拉桥和断裂，逐步积累复杂的结构变异。页顶标题印成 Breakage-fusion-Breakage cycle (BFB)，第三个词写成了 Breakage。淡蓝译注和通用缩写里的第三个词是 bridge：breakage–fusion–bridge，断裂—融合—桥。题注强调 step-wise，逐步积累。两侧都是机制示意，出处是 Dubois 等，*Nature Reviews Cancer* 2022。
 
-#### 深入理解：BFB与chromothripsis如何区分
+左侧用黄色染色体和蓝色着丝粒画成闭合回路。细胞核里先是一条 Dicentric，带两个蓝色着丝粒。Replication 之后进入 anaphase，这条染色体被两侧微管拉成横跨两极的桥。Telophase / cytokinesis onset 时，桥还连着两个正在分开的子核。Chromatin bridge breakage 把桥断开，两个细胞各留下断端。Fusions 把断端重新接上，得到 New dicentrics。左侧大括号再指回最上面，新的双着丝粒可以进入下一轮。
 
-BFB强调多轮“融合—拉桥—断裂”的积累；chromothripsis强调集中碎裂及重组装。研究中两者可以衔接：桥的异常处理可能参与灾难性重排，复杂肿瘤也可能经历多种过程。因此它们是有用的机制框架，并非永远互斥的标签。只有终点测序时，应结合断点结构、方向、拷贝数与额外实验提出最受支持的解释。
+右侧用绿色的 chrA 说明拷贝怎样越堆越多。正常染色体上只有一个红点，红点标为 Oncogene。姐妹染色单体在末端 Fusion，拉成 Bridge，再 Break；桥的断开可以不对称，两段产物长短不同。Replication 之后红点变多，然后再次 Fusion、Bridge、Break。最下方 Derivative chromosome 上排着多个红点。姐妹染色单体先融合再断裂，是倒置重复和不对称结构的一种来路；红点随轮次增加，对应的是逐步扩增。
+
+把“循环”读出来，就能串起这两张图，不必背某一次断裂后的最终片段顺序。左侧每一轮都回到新的双着丝粒，右侧的红点一轮轮变多。
+
+和下一页的 chromothripsis 按画法区分。BFB 的特征是多轮“融合—拉桥—断裂”，拷贝数可以逐轮升高。chromothripsis 强调一次或少数几次集中碎裂，再把片段重组装。两者可以衔接：桥若被异常处理，有可能参与后面的灾难性重排，同一个肿瘤基因组里也可以留下不止一种过程的痕迹。它们是解释结构变异的机制框架。只拿到终点测序时，要同时看断点如何聚集、连接的方向和拷贝数，并配合其他实验，再判断哪一种过程得到的支持更充分。
 
 
 ### 第096页｜染色体碎裂重排：集中式剧变
 
 <div id="lecture-page-96"></div>
-<figure class="genome-figure" data-lecture-page="96"><img src="/notes/genome-stability-2026/page-096.webp" width="1781" height="1330" loading="lazy" decoding="async" alt="第96页：染色体碎裂重排：集中式剧变，原图内中文标注" /><figcaption>原讲义第96页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="96"><img src="/notes/genome-stability-2026/page-096.webp" width="1781" height="1330" loading="lazy" decoding="async" alt="第96页：染色体碎裂重排：集中式剧变，原图内中文标注" /><figcaption>原讲义第96页 · 点击图片放大</figcaption></figure>
 
-与BFB的多轮积累相比，这里强调一次或少数集中灾难性过程造成大量局部重排。图中原来连续的A、B、C等片段被打散，一部分丢失，其余以新方向和顺序接回。真实数据中不能只凭“重排多”就判定chromothripsis，还需要结合断点聚集、片段连接和拷贝数等证据。
+**Chromothripsis**（染色体碎裂重排）在这一页被定义成一次灾难性事件产生的大量重排。英文要点写着 Multiple chromosome rearrangements derived from a single catastrophic event，题注称为集中式剧变。和上一页 BFB 逐轮回到新双着丝粒、红点逐轮变多的画法相比，这里只有两次箭头：先碎裂，再重组装。出处同样是 Dubois 等 2022。
+
+上方是一条连续染色体，按颜色分成 A B（蓝）、C D（黄）、E F（橙）、G H（绿）、I J（红）、K L（紫）。中间箭头标 Fragmentation，这些成对色块彼此分开。再向下的箭头标 Reassembly with loss of segments：重新接上的短染色体留下 A B C D E F K L，G、H、I、J 没有回到这条链上。译注把这一步写成伴随部分片段丢失的重组装，并把多个重排写成集中产生。
+
+这张彩块图是示意，看得见的操作是一次碎开、丢掉其中一段连续色块、再把剩下的接回去。经典讨论里的 chromothripsis 还常包含片段顺序和连接方向被打乱；那些方向这张简化图没有逐段画出。因此，重排数目多这一条，还不能单独判定为 chromothripsis。真实数据还要看断点是否聚在有限区域、片段如何头尾相接，以及拷贝数呈什么样的阶梯。图本身没有给出某个肿瘤样本的统计。
 
 
 ### 第097页｜染色体碎裂与基因扩增的研究
 
 <div id="lecture-page-97"></div>
-<figure class="genome-figure" data-lecture-page="97"><img src="/notes/genome-stability-2026/page-097.webp" width="1623" height="1329" loading="lazy" decoding="async" alt="第97页：染色体碎裂与基因扩增的研究，原图内中文标注" /><figcaption>原讲义第97页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="97"><img src="/notes/genome-stability-2026/page-097.webp" width="1623" height="1329" loading="lazy" decoding="async" alt="第97页：染色体碎裂与基因扩增的研究，原图内中文标注" /><figcaption>原讲义第97页 · 点击图片放大</figcaption></figure>
 
-上一页讨论重排产生，这一页把问题推进到肿瘤演化：某些重组装片段可能携带驱动基因并扩增，使细胞获得选择优势。这里的演化发生在肿瘤细胞群体中，不等于有目的地选择某段DNA。论文截图提供机制研究入口，不能单独说明所有基因扩增都来自同一种碎裂过程。
+这一页把染色体碎裂接到肿瘤里的基因扩增：碎裂后重新连接的片段，如果带有生长优势，还可以被进一步扩增，使相应细胞在群体中被留下来。中文题注是“染色体碎裂与基因扩增的研究”。左侧译注把主题收成 **chromothripsis**（染色体碎裂重排）驱动癌症基因扩增的演化，并把 **evolution** 注成演化；最下方译注写明，本页是研究论文首页截图。
+
+画面主体是文章首页。标题为 *Chromothripsis drives the evolution of gene amplification in cancer*，下方印有 DOI、收稿与接受日期、在线发表日期和作者名单。摘要里能读到的论证是：局灶性染色体扩增既可以通过癌基因过表达参与肿瘤起始，也可以提高那些削弱药物作用的基因的表达。作者对获得化疗耐药的克隆做全基因组测序，认为 chromothripsis 是环状 **ecDNA**（extrachromosomal DNA，染色体外 DNA；摘要中也称为 double minutes，双微体）扩增的主要推动因素，并写到这一过程依赖 PARP 和 DNA-PKcs（DNA 依赖的蛋白激酶催化亚基）。摘要继续写道，耐药程度还可以随 ecDNA 再经历一轮碎裂而提高；原位 Hi-C 显示这些 ecDNA 倾向于系在染色体末端附近，并在存在 DNA 损伤时重新整合。低强度药物选择下先形成的染色体内扩增，可经断裂–融合–桥循环长成摘要所说的超过 100 Mb 的扩增子，陷入间期桥后再碎裂，产生微核，微核中的 ecDNA 又成为下一轮碎裂的底物。摘要末尾用 propose 提出：chromothripsis 加速基因组重排，并把扩增推进到 ecDNA，使细胞较快适应改变了的生长条件。
+
+首页上直接印出的是作者的研究设计和结论性表述，实验图、对照和统计都不在这一页。它支持的是：在所研究的耐药克隆，以及一批伴有获得性耐药或癌基因扩增的人类肿瘤重排图谱中，碎裂可以和 ecDNA、染色体内扩增连在同一条路上。所有基因扩增都来自同一种碎裂过程，这一页单独不能说明。这里的演化指肿瘤细胞群体中的选择：带有扩增的细胞获得优势而被留下。
 
 
 ### 第098页｜ecDNA：染色体外DNA与扩增
 
 <div id="lecture-page-98"></div>
-<figure class="genome-figure" data-lecture-page="98"><img src="/notes/genome-stability-2026/page-098.webp" width="1571" height="1146" loading="lazy" decoding="async" alt="第98页：ecDNA：染色体外DNA与扩增，原图内中文标注" /><figcaption>原讲义第98页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="98"><img src="/notes/genome-stability-2026/page-098.webp" width="1571" height="1146" loading="lazy" decoding="async" alt="第98页：ecDNA：染色体外DNA与扩增，原图内中文标注" /><figcaption>原讲义第98页 · 点击图片放大</figcaption></figure>
 
-携带生长相关基因的ecDNA可以通过拷贝数和调控环境影响表达，并在细胞分裂中产生异质性。不要把所有染色体外DNA都当成这种肿瘤ecDNA，也不等同于线粒体DNA。本页所示末端结合和重新整合是特定研究中的过程，不能概括为每个ecDNA都必然先系在染色体末端再整合。
+这一页说明，肿瘤里常见的较大环状扩增 DNA 可以怎样从染色体碎片变成许多份 ecDNA。题注把 **ecDNA** 定义为染色体外 DNA，并限定本课重点是这类较大的环状扩增分子。线粒体 DNA 也位于染色体以外，本页的流程不讨论它。
+
+左侧从一条标为 Normal 的 chrA 开始，紫、绿、青色区段上带一个红点。向下箭头写 Fragmentation，染色体被打成同色系的碎片，旁边另标一段橙色的 chrB fragment，图上允许不同染色体的碎片同时出现。下一步 Double-minute assembly 把碎片收成三个彩色环，红点留在环内。再向下是 Amplification through unequal mitotic distribution and selection：环的数目变多，颜色组合也不完全相同，底部用省略号表示还可以继续增加。红点从亲本染色体一直留到环里，用来标出一个位点穿过碎裂和成环。图上写的是有丝分裂中的不均等分配加上选择。需要的背景是：这类环通常不依靠着丝粒被均等拉开，子细胞得到的份数可以不同；若环上带有与生长有关的序列，拷贝数高的细胞会被留下，群体因此出现异质性。拷贝数和调控环境可以影响表达，这一页的图只画到组装、分配和选择。
+
+右侧三条英文写得比较满：chromothripsis 驱动 ecDNA 形成，ecDNA 在肿瘤细胞中丰富，并且会系到染色体末端、在 DNA 损伤时整合进染色体。译注更窄：碎裂“可参与”形成，而且是“部分”ecDNA 可以与染色体关联或重新整合。末端结合和重新整合来自特定研究中的过程，不能概括成每一个 ecDNA 都先系在染色体末端、再整合回去。
 
 
 ### 第099页｜从碎裂到ecDNA：动态模型
 
 <div id="lecture-page-99"></div>
-<figure class="genome-figure" data-lecture-page="99"><img src="/notes/genome-stability-2026/page-099.webp" width="1746" height="1134" loading="lazy" decoding="async" alt="第99页：从碎裂到ecDNA：动态模型，原图内中文标注" /><figcaption>原讲义第99页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="99"><img src="/notes/genome-stability-2026/page-099.webp" width="1746" height="1134" loading="lazy" decoding="async" alt="第99页：从碎裂到ecDNA：动态模型，原图内中文标注" /><figcaption>原讲义第99页 · 点击图片放大</figcaption></figure>
 
-按箭头追踪：染色体损伤形成片段，部分可成环并扩增，之后可能再次与染色体交换或整合。模型强调ecDNA与染色体结构之间可以动态转换，不是一次形成后永远不变。不同箭头的实验证据强度可能不同，示意图的可行路径不等于已在所有肿瘤里完整观察到的统一时间顺序。
+这一页的标题已经写明 *A model of Chromothripsis and ecDNAs*，译注也把 *A model* 译成机制模型。它画的是一条可以往返的路线：染色体断裂怎样进入微核和碎裂，碎片怎样成环并扩增，环又怎样在损伤时回到染色体。竖排文字称为癌症中基因扩增的路线图，分图字母是 g。染色体上的红色短条代表被选择的基因；粉色字是模型放在某些箭头上的条件。
+
+正常的绿色染色体可以走进两条入口。上面一条经 Chromosome break，无着丝粒片段进入微核，微核内容再碎裂，红框标出 chromothripsis；箭头旁的粉色字是 **NHEJ**（non-homologous end joining，非同源末端连接）或 PARP 抑制，随后画出绿色小环，标为 DMs（double minutes，双微体）。下面一条写 Chromosome break leading to Break-fusion-bridge：断裂进入断裂–融合–桥，染色体上出现标为 **HSR**（homogeneously staining region，均匀染色区，扩增片段串联留在染色体上的形式）的红色区段；接着是带微核的间期桥，桥上的染色体碎裂，再进入微核。右侧把许多绿色环收在一起，弯箭头写着 DM evolution: successive rounds of chromothripsis，表示双微体还可以再经历一轮轮碎裂；粉色的 NHEJ inhibition 标在这条演化环旁边。环成堆的地方注明 gene copy number 上升。译注里的 circularization、ecDNA amplification、reintegration，分别对应成环、扩增和重新整合。
+
+模型的后半段把环送回染色体。粉色的 DNA damage，以及下方注明来自 cancer therapies 的 double strand breaks，指向这些环重新接上染色体，产物标为 Ectopic HSR and dicentric formation，即异位均匀染色区和双着丝粒染色体。从这里还有箭头指回间期桥。成环之后仍然可以回到染色体，ecDNA 和染色体结构在图上被画成可以来回转换。这是模型。它给出一组可行的转换，并没有展示所有肿瘤共享的同一条时间顺序。粉色条件说明作者把末端连接方式、PARP 和治疗相关的 DNA 损伤放进了某些步骤；本页没有剂量、对照，也没有给每一条箭头单独的实验证据。不同箭头的支持可以强弱不同。
 
 
 ## 结构变异的检测与解释
 
-
 ### 第100页｜结构变异的检测工具
 
 <div id="lecture-page-100"></div>
-<figure class="genome-figure" data-lecture-page="100"><img src="/notes/genome-stability-2026/page-100.webp" width="2015" height="1398" loading="lazy" decoding="async" alt="第100页：结构变异的检测工具，原图内中文标注" /><figcaption>原讲义第100页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="100"><img src="/notes/genome-stability-2026/page-100.webp" width="2015" height="1398" loading="lazy" decoding="async" alt="第100页：结构变异的检测工具，原图内中文标注" /><figcaption>原讲义第100页 · 点击图片放大</figcaption></figure>
 
-不同工具看不同尺度。核型与FISH可观察染色体位置和特定靶标，芯片偏向拷贝数变化，测序可通过比对证据定位断点，长读长有助跨越复杂或重复区域。没有一种方法对所有SV都同样敏感；尤其平衡易位可能没有净拷贝数改变，因此单靠覆盖深度或拷贝数芯片可能遗漏。
+从这一页起，问题转到基因组里的 **SV**（structural variation，结构变异）怎样被检测到。副题把方法分成细胞遗传学和基于测序两类。没有任何一种方法对所有 SV 同样敏感，所以图按 a、b、c 把尺度分开。页脚是 Cosenza 等，*Annual Review of Genomics and Human Genetics*，2022。
+
+a 列是 Cytogenetics，副题写明包括 FISH（fluorescence in situ hybridization，荧光原位杂交）和芯片类方法。上面的 Spectral karyotype 把中期染色体涂成不同颜色，图注列出 deletion、inversion、duplication、translocation，也就是在显微镜分辨率下按颜色和位置能看到的缺失、倒位、重复和易位。下面的 **array CGH**（array comparative genomic hybridization，比较基因组杂交芯片）是红、绿、黄点阵，图注只写 Deletion (loss) 和 duplication (gain)。芯片比较的是相对拷贝数。平衡易位若没有净的增多或减少，这一格里可以没有信号。
+
+b 列是短读长方法，副题为 paired-end mapping 和 read-depth analysis。五张示意图用蓝色短读段分别标出 Deletion、Insertion、Inversion、Duplication 和 Translocation：缺失是读段跨过空隙，插入是读段之间多出一段，倒位用绿色箭头表示方向反过来，重复是同一区段被多组读段覆盖，易位是原本不相邻的两段被读段对连到一起。c 列换成更长的蓝色条，副题写 long-fragment-based methods，并包括单分子和基于图的方法；左上译注把 **optical mapping**（光学图谱）也放进这一组。长条图同样覆盖缺失、插入、倒位、重复和易位：插入画成嵌进长条的粉色片段，重复画成从长条上拱起的一段，易位是蓝条与粉色条直接相接。这些都是证据类型的示意。长片段的用处，是一条分子可以跨过短读长对不准的重复或复杂连接。三列合在一起，才分别覆盖显微镜下的染色体、拷贝数变化和断点两侧的序列关系；只看覆盖深度或拷贝数芯片，会漏掉没有净拷贝数改变的平衡重排。
 
 
 ### 第101页｜短读长识别SV的三类证据
 
 <div id="lecture-page-101"></div>
-<figure class="genome-figure" data-lecture-page="101"><img src="/notes/genome-stability-2026/page-101.webp" width="1954" height="1259" loading="lazy" decoding="async" alt="第101页：短读长识别SV的三类证据，原图内中文标注" /><figcaption>原讲义第101页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="101"><img src="/notes/genome-stability-2026/page-101.webp" width="1954" height="1259" loading="lazy" decoding="async" alt="第101页：短读长识别SV的三类证据，原图内中文标注" /><figcaption>原讲义第101页 · 点击图片放大</figcaption></figure>
 
-异常配对指两端距离、方向或所在染色体偏离文库预期，不只是距离超过500 bp。分裂读段的一条read跨越连接点，因此被拆成不同片段比对；深度变化则提示某段相对多了或少了。500 bp是讲义示例，不是通用阈值。把这三类证据联合起来，通常比单独凭一种异常更可靠。
+短读长识别 SV，靠三类可以互相核对的证据。页首把它们并列为 discordant reads、split reads 和 read depth。图中央是红色的 ChrA 和蓝色的 ChrB，在一个黑点处相接。页脚为 Dubois 等，*Nature Reviews Cancer*，2022。
 
-#### 深入理解：一个缺失怎样同时改变三类证据
+图上同时标出 Paired-end read、Discordant read 和 Split read。Paired-end read 的引出线指向染色体一侧的成对读段。Discordant read 画在连接上方：一对读段一端为红、一端为蓝，中间用虚线相连，两端落到不同染色体。右侧第一条英文把 **discordant reads**（异常配对读段）定义成“比对到的位置比通常片段长度更远”，括号里给出约 500 bp。这个 500 bp 是讲义用来举例的文库片段尺度，不是所有实验共用的阈值。异常配对要同时看距离、方向和所在染色体是否偏离文库预期；本页的图画的是跨染色体，右侧句子只强调了距离。下方的 **split read**（分裂比对读段）贴在黑点上，一条读段红蓝各半：它跨越断点，比对时会被拆开，分别贴到 ChrA 和 ChrB。右侧第二条因此写 split reads overlap SV breakpoints，译注把 breakpoint 注成断点。第三条用 **read depth**（覆盖深度）看某个位点的 **copy-number change**（拷贝数改变）：某一段相对参考多了或少了，深度会上升或下降。
 
-假设样本删除参考基因组中的B片段。跨越新A-C连接的read可以分裂比对到A末端和C起点；跨缺失区的一对reads在样本中相距正常，投影回含B的参考时却显得更远；B区覆盖则可能降低。三者联合支持同一结构。深度是否明显下降还受杂合性、肿瘤纯度、克隆比例和正常细胞混入影响，不能机械要求深度降到零。
+用一个缺失可以把这三类证据接到同一次事件上。本页示意图画的是 ChrA 与 ChrB 的连接，没有另画缺失的覆盖度曲线；缺失是用来理解这三类名字的例子。设参考顺序是 A–B–C，样本删去 B，新连接变成 A–C。跨越新连接的 read 会分裂比对到 A 的末端和 C 的起点。一对在样本中距离正常的 reads，一端位于 A、一端位于 C，投回仍含有 B 的参考基因组时，两端会被拉开，成为异常配对。B 区的深度则可能下降。三者指向同一处缺失。深度会不会明显下降，还取决于这段缺失是杂合还是纯合、肿瘤纯度、克隆比例，以及样本里混入了多少正常细胞。缺失区的深度不必降到零。单独一种异常也可能来自比对误差，联合起来才更可靠。
 
 
 ### 第102页｜不同SV怎样留下读段模式
 
 <div id="lecture-page-102"></div>
-<figure class="genome-figure" data-lecture-page="102"><img src="/notes/genome-stability-2026/page-102.webp" width="1957" height="1339" loading="lazy" decoding="async" alt="第102页：不同SV怎样留下读段模式，原图内中文标注" /><figcaption>原讲义第102页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="102"><img src="/notes/genome-stability-2026/page-102.webp" width="1957" height="1339" loading="lazy" decoding="async" alt="第102页：不同SV怎样留下读段模式，原图内中文标注" /><figcaption>原讲义第102页 · 点击图片放大</figcaption></figure>
 
-假设参考序列是A-B-C-D，样本删除B后变成A-C-D，跨连接点的读段会把A和C接起来；倒位则改变片段方向；易位可把不同染色体连接起来。推断时要在样本结构和参考坐标之间切换。比对异常也可能来自重复序列或技术伪影，因此图中的理想模式是理解原理的起点，不是自动判真规则。
+不同 SV 会在全基因组测序里留下不同的读段和拷贝数模式。图从六块彩色字母 A 到 F 的初始序列出发，分成易位、缺失、重复、倒位和模板插入五列。中间灰条写明，下面每一格都是把支持 SV 的读段和拷贝数变化比对回参考基因组之后的样子。读图时要在样本里的真实顺序和参考坐标上的投影之间切换。页脚同样是 Dubois 等 2022。
+
+易位列把 ChrA 上的一段接到 ChrB 的 X、Y。检测图是一条跨过两条染色体的弧，底下 A–F 的拷贝数道没有台阶。这种平衡连接可以只改邻接关系，不改净拷贝数。缺失列的产物是 A、B、E、F，C 和 D 不再出现；弧从断点一侧接到另一侧，拷贝数道在被删区段下降。重复列写成 A、B、C、D、C、D、E、F，弧盖在被多抄的区段上，对应位置的拷贝数抬高。倒位列的产物仍以 A–F 标出，检测图用转向的弧表示 **read-pair orientation**（读段配对方向）改变，拷贝数道可以没有明显台阶。最右列是 templated insertion：A、B 之后插入来自模板的 ∂ 和 β，再接上 C、D，弧把插入片段指回模板。同一套 A–F，五列的弧和拷贝数道并不相同。
+
+这些是理想化模式，用来建立读图规则。重复序列会让短读段落到多个位置，建库和比对也会制造距离或方向上的异常。看到一种弧，只是开始用上一页的三类证据去核对。示意图上的虚线是原理的起点，还不是已经确认的断点。
 
 
 ### 第103页｜真实病例的复杂重排
 
 <div id="lecture-page-103"></div>
-<figure class="genome-figure" data-lecture-page="103"><img src="/notes/genome-stability-2026/page-103.webp" width="1638" height="1072" loading="lazy" decoding="async" alt="第103页：真实病例的复杂重排，原图内中文标注" /><figcaption>原讲义第103页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="103"><img src="/notes/genome-stability-2026/page-103.webp" width="1638" height="1072" loading="lazy" decoding="async" alt="第103页：真实病例的复杂重排，原图内中文标注" /><figcaption>原讲义第103页 · 点击图片放大</figcaption></figure>
 
-真实融合可能通过多个断点和插入片段形成，而不是两根直线简单交换。读图时先找最终保留的基因片段、方向和连接关系，再看原始读段是否支持。检测到基因邻接不自动说明存在可表达且有功能的融合蛋白，还要考虑外显子、阅读框、转录或蛋白证据；本页不据缩略图推断具体治疗。
+真实样本里的 SV，可以在一个连接点里叠上好几段来源不同的序列。这一页的例子是一名肺癌患者中涉及 *NTRK1* 的重排。译注写明是肺癌中的 *NTRK1* 相关重排；幻灯片标题用了 translocation 这个词。
+
+A 图从左到右接成四段：绿色箭头 *LMNA*，坐标 chr1:156134874；一段标成 8 bp 的 novel sequence；一段标成 30 bp 的 repetitive sequence；蓝色箭头 *NTRK1*，坐标 chr1:156875094。两个坐标都写在 chr1 上，这条连接位于 1 号染色体内部，中间还夹着新序列和重复序列。幻灯片虽然使用 translocation，读图时要以这两个坐标、箭头方向和中间的插入片段为准。先确认保留下来的基因片段和连接顺序，再看这段连接比“两段直接相接”多出了什么。
+
+B 图把同一连接拆成测序证据。绿色读段贴在 *LMNA* 一侧，橙色是 novel sequence，红色是 repetitive sequence，蓝色读段进入 *NTRK1*。右侧括号分别标出 Contig sequence 和支持这条连接的 supporting reads，黑框圈在连接附近。缩略图里的具体碱基应按原图阅读。这些支持读段说明的是：这几段序列在读段上彼此邻接。
+
+检测到基因邻接，还要另有外显子边界、阅读框、转录本或蛋白质证据，才能说明细胞内存在可表达且有功能的融合蛋白。译注里的 fusion 和 junction 指两件事情：junction 是连接位点，fusion 是对基因融合的功能称呼。本页给出的是连接结构的示意图和读段堆叠，不据此推断治疗。
 
 
 ### 第104页｜从SV图形提出机制假说
 
 <div id="lecture-page-104"></div>
-<figure class="genome-figure" data-lecture-page="104"><img src="/notes/genome-stability-2026/page-104.webp" width="2068" height="1305" loading="lazy" decoding="async" alt="第104页：从SV图形提出机制假说，原图内中文标注" /><figcaption>原讲义第104页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="104"><img src="/notes/genome-stability-2026/page-104.webp" width="2068" height="1305" loading="lazy" decoding="async" alt="第104页：从SV图形提出机制假说，原图内中文标注" /><figcaption>原讲义第104页 · 点击图片放大</figcaption></figure>
 
-把断点按参考坐标投影，再把样本连接顺序拼起来，能发现断点聚集、片段缺失和方向变化等规律。这些规律帮助提出机制假说，但不同过程可能产生相似终点，测序也可能漏检部分连接。因此合理表述是“与某机制一致”或“支持某机制”，除非有额外实验，否则不把结构图本身当作直接观察到发生过程。
+检测到的复杂 SV 模式可以提示形成机制。页首英文用 indicative，表示“提示”。左上译注把左图收成 chromothripsis 相关模式，把右图收成复制和模板切换。两侧都从同一套彩色区段 A–L 出发，检测结果都画成投回参考坐标后的弧和拷贝数。页脚为 Dubois 等 2022。
+
+左侧先 Fragmentation，A–L 被打成多块，图上分开画出 C–D、G–H、K–L、A–B、E–F、I–J 这些碎片。下一步 Reassembly with loss of segments，重新接上的顺序是 A–B–C–D–E–F–K–L，G–J 没有回到这条产物上。再投到标有 A 到 L 的 Reference genome 时，检测图用几条不同颜色的弧跨过丢失区，拷贝数道分成保留和下降的台阶。这种图形的要点是断点集中、部分片段丢失，留下的片段以新的邻接关系出现。
+
+右侧没有再画一次碎裂，画的是 Template switch。A–F 上的箭头绕回去，把 C–D–E–F 再抄一遍，然后跳到 I–J；I–J 再被抄一次，最后接到 K–L。检测图上的拷贝数因此出现多级台阶，弧对应每一次模板跳转：有的区段升高，有的位置留下缺口。同样是 A–L 的局部重排，左侧终点偏向打碎后再接、并伴随丢失，右侧终点偏向某些片段被重复抄写。
+
+这些规律可以用来提出机制假说。不同过程可能停在相似的终点，测序也会漏掉一部分连接。和现有图形相符时，合适的说法是“与 chromothripsis 一致”或“支持模板切换”。结构图记录的是重排结束后的连接和拷贝数。若没有额外实验，它支持机制假说，并不直接显示发生过程。
 
 
 ### 第105页｜Chromoanasynthesis：复制重建型复杂重排
 
 <div id="lecture-page-105"></div>
-<figure class="genome-figure" data-lecture-page="105"><img src="/notes/genome-stability-2026/page-105.webp" width="1818" height="1340" loading="lazy" decoding="async" alt="第105页：Chromoanasynthesis：复制重建型复杂重排，原图内中文标注" /><figcaption>原讲义第105页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="105"><img src="/notes/genome-stability-2026/page-105.webp" width="1818" height="1340" loading="lazy" decoding="async" alt="第105页：Chromoanasynthesis：复制重建型复杂重排，原图内中文标注" /><figcaption>原讲义第105页 · 点击图片放大</figcaption></figure>
 
-这里的重点是复制过程中切换模板，造成某些片段被重复抄写。与碎裂后重拼的概念相比，复制重建更强调拷贝增加与模板跳转，但真实样本中模式可能交叉。讲义的FoFeS是拼写问题，应为FoSTeS。不要仅凭有重复或三重复就下机制定论，还要分析断点序列与整体结构。
+**Chromoanasynthesis**（染色体复制重建型复杂重排）在这一页被定义成：一条或少数几条染色体的局部，出现成簇的重复和三重复。幻灯片认为它可能经由 **MMBIR**（microhomology-mediated break-induced replication，微同源介导的断裂诱导复制），或复制叉停滞之后的模板切换产生。第二行括号里印的是 FoFeS。这是拼写问题。正确缩写是 **FoSTeS**，即 fork stalling and template switching（复制叉停滞与模板切换）。左侧译注已经按 FoSTeS 来注。
+
+下面的彩条和上一页右侧是同一类模板切换示意。A–L 中，箭头从 A–F 绕回，把 C–D–E–F 再抄一遍，再跳到 I–J；I–J 也被再抄一次，然后接到 K–L。进入回环的字母在产物里出现两次，没有进入回环的字母仍是一份。这张图直接画出的是局部重复：同一段模板被新生链多抄了一次。上方文字里的 triplication（三重复）是这类重排可以达到的拷贝数状态，图中的方块并没有逐个画成三份。
+
+和碎裂后重拼相比，这条路线强调的是拷贝增加和模板跳转。真实样本里两种模式可以交叉。英文写的是 May be generated through，本身就是“可能经由”。只看到重复或三重复，还要再看断点处有没有短同源、拷贝数阶梯是否成簇、整体连接是否更像一次碎裂后的丢失。页脚为 Dubois 等 2022。
 
 
 ### 第106页｜MMBIR与FoSTeS怎样改变拷贝数
 
 <div id="lecture-page-106"></div>
-<figure class="genome-figure" data-lecture-page="106"><img src="/notes/genome-stability-2026/page-106.webp" width="1897" height="1307" loading="lazy" decoding="async" alt="第106页：MMBIR与FoSTeS怎样改变拷贝数，原图内中文标注" /><figcaption>原讲义第106页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="106"><img src="/notes/genome-stability-2026/page-106.webp" width="1897" height="1307" loading="lazy" decoding="async" alt="第106页：MMBIR与FoSTeS怎样改变拷贝数，原图内中文标注" /><figcaption>原讲义第106页 · 点击图片放大</figcaption></figure>
 
-沿每条新生链的颜色追踪模板来源：复制受阻或断端形成后，延伸末端可能利用短同源序列转接到另一模板，再继续合成；多次切换就会重排片段并改变拷贝数。两者的提出背景和起始条件不同，不应简单合并为同一个酶反应。微同源是机制线索之一，短相同序列本身不足以唯一证明MMBIR。
+这一页把 chromoanasynthesis 拆成左右两套模型。标题是 Two mechanisms of chromoanasynthesis，页脚为 Pellestor 与 Gatinois，*Human Reproduction*，2018。左栏是 MMBIR，分 A1 到 A6；右栏是 FoSTeS，分 B1 到 B4。两套图都用颜色表示模板来源，虚线和弯箭头表示延伸中的末端换到另一条模板上继续合成。译注把 template switch 注成模板切换，把 microhomology 注成微同源。
+
+左栏沿蓝色、红色、绿色往下看。A1、A2 是蓝色复制叉打开并延伸。A3 里蓝色末端离开原来的模板，虚线弯进红色模板。A4 的产物已经是蓝段接红段。A5 再从这段嵌合末端跳到绿色模板，A6 得到蓝、红、绿三段连在一条双链上的产物。每换一次模板，最终分子就多掺进一段原本不相邻的序列，顺序和拷贝数一起改变。
+
+右栏从停滞的复制叉出发。B1 上方红色叉停住，虚线向下接到另一把蓝色叉的模板。B2 继续切到绿色模板。B3 在红色叉附近用一小段虚线环表示一次短的跳转。B4 的红色双链中间嵌进一小段绿和蓝。沿新生链的颜色读，可以看出哪些片段来自哪一次模板切换，以及局部为什么会多出一段。
+
+两套图都在讲延伸端更换模板，起始画面不同。左侧从断开或坍缩后的末端串联侵入其他模板，右侧从停滞的复制叉跳到邻近的叉。它们的提出背景和起始条件不同，不宜收成同一种酶反应；本页也没有标出具体的聚合酶。微同源是这类模型用来解释切换为何能够发生的线索之一。图上没有印出连接处的碱基。一段短的相同序列，本身不能单独证明某一次重排就是 MMBIR。
 
 
 ### 第107页｜把连接关系与拷贝数合起来读
 
 <div id="lecture-page-107"></div>
-<figure class="genome-figure" data-lecture-page="107"><img src="/notes/genome-stability-2026/page-107.webp" width="2082" height="1305" loading="lazy" decoding="async" alt="第107页：把连接关系与拷贝数合起来读，原图内中文标注" /><figcaption>原讲义第107页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="107"><img src="/notes/genome-stability-2026/page-107.webp" width="2082" height="1305" loading="lazy" decoding="async" alt="第107页：把连接关系与拷贝数合起来读，原图内中文标注" /><figcaption>原讲义第107页 · 点击图片放大</figcaption></figure>
 
-左图更像描述染色体上的复杂连接，右图展示环状扩增结构。相似的片段增多可能具有不同拓扑，只有拷贝数无法完整重建。应同时利用断点方向、连接顺序和深度，必要时结合长读长、FISH等证据。算法给出的结构解释仍受数据分辨率约束，不能把一张重建图当成样本内每个细胞都相同。
+复杂 SV 的检测图要把连接关系和拷贝数合在一起读。页首仍写：检测到的模式可以提示形成机制。左图是一条衍生染色体投回参考坐标，右图是许多环状分子投成拷贝数峰。两边都可以出现片段增多，拓扑不一样。页脚为 Dubois 等 2022。
+
+左侧上方是一条长的绿色 **derivative chromosome**（衍生染色体），红色竖线沿染色体标出连接或断点，顶端有一个黑色三角。虚线箭头 Projected to ref. 把这条染色体按参考顺序拆开、叠成几段，红线仍留在段与段之间。再往下的 Detected pattern 用紫色和绿色的弧表示 SV 连接，底部 Copy number 道呈台阶：有的区段升高，有的降到很低。只看绿色条的长短，还不知道哪些红线把哪两段接在一起。弧提供连接，台阶提供剂量。
+
+右侧先画一群带红点的彩色环，省略号表示数量还可以更多。向下收到 Detected pattern：上方用红色虚线弧表示环上的连接被投回参考后的样子，下方拷贝数纵轴标出 2 和 70 两档。chrA 上的紫、绿、青色小段和 chrB 上的橙色段位于高台阶。图例把一部分标记标为 Oncogenes，括号称为 Amplified segments（扩增片段）。这里的 2 和 70 是示意图上的刻度，用来表示扩增片段远高于二倍体基线，不是本页重新测量的实验读数。环在细胞之间的数目可以不均；投成一条拷贝数曲线之后，这种细胞间差别被平均掉了。
+
+相似的拷贝数上升，既可以来自左侧那种染色体上的复杂连接，也可以来自右侧的环。只有深度无法重建拓扑。断点方向、连接顺序和覆盖深度要一起用；必要时再用长读长或 FISH 看分子是线状还是环状、信号在核内是集中一处还是散在多处。算法给出的结构是在当前分辨率下的一种解释，不能当成样本里每一个细胞都相同。
 
 
 ### 第108页｜癌症中的SV与驱动融合
 
 <div id="lecture-page-108"></div>
-<figure class="genome-figure" data-lecture-page="108"><img src="/notes/genome-stability-2026/page-108.webp" width="1805" height="1357" loading="lazy" decoding="async" alt="第108页：癌症中的SV与驱动融合，原图内中文标注" /><figcaption>原讲义第108页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="108"><img src="/notes/genome-stability-2026/page-108.webp" width="1805" height="1357" loading="lazy" decoding="async" alt="第108页：癌症中的SV与驱动融合，原图内中文标注" /><figcaption>原讲义第108页 · 点击图片放大</figcaption></figure>
 
-SV可通过产生融合、扩增驱动基因或改变调控环境参与肿瘤。相同癌种也存在大量非驱动改变，因此“发现SV”与“证明它驱动肿瘤”是两个任务。癌种特异性通常指明显富集，不意味着绝对排他；样本数属于引用研究的数据规模。最后把检测证据、功能解释与临床意义分别评估，形成完整阅读习惯。
+这一页讨论癌症基因组里 SV 有多常见，以及哪些 SV 落在驱动基因上。中文题注是“癌症中的SV与驱动融合”。右侧正文第一句写：对 2,658 例癌症的泛癌分析，显示了含有 **driver genes**（驱动基因）的 SV 的出现情况。译注把 2,658 记为讲义所引泛癌分析的癌症样本规模。这个数字属于被引用的研究。页脚是 Cosenza 等，*Annual Review of Genomics and Human Genetics*，2022。
+
+分图 a 是横向堆积条形图。纵轴列出从食管腺癌、骨与软组织肉瘤到其他癌种的一长串类型，横轴是不同驱动改变所占比例。图例把驱动分成 SNVs and indels 中的 Coding 与 Noncoding，以及 **SCNAs**（somatic copy-number alterations，体细胞拷贝数改变）和 SV 中的 Truncation、Amplification、Cis-activation、Loss、Fusion。每一行右侧还印有计数。分图 b 是三块热图：Simple SVs 按缺失、重复、倒位、易位等类型着色，SCNAs 分成 Loss 和 Gain，Complex alterations 再分成若干复杂改变，各有自己的色标。热图格子和各癌种右侧的具体数值，在缩略图里应按原文单位阅读。分图 a 各行右侧的计数，和正文里的 2,658，先不要加成同一个队列；两套数字以原综述的图注为准。
+
+正文接着举了三类常被说成癌种相关的易位：急性髓系白血病中的 AML1-ETO，译注对应 *RUNX1*::*RUNX1T1*；肺癌中的 *EML4-ALK*；前列腺癌中常见的 *TMPRSS2-ERG*。这些是例子，说明某些融合在特定癌种里可以明显富集。癌种相关指的是这种富集；其他癌种里仍可能出现相同或相似的连接。堆积条形图也显示，同一癌种的驱动构成里同时有点突变、拷贝数和融合，融合只是其中一层。
+
+SV 可以通过形成融合、扩增驱动基因或改变调控环境参与肿瘤。发现一个 SV，和证明它驱动肿瘤，是先后两件工作：前者靠断点、读段和拷贝数，后者还要看它是否反复落在驱动基因上、是否改变转录或蛋白质、是否带来选择优势。同一癌种里同时存在大量不驱动肿瘤的结构改变。读这页时，把检测证据、功能解释和临床意义分开。
 
 
 ### 第109页｜课程结束：把知识连成因果链
 
 <div id="lecture-page-109"></div>
-<figure class="genome-figure" data-lecture-page="109"><img src="/notes/genome-stability-2026/page-109.webp" width="1505" height="727" loading="lazy" decoding="async" alt="第109页：课程结束：把知识连成因果链，原图内中文标注" /><figcaption>原讲义第109页 · 已裁去外边留白 · 点击图片放大</figcaption></figure>
+<figure class="lecture-figure" data-lecture-page="109"><img src="/notes/genome-stability-2026/page-109.webp" width="1505" height="727" loading="lazy" decoding="async" alt="第109页：课程结束：把知识连成因果链，原图内中文标注" /><figcaption>原讲义第109页 · 点击图片放大</figcaption></figure>
 
-试着独立解释三条链：5mC脱氨为何可能留下C到T；端粒失保护怎样进入BFB循环；一段DNA缺失怎样同时影响配对距离、分裂读段和深度。若能说出每一步的中间环节、适用条件与证据限制，就已经超越了单纯背术语。遇到不确定机制时先回原图和出处，而不是把统计关联直接当作因果。
+课程在这一页收束。画面主体是一行蓝色的 Thank you，题注要求把知识连成因果链。译注写明发布版遮去了原页联系方式，因此画面上不再保留地址或账号。复习路径是一条总纲：损伤来源 → 修复选择 → 突变痕迹 → 染色体维持 → 结构变异证据。下面三条是沿着这条总纲回看的练习。这一页不提供唯一的标准答句。要自己接上的是每条链的中间环节、适用条件，以及会使结论停住的证据边界。
+
+第一条对应“损伤来源 → 修复选择 → 突变痕迹”。要能讲清 **5mC**（5-甲基胞嘧啶）脱氨为什么可能在原位留下 C 到 T。需要接到的环节是：脱氨这一步的直接产物是什么，它和互补链组成什么样的错配，复制之前的修复有没有机会把原来的配对救回去，若错配进入复制又会固定成哪一种碱基对。化学损伤和可遗传突变之间隔着修复选择。修复把损伤去掉时，这条链停在损伤，原位可以不留下 C 到 T。普通胞嘧啶脱氨的直接产物和 5mC 不同，两条路要分开讲。具体的碱基和修复中间体，回到第 7 页和第 23 页的图，不必收成一句脱离原图的口号。
+
+第二条对应“染色体维持”。要能讲清端粒失去保护之后，怎样进入 **BFB**（breakage-fusion-bridge，断裂–融合–桥）循环。需要接到的环节是：无保护末端如何融合，有丝分裂时桥怎样被拉向两极，桥断裂为什么又留下新的无保护末端，以及重复这一轮为什么可以积累扩增、反向重复和不对称结构。端粒变短是进入这条链的条件之一；融合和桥都出现，循环才转起来。它可以和第 96–99 页的碎裂、微核、ecDNA 衔接。多轮桥的积累和一次集中碎裂仍是两种框架。终点看起来相似时，用断点、方向和拷贝数分辨，而不是把两个名称互换。
+
+第三条对应“结构变异证据”，材料在第 101 页。要能讲清一段 DNA 缺失怎样同时改变配对距离、分裂读段和覆盖深度。需要接到的环节是：样本里的新连接如何让一条 read 跨过断点，一对在样本中距离正常的 reads 投回仍含缺失段的参考基因组时为什么变远，缺失段的深度为什么可能下降。杂合性、肿瘤纯度、克隆比例和正常细胞混入，都会使深度不必降到零。三类证据互相支持时，才比较有把握说它们指向同一个缺失。
+
+三条练习都允许多种完整讲法，只要中间环节、适用条件和证据边界都在。不确定时先回到原来的那一页和页脚出处。示意图、作者提出的模型，以及已经测到的终点，要分开存放。统计上的同时出现，还要补上中间机制，才能讲成因果。
+
 
 ## 关键补充来源
 
